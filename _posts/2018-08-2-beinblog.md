@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Block
+title: 博客开通啦
 date: 2018-07-10 23:34:15.000000000 +09:00
 tags: 生活
 ---
