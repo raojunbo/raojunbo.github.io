@@ -23,7 +23,7 @@ blog_button:
 nav:
     - {title: 简历, description: 我的简历, url: 'https://raojunbo.github.io/'}
     - {title: 关于, description: 了解更多关于我, url: 'https://raojunbo.github.io/'}
-    - {title: 订阅, description: 邮件订阅本站, url: '//store.objccn.io/subscribe'}
+    #- {title: 订阅, description: 邮件订阅本站, url: '//store.objccn.io/subscribe'}
 
 # Pagination
 plugins: [jekyll-paginate]
