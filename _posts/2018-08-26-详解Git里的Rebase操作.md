@@ -7,12 +7,16 @@ tags: iOS技术
 
 在命令行里git rebase --help 可以查看英文版本的解释
 下面将对这个英文的文档做输出
+
 假定下面历史记录
 ![Xnip2018-08-27_19-14-08](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-27_19-14-08.png)
 
 当前在topic分支上
 执行 
-```git rebase master``` 或者 ```git rebase master topic ```
+```git rebase master``` 
+或者
+ ```git rebase master topic ```
+ 
 将得到如下结果
 ![Xnip2018-08-27_19-14-18](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-27_19-14-18.png)
 
@@ -22,6 +26,7 @@ NOTE:```git rebase master topic``` 形式是```git checkout topic ,git rebase ma
 ![Xnip2018-08-27_19-14-28](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-27_19-14-28.png)
 
 执行 ```git rebase master```
+
 将会得到
 ![Xnip2018-08-27_19-14-36](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-27_19-14-36.png)
 
@@ -37,6 +42,7 @@ NOTE:```git rebase master topic``` 形式是```git checkout topic ,git rebase ma
 另一种使用
 ![Xnip2018-08-28_09-55-15](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-28_09-55-15.png)
 执行 git rebase --onto master topicA topicB
+
 （我对这条的理解，checkout到topicB,取topicA到topcB多出来的变更，以master为新的基础）
 ![Xnip2018-08-27_19-15-17](http://7nj246.com1.z0.glb.clouddn.com/Xnip2018-08-27_19-15-17.png)
 
