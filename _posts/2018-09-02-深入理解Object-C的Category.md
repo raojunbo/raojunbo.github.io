@@ -4,14 +4,15 @@ title: 深入理解Object-C的Category
 date: 2018-09-5 23:34:15.000000000 +09:00
 tags: iOS技术
 ---
-参考文档[深入理解Objective-C：Category](https://tech.meituan.com/DiveIntoCategory.html)
-
-上面这篇文章是我看过的最完整的一个对Category的描述。本篇文章只是一个结论性的总结，并对其中的一些概念做说明。
+[深入理解Objective-C：Category](https://tech.meituan.com/DiveIntoCategory.html)
+是我看过的最完整的一个对Category的描述。本篇文章只是一个实践后结论性的总结，并对其中的一些发生关联的概念做说明。
 
 ## 1. 前言
-category是Objective-C 2.0添加的语言特性，category的主要作用是为已经存在的类添加方法。
+>
+Category实际上就是将这些方法添加到主类的方法列表里的头部。
 
 app推荐的使用场景
+
 - 可以减少单个文件的体积 
 - 可以把不同的功能组织到不同的category里 
 - 可以由多个开发者共同完成一个类 
@@ -19,22 +20,20 @@ app推荐的使用场景
 - 将私有方法提前声明
  
 不过除了apple推荐的使用场景，category的其他几个使用场景：
+
 - 模拟多继承
 - 把framework的私有方法公开
 
 补充说明
-什么是私有方法提前声明?
-Cocoa没有任何真正的私有方法。只要知道对象支持的某个方法的名称，即使该对象所在的类的接口中没有该方法的声明，你也可以调用该方法。不过这么做编译器会报错，但是只要新建一个该类的类别，在类别.h文件中写上原始类该方法的声明，类别.m文件中什么也不写，就可以正常调用私有方法了。这就是传说中的私有方法前向引用。 所以说cocoa没有真正的私有方法。
 
+1. 什么是私有方法提前声明?
+Cocoa没有任何真正的私有方法。只要知道对象支持的某个方法的名称，即使该对象所在的类的接口中没有该方法的声明，你也可以调用该方法。不过这么做编译器会报错，但是只要新建一个该类的类别，在类别.h文件中写上原始类该方法的声明，类别.m文件中什么也不写，就可以正常调用私有方法了。这就是传说中的私有方法前向引用。 所以说cocoa没有真正的私有方法。
 我们还知道，即使没有引入 Category 的头文件，Category 的方法也会被添加进主类的方法列表里，可以通过 performSelector 的方式使用，导入头文件只是为了通过编译器的静态检查（上面所说的私有方法）。
 
-category如何模拟多继承？
+2. category如何模拟多继承？
 模拟多继承主要是利用可以添加方法，添加属性。既然可以添加属性，也可以添加方法，那么我要的方法与东西，都可以在里面实现。
 
->
-Category实际上就是将这些方法添加到主类的方法列表里的头部。
-
-## 2. category与extension对比
+## 2. Category与extension对比
 
 - extension
 在**编译器决议**，它是类的一部分。在编译期和头文件的@interface以及实现文件里的@implement一起形成一个完整的类。它伴随类的产生而产生。extension一般用于隐藏类的私有信息。
@@ -77,7 +76,7 @@ static struct _category_t *L_OBJC_LABEL_CATEGORY_$ [1] __attribute__((used, sect
 1. 把category的实例方法，协议以及属性添加到类上
 2. 把category的类方法和协议添加到类的metaclass上
 
-具体怎么添加的，我们就不看源码了。有兴趣的可以自行查看源码，或者查看参考文档[深入理解Objective-C：Category](https://tech.meituan.com/DiveIntoCategory.html)
+具体怎么添加的，有兴趣的可以自行查看源码
 
 需要特别注意的是(特别重要)
 
