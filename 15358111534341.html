@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  --- - 北哥传奇
+  Runtime系列二 消息机制 - 北哥传奇
   
   </title>
  <meta name="description" content="">
@@ -144,32 +144,23 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-<h1>---</h1>
-
-<p>layout: post<br/>
-title: Runtime系列二 消息机制<br/>
-date: 2018-08-31 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
+<h1>Runtime系列二 消息机制</h1>
 
 <ul>
 <li>
-<a href="#toc_0">tags: iOS技术</a>
+<a href="#toc_0">一：方法调用的流程</a>
 </li>
 <li>
-<a href="#toc_1">一：方法调用的流程</a>
-</li>
-<li>
-<a href="#toc_2">二 ：消息的转发</a>
+<a href="#toc_1">二 ：消息的转发</a>
 <ul>
 <li>
-<a href="#toc_3">1. 动态方法解析</a>
+<a href="#toc_2">1. 动态方法解析</a>
 </li>
 <li>
-<a href="#toc_4">2. 备用接收者</a>
+<a href="#toc_3">2. 备用接收者</a>
 </li>
 <li>
-<a href="#toc_5">3. 完整转发</a>
+<a href="#toc_4">3. 完整转发</a>
 </li>
 </ul>
 </li>
@@ -178,7 +169,7 @@ date: 2018-08-31 23:34:15.000000000 +09:00</p>
 
 <p>前面讨论了Runtime中对类和对象的处理以及对成员变量与属性的处理。本文将讨论Runtime里的消息机制。</p>
 
-<h2 id="toc_1">一：方法调用的流程</h2>
+<h2 id="toc_0">一：方法调用的流程</h2>
 
 <p>在Objective-C中，消息直到运行时才绑定到指定的方法实现上。编译器会将消息表达式转换成一个消息函数的调用</p>
 
@@ -198,7 +189,7 @@ pp = objc_msgSend(pp, sel_registerName(&quot;init&quot;));
 <p>objc_msgSend(receiver, selector)<br/>
 objc_msgSend(receiver, selector, arg1, arg2, ...)</p>
 
-<h2 id="toc_2">二 ：消息的转发</h2>
+<h2 id="toc_1">二 ：消息的转发</h2>
 
 <p>当一个对象能接收一个消息时，就会走正常的方法调用流程。但如果一个对象无法接收指定消息时，就会启动所谓”消息转发(message forwarding)“机制<br/>
 消息转发机制基本上分为三个步骤：<br/>
@@ -206,7 +197,7 @@ objc_msgSend(receiver, selector, arg1, arg2, ...)</p>
 备用接收者<br/>
 完整转发</p>
 
-<h3 id="toc_3">1. 动态方法解析</h3>
+<h3 id="toc_2">1. 动态方法解析</h3>
 
 <p>对象在接收到未知的消息时，首先会调用所属类的类方法+resolveInstanceMethod:(实例方法)或者+resolveClassMethod:(类方法)。在这个方法中，我们有机会为该未知消息新增一个”处理方法””。不过使用该方法的前提是我们已经实现了该”处理方法”，只需要在运行时通过class_addMethod函数动态添加到类里面就可以了。如下代码所示：</p>
 
@@ -224,7 +215,7 @@ NSLog(@&quot;我来了%@,%@,%@&quot;,obj,sel,objc);
 ```
 </code></pre>
 
-<h3 id="toc_4">2. 备用接收者</h3>
+<h3 id="toc_3">2. 备用接收者</h3>
 
 <p>如果在上一步无法处理消息，则Runtime会继续调以下方法：</p>
 
@@ -233,7 +224,7 @@ NSLog(@&quot;我来了%@,%@,%@&quot;,obj,sel,objc);
 
 <p>如果一个对象实现了这个方法，并返回一个非nil的结果，则这个对象会作为消息的新接收者，且消息会被分发到这个对象</p>
 
-<h3 id="toc_5">3. 完整转发</h3>
+<h3 id="toc_4">3. 完整转发</h3>
 
 <p>如果在上一步还不能处理未知消息，则唯一能做的就是启用完整的消息转发机制了。此时会调用以下方法：</p>
 
