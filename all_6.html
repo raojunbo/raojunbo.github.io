@@ -44,6 +44,14 @@
       <li><a href="index.html">Home</a></li>
       
         <li class="divider"></li>
+        <li><label>前言</label></li>
+
+          
+            <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
+          
+
+      
+        <li class="divider"></li>
         <li><label>软件开发</label></li>
 
           
@@ -98,6 +106,12 @@
                   <ul id="side-nav" class="side-nav">
 
                     
+                      <li class="side-title"><span>前言</span></li>
+                        
+                          <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
+                        
+
+                    
                       <li class="side-title"><span>软件开发</span></li>
                         
 
@@ -144,307 +158,15 @@
 
 	
 		<div class="markdown-body">
-		<h1>---</h1>
+		<h1>开始自己的博客啦</h1>
 
-		<p>layout: post<br/>
-title: Block<br/>
-date: 2018-08-10 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
-
-<ul>
-<li>
-<a href="#toc_0">tags: iOS技术</a>
-</li>
-<li>
-<a href="#toc_1">本文要思考的问题</a>
-</li>
-<li>
-<a href="#toc_2">Block概念</a>
-</li>
-<li>
-<a href="#toc_3">Block内存管理</a>
-</li>
-<li>
-<a href="#toc_4">Block循环引用</a>
-</li>
-<li>
-<a href="#toc_5">Block的实现原理</a>
-</li>
-<li>
-<a href="#toc_6">block实践感悟</a>
-</li>
-</ul>
-
-
-<h2 id="toc_1">本文要思考的问题</h2>
-
-<p>本文将会解决的如下疑问<br/>
-1. block内存如何管理<br/>
-2. 为什么会造成循环引用<br/>
-3. 延时释放的原理<br/>
-4. block的实现原理的本质推演</p>
-
-<h2 id="toc_2">Block概念</h2>
-
-<p>一句话：”一个能捕获局部变量，且保存了可执行代码的一个对象“，对象类型有isa指向，__NSGlobalBlock__,__NSMallocBlock__，__NSStckBlock__。</p>
-
-<p>使用clang 将OC代码转换成C++文件。在命令行输入clang -rewrite-objc需要编译的OC文件.m</p>
-
-<pre><code>int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@&quot;Hello, World!&quot;);
-        int a = 1;
-        int (^RJBblock)(void) = ^(void){
-            NSLog(@&quot;这是值%d&quot;,a);
-            return 1;
-        };
-        RJBblock();
-    }
-    return 0;
-}
-</code></pre>
-
-<pre><code>struct __main_block_impl_0 {
-  struct __block_impl impl;
-  struct __main_block_desc_0* Desc;
-  int a;
-  //在c++中，结构体是可以用构造函数初始化的
-  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int _a, int flags=0) : a(_a) {
-    impl.isa = &amp;_NSConcreteStackBlock;
-    impl.Flags = flags;
-    impl.FuncPtr = fp;
-    Desc = desc;
-  }
-};
-static int __main_block_func_0(struct __main_block_impl_0 *__cself) {
-  int a = __cself-&gt;a; // bound by copy
-
-            NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_20bcfd_mi_1,a);
-            return 1;
-        }
-
-static struct __main_block_desc_0 {
-  size_t reserved;
-  size_t Block_size;
-} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0)};
-
-int main(int argc, const char * argv[]) {
-    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
-
-        NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_20bcfd_mi_0);
-        int a = 1;
-        //c++里的一个对象的初始化,用void *fp 指向函数的指针进行初始化。__main_block_func_0 就是一函数。也就是block括号里的东西。
-        //普通的传值，是会将这个变量传进去的
-        int (*RJBblock)(void) = ((int (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, a));
-
-        //
-        ((int (*)(__block_impl *))((__block_impl *)RJBblock)-&gt;FuncPtr)((__block_impl *)RJBblock);
-    }
-    return 0;
-}
-</code></pre>
-
-<p>上面的表示，就是一个Block的实现。</p>
-
-<h2 id="toc_3">Block内存管理</h2>
-
-<p>block存储区域</p>
-
-<ul>
-<li><p>block没有访问外部变量<br/>
-block始终在Global区,无论当前环境是ARC还是MRC</p></li>
-<li><p>MRC </p>
-
-<ul>
-<li>block 如若果访问外部变量，block在栈里</li>
-<li>只要使用copy,才能放到堆里</li>
-</ul></li>
-<li><p>ARC </p>
-
-<ul>
-<li>block如果访问外部变量，block在堆里(因为arc默认将其拷贝了)</li>
-<li>block可以使用strong,copy,并且block是同一个对象</li>
-</ul></li>
-</ul>
-
-<p>__block变量<br/><br/>
-我们通过<code>clang -rewrite-objc</code> 查看如何实现的。由下面的可以看出。<code>__block</code>也有自己的结构体实现，传进去的是传值。再通过 <code>__block</code>结构体力的<code>_forwarding</code>，保证了访问时，block拷贝还是没拷贝的_block变量访问的正确性。拷贝后_forwarding指向堆里，没拷贝_forwarding指向栈里。</p>
-
-<pre><code>_struct __Block_byref_a_0 {
-  void *__isa;
-__Block_byref_a_0 *__forwarding;
- int __flags;
- int __size;
- int a;
-};
-
-struct __main_block_impl_0 {
-  struct __block_impl impl;
-  struct __main_block_desc_0* Desc;
-  __Block_byref_a_0 *a; // by ref
-  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, __Block_byref_a_0 *_a, int flags=0) : a(_a-&gt;__forwarding) {
-    impl.isa = &amp;_NSConcreteStackBlock;
-    impl.Flags = flags;
-    impl.FuncPtr = fp;
-    Desc = desc;
-  }
-};
-static int __main_block_func_0(struct __main_block_impl_0 *__cself) {
-  __Block_byref_a_0 *a = __cself-&gt;a; // bound by ref
-
-            (a-&gt;__forwarding-&gt;a) = 2;
-            return 1;
-        }
-static void __main_block_copy_0(struct __main_block_impl_0*dst, struct __main_block_impl_0*src) {_Block_object_assign((void*)&amp;dst-&gt;a, (void*)src-&gt;a, 8/*BLOCK_FIELD_IS_BYREF*/);}
-
-static void __main_block_dispose_0(struct __main_block_impl_0*src) {_Block_object_dispose((void*)src-&gt;a, 8/*BLOCK_FIELD_IS_BYREF*/);}
-
-static struct __main_block_desc_0 {
-  size_t reserved;
-  size_t Block_size;
-  void (*copy)(struct __main_block_impl_0*, struct __main_block_impl_0*);
-  void (*dispose)(struct __main_block_impl_0*);
-} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0), __main_block_copy_0, __main_block_dispose_0};
-int main(int argc, const char * argv[]) {
-    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
-
-        NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_e97dd6_mi_0);
-        __attribute__((__blocks__(byref))) __Block_byref_a_0 a = {(void*)0,(__Block_byref_a_0 *)&amp;a, 0, sizeof(__Block_byref_a_0), 1};
-        int (*RJBblock)(void) = ((int (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, (__Block_byref_a_0 *)&amp;a, 570425344));
-        ((int (*)(__block_impl *))((__block_impl *)RJBblock)-&gt;FuncPtr)((__block_impl *)RJBblock);
-    }
-    return 0;
-}
-</code></pre>
-
-<h2 id="toc_4">Block循环引用</h2>
-
-<ul>
-<li><p>费曼输出：<strong>self引用block,block引用self</strong>。<br/>
-如果对此理解的不是很清楚，而只是一味按照其他人说的避免循环引用的方式。就没有抓住本质，也就不能创造性的解决问题。<br/>
-self引用block,就是self持有这个block,block引用self，是因为block代码里使用到了self，或者self.property,_ivr,block默认会对这个self,实现强引用。<br/>
-解决的办法是不让block对self进行强引用。也就是block不对self进行一次release的权限。(这里的self指的是直接强引用block的对象)</p></li>
-<li><p>延时释放(<strong>重点，这个问题我想了好久，是如何办到的？</strong>)<br/>
-但有时会遇到，需要在block执行时，self一定要存在。即需求是延时self的释放。尽管有时，self释放后，执行block时，不会对逻辑造成影响（对nil发起的操作不做任何反应）。这时。我们需要在在block里对self的一次强引用。那有人会问，在block外面进行强引用，与在block里面进行强引用，不都是强引用吗？_为啥，在外面强引用会造成循环引用，在block里面做强引用不会造成循环引用呢？__<br/>
-因为Block的实现原理导致。请看Block的实现原理（高潮来了）</p></li>
-</ul>
-
-<h2 id="toc_5">Block的实现原理</h2>
-
-<ul>
-<li>费曼输出：Block在内存里实际是一个对象，而在Object-C里，对象实际是一个结构体。
-<strong>Block结构体里保存了“实现”，“描述”，“捕获的变量”。“实现”里保存了isa,funcPtr,而isa是这个对象类型，funcPtr就是函数指针，指向那个可执行的一个函数。函数的数据来源就是这个Block里捕获的变量</strong></li>
-</ul>
-
-<p>代码如下<br/>
-oc代码</p>
-
-<pre><code>test1() {
-    int a = 10;
-    void (^block)()= ^{
-        NSLogt(&quot;%d&quot;,a);
-    }
-    a = 20;
-    block();
-}
-
-int main(int argc,const char *argv[]){    
-    test1();
-    return 0;
-}
-
-</code></pre>
-
-<p>编译成c++代码</p>
-
-<pre><code>struct __test1_block_impl_0 {
-        struct __block_imple impl;
-        struct__test1_block_desc_0 *Desc_0;
-        _int a;
-        __test1_block_impl_0(void *fp,struct_test1_block_desc_0*Desc,int _a,int flag =0):a(_a) {
-            impl.isa = &amp;_NSConcreteStackBlock;
-            impl.Flags = flags;
-            impl.FuncPtr = fp;
-            Desc = desc;
-        }
-    };
-    
-static void __test1_block_func_0(struct __test1_block_imp_0 *__cself) {
-    int a = __cself-&gt;a;
-    NSLog(a);
-}
-
-void test1 () {
-    int a  = 10;
-    //block的定义转换成c++的定义，这是block的初始化（c++结构体的初始化）,生成block。
-    void(*block)() = (void (*)())&amp;__test1_block_imp_0((void *))__test1_block_func_0,&amp;__test1_block__desc_0_DATA,a);
-    a = 20;
-     //执行block   
-    ((void (*)(__block_impl *))((__block_imp *)block)-&gt;FuncPtr)((_block_impl *)block);
-}
-int main(itn argc,const char *argv[]){
-    test1();
-    return 0;
-}
-</code></pre>
-
-<p>简单推演<br/>
-1.  _int a; 是捕获的变量<br/>
-2. __test1_block_func_0 ;是可执行的代码<br/>
-3.执行block时，实际是执行声明的block里的FuncPtr,并将自己当做参数传了进去。</p>
-
-<p>我们回到延时释放的解释：从这里就能解释为什么从外面强引用会造成循环引用，因为block的结构体里实现了对self的捕获。并强引用了。从里面实现强引用，为什么不造成循环引用，是因为，从里面是在__test1_block_func_0函数里了。是一个局部变量了。block执行完时，自然会对这个局部变量实行释放。哈哈。终于揭开了疑惑。！！！</p>
-
-<p>对于__block变量的捕获原理，其实本质是一样的。只不过，是在捕获int a是传值进去。而__block变量是传地址进去。（特别说明：__block,static的变量，全局变量都是传指针）</p>
-
-<p>这里是block的实现。（这里有个遗憾，没有模拟出??）<br/>
-当外面的对象捕获是强引用时。在block的实现里也是强引用。这就导致当引用的是“对block有强引用的对象”时出现循环引用情况。若果对外面是弱引用。在block里就是弱引用。当想延迟时释放时。可以在block里加强引用。这会将其当做是局部变量，也就是在栈上。</p>
-
-<pre><code>//RJBObject.h
-typedef void(^RJBBlock)(void);
-
-@interface RJBObject : NSObject
-@property (nonatomic, strong) RJBBlock block;
-@property (nonatomic, assign) int a;
-@end
-
-</code></pre>
-
-<pre><code>//main.m
-#import &quot;RJBObject.h&quot;
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        RJBObject *objct = [[RJBObject alloc]init];
-        objct.block = ^{
-            NSLog(@&quot;这是a的值%d&quot;,weakObj.a);
-        };
-    }
-    return 0;
-}
-</code></pre>
-
-<pre><code>struct __main_block_impl_0 {
-  struct __block_impl impl;
-  struct __main_block_desc_0* Desc;
-  RJBObject *objct;//此处是捕获的变量。因为捕获时时强引用，则这里就是强引用导致了+1;若果外面是弱引用，则这里就不会+1.就不会造成强引用。
-  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, RJBObject *_objct, int flags=0) : objct(_objct) {
-    impl.isa = &amp;_NSConcreteStackBlock;
-    impl.Flags = flags;
-    impl.FuncPtr = fp;
-    Desc = desc;
-  }
-};
-</code></pre>
-
-<h2 id="toc_6">block实践感悟</h2>
-
-<p>block是强大的。可以做保存代码，可以当返回值，可以当参数，总之，将其当一般对象使用，外加他能保存代码并执行，那就简直强大无比了。Masory里将block做返回值实现链式编程，就是一个很好的实践。</p>
+		<p>之前一直在gitbook上写些总结，都不是原创的东西，觉得没有必要拿到自己的博客上。随着对技术，生活的体验与思考，有了些心得与体会。我觉得有必要开始表达我自己的想法了。于是这个博客就诞生了。</p>
 
 
 		</div>
+	
+
+ 
 	
 
   
