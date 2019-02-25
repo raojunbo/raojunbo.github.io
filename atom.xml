@@ -4,7 +4,7 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-02-25T22:03:42+08:00</updated>
+  <updated>2019-02-25T22:06:09+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,641 @@
   </author>
   <generator uri="http://www.mweb.im">MWeb</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[---]]></title>
+    <link href="https://raojunbo.github.io/15512048926912.html"/>
+    <updated>2019-02-27T02:14:52+08:00</updated>
+    <id>https://raojunbo.github.io/15512048926912.html</id>
+    <content type="html"><![CDATA[
+<p>layout: post<br/>
+title: 设计模式系列（四）-- 行为型<br/>
+date: 2018-08-28 23:34:15.000000000 +09:00</p>
+
+<h2 id="toc_0">tags: iOS技术</h2>
+
+<p>具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
+
+<h2 id="toc_1">13. 责任链模式</h2>
+
+<p>避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些<br/>
+对象连接成一条链，并且沿着者条链传递请求，直到有对象处理它为止。<br/>
+<strong>iOS里的事件传递。就是一种责任链模式</strong>。<br/>
+使用场景<br/>
+有多个对象可以处理一个请求，具体哪个对象处理该请求由运行时自动确定。<br/>
+在不确定指定接收者的情况写，向多个对象中的一个提交一个请求。</p>
+
+<h2 id="toc_2">14：命令模式(很重要)</h2>
+
+<p>将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化。<br/>
+使用场景<br/>
+需要对<strong>行为进行记录</strong>，<strong>撤销</strong>或者重做，事物等的处理时。凡是有命令的地方，都可以使用命令模式。命令模式实现了很容易对命令的扩展（即对扩展开放），添加一个命令就可以了，同过这些命令取修改接受者的状态，其实我们直接执行函数就可以修改接受者的状态，当我们需要添加一些行为的记录，撤销的等行为，为了将行为的<strong>实现者receiver</strong>与行为的请求者(既可以是receiver也可以是其他对象)实现松耦合。</p>
+
+<h2 id="toc_3">15：解释器模式</h2>
+
+<h2 id="toc_4">16：迭代器模式</h2>
+
+<p>提供一种按顺序访问一个聚合对象中的各个元素。而又无需暴露该对象的内部表示。<br/>
+迭代器的关键代码是实现hasNext,next。<br/>
+迭代器简化并且统一了对于集合类型的访问方法。在新添加的集合类型里，无需修改原有代码，只需要实现针对这个心添加的集合的迭代器就可以了。所以对扩展时开放的。</p>
+
+<h2 id="toc_5">17：中介者模式</h2>
+
+<p>中介者模式和我们日常生活中的中介者其实是一样的。房产中介。解决了买家与卖家之间错综复杂的关系。实现了。买家与中介联系，卖家与中介联系,当然这里协调的对象也可以是相同类型的比如都是&quot;买家&quot;,我们把买家与卖家统一称为“同事”（这类在初看文章的时候不理解为什么都是”同事“，其是为了方便描述罢了。在实际的开发中，那你想协调哪两种或者多种对象之间的交互都是可以的）。在对象的世界里面，也是如此。<br/>
+实际的例子<br/><br/>
+MVC里的模式，c就是中介者，m,v都是同事。c需要协调m与v的交互。那么从这里也可以看出。设计不当的时候很容易将c搞的比较复杂。<br/>
+代码里的例子<br/>
+ 同事之间有一定的关系。同事A修改的分值，同事B的分值同样会修改。同事C的值统一会修改。<br/>
+那么就有个问题，我同事A修改了值，我还要通过A取修改B的值，B的值修改了，B还要去修改C的值。这样就是对象间非常复杂的操作关系。<br/>
+引入中介这后，这个几个对象之间的关系就变成只有中介者之间交互。这样关系就轻松多了。</p>
+
+<h2 id="toc_6">18：备忘录模式</h2>
+
+<p>保存一个对象的某个状态，以便在适当的时候恢复对象。<br/>
+在不破话封装的前提下，捕获一个对象的内部状态，幷在该对象之外保存这个状态，这样可以<br/>
+在以后将恢复到原先保存的状态。<br/>
+实现代码的核心是搞一个备忘录的类。要保存状态的类可以实现协议方法，取出当前需要保存的<br/>
+信息。和将保存的信息恢复为类的过程。整个是在需要备忘得对象实现的。<br/>
+所以，备忘录其实，就时搞一个类专门实现“存”与&quot;取&quot;一个对象的状态，以备忘。</p>
+
+<h2 id="toc_7">19：观察者模式</h2>
+
+<p>当一个对象的状态发生改变的时候，所有的依赖对象都将得到通知。<br/>
+解决一对多的情况。<br/>
+观察者模式，在iOS里到处都有。通知中心，Kvo,等.</p>
+
+<h2 id="toc_8">20：状态模式(很重要,实际的开始中很常见)</h2>
+
+<p>对象的行为依赖于他的状态，并且可以根据它的状态的改变而改变相关的行为。<br/>
+使用场景<br/>
+当代码中包含有大量于状态有关的行为时。</p>
+
+<h2 id="toc_9">21：策略模式</h2>
+
+<p>策略模式同状态模式一样，不同的是将策略进行隔离。当有新的策略时，只需要扩展新的策略就行了。</p>
+
+<h2 id="toc_10">22：模板方法模式</h2>
+
+<h2 id="toc_11">23：访问者模式</h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[---]]></title>
+    <link href="https://raojunbo.github.io/15512048797799.html"/>
+    <updated>2019-02-27T02:14:39+08:00</updated>
+    <id>https://raojunbo.github.io/15512048797799.html</id>
+    <content type="html"><![CDATA[
+<p>layout: post<br/>
+title: 设计模式系列（三）-- 结构型<br/>
+date: 2018-08-28 23:34:15.000000000 +09:00</p>
+
+<h2 id="toc_0">tags: iOS技术</h2>
+
+<p>具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
+
+<h2 id="toc_1">6. 适配器模式</h2>
+
+<p>适配器模式将某个类的接口转换成客户端期望的另一个接口表示。目的是消除由于接口不匹配所造成的类的兼容性问题。分为3类，类适配器，对象的适配器</p>
+
+<ol>
+<li><p>类适配器<br/>
+所谓的类适配器，指的是适配器Adapter<strong>继承</strong>我们的被适配者Adaptee，并实现目标接口Target。</p></li>
+<li><p>对象适配器<br/>
+所谓的对象适配器，就是适配器实现我们的接口，但是并不继承需要被适配的类。而是通过在构造函数中将需要被适配的类传递进来从而进行适配(也就是组合的形式)。</p></li>
+</ol>
+
+<p>它们的特点(至于特点，可以从它们的实现方法取考虑)<br/>
+类适配器只能适配一个类，而对象适配器可以将不同的待适配者适配到统一目标。<br/>
+而类适配器由于是继承，可以置换待适配对象的一些方法。</p>
+
+<h2 id="toc_2">7. 外观模式</h2>
+
+<p>外观模式让子系统更加易用，使用端不需要了解子系统的内部的实现。<br/>
+也不需要跟众多子系统的内部的模块进行交互，只需要跟门面交互就可以了。外观角色好比一道屏障，对客户端屏蔽了子系统的具体实现。</p>
+
+<h2 id="toc_3">8. 桥接模式</h2>
+
+<p>桥接模式的场景：<br/>
+类似于绘制形状，有多个形状，每个形状的颜色还不一样。为每种形状都提供各种颜色的版本，会造成n*n个类。</p>
+
+<p>这是可以采用桥接模式，将<strong>继承关系转换成关联</strong>关系，为每种形状都提供各种颜色的版本。<br/>
+桥接模式的本质是将继承关系转换成关联的关系。从而降低了类与类之间的耦合度，减少了系统中的类的数量，也减少了代码量。</p>
+
+<h2 id="toc_4">9. 装饰</h2>
+
+<p>有这样一个场景，购买咖啡时，可以要求在其中加入各种调料。例如<br/>
+豆浆，摩卡，蒸奶，有时添加，有时不添加。这样就会导致类的爆炸，并且无法满足混合添加,多次添加的的情况。<br/>
+关键的实现装饰类的实现</p>
+
+<p>装饰类的设计，装饰类既有主类的属性，本类也是主类类型。这样可以递归的方式来获得最总被装饰了的对象。</p>
+
+<h2 id="toc_5">10. 代理</h2>
+
+<p>代理不说了，开始做iOS时就是代理模式。</p>
+
+<h2 id="toc_6">11. 享元</h2>
+
+<p>享元就是共享对象。既可以内存缓存对象，也可复用对象（通过一个唯一的标识）。</p>
+
+<h2 id="toc_7">12. 组合模式</h2>
+
+<p>我的理解，组合的设计模式在这里有两层含义。<br/>
+一层含义：对象包含对象的问题，通过组合的方式（在对象内部引用对象）来进行布局。<br/>
+二层含义：引申到树形结构的对象包含对象。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[---]]></title>
+    <link href="https://raojunbo.github.io/15512048653711.html"/>
+    <updated>2019-02-27T02:14:25+08:00</updated>
+    <id>https://raojunbo.github.io/15512048653711.html</id>
+    <content type="html"><![CDATA[
+<p>layout: post<br/>
+title: 设计模式系列（二）--创建型设计模式<br/>
+date: 2018-08-28 23:34:15.000000000 +09:00</p>
+
+<h2 id="toc_0">tags: iOS技术</h2>
+
+<p>接下来将进入设计模式里的创建型设计模式。这里将对设计模式的使用场景与优劣，以及UML图做描述。<br/>
+具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
+
+<h2 id="toc_1">0. 简单工厂（if type）</h2>
+
+<p>（通过传类型进行区分，对修改是开放的，所有不好）<br/>
+简单工厂就是一个工厂，将类型传进去，在一个类里面生成不同的类型。<br/>
+弊端：这个工厂会包括多个需要生产的产品的引用。而且对于修改是开放的，因为需要修改类里面的内容。对于扩展也是需要在同一个类里面做修改。</p>
+
+<h2 id="toc_2">1. 工厂方法（一个产品线）</h2>
+
+<p>使用场景：<br/>
+当需要创建多种分Type的对象时，特别是针对多种类型有共同的行为特征时。或者写出简单工厂时，思考是否可以用工厂方法。</p>
+
+<p>好处：<br/>
+工厂方法遵循开闭原则就是”对扩展开放，对修改关闭”，再说白点就是实现工厂方法以后要进行扩展时不需要修改原有代码（你看简单工厂里添加类型时时不是还要修改if语句），只需要增加一个<strong>工厂实现类</strong>和<strong>产品实现类</strong>就可以。</p>
+
+<p>实现：<br/>
+产品基类（协议），工厂基类(协议)。产品实现，工厂实现。客户端直接使用工厂生产相应的产品就可以了。</p>
+
+<p>费曼<strong>工厂方法会针对每个产品都有一个工厂实现类</strong>。工厂实现类有一个相应工厂的一个实现，这个实现是生产产品的实现。我们可以将工厂方法理解成一个产品线。</p>
+
+<h2 id="toc_3">2. 抽象工厂（多个产品线及真正的工厂）</h2>
+
+<p>使用场景<br/>
+1.通过对象组合创建抽象产品<br/><br/>
+2.创建多个系列产品<br/>
+3.必须修改父类的接口才能支持新的产品</p>
+
+<p>费曼  <strong>所谓的抽象工厂，就是将工厂方法的产品线扩大到多个产品线</strong> 我们可以将抽象工厂理解成多条产品线（真正的工厂）,每一个工厂有其特殊的标识。</p>
+
+<p>突然想到一个例子<br/>
+”北京杂酱面“ 与 “重庆杂酱面”都是杂酱面，都是配料都是面条，汤，酱，但北京面馆（一个工厂），是北京面条，北京汤，北京酱，重庆面馆（一个工厂）是重庆面条，重庆汤，重庆酱，这个工厂是一个产品线。</p>
+
+<h2 id="toc_4">3. 单例模式(整个应用程序只用一个对象)</h2>
+
+<p>使用场景<br/>
+在一个应用程序中，当需要在多个地方共享数据时</p>
+
+<p>注意点<br/>
+注意多线程的使用下的情况。</p>
+
+<p>在实际的使用中，单例模式也不能滥用。举个例子，单例有个isLogin，我判定isLogin为true进入一个操作，其他线程将isLogin改成false，那么在这个单例里执行的操作都将有问题。<br/>
+因为数据被其他线程改变了。在实际的开发中，这种情况会是一个大坑。</p>
+
+<h2 id="toc_5">4. 构建者(子部分算法的变化无常，当构成这个对象组成相对固定)</h2>
+
+<p>构建者模式使用多个简单的对象一步一步构建一个复杂的对象。<br/>
+<strong>主要解决的问题，有时候面临着&quot;一个复杂的对象&quot;的创建工作，通常其子对象部分有着剧烈的变换，需要将他们组合在一起</strong>。</p>
+
+<p>我的理解是，当创建一个对象，这个对象需要很多组合的对象（且这些组合的对象有一定固定算法，我需要将这些对象随意的组合成我需要的对象）时，用构建者模式。（区别与抽象工厂，抽象工厂创建后不是随意的组合，是工厂创建后就只能生产固定的产品了，抽象工厂的变换在外部，而构建者的变换在内部，哈哈，就是这个意思）<br/>
+例如<br/>
+构造电脑，电脑的组成由CPU,显示器，主板，这是相对固定的。但子部分，CPU有各种实现的算法。所以这种情况使用构建者最好。</p>
+
+<h2 id="toc_6">5. 原型模式</h2>
+
+<p>原型模式<br/>
+原型遵循copy或者clone的协议。执行copy或者clone就是按照原型创建一个对象。在iOS里理解成copy就行了。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[---]]></title>
+    <link href="https://raojunbo.github.io/15512048416439.html"/>
+    <updated>2019-02-27T02:14:01+08:00</updated>
+    <id>https://raojunbo.github.io/15512048416439.html</id>
+    <content type="html"><![CDATA[
+<p>layout: post<br/>
+title: 设计模式系列（一）设计模式概要<br/>
+date: 2018-08-28 23:34:15.000000000 +09:00</p>
+
+<h2 id="toc_0">tags: iOS技术</h2>
+
+<p>在这里给大家推荐一本设计模式入门的书《HeadFirst 设计模式》，这是我真正理解设计模式的开始。当然对于设计模式的理解，需要一定的开发经验才能真正理解的。<br/>
+<img src="https://github.com/raojunbo/picres/blob/master/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-02-02%2012.50.34.png?raw=true" alt="image"/><br/>
+本篇文章不是对设计模式的全解。而是我自己在iOS的实践中对设计模式的理解的一个一个梳理。我在<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>里写出了相关的<a href="https://github.com/raojunbo/DesignPatterns.git">Demo</a></p>
+
+<p>学习方法：抽象—》具体—》应用—》引申。重点在与理解设计模式的几大原则在设计模式里的体现。当你理解了几大原则在设计模式里的体现，也就理解了设计的精髓所在。在自己写出相关Demo后，然后自己默写出相关设计模式的UML图，分析每种设计模式的优劣是为解决什么问题而诞生。那么那你就真正理解了设计模式。</p>
+
+<h2 id="toc_1">设计模式的六大原则</h2>
+
+<ol>
+<li><p>开闭原则（面向对向设计的首要目标:<strong>对扩展开放，对修改关闭</strong>）<br/>
+对扩展开放，对修改关闭，也就是在进行扩展时，不要对先前的代码修改（因为如果对先前的代码进行修改的化，需要重新测试）。对扩展开放最好直接创建一个新类，其他的东西都不要更改。可以采用抽象的方式，将对象抽象出来，形成对这个&quot;抽象化&quot;处理。</p></li>
+<li><p>里氏替换原则（<strong>子类替换基类业务不受影响</strong>）<br/>
+在软件中将一个基类对象替换成它的子类对象，程序不将不会出现任何差错。其实这是开闭原则的一个实现。也就是在程序中尽量使用基类类型来对对象进行定义，而运行时在确定其子类类型。这样有一种<strong>面向基类，面向协议编程</strong>，这样在有扩展进来时，更改的代码就会很少。</p></li>
+<li><p>依赖倒置原则(<strong>面向协议编程</strong>)<br/>
+名字取的很高大上。实际就一句话，实现依赖抽象，抽象不依赖实现。也就是面向协议编程，不针对实现编程。</p></li>
+<li><p>接口隔离原则(<strong>接口分离</strong>)<br/>
+使用多个专门的接口，而不使用单一的总接口。每个接口<br/>
+应该承担一种相对独立的角色，将不同功能类型的接口进行分离</p></li>
+<li><p>迪米特法则（<strong>减少对象之间交互</strong>）<br/>
+应该减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应该发生任何直接的作用。</p></li>
+<li><p>合成复用原则（<strong>多用组合少用继承</strong>）<br/>
+尽量使用合成与聚合，而不是使用继承。<br/>
+这条在实际的开发中，的确很有感触。继承用的不好会导致维护的困难。</p></li>
+</ol>
+
+<h2 id="toc_2">设计模式分类</h2>
+
+<p>创建型设计模式<br/>
+结构型设计模式<br/>
+行为型设计模式</p>
+
+<h3 id="toc_3">一：创建型（5种）</h3>
+
+<p>1:单例模式<br/>
+2:工厂方法(生成单一产品)<br/>
+3:抽象工厂（生产系列产品）<br/>
+4:建造模式（生产比较复杂的具有统一生产流程的产品，将生产流程固话）<br/>
+5:原型设计模式(clone的实现)</p>
+
+<h3 id="toc_4">二：结构型（7种）</h3>
+
+<p>6:适配器模式（将一个对象适配成需要的接口）<br/>
+7:桥接模式<br/>
+8:组合模式（类似于iOS里的view，对每一个组件具有相同的操作方法）<br/>
+9:外观模式（子系统）<br/>
+10:享元模式（聚合使用）<br/>
+11:代理模式<br/>
+12:装饰模式</p>
+
+<h3 id="toc_5">三：行为型（11种）</h3>
+
+<p>13:责任链模式<br/>
+14:命令模式<br/>
+15:解释器模式（暂时不太明白）<br/>
+16:迭代器模式<br/>
+17:中介者模式<br/>
+18:备忘录模式<br/>
+19:观察者模式<br/>
+20:状态模式<br/>
+21:策略模式<br/>
+22:模板方法模式<br/>
+23:访问者模式(暂时不太明白)</p>
+
+<p>其中，命令模式，状态模式，策略模式，都是同的思想，将命令封装，将状态封装，将策略封装。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Swift梳理]]></title>
+    <link href="https://raojunbo.github.io/15512046578708.html"/>
+    <updated>2019-02-27T02:10:57+08:00</updated>
+    <id>https://raojunbo.github.io/15512046578708.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">一：基础知识</h2>
+
+<h4 id="toc_1">1. Float与Double有时在比较是比如1.2与1.2的比较为什么表示时不相等?</h4>
+
+<h4 id="toc_2">2. 元组主要是解决什么问题的？</h4>
+
+<h3 id="toc_3">变量定义与数</h3>
+
+<ul>
+<li><p>数<br/>
+Int，Float,Double<br/>
+同其他语言一样，Int是机器字长。32位长度的Float，64位的Double;小数的表示都是用科学计数法表示。所以64位的Double的精度要高。</p></li>
+<li><p>常量与变量</p></li>
+</ul>
+
+<pre><code>var population:Int = 100;
+var price:Float = 100.0;
+let address:String = &quot;潜江&quot;;
+</code></pre>
+
+<h3 id="toc_4">if语句,循环语句</h3>
+
+<pre><code>//if语句示例
+var population = 20;
+let name:String = &quot;raojunbo&quot;;
+if (population &lt; 50 ){
+    print(&quot;20018:\(name)人口小于\(population)&quot;);
+}else{
+    print(&quot;2018:\(name)人口超标了&quot;);
+}
+population = 100;
+if(population &lt; 50){
+    print(&quot;20019:\(name)人口小于\(population)&quot;);
+}else{
+    print(&quot;2019:\(name)人口超标了&quot;);
+}
+</code></pre>
+
+<pre><code>//switch语句示例
+var statusCode:Int = 404;
+var statusString:String = &quot;潜江市&quot;;
+
+switch statusCode {
+    case 400:
+        statusString = &quot;很好&quot;;
+    case 401:
+        statusString = &quot;一般&quot;;
+    default:
+        statusString = &quot;默认&quot;;
+}
+print(statusString);
+</code></pre>
+
+<pre><code>//while循环
+var i:Int = 0;
+while (i &lt; 10 ){
+    print(i);
+    i+=1;
+}
+
+</code></pre>
+
+<pre><code>//for 循环
+var i:Int = 0;
+for i in 2...6 {
+    print(i);
+}
+
+</code></pre>
+
+<h3 id="toc_5">元组（Swift特有）</h3>
+
+<pre><code>//有点类似于Object-C里的字典，主要是在返回参数时，可以同时返回两个参数
+var statusCode:Int = 404;
+var statusString:String = &quot;这是状态错误&quot;;
+let error = (statusCode,statusString);
+let error2 = (code:statusCode,error:statusString);
+print(&quot;\(error.0),\(error.1)&quot;);
+print(&quot;\(error2.code),\(error2.error)&quot;)
+</code></pre>
+
+<h3 id="toc_6">字符串</h3>
+
+<p>Swift字符串的字符都是Character类型，Swift的Character类型表示Unicode字符。组合起来就是字符串的实例</p>
+
+<ul>
+<li>Unicode</li>
+</ul>
+
+<h3 id="toc_7">可空类型（Swift特有）</h3>
+
+<p>Swift可空类型让这门语言更加安全，（有点类似于NSObject里的weak属性）一个可能为nil的实例应该被声明为可空类型。在Swift的变量必须给定一个初始值，否则编译不过。也可声明成一个可空类型。<strong>任何变量类型都可以用可空类型来说明一个实例可能是nil。哪怕是一个Int类型，而NSObject只能允许对象是nil</strong></p>
+
+<ul>
+<li>可空类型定义</li>
+</ul>
+
+<pre><code>var errorStr = String?;
+print(errorStr);
+</code></pre>
+
+<ul>
+<li>可空类型绑定</li>
+</ul>
+
+<p><strong>将可空变量的真实存在的值赋值给另一个变量，即绑定;绑定的过程也是展开的过程</strong></p>
+
+<pre><code>var play:Int?
+if let w = play {
+    print(w);
+}
+//将可空的play绑定到w变量上。是空，不做任何操作，不为空就给w;
+</code></pre>
+
+<ul>
+<li>可空链式调用</li>
+</ul>
+
+<pre><code>var errorCodeString:String?
+errorCodeString = &quot;404&quot;;
+var upperCodeString = errorCodeString?.uppercased();//链式调用
+</code></pre>
+
+<ul>
+<li>nil合并运算符</li>
+</ul>
+
+<pre><code>var errorDescription:String?;
+let description = errorDescription ?? &quot;error&quot; 
+</code></pre>
+
+<h2 id="toc_8">二：容器类型</h2>
+
+<h3 id="toc_9">数组</h3>
+
+<p>这里的数组里的类型必须是相同类型</p>
+
+<pre><code>//数组定义，添加元素，删除元素
+var bucketList:[String] = [&quot;rao&quot;,&quot;jun&quot;];
+bucketList.append(&quot;bo&quot;)
+bucketList.append(&quot;nihao&quot;)
+bucketList.removeLast();
+for item in bucketList {
+    print(item)
+}
+</code></pre>
+
+<blockquote>
+<p>注意<br/>
+是用<code>let bucketlist申明的是不可变的数组，是用var申明的是可变的数组</code></p>
+</blockquote>
+
+<h3 id="toc_10">字典</h3>
+
+<pre><code>var movieDict = [&quot;rao&quot;:1,&quot;jun&quot;:2,&quot;bo&quot;:3];//申明
+movieDict[&quot;qing&quot;] = 4//设置
+movieDict.removeValue(forKey: &quot;qing&quot;)//移出key=qing的值
+var keyArray = movieDict.keys;//全部的key值
+for item in keyArray {
+    print(item)
+}
+
+</code></pre>
+
+<blockquote>
+<p>注意<br/>
+不可变的字典就是用let修饰</p>
+</blockquote>
+
+<h3 id="toc_11">集合</h3>
+
+<h3 id="toc_12">函数</h3>
+
+<pre><code>func printPersonGreeting2 (to name:String, price:Double,age:Int = 20) {
+    print(&quot;\(name),\(price),\(age)&quot;);
+}
+
+printPersonGreeting2(to: &quot;rao&quot;, price: 20.0);
+printPersonGreeting2(to: &quot;jun&quot;, price: 30.0, age: 10);
+</code></pre>
+
+<ul>
+<li><p>参数</p>
+
+<p>一个方法可以定义多个参数，但调用的时候，可以调用这个函数的其他参数的形式。</p>
+
+<p>函数在定义的时候，有内部参数与外部参数，内部参数是供內使用的，外部参数是供调用时使用的。在定义时也可以特别标记没有外部参数，在需要通过函数内部修改外部的值时，需要标记这个参数inout;</p></li>
+<li><p>函数返回</p></li>
+</ul>
+
+<pre><code>//返回一个元组
+func sortedEvenOddNumbers(numbers:[Int])-&gt;(events:[Int],odds:[Int]) {
+    var evens = [Int]();
+    var odds = [Int]();
+    for number in numbers {
+        if(number%2==0){
+            //是偶数
+            evens.append(number);
+        }else{
+            //是奇数
+            odds.append(number);
+        }
+    }
+    return (evens,odds);
+}
+
+let array = [10,1,4,3,43,85,27];
+let tupe = sortedEvenOddNumbers(numbers: array);
+
+print(tupe.events)
+print(tupe.odds)
+</code></pre>
+
+<pre><code>//返回可空类型
+func gradMiddleName(fromFullName name:(String, String?, String))-&gt;String?{
+    return name.1;
+}
+var middle = gradMiddleName(fromFullName: (&quot;rao&quot;,nil,&quot;bo&quot;))
+if let middleName = middle {
+    print(middleName);
+}
+</code></pre>
+
+<ul>
+<li>函数类型</li>
+</ul>
+
+<p><code>func sortedEvenOddNumbers(numbers:[Int])-&gt;(events:[Int],odds:[Int])</code></p>
+
+<p>上面这个函数的类型，就是([Int])-&gt;([Int],[Int])，函数也可以当做一个变量存储。</p>
+
+<pre><code>func sortedEvenOddNumbers(numbers:[Int])-&gt;(events:[Int],odds:[Int]) {
+    var evens = [Int]();
+    var odds = [Int]();
+    for number in numbers {
+        if(number%2==0){
+            //是偶数
+            evens.append(number);
+        }else{
+            //是奇数
+            odds.append(number);
+        }
+    }
+    return (evens,odds);
+}
+
+let evenOdsFunction:([Int])-&gt;([Int],[Int]) = sortedEvenOddNumbers;//将一个函数用一个变量承接起来
+let array = [10,1,4,3,43,85,27];
+var evenOdds = evenOdsFunction(array);
+print(evenOdds)
+</code></pre>
+
+<h3 id="toc_13">闭包</h3>
+
+<p>函数实际上是闭包的一种。<br/>
+所有的函数实际上是一种闭包。暂时将闭包理解成一个匿名函数。</p>
+
+<ul>
+<li>闭包的表达式语法</li>
+</ul>
+
+<pre><code>//函数形式
+let volunteerSorted = [1,3,40,32,2,77,13];
+func sortAscending(_ i:Int, _ j:Int)-&gt;Bool {
+    return i &lt; j;
+}
+let volunteer = volunteerSorted.sorted(by: sortAscending);
+
+//闭包完整形式
+let volunteer2 = volunteerSorted.sorted { (i:Int, j:Int) -&gt; Bool in
+    return i&lt;j;
+}
+
+//闭包的缩略形式1
+let volunteer3 = volunteerSorted.sorted { (i, j) -&gt; Bool in
+     return i&lt;j;
+}
+
+//闭包的x缩略形式2
+let volunteer4 = volunteerSorted.sorted(by: {$0 &lt; $1});
+</code></pre>
+
+<ul>
+<li><p>函数作为返回值</p>
+
+<pre><code>let volunteerCount = [1,3,40,32,2,53,77,13]
+func makeTownGrand()-&gt;(Int,Int)-&gt;Int {
+func buildRoads(lightsz:Int,existingLights:Int)-&gt;Int{
+    if(lightsz == existingLights){
+        return 0
+    }else if(lightsz &gt; existingLights){
+        return lightsz;
+    }else {
+        return existingLights;
+    }
+}
+return buildRoads;
+}                          
+var result = makeTownGrand();//result是一个函数
+print(result(10,10));
+
+</code></pre></li>
+<li><p>函数作为参数</p></li>
+<li><p>闭包能捕获变量</p></li>
+<li><p>闭包是引用类型</p></li>
+<li><p>函数式编程                                                        </p></li>
+</ul>
+
+<h3 id="toc_14">结构体</h3>
+
+<h3 id="toc_15">类</h3>
+
+<h2 id="toc_16">三：高级内容</h2>
+
+<h3 id="toc_17">协议</h3>
+
+<h3 id="toc_18">扩展</h3>
+
+<h3 id="toc_19">泛型</h3>
+
+<h3 id="toc_20">错误处理</h3>
+
+<h2 id="toc_21">四：内存管理和ARC</h2>
+
+<h2 id="toc_22">五：Object-C与Swift的交互</h2>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[这是一个读书笔记]]></title>
@@ -29,981 +664,1434 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[基础实践系列之实现解码功能]]></title>
-    <link href="https://raojunbo.github.io/15429468991101.html"/>
-    <updated>2018-11-23T12:21:39+08:00</updated>
-    <id>https://raojunbo.github.io/15429468991101.html</id>
+    <title type="html"><![CDATA[GCD源码核心概念]]></title>
+    <link href="https://raojunbo.github.io/15462987177847.html"/>
+    <updated>2019-01-01T07:25:17+08:00</updated>
+    <id>https://raojunbo.github.io/15462987177847.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li><p>dispatch_queue<br/>
+<img src="media/15462987177847/c8319b785fd73afa2150a3710190f3cd.png" alt="c8319b785fd73afa2150a3710190f3cd"/><br/>
+从这张图中能看出，我们创建的dispatch_queue_t实际上是统一由GCD Thread Pool来进行统一管理。他会根据多线程队列设置的Priority，来统一管理执行的优先级。</p></li>
+<li><p>dispatch_async<br/>
+dispatch_async的流程是用链表保存所有提交的block，然后在底层线程池中，依次取出block并执行；而向主队列提交block则会向主线程的Runloop发送消息并唤醒Runloop，接着会在回调函数中取出block并执行。主线程，专门有个存储queue里需要执行的代码段。当执行到主线程的一个循环玩了后，会从这些队列里拿任务一个一个去执行。</p></li>
+</ul>
+
+<blockquote>
+<p>当我们调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调<code>__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__()</code> 里执行这个 block</p>
+</blockquote>
+
+<ul>
+<li>dispatch_sync</li>
+</ul>
+
+<blockquote>
+<p>理解dispathch_sync 在执行的时候,会<strong>阻塞 上下文 任务</strong>的执行.</p>
+
+<p>造成死锁的情况<br/>
+在主线程里执行<code>dispatch_sync(dispatch_main_queue,block);</code>即，上下文环境是主线程，要将任务放到主线程里执行，而且是同步的。dispatch_sync会阻塞当前主线程，又要在主线程里执行block，所以会造成死锁。造成死锁的原因是“当前执行的上下文环境”与“即将要执行的任务也是这个环境&quot;且是同步执行。同步执行不会开启新的线程，会在当前线程里执行。（所以<strong>同步执行将任务放到哪种队列没有关系，任务会在当前线程执行</strong>）哈哈哈。这个三个条件到达时就会死锁。终于弄懂了。</p>
+</blockquote>
+
+<p><strong>同步，异步的概念始终与当前执行代码的上下文线程有关系。同步就是讲当前放到其他队列里的任务拿到当前线程执行，执行完后然后返回，继续执行，执行完后返回，继续执行下面的代码。（也就说可以把加到其他队列里的任务拿到当前上下文的线程里去执行）。</strong></p>
+
+<ul>
+<li><p>dispatch_semaphore</p></li>
+<li><p>dispatch_source<br/>
+dispatch_source是BSD系统内核kqueue的包装，kqueue() 生成一个<strong>内核事件队列</strong>，返回该队列的文件描述符。kqueue是在XNU内核中发生各种事件时，在应用程序编程方执行处理的技术。操作dispatch_source实际上就是，通过操作这个 kqueue，进而对内核事件的处理。（哈哈，这个终于可以解释通了）相当于可以监听内核的事件，然后给一个回调，并将回调的代码在指定的线程里面执行。</p>
+
+<p>特别说明：<br/>
+这里的dispatch_source与runloop里的source还是有区别的。dispatch_source是   内核事件，runloop的source是端口事件（线程通信的方式），timer事件源（runloop的Timer依赖于线程的runloop）。</p></li>
+</ul>
+
+<p>重要理解<br/>
+<strong>dispatch_asyn与dispatch_syn，dispatch_queue,任务队列是任务列，只管装任务。至于是在当前上下文线程，还是开启新的线程执行，是由同步还是异步决定的。同步不用新的线程执行，异步有创建新线程的权利。</strong></p>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[基础实践系列之编译成iOS可用的.a静态库]]></title>
-    <link href="https://raojunbo.github.io/15429406911904.html"/>
-    <updated>2018-11-23T10:38:11+08:00</updated>
-    <id>https://raojunbo.github.io/15429406911904.html</id>
+    <title type="html"><![CDATA[iOS UI视图相关深入]]></title>
+    <link href="https://raojunbo.github.io/15459973166637.html"/>
+    <updated>2018-12-28T19:41:56+08:00</updated>
+    <id>https://raojunbo.github.io/15459973166637.html</id>
     <content type="html"><![CDATA[
-<p>比较完整的iOS编译脚本，可以一条命令执行<br/>
-<a href="https://github.com/kewlbear/FFmpeg-iOS-build-script">https://github.com/kewlbear/FFmpeg-iOS-build-script</a> </p>
+<h2 id="toc_0">iOS事件传递的需要思考的问题</h2>
 
-<p>下面来分解这条脚本的执行过程</p>
+<pre><code>- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {}
+最终将这个fitView给了谁?
+</code></pre>
+
+<pre><code>- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event { }
+到底是谁在调用的?
+</code></pre>
+
+<blockquote>
+<p>经研究，最终将这个view给了UIWindow,UIWindow调用这个fitView得touchBegan方法。</p>
+</blockquote>
+
+<p>整个事件首先在Application的事件队列里，然后通过UIWindow在view层级里是先从最后面的子view进行hitTest;找到fitView,然后将touch事件派发给它处理。或者view里有手势会先派发事件给手势处理。手势识别后会取消派发给fitView，UIWindow会调用fitView的touchBegan方法。后面的响应链条上touchBegan会被Pre-responder调用。若果不重写touchBegan，pre-responder会默认递归回溯调用。</p>
+
+<ul>
+<li><p>手势识别的内部调用机制?</p></li>
+<li><p>TouchBegan，UIControl，手势识别关系?</p></li>
+</ul>
+
+<h2 id="toc_1">iOS 布局</h2>
+
+<h3 id="toc_2">Frame布局</h3>
+
+<p>layoutSubviews，不手动调用<br/>
+layoutIFNeeded()，在同一个循环里如果需要更新就执行layoutSubviews，然后放回。也就是在layoutIFNeeded里会做判定并且调用本类的layoutSubviews；</p>
+
+<p>setNeedsLayout()，只要告诉标记需要更新界面，在下一个循环里会有一个检测是否需要更新UI布局的一个点来执行layoutSubviews，</p>
+
+<ul>
+<li>drawRect
+这是一个被重复调用的函数。重复调用会造成内存问题。</li>
+</ul>
+
+<h3 id="toc_3">自动布局</h3>
 
 <ol>
-<li><p>下载FFmpeg<br/>
-<a href="http://ffmpeg.org/download.html">http://ffmpeg.org/download.html</a></p></li>
-<li><p>编写编译脚本<br/>
-主要是设置编译的参数，如下面的ffmpeg-build.sh。这个文件主要是配置编译到iOS设备的一些参数</p></li>
-<li><p>下载gas-preprocessor.pl<br/>
-编译库需要的支持，将其拷贝到/usr/local/bin目录下<br/>
-<a href="https://github.com/mansr/gas-preprocessor">https://github.com/mansr/gas-preprocessor</a>  下载 perl 支持库</p></li>
-<li><p>执行编译脚本<br/>
-下载FFmpeg后的目录名是ffmpeg。在脚本文件里指定下载的文件目录名。./ffmpeg-build.sh执行完后就会在my-ffmpeg-iOS目录下生成相应的架构的.a库</p></li>
+<li>更新约束</li>
+<li>布局阶段</li>
+<li>显示</li>
 </ol>
 
-<p>ffmpeg-build.sh   文件内容如下<br/>
-（这个文件直接可以拿过去使用）</p>
+<p>updateConstraints()，不手动调用和layoutSubviews类似<br/>
+updateConstraintsIfNeeded()， 和layoutIfNeeded类似<br/>
+setNeedsUpdateConstraints()，和setNeedsLayout类似</p>
 
-<pre><code>#!/bin/bash
+<p>intrinsicContentSize 属性，根据内容自然得到的属性。</p>
 
-#1、首先：定义下载的库名称
-source=&quot;ffmpeg&quot;
+<h3 id="toc_4">视图布局更新与runloop的关系</h3>
 
-#2、其次：定义&quot;.h/.m/.c&quot;文件编译的结果目录
-#目录作用：用于保存.h/.m/.c文件编译后的结果.o文件
-cache=&quot;cache&quot;
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[讨论架构时是在说什么]]></title>
+    <link href="https://raojunbo.github.io/15458865236455.html"/>
+    <updated>2018-12-27T12:55:23+08:00</updated>
+    <id>https://raojunbo.github.io/15458865236455.html</id>
+    <content type="html"><![CDATA[
+<p>调用网络API<br/>
+页面展示<br/>
+数据的本地持久化<br/>
+动态部署方案</p>
 
-#3、定义&quot;.a&quot;静态库保存目录
-#pwd命令：表示获取当前目录
-staticdir=`pwd`/&quot;my-ffmpeg-iOS&quot;
+<h2 id="toc_0">那么需要解决的问题</h2>
 
-#4、添加FFmpeg配置选项-&gt;默认配置
-#Toolchain options:工具链选项（指定我么需要编译平台CPU架构类型，例如：arm64、x86等等…）
-#--enable-cross-compile: 交叉编译
-#Developer options:开发者选项
-#--disable-debug: 禁止使用调试模式
-#Program options选项
-#--disable-programs:禁用程序(不允许建立命令行程序)
-#Documentation options：文档选项
-#--disable-doc：不需要编译文档
-#Toolchain options：工具链选项
-#--enable-pic：允许建立与位置无关代码
-configure_flags=&quot;--enable-cross-compile --disable-debug --disable-programs --disable-doc --enable-pic&quot;
+<ul>
+<li><p>网络层设计方案？<br/>
+设计网络层需要考虑哪些问题？<br/>
+网络层的优化从哪里入手？</p></li>
+<li><p>页面展示层设计方案？<br/>
+页面的展示，调用，组织都有哪些设计方案</p></li>
+<li><p>本地持久化的设计方案有哪些？</p></li>
+<li><p>要实现动态部署，都有哪些方案</p></li>
+</ul>
 
-#5、定义默认CPU平台架构类型
-#arm64 armv7-&gt;真机-&gt;CPU架构类型
-#x86_64 i386-&gt;模拟器-&gt;CPU架构类型
-archs=&quot;arm64 armv7 x86_64 i386&quot;
+<h2 id="toc_1">软件架构的思路</h2>
 
-#6、指定我们的这个库编译系统版本-&gt;iOS系统下的7.0以及以上版本使用这个静态库
-targetversion=&quot;8.0&quot;
+<ol>
+<li>要解决的问题（问题是什么）</li>
+<li>问题分类，用不同的模块解决不同类型的问题</li>
+<li>搞清楚各个问题之间的依赖关系</li>
+<li>推演预测未来可能的走向</li>
+<li>先实现基础模块，在用基础模块堆积整个架构</li>
+</ol>
 
-#7、接受命令后输入参数
-#我是动态接受命令行输入CPU平台架构类型(输入参数：编译指定的CPU库)
-if [ &quot;$*&quot; ]
-then
-    #存在输入参数，也就说：外部指定需要编译CPU架构类型
-    archs=&quot;$*&quot;
-fi
+<h2 id="toc_2">View层的组织和调用方案</h2>
 
-#8、安装汇编器-&gt;yasm
-#判断一下是否存在这个汇编器
-#目的：通过软件管理器(Homebrew)，然后下载安装（或者更新）我的汇编器
-#一个命令就能够帮助我们完成所有的操作
-#错误一：`which` yasm
-#正确一：`which yasm`
-if [ ! `which yasm`  ]
-then
-    #Homebrew:软件管理器
-    #下载一个软件管理器:安装、卸载、更新、搜索等等...
-    #错误二：`which` brew
-    #正确二：`which brew`
-    if [ ! `which brew` ]
-    then
-        echo &quot;安装brew&quot;
-        ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; || exit 1
-    fi
-    echo &quot;安装yasm&quot;
-    #成功了
-    #下载安装这个汇编器
-    #exit 1-&gt;安装失败了，那么退出程序
-    brew install yasm || exit 1
-fi
+<p>架构模式</p>
 
-echo &quot;循环编译&quot;
+<ol>
+<li><p>如何划分MVC<br/>
+M,V,C<br/>
+在服务端的开发中V主要是指浏览器。<br/>
+在iOS开发中V主要是指self.view的容器</p></li>
+<li><p>MVCS<br/>
+将C的<strong>数据储存部分</strong>抽离出来，交给另一个对象去做，即store</p></li>
+<li><p>MVVM<br/>
+将C的<strong>数据处理</strong>部分抽离出来，交给viewModel处理。即vm<br/>
+而C负责View与ViewModel之间的绑定，以及UI逻辑处理</p></li>
+<li><p>VIPER<br/>
+(不懂)</p></li>
+</ol>
 
-#9、for循环编译FFmpeg静态库
-currentdir=`pwd`
-echo &quot;当前执行编译路径&quot; ${currentdir};
-for arch in $archs
-do
-    echo &quot;开始编译&quot;
-    #9.1、创建目录
-    #在编译结果目录下-创建对应的平台架构类型
-    mkdir -p &quot;$cache/$arch&quot;
-    #9.2、进入这个目录
-    cd &quot;$cache/$arch&quot;
+<p>总结：这些架构都是在MVC的基础上拆分出来的。天下架构出MVC，拆分方式的不同衍生出不同的架构。</p>
 
-    #9.3、配置编译CPU架构类型-&gt;指定当前编译CPU架构类型
-    #错误三：&quot;--arch $arch&quot;
-    #正确三：&quot;-arch $arch&quot;
-    archflags=&quot;-arch $arch&quot;
+<h2 id="toc_3">是否应该使用BaseViewController？</h2>
 
-    #9.4、判定一下你到底是编译的是模拟器.a静态库，还是真机.a静态库
-    if [ &quot;$arch&quot; = &quot;i386&quot; -o &quot;$arch&quot; = &quot;x86_64&quot; ]
-    then
-        #模拟器
-        platform=&quot;iPhoneSimulator&quot;
-        #支持最小系统版本-&gt;iOS系统
-        archflags=&quot;$archflags -mios-simulator-version-min=$targetversion&quot;
-    else
-        #真机(mac、iOS都支持)
-        platform=&quot;iPhoneOS&quot;
-        #支持最小系统版本-&gt;iOS系统
-        archflags=&quot;$archflags -mios-version-min=$targetversion -fembed-bitcode&quot;
-        #注意:优化处理(可有可无)
-        #如果架构类型是&quot;arm64&quot;，那么
-        if [ &quot;$arch&quot; = &quot;arm64&quot; ]
-        then
-            #GNU汇编器（GNU Assembler），简称为GAS
-            #GASPP-&gt;汇编器预处理程序
-            #解决问题：分段错误
-            #通俗一点：就是程序运行时,变量访问越界一类的问题
-            EXPORT=&quot;GASPP_FIX_XCODE5=1&quot;
-        fi
-    fi
+<p>尽可能<strong>不使用继承</strong>而是使用<strong>组合</strong>或者<strong>面向切面编程的AOP</strong>来替代。</p>
+
+<ul>
+<li>好处</li>
+<li>业务方集成成本小。（因为如果用了继承会导致，在集成到其他APP里时，需要依赖很多东西，打动干戈）</li>
+<li>新用户上手接收成本也减少了</li>
+<li><p>架构维护成本低</p></li>
+<li><p>目标</p></li>
+<li><p>业务方可以不用继承的方法，然后框架能够做到ViewController的统一配置。</p></li>
+<li><p>业务方即使脱离框架环境，</p></li>
+</ul>
+
+<h2 id="toc_4">解耦定义</h2>
+
+<p>代码里不相互依赖，依赖分两种，单向依赖，双向依赖。</p>
+
+<h2 id="toc_5">组件化的定义</h2>
+
+<p>让高层模块单向依赖低层模块，业务模块之间完全解耦</p>
+
+<h2 id="toc_6">解耦的几种方式</h2>
+
+<ol>
+<li>代理</li>
+<li>block</li>
+<li>通知</li>
+<li>kvo</li>
+</ol>
+
+<h2 id="toc_7">组件通信实现</h2>
+
+<ol>
+<li>runtime反射机制在Mediator里的实现，在通过对Mediator的category进行接口分离(本质是runtime的反射机制)</li>
+<li>通过在Mediator里注册block,一般是进行url与block的映射（本质是存block）</li>
+<li>同过在Mediator里注册protocal（本质是存class）</li>
+</ol>
+
+<p><strong>总结下：业务层可以依赖基础库，但业务层要相互不依赖。就需要依赖一个可以连接两个业务层的东西Mediator。为了防止业务层又与Mediator相互依赖。这里只允许业务层单向依赖Mediator。其实解耦可以是任意两个类之间实现单向依赖。只是将解耦应用到了对Mediator的单向依赖上。</strong></p>
+
+<h2 id="toc_8">组合与继承的选择</h2>
+
+<p>组合与继承都可以实现代码的复用<br/>
+1. 除非两个类之间是<strong>&quot;is-a&quot;</strong>的关系，否则不要轻易使用继承<br/>
+2. 两个类之间是<strong>has a</strong>的关系时，最好用组合</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode里的Instruments的应用]]></title>
+    <link href="https://raojunbo.github.io/15454940280965.html"/>
+    <updated>2018-12-22T23:53:48+08:00</updated>
+    <id>https://raojunbo.github.io/15454940280965.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">TimerPofile</h2>
+
+<p>可以查看应用程序的那个方法耗时比较长，然后针对性优化</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据结构与算法之美(专栏)]]></title>
+    <link href="https://raojunbo.github.io/15453886088422.html"/>
+    <updated>2018-12-21T18:36:48+08:00</updated>
+    <id>https://raojunbo.github.io/15453886088422.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">复杂度分析</h2>
+
+<p>时间复杂度</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git 拾遗]]></title>
+    <link href="https://raojunbo.github.io/15453592839286.html"/>
+    <updated>2018-12-21T10:28:03+08:00</updated>
+    <id>https://raojunbo.github.io/15453592839286.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0"><code>.git</code>文件目录</a>
+</li>
+<li>
+<a href="#toc_1">commit,tree,block关系</a>
+</li>
+<li>
+<a href="#toc_2">分离头指针情况的注意事项（没有与branch进行关联）</a>
+</li>
+<li>
+<a href="#toc_3">修改commit的message</a>
+</li>
+<li>
+<a href="#toc_4">rebase操作</a>
+<ul>
+<li>
+<a href="#toc_5">修改以往的任何一个commit的message(rebase)</a>
+</li>
+<li>
+<a href="#toc_6">合并以往的连续的几个commit（rebase）</a>
+</li>
+<li>
+<a href="#toc_7">合并以往的不连续的commit(rebase)</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_8">diff操作</a>
+</li>
+<li>
+<a href="#toc_9">恢复工作区，恢复索引区</a>
+</li>
+<li>
+<a href="#toc_10">删除，重命名文件</a>
+</li>
+<li>
+<a href="#toc_11">ignore文件</a>
+</li>
+</ul>
 
 
-    #10、正式编译
-    #tr命令可以对来自标准输入的字符进行替换、压缩和删除
-    #&#39;[:upper:]&#39;-&gt;将小写转成大写
-    #&#39;[:lower:]&#39;-&gt;将大写转成小写
-    #将platform-&gt;转成大写或者小写
-    XCRUN_SDK=`echo $platform | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39;`
-    #编译器-&gt;编译平台
-    CC=&quot;xcrun -sdk $XCRUN_SDK clang&quot;
+<h2 id="toc_0"><code>.git</code>文件目录</h2>
 
-    #架构类型-&gt;arm64
-    if [ &quot;$arch&quot; = &quot;arm64&quot; ]
-    then
-        #音视频默认一个编译命令
-        #preprocessor.pl帮助我们编译FFmpeg-&gt;arm64位静态库
-        AS=&quot;gas-preprocessor.pl -arch aarch64 -- $CC&quot;
-    else
-        #默认编译平台
-        AS=&quot;$CC&quot;
-    fi
-
-    echo &quot;执行到了1&quot;
-
-    #目录找到FFmepg编译源代码目录-&gt;设置编译配置-&gt;编译FFmpeg源码
-    #--target-os:目标系统-&gt;darwin(mac系统早起版本名字)
-    #darwin:是mac系统、iOS系统祖宗
-    #--arch:CPU平台架构类型
-    #--cc：指定编译器类型选项
-    #--as:汇编程序
-    #$configure_flags最初配置
-    #--extra-cflags
-    #--prefix：静态库输出目录
-    TMPDIR=${TMPDIR/%\/} $currentdir/$source/configure \
-        --target-os=darwin \
-        --arch=$arch \
-        --cc=&quot;$CC&quot; \
-        --as=&quot;$AS&quot; \
-        $configure_flags \
-        --extra-cflags=&quot;$archflags&quot; \
-        --extra-ldflags=&quot;$archflags&quot; \
-        --prefix=&quot;$staticdir/$arch&quot; \
-        || exit 1
-
-    echo &quot;执行了&quot;
-
-    #解决问题-&gt;分段错误问题
-    #安装-&gt;导出静态库(编译.a静态库)
-    #执行命令
-    make -j3 install $EXPORT || exit 1
-    #回到了我们的脚本文件目录
-    cd $currentdir
-done
-
+<pre><code>➜  .git git:(V.12.0) ls -l
+total 1440
+-rw-r--r--    1 raojunbo  staff      26 12 15 15:40 COMMIT_EDITMSG
+-rw-r--r--    1 raojunbo  staff    1573 12 18 19:12 FETCH_HEAD
+-rw-r--r--    1 raojunbo  staff      23 12 18 19:12 HEAD
+-rw-r--r--    1 raojunbo  staff      41 12 18 19:12 ORIG_HEAD
+-rw-r--r--    1 raojunbo  staff     551 12 12 12:56 config
+-rw-r--r--    1 raojunbo  staff      73 11 30 11:39 description
+-rw-r--r--    1 raojunbo  staff  311844 12 20 22:54 gitk.cache
+drwxr-xr-x   13 raojunbo  staff     416 11 30 11:39 hooks
+-rw-r--r--    1 raojunbo  staff  391258 12 20 22:48 index
+drwxr-xr-x    3 raojunbo  staff      96 11 30 11:39 info
+drwxr-xr-x    4 raojunbo  staff     128 11 30 11:42 logs
+drwxr-xr-x  256 raojunbo  staff    8192 12 14 14:58 objects
+-rw-r--r--    1 raojunbo  staff    1536 11 30 11:42 packed-refs
+drwxr-xr-x    5 raojunbo  staff     160 11 30 11:42 refs
 </code></pre>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[FFMPEG视音频基础探索-API(系列二)]]></title>
-    <link href="https://raojunbo.github.io/15427852627727.html"/>
-    <updated>2018-11-21T15:27:42+08:00</updated>
-    <id>https://raojunbo.github.io/15427852627727.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[FFMPEG视音频基础探索-命令行(系列一)]]></title>
-    <link href="https://raojunbo.github.io/15427812231625.html"/>
-    <updated>2018-11-21T14:20:23+08:00</updated>
-    <id>https://raojunbo.github.io/15427812231625.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">ffmpeg命令行</h2>
-
-<h2 id="toc_1">ffplay命令行</h2>
-
-<h2 id="toc_2">ffprobe命令行</h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UDP-RTP协议解析（基础系列六）]]></title>
-    <link href="https://raojunbo.github.io/15427692957422.html"/>
-    <updated>2018-11-21T11:01:35+08:00</updated>
-    <id>https://raojunbo.github.io/15427692957422.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15427692957422/ftpudp.png" alt="ftpudp"/></p>
-
-<p>原理<br/>
-RTP是基于UDP上的。即时非链接的。RTP里的载荷是媒体的分包<br/>
-<img src="media/15427692957422/rtp%E5%9B%BE.png" alt="rtp图"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[FLV封装格式解析（基础系列五）]]></title>
-    <link href="https://raojunbo.github.io/15427076070232.html"/>
-    <updated>2018-11-20T17:53:27+08:00</updated>
-    <id>https://raojunbo.github.io/15427076070232.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15427076070232/%E8%A7%86%E9%A2%91%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE.png" alt="视频封装数据"/></p>
-
-<p>原理<br/>
-<img src="media/15427076070232/flvtag.png" alt="flvtag"/></p>
-
-<p>FLV封装格式是一个FLV Header文件头和一个一个的Tag组成。Tag包括音频数据以及视频数据。整个的解析过程就是将上面的图的数据进行解析。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AAC音频码流解析（基础系列四）]]></title>
-    <link href="https://raojunbo.github.io/15427004394453.html"/>
-    <updated>2018-11-20T15:53:59+08:00</updated>
-    <id>https://raojunbo.github.io/15427004394453.html</id>
-    <content type="html"><![CDATA[
 <ul>
-<li>
-<a href="#toc_0">原理</a>
-</li>
+<li><p>HEAD 文件<br/>
+存有当前分支的头指针。在切换分支的时候，会跟随分支的变化而变化。当然也可以不与分支挂钩，直接指向一个处理分支状态（任意指向的）也可以。</p></li>
+<li><p>config 文件</p>
+
+<p><code>git config -l</code>命令的内容</p></li>
 </ul>
 
-
-<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/50535042">AAC音频码流解析</a><br/>
-<img src="media/15427004394453/%E9%9F%B3%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="音频码流"/></p>
-
-<h2 id="toc_0">原理</h2>
-
-<p>AAC原始码流是一个一个ADTS进行分隔，同步字为0xfff<br/>
-AAC码流解析的步骤就是首先从码流中搜索0x0FFF，分离出ADTS frame；然后再分析ADTS frame的首部各个字段。</p>
-
-<p><img src="media/15427004394453/AAC%E7%A0%81%E6%B5%81%E7%9A%84%E7%89%87%E6%AE%B5.png" alt="AAC码流的片段"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[H.264视频码流解析（基础系列三）]]></title>
-    <link href="https://raojunbo.github.io/15426950827326.html"/>
-    <updated>2018-11-20T14:24:42+08:00</updated>
-    <id>https://raojunbo.github.io/15426950827326.html</id>
-    <content type="html"><![CDATA[
 <ul>
-<li>
-<a href="#toc_0">原理</a>
-</li>
+<li><p>ORIG_HEAD 文件</p></li>
+<li><p>FETCH_HEAD 文件</p></li>
+<li><p>object目录<br/>
+对象集，block ,commit,tree,tags;</p></li>
+<li><p>refs</p></li>
 </ul>
-
-
-<p>参考文章<a href="https://blog.csdn.net/leixiaohua1020/article/details/50534369">视音频数据处理入门：H.264视频码流解析</a><br/>
-<img src="media/15426950827326/%E8%A7%86%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="视频码流"/></p>
-
-<p>可以从H.264码流中分析得到它的基本单元NALU，并且可以简单解析NALU首部的字段。通过修改该程序可以实现不同的H.264码流处理功能。</p>
-
-<h2 id="toc_0">原理</h2>
-
-<p><img src="media/15426950827326/H264%E7%A0%81%E6%B5%81.png" alt="H264码流"/><br/>
-每个NALU之间通过起始码进行分隔，起始码分成两种：0x000001（3Byte）或者0x00000001（4Byte）,如果NALU对应的Slice为一帧的开始就用0x00000001，否则就用0x000001。<br/>
-H.264码流解析的步骤就是首先从码流中搜索0x000001和0x00000001，分离出NALU；然后再分析NALU的各个字段。本文的程序即实现了上述的两个步骤。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[音频采样数据处理（基础系列二）]]></title>
-    <link href="https://raojunbo.github.io/15426806992852.html"/>
-    <updated>2018-11-20T10:24:59+08:00</updated>
-    <id>https://raojunbo.github.io/15426806992852.html</id>
-    <content type="html"><![CDATA[
-
-
-<p><img src="media/15426806992852/20160117235313221.png" alt="20160117235313221"/></p>
-
-<p>注：本文中声音样值的采样频率一律是44100Hz，采样格式一律为16LE。“16”代表采样位数是16bit。由于1Byte=8bit，所以一个声道的一个采样值占用2Byte。“LE”代表Little Endian，代表2 Byte采样值的存储方式为高位存在高地址中。<br/>
-<img src="media/15426806992852/%E5%A3%B0%E9%9F%B3%E5%AD%98%E5%82%A8.png" alt="声音存储"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[视频像素数据处理(基础系列一)]]></title>
-    <link href="https://raojunbo.github.io/15426223369165.html"/>
-    <updated>2018-11-19T18:12:16+08:00</updated>
-    <id>https://raojunbo.github.io/15426223369165.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0">YUV处理</a>
-</li>
-<li>
-<a href="#toc_1">RGB处理</a>
-</li>
-</ul>
-
-
-<p>参考<a href="https://blog.csdn.net/leixiaohua1020/article/details/50534150">视音频数据处理入门：RGB、YUV像素数据处理</a></p>
-
-<p><img src="media/15426223369165/15426224657307.jpg" alt=""/></p>
-
-<h1 id="toc_0">YUV处理</h1>
-
-<p>Y,U,V是单独存储的方式。所以很容易处理。<br/>
-为节省带宽起见，大多数YUV格式平均使用的每像素位数都少于24位。主要的抽样（subsample）格式有YCbCr4:2:0、YCbCr4:2:2、YCbCr4:1:1和YCbCr4:4:4。YUV的表示法称为A:B:C表示法：<br/>
-4:4:4表示完全取样。<br/>
-4:2:2表示2:1的水平取样，垂直完全采样。<br/>
-4:2:0表示2:1的水平取样，垂直2：1采样。<br/>
-4:1:1表示4:1的水平取样，垂直完全采样。<br/>
-<img src="media/15426223369165/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-19%20%E4%B8%8B%E5%8D%888.04.15.png" alt="屏幕快照 2018-11-19 下午8.04.15"/></p>
-
-<h1 id="toc_1">RGB处理</h1>
-
-<p>RGB的存储存储是一个RGB一个RGB来存的。所以对于图像的处理不太好处理。<br/>
-<img src="media/15426223369165/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-19%20%E4%B8%8B%E5%8D%888.13.30.png" alt="屏幕快照 2018-11-19 下午8.13.30"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[财务报表分析]]></title>
-    <link href="https://raojunbo.github.io/15423493894054.html"/>
-    <updated>2018-11-16T14:23:09+08:00</updated>
-    <id>https://raojunbo.github.io/15423493894054.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[TOC]]]></title>
-    <link href="https://raojunbo.github.io/15420339112607.html"/>
-    <updated>2018-11-12T22:45:11+08:00</updated>
-    <id>https://raojunbo.github.io/15420339112607.html</id>
-    <content type="html"><![CDATA[
-<p>参考博客<a href="https://blog.csdn.net/leixiaohua1020/article/details/18893769">视音频编解码技术零基础学习方法</a></p>
-
-<h2 id="toc_0">数字音频</h2>
-
-<h3 id="toc_1">音频表示</h3>
-
-<p>音频的裸数据格式就是脉冲编码调制PCM数据。<br/>
-PCM数据数字化：位深度，采样率，声道数。</p>
-
-<h3 id="toc_2">音频编码</h3>
-
-<p>wav:wav就是在pcm数据外面加上一层头<br/>
-mp3:压缩比较高<br/>
-aac:文件更小，质量更高</p>
-
-<h2 id="toc_3">数字视频</h2>
-
-<h3 id="toc_4">封装格式</h3>
-
-<p>AVI<br/>
-FLV <br/>
-MP4<br/>
-MOV<br/>
-WMV<br/>
-MKV<br/>
-RMVB<br/>
-就是把视频数据和音频数据打包成一个文件的规范</p>
-
-<h3 id="toc_5">视频编码</h3>
-
-<p>MPEG<br/>
-H.264</p>
-
-<ul>
-<li>IPB帧</li>
-</ul>
-
-<p>I帧，帧内编码<br/>
-p帧，前向预测编码<br/>
-B帧，双向预测内插编码帧</p>
 
 <blockquote>
-<p>这个地方不太理解。fdsatsa</p>
+<p>git内部的命令<br/>
+查看hash所代表的对象类型 `<code>git cat-file -t 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
+
+<p>查看hash所代表的对象实际内容<code>git cat-file -p 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
 </blockquote>
 
+<h2 id="toc_1">commit,tree,block关系</h2>
+
+<p><img src="media/15453592839286/gitbloctree.png" alt="gitbloctree"/></p>
+
+<p>blob实际就是真实的文件<br/>
+tree实际就是目录<br/>
+commit是git里的东西是一个包含“根tree”的东西。commit里有parent(父commit),author(作者),committer(提交者)</p>
+
+<h2 id="toc_2">分离头指针情况的注意事项（没有与branch进行关联）</h2>
+
+<pre><code>➜  GitTestDir git:(master) git checkout 552aa3eba30936d5c4ecf148b38d0cbc89221fbc 
+Note: checking out &#39;552aa3eba30936d5c4ecf148b38d0cbc89221fbc&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at 552aa3e add sty
+➜  GitTestDir git:(552aa3e) 
+</code></pre>
+
+<p>直接切换到一个指定的commit号，直接进入工作后，进行提交，如果在checkout 到其它分支，就会出现分离头指针，也就是没有基于某个分支。在后期，分支的指针会自动被清理掉。</p>
+
+<p>git diff HEAD HEAD^     //head与父亲进行对比<br/>
+git diff HEAD HEAD<sup>^</sup>   //head 与父亲的父亲进行对比<br/>
+git diff HEAD HEAD~1    //head 与父亲进行对比</p>
+
+<h2 id="toc_3">修改commit的message</h2>
+
+<p>对最近一次的message做修改<br/>
+<code>git commit --amend</code></p>
+
+<h2 id="toc_4">rebase操作</h2>
+
+<h3 id="toc_5">修改以往的任何一个commit的message(rebase)</h3>
+
+<p>示例<br/>
+<code><br/>
+commit3<br/>
+commit2<br/>
+commit1<br/>
+</code><br/>
+我现在要，修改commit2,那么我就是git rebase -i commit1;以commit1作为基准,去修改其后面的commit信息。<br/>
+rebase 命令的交互命令里有拿出commit,重新设置messge等操作。<br/>
+修改后commit的commit号会发生变化。</p>
+
+<h3 id="toc_6">合并以往的连续的几个commit（rebase）</h3>
+
+<p>示例<br/>
+<code><br/>
+commit4<br/>
+commit3<br/>
+commit2<br/>
+commit1<br/>
+</code><br/>
+合并commit2,与commit3为commit5;这样就会形成一个新的commit;</p>
+
+<h3 id="toc_7">合并以往的不连续的commit(rebase)</h3>
+
+<p>其实与前面一样，只是，列出commit ，然后描述命令</p>
+
+<h2 id="toc_8">diff操作</h2>
+
 <ul>
-<li>DTS与PTS</li>
+<li><p>比较工作区，索引区,HEAD的差异<br/>
+<code>git diff --cached</code>  比较索引区域HEAD的差别比较<br/>
+<code>git diff</code> 工作区与索引区的差别</p></li>
+<li><p>比较不同分支的同一个文件的差异</p></li>
 </ul>
 
-<h3 id="toc_6">视频像素数据表示</h3>
+<p><code>git diff temp master -- filename</code><br/>
+temp是一个分支或者commitid，master是一个分支或者commitid；</p>
 
-<p>YUV<br/>
-RGB</p>
+<h2 id="toc_9">恢复工作区，恢复索引区</h2>
 
-<h2 id="toc_7">FFmepg命令</h2>
+<ul>
+<li>清空工作区</li>
+</ul>
 
-<p>ffmpeg视频转码<br/>
-mp4-&gt;mov,mov-&gt;mp4,wmv-&gt;mp4<br/>
-命令格式 ffmpeg -i {指定输入文件路径} -b:v {输出文件路径}</p>
+<p><code>git checkout file</code><br/>
+<code>git checkout .</code></p>
+
+<ul>
+<li>将加入索引的放入工作区</li>
+</ul>
+
+<p><code>git reset HEAD</code></p>
+
+<ul>
+<li>清除最近的几个commit</li>
+</ul>
+
+<p><code>git reset --hard  commitid</code></p>
+
+<h2 id="toc_10">删除，重命名文件</h2>
+
+<ul>
+<li>重命名文件
+<code>git mv filename1 filename2</code></li>
+</ul>
+
+<ul>
+<li>删除文件
+<code>git rm filename</code></li>
+</ul>
+
+<h2 id="toc_11">ignore文件</h2>
+
+<p><code>.gitignore</code>告诉哪些不需要加入git的管理里</p>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Markdown 语法和 MWeb 写作使用说明]]></title>
-    <link href="https://raojunbo.github.io/15346594344474.html"/>
-    <updated>2018-08-19T14:17:14+08:00</updated>
-    <id>https://raojunbo.github.io/15346594344474.html</id>
+    <title type="html"><![CDATA[网络协议总结]]></title>
+    <link href="https://raojunbo.github.io/15448598664160.html"/>
+    <updated>2018-12-15T15:44:26+08:00</updated>
+    <id>https://raojunbo.github.io/15448598664160.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">Markdown 的设计哲学</h2>
+<h2 id="toc_0">网络协议层次</h2>
 
-<blockquote>
-<p>Markdown 的目標是實現「易讀易寫」。<br/>
-不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。<br/>
-Markdown 的語法有個主要的目的：用來作為一種網路內容的<em>寫作</em>用語言。</p>
-</blockquote>
+<p>应用层：HTTP,HTTPS,RTMP,DHCP,DNS,P2P<br/>
+传输层：TP，UDP<br/>
+网络层：IP,ICMP,OSPF,BGP<br/>
+链路层：ARP,VLAN,STP<br/>
+物理层</p>
 
-<span id="more"></span><!-- more -->
+<h2 id="toc_1">2层设备，3层设备</h2>
 
-<h2 id="toc_1">本文约定</h2>
+<h2 id="toc_2">IP</h2>
 
-<p>如果有写 <code>效果如下：</code>， 在 MWeb 编辑状态下只有用 <code>CMD + 4</code> 或 <code>CMD + R</code> 预览才可以看效果。</p>
+<h3 id="toc_3">IP组成</h3>
 
-<h2 id="toc_2">标题</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code># 第一级标题 `&lt;h1&gt;` 
-## 第二级标题 `&lt;h2&gt;` 
-###### 第六级标题 `&lt;h6&gt;` 
-</code></pre>
-
-<p>效果如下：</p>
-
-<h1 id="toc_3">第一级标题 <code>&lt;h1&gt;</code></h1>
-
-<h2 id="toc_4">第二级标题 <code>&lt;h2&gt;</code></h2>
-
-<h6 id="toc_5">第六级标题 <code>&lt;h6&gt;</code></h6>
-
-<h2 id="toc_6">强调</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>*这些文字会生成`&lt;em&gt;`*
-_这些文字会生成`&lt;u&gt;`_
-
-**这些文字会生成`&lt;strong&gt;`**
-__这些文字会生成`&lt;strong&gt;`__
-</code></pre>
-
-<p>在 MWeb 中的快捷键为： <code>CMD + U</code>、<code>CMD + I</code>、<code>CMD + B</code><br/>
-效果如下：</p>
-
-<p><em>这些文字会生成<code>&lt;em&gt;</code></em><br/>
-<u>这些文字会生成<code>&lt;u&gt;</code></u></p>
-
-<p><strong>这些文字会生成<code>&lt;strong&gt;</code></strong><br/>
-<strong>这些文字会生成<code>&lt;strong&gt;</code></strong></p>
-
-<h2 id="toc_7">换行</h2>
-
-<p>四个及以上空格加回车。<br/>
-如果不想打这么多空格，只要回车就为换行，请勾选：<code>Preferences</code> - <code>Themes</code> - <code>Translate newlines to &lt;br&gt; tags</code></p>
-
-<h2 id="toc_8">列表</h2>
-
-<h3 id="toc_9">无序列表</h3>
-
-<p>Markdown 语法：</p>
-
-<pre><code>* 项目一 无序列表 `* + 空格键`
-* 项目二
-    * 项目二的子项目一 无序列表 `TAB + * + 空格键`
-    * 项目二的子项目二
-</code></pre>
-
-<p>在 MWeb 中的快捷键为： <code>Option + U</code><br/>
-效果如下：</p>
+<p>IP地址由网络地址和主机地址共同组成。下面两种分类方法去定义IP的网络地址与主机地址。<br/>
+- 传统地址分类<br/>
+A,B,C,D类，现在基本不用</p>
 
 <ul>
-<li>项目一 无序列表 <code>* + 空格键</code></li>
-<li>项目二
+<li>无类型域间选路即CIDR（<strong>目前采用的方案，泳衣解决传统分类IP浪费的问题</strong>）
 
 <ul>
-<li>项目二的子项目一 无序列表 <code>TAB + * + 空格键</code></li>
-<li>项目二的子项目二</li>
+<li>子网掩码的表示形式</li>
+<li>16.158.165.91/22</li>
 </ul></li>
 </ul>
 
-<h3 id="toc_10">有序列表</h3>
+<h3 id="toc_4">公有IP地址和私有IP地址</h3>
 
-<p>Markdown 语法：</p>
+<p>将<code>192.168.0.0~192.168.255.255</code>之间的地址定义为私有地址。也就是在同一公有IP的网络里唯一，在不同的IP网络里可能相同。这样在结合NAT技术解决通讯问题。<strong>这是目前采用的方案，用以解决IP即将耗尽的问题</strong></p>
 
-<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
-2. 项目二 
-3. 项目三
-    1. 项目三的子项目一 有序列表 `TAB + 数字 + . + 空格键`
-    2. 项目三的子项目二
-</code></pre>
+<h2 id="toc_5">动态主机配置协议(DHCP)</h2>
 
-<p>效果如下：</p>
-
-<ol>
-<li>项目一 有序列表 <code>数字 + . + 空格键</code></li>
-<li>项目二 </li>
-<li>项目三
-
-<ol>
-<li>项目三的子项目一 有序列表 <code>TAB + 数字 + . + 空格键</code></li>
-<li>项目三的子项目二</li>
-</ol></li>
-</ol>
-
-<h3 id="toc_11">列表中嵌入代码块语法</h3>
-
-<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
-
-    列表中嵌入代码块必须前后空一行，如这个写法
-
-    ```
-    js
-    function fancyAlert(arg) {
-      if(arg) {
-        $.facebox({div:&#39;#foo&#39;})
-      }
-    }
-    ```
-
-    其他文本。
-
-2. 项目二
-</code></pre>
-
-<h3 id="toc_12">任务列表（Task lists）</h3>
-
-<p>Markdown 语法：</p>
-
-<pre><code>- [ ] 任务一 未做任务 `- + 空格 + [ ]`
-- [x] 任务二 已做任务 `- + 空格 + [x]`
-</code></pre>
-
-<p>效果如下：</p>
+<h2 id="toc_6">ARP协议</h2>
 
 <ul>
-<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 任务一 未做任务 <code>- + 空格 + [ ]</code>
-</li>
-<li class="task-list-item"><input disabled="disabled" type="checkbox" checked /> 任务二 已做任务 <code>- + 空格 + [x]</code>
-</li>
+<li><p>集线器<br/>
+全部是用广播</p></li>
+<li><p>交换机<br/>
+刚开始是广播，通过自学习能力的完善转发表，知道了到达的MAC地址的设备口。就可以定向转发。</p></li>
 </ul>
 
-<h2 id="toc_13">图片</h2>
+<h2 id="toc_7">ICMP协议</h2>
 
-<p>Markdown 语法：</p>
-
-<pre><code>![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
-格式: ![Alt Text](url)
-</code></pre>
-
-<p><code>Control + Shift + I</code> 可插入Markdown语法。<br/>
-如果是 MWeb 的文档库中的文档，还可以用拖放图片、<code>CMD + V</code> 粘贴、<code>CMD + Option + I</code> 导入这三种方式来增加图片。<br/>
-效果如下：</p>
-
-<p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up"/></p>
-
-<p>MWeb 引入的特别的语法来设置图片宽度，方法是在图片描述后加 <code>-w + 图片宽度</code> 即可，比如说要设置上面的图片的宽度为 140，语法如为 <code>![GitHub-w140](set-up-git.gif)</code>：</p>
-
-<p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up" style="width:140px;"/></p>
-
-<h2 id="toc_14">链接</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>email &lt;example@example.com&gt;
-[GitHub](http://github.com)
-自动生成连接  &lt;http://www.github.com/&gt;
-</code></pre>
-
-<p><code>Control + Shift + L</code> 可插入Markdown语法。<br/>
-如果是 MWeb 的文档库中的文档，拖放或<code>CMD + Option + I</code> 导入非图片时，会生成连接。<br/>
-效果如下：</p>
-
-<p>Email 连接： <a href="mailto:example@example.com">example@example.com</a><br/>
-<a href="http://github.com">连接标题Github网站</a><br/>
-自动生成连接像： <a href="http://www.github.com/">http://www.github.com/</a> 这样</p>
-
-<h2 id="toc_15">区块引用</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>某某说:
-&gt; 第一行引用
-&gt; 第二行费用文字
-</code></pre>
-
-<p><code>CMD + Shift + B</code> 可插入Markdown语法。<br/>
-效果如下：</p>
-
-<p>某某说:</p>
-
-<blockquote>
-<p>第一行引用<br/>
-第二行费用文字</p>
-</blockquote>
-
-<h2 id="toc_16">行内代码</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>像这样即可：`&lt;addr&gt;` `code`
-</code></pre>
-
-<p><code>CMD + K</code> 可插入Markdown语法。<br/>
-效果如下：</p>
-
-<p>像这样即可：<code>&lt;addr&gt;</code> <code>code</code></p>
-
-<h2 id="toc_17">多行或者一段代码</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>```js
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:&#39;#foo&#39;})
-  }
-
-}
-```
-</code></pre>
-
-<p><code>CMD + Shift + K</code> 可插入Markdown语法。<br/>
-效果如下：</p>
-
-<pre><code class="language-js">function fancyAlert(arg) {
-    if(arg) {
-        $.facebox({div:&#39;#foo&#39;})
-    }
-
-}
-</code></pre>
-
-<h2 id="toc_18">顺序图或流程图</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>```sequence
-张三-&gt;李四: 嘿，小四儿, 写博客了没?
-Note right of 李四: 李四愣了一下，说：
-李四--&gt;张三: 忙得吐血，哪有时间写。
-```
-
-```flow
-st=&gt;start: 开始
-e=&gt;end: 结束
-op=&gt;operation: 我的操作
-cond=&gt;condition: 确认？
-
-st-&gt;op-&gt;cond
-cond(yes)-&gt;e
-cond(no)-&gt;op
-```
-</code></pre>
-
-<p>效果如下（ <code>Preferences</code> - <code>Themes</code> - <code>Enable sequence &amp; flow chart</code> 才会看到效果 ）：</p>
-
-<pre><code class="language-sequence">张三-&gt;李四: 嘿，小四儿, 写博客了没?
-Note right of 李四: 李四愣了一下，说：
-李四--&gt;张三: 忙得吐血，哪有时间写。
-</code></pre>
-
-<pre><code class="language-flow">st=&gt;start: 开始
-e=&gt;end: 结束
-op=&gt;operation: 我的操作
-cond=&gt;condition: 确认？
-
-st-&gt;op-&gt;cond
-cond(yes)-&gt;e
-cond(no)-&gt;op
-</code></pre>
-
-<p>更多请参考：<a href="http://bramp.github.io/js-sequence-diagrams/">http://bramp.github.io/js-sequence-diagrams/</a>, <a href="http://adrai.github.io/flowchart.js/">http://adrai.github.io/flowchart.js/</a></p>
-
-<h2 id="toc_19">表格</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code class="language-txt">第一格表头 | 第二格表头
---------- | -------------
-内容单元格 第一列第一格 | 内容单元格第二列第一格
-内容单元格 第一列第二格 多加文字 | 内容单元格第二列第二格
-</code></pre>
-
-<p>效果如下：</p>
-
-<table>
-<thead>
-<tr>
-<th>第一格表头</th>
-<th>第二格表头</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>内容单元格 第一列第一格</td>
-<td>内容单元格第二列第一格</td>
-</tr>
-<tr>
-<td>内容单元格 第一列第二格 多加文字</td>
-<td>内容单元格第二列第二格</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="toc_20">删除线</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>加删除线像这样用： ~~删除这些~~
-</code></pre>
-
-<p>效果如下：</p>
-
-<p>加删除线像这样用： <del>删除这些</del></p>
-
-<h2 id="toc_21">分隔线</h2>
-
-<p>以下三种方式都可以生成分隔线：</p>
-
-<pre><code>***
-
-*****
-
-- - -
-</code></pre>
-
-<p>效果如下：</p>
-
-<hr/>
-
-<hr/>
-
-<hr/>
-
-<h2 id="toc_22">MathJax</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>块级公式：
-$$  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
-
-\\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
-1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
-{1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
-
-行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$
-</code></pre>
-
-<p>效果如下（<code>Preferences</code> - <code>Themes</code> - <code>Enable MathJax</code> 才会看到效果）：</p>
-
-<p>块级公式：<br/>
-\[  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</p>
-
-<p>\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =<br/>
-1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}<br/>
-{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]</p>
-
-<p>行内公式： \(\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N\)</p>
-
-<h2 id="toc_23">脚注（Footnote）</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>这是一个脚注：[^sample_footnote]
-</code></pre>
-
-<p>效果如下：</p>
-
-<p>这是一个脚注：<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
-
-<h2 id="toc_24">注释和阅读更多</h2>
-
-<!-- comment -->
-
-<!-- more -->
-
-<p>Actions-&gt;Insert Read More Comment <em>或者</em> <code>Command + .</code><br/>
-<strong>注</strong> 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。</p>
-
-<h2 id="toc_25">TOC</h2>
-
-<p>Markdown 语法：</p>
-
-<pre><code>[TOC]
-</code></pre>
-
-<p>效果如下：</p>
+<p><img src="media/15448598664160/23aecf653d60dd94b7c5c6dc21ca21ff.jpg" alt="23aecf653d60dd94b7c5c6dc21ca21ff"/></p>
 
 <ul>
-<li>
-<a href="#toc_0">Markdown 的设计哲学</a>
-</li>
-<li>
-<a href="#toc_1">本文约定</a>
-</li>
-<li>
-<a href="#toc_2">标题</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_3">第一级标题 <code>&lt;h1&gt;</code></a>
-<ul>
-<li>
-<a href="#toc_4">第二级标题 <code>&lt;h2&gt;</code></a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<a href="#toc_5">第六级标题 <code>&lt;h6&gt;</code></a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_6">强调</a>
-</li>
-<li>
-<a href="#toc_7">换行</a>
-</li>
-<li>
-<a href="#toc_8">列表</a>
-<ul>
-<li>
-<a href="#toc_9">无序列表</a>
-</li>
-<li>
-<a href="#toc_10">有序列表</a>
-</li>
-<li>
-<a href="#toc_11">列表中嵌入代码块语法</a>
-</li>
-<li>
-<a href="#toc_12">任务列表（Task lists）</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_13">图片</a>
-</li>
-<li>
-<a href="#toc_14">链接</a>
-</li>
-<li>
-<a href="#toc_15">区块引用</a>
-</li>
-<li>
-<a href="#toc_16">行内代码</a>
-</li>
-<li>
-<a href="#toc_17">多行或者一段代码</a>
-</li>
-<li>
-<a href="#toc_18">顺序图或流程图</a>
-</li>
-<li>
-<a href="#toc_19">表格</a>
-</li>
-<li>
-<a href="#toc_20">删除线</a>
-</li>
-<li>
-<a href="#toc_21">分隔线</a>
-</li>
-<li>
-<a href="#toc_22">MathJax</a>
-</li>
-<li>
-<a href="#toc_23">脚注（Footnote）</a>
-</li>
-<li>
-<a href="#toc_24">注释和阅读更多</a>
-</li>
-<li>
-<a href="#toc_25">TOC</a>
-</li>
+<li><p>ping <br/>
+就是利用ICMP协议的<strong>查询报文</strong></p></li>
+<li><p>traceroute<br/>
+就是利用ICMP的<strong>差错报文</strong></p></li>
 </ul>
 
+<h2 id="toc_8">公有IP与私有IP的应用</h2>
 
-<div class="footnotes">
-<hr/>
-<ol>
+<p>有NAT路由设备，将公有IP映射成私有IP,进关,将私有IP映射成公有IP，出关。此种模式就是”玄奘西行&quot;，在出关时需要换成公有IP。即很多路由器支持的NAT转换。这里的公网就是运营商的地址。<br/>
+那么这个这里有个疑问，isp服务商</p>
 
-<li id="fn1">
-<p>这里是脚注信息&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
-</li>
+<h2 id="toc_9">路由协议</h2>
 
-</ol>
-</div>
+<ul>
+<li>静态路由策略（手动配置）</li>
+<li>动态路由算法(自动配置)
+距离矢量路由算法,基于距离矢量路由算法的BGP
+链路状态路由算法,基于链路状态路由算法的OSPF</li>
+</ul>
+
+<h2 id="toc_10">传输层</h2>
+
+<p>UDP与TCP的区别<br/>
+所谓的建立连接，是为了在客户端和服务端连接，而建立一定的数据结构来维护双方交互的状态(连接实际上就是<strong>连接就是两端的状态维护</strong>)。用这样的数据结构来保证所谓的面向连接的特性。<br/>
+TCP提供可靠交付。保证数据的无差错，不丢失，不重复，并按顺序到达。<strong>是一种由状态的服务</strong>。提供拥塞控制。</p>
+
+<p>UDP<br/>
+UDP继承了IP数据报的原始特性，一个个发一个个地接收。不管网络情况，一个劲的发。</p>
+
+<ul>
+<li>UDP
+<img src="media/15448598664160/6d1313f51b9dfd7ab454b2cef1cb37bf.jpg" alt="6d1313f51b9dfd7ab454b2cef1cb37bf"/></li>
+</ul>
+
+<p>UDP的几个例子<br/>
+1. Google推出的QUIC是基于UDP改进的通信协议，其目的是降低网路通信的延迟<br/>
+2. 很多直播都会基于UDP实现自己的视频传输协议<br/>
+3. 很多实时游戏会采用自定义的可靠UDP协议，来自定义重传策略，将丢包降低到最低<br/>
+4. 物联网，很多嵌入式设备不能处理打量的数据结构，基于UDP实现网络通信</p>
+
+<ul>
+<li>TCP
+<img src="media/15448598664160/a795461effcce686a43f48e094c9adbf.jpg" alt="a795461effcce686a43f48e094c9adbf"/>
+TCP的三次握手
+为什么是三次握手：保证双方的消息都<strong>有去有回</strong>。就是建立连接了。</li>
+</ul>
+
+<p>TCP的四次分手<br/>
+分手过程，要保证各端的数据都发送完了。才真正结束。</p>
+
+<p>顺序问题<br/>
+超时重传<br/>
+流量控制<br/>
+拥塞控制</p>
+
+<h2 id="toc_11">应用层协议</h2>
+
+<ul>
+<li>HTTP</li>
+</ul>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[欢迎使用 MWeb]]></title>
-    <link href="https://raojunbo.github.io/15346594344475.html"/>
-    <updated>2018-08-19T14:17:14+08:00</updated>
-    <id>https://raojunbo.github.io/15346594344475.html</id>
+    <title type="html"><![CDATA[C语言拾遗]]></title>
+    <link href="https://raojunbo.github.io/15444947240000.html"/>
+    <updated>2018-12-11T10:18:43+08:00</updated>
+    <id>https://raojunbo.github.io/15444947240000.html</id>
     <content type="html"><![CDATA[
-<p>首先介绍一下 MWeb 是什么，MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。MWeb 使用的是 Github Flavored Markdown 语法，在使用 MWeb 前，建议你一定要去 <a href="http://zh.mweb.im/">MWeb 官网首页</a> 看一下介绍视频，MWeb 官网也做了比较详细的帮助，建议你也看一下大概内容，帮助的网址为：<a href="http://zh.mweb.im/help.html">http://zh.mweb.im/help.html</a>。</p>
+<ul>
+<li>
+<a href="#toc_0">一：编译</a>
+<ul>
+<li>
+<a href="#toc_1">makefile的编译</a>
+</li>
+<li>
+<a href="#toc_2">预处理</a>
+<ul>
+<li>
+<a href="#toc_3">条件编译</a>
+</li>
+<li>
+<a href="#toc_4">预定义宏</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">完整项目多文件编译</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">二：指针的概念</a>
+<ul>
+<li>
+<a href="#toc_7">指针与object的关系</a>
+</li>
+<li>
+<a href="#toc_8">指针与数组的关</a>
+</li>
+<li>
+<a href="#toc_9">指针与函数</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">三：C中的字符串</a>
+</li>
+<li>
+<a href="#toc_11">四：C的内存管理</a>
+<ul>
+<li>
+<a href="#toc_12">动态内存分配</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">五：结构体</a>
+</li>
+<li>
+<a href="#toc_14">六：抽象数据接口</a>
+</li>
+<li>
+<a href="#toc_15">七：示例</a>
+</li>
+</ul>
 
-<h2 id="toc_0">需要您重点注意的</h2>
 
-<p>MWeb 是有<strong>两种模式</strong>的：外部模式和文档库模式。MWeb 为了满足所有 Markdown 使用需求，设计了两种模式！外部模式用于打开和编辑所有本地 Markdown 文档。另外为了方便用 Markdown 记笔记，MWeb 设计了文档库模式，文档库中的文档也支持一键生成静态博客，以便于分享。关于两个模式的情况，还是建议您去看一下官网的视频和帮助。</p>
+<h2 id="toc_0">一：编译</h2>
 
-<h2 id="toc_1">帮助我们改进 MWeb</h2>
+<p>不同的CPU制造商使用的指令系统和编码格式不同。例如Intel Corei7与ARM采用的就是不同的指令集。在编译时，编译器就需要将C语言编译成相应CPU的机器码。</p>
 
-<p>如果你喜欢 MWeb，想让它变得更好，你可以：</p>
+<p>补充说明：汇编语言是为特殊的CPU设计的一系列内部指令，是用助记符号表示，不同的CPU使用不同的汇编指令，就像C语言编译器编译成机器指令</p>
 
-<ol>
-<li>推荐 MWeb，让更多的人知道。</li>
-<li>给我们发反馈和建议：<a href="mailto:coderforart+233@gmail.com">coderforart+233@gmail.com</a></li>
-<li>在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。</li>
-</ol>
+<p>C语言标准定义，C89,C99，C11（2011）等标准，而这种<strong>标准实际上是一种抽象</strong>。具体的实现是由相应的编译器解释。</p>
+
+<blockquote>
+<p>编译流程，把源代码文件转换为可执行文件，具体是首先把源代码转换成中间代码（这个中间代码是没有连接其他模块的代码，因为这个中间代码可能用到了其他模块的函数，这个模块可以是其他模块也可是标准库），连接器把中间代码和其他代码合并（这个合并的过程就是连接的过程，是模块之间能正常找到调用），最终生成可执行文件。</p>
+</blockquote>
+
+<p>GNU编译合集，LLVM项目分别是连个开源编译合集。都支持C的编译，在苹果系统目前采用LLVM项目里的Clang来编译C程序。</p>
+
+<p>哈哈，从上述的整理，终于理解了Xcode里的Architectures（CPU架构），FrameSearchPath,Header SearchPath,Library SearchPath,Apple Clang的编译选项设置。</p>
+
+<h3 id="toc_1">makefile的编译</h3>
+
+<p>在编译一个开源的C库时，比如Objectc的runtime，编译FFmpeg的库时，都会用到makefile文件来进行构建。</p>
+
+<p>make通常被视为一种软件构建工具，是一个命令行工具。该工具主要经由读取一种名为“makefile”或“Makefile”的文件来实现软件的自动化建构程序。makeFile有其自己的语法。</p>
+
+<ul>
+<li>文件包含</li>
+</ul>
+
+<p>include <stdio.h>的实质：实际上是相当于把stdio.h文件中的所有内容都输入该行所在的位置。</p>
+
+<h3 id="toc_2">预处理</h3>
+
+<pre><code>#define PI 3.13444
+</code></pre>
+
+<pre><code>//带固定参数个数的宏
+#define Men(X,Y) ((X)+(Y))  
+</code></pre>
+
+<pre><code>//可变参数个数的宏
+#define PR(...) printf(__VA_ARGS__) //可变参数的宏
+PR(&quot;Howdy&quot;);
+PR(&quot;weight=%d, shipping=%d&quot;,wt,sp);
+</code></pre>
+
+<pre><code>//文件包含
+#include
+当预处理器发现#include指令时，会替换源文件中的include指令。
+（相当于把被包含的文件的全部内容输入到源文件#include指令所在的位置）
+要深度的理解这句话的含义，包含，就是将代码实现替换到这。
+头文件提供函数声明或者原型，库选项（也就是真正的库）告诉系统到哪里查找函数代码，或者是到源文件里查找代码。
+</code></pre>
+
+<ul>
+<li>区分宏定义的函数与函数区别</li>
+</ul>
+
+<p>宏每调用一次，都会展开一次，是一种内联。而函数的调用。是会在一段函数指令里执行一次又一次。</p>
+
+<h4 id="toc_3">条件编译</h4>
+
+<pre><code>#define
+#ifdef
+#else
+#endif
+#ifndef
+#if
+#elif
+</code></pre>
+
+<h4 id="toc_4">预定义宏</h4>
+
+<pre><code>C标准规定了一些预定义宏
+__LINE__
+__FILE__
+__func__
+</code></pre>
+
+<h3 id="toc_5">完整项目多文件编译</h3>
+
+<h2 id="toc_6">二：指针的概念</h2>
+
+<p>从核心的去理解指针，就是一个<strong>地址值</strong>，一个变量的地址值。一个数组的首原始地址值。一个函数代码段的开始地址值。<br/>
+指针的操作，是根据他们指向的数据的所占空间的大小来操作的。指向整数时，p+1,就是指向下一个整数。</p>
+
+<pre><code>int *p1 //指向int的指针变量（理解成一个整形变量的地址）
+double *p2;
+</code></pre>
+
+<ul>
+<li>指针的应用</li>
+</ul>
+
+<p>有时候，在函数外有个数组，想通过，这个函数修改数组里的值，要将整个修改逻辑放在这里。就需要传地址。(但外面是一个结构体时，有时遇到需要通过一个函数修改这个结构体的值，也会采用传地址的方式)。这是一个非常典型的应用场景。</p>
+
+<pre><code>//在采用传地址时，不允许修改这个数组的内容的值时，可以添加const。
+//const修饰指针时，表示内容不允许修改
+int sum (const int ar[],int n);
+int sum (const int ar[],int n) {
+    int i;
+    int total = 0;
+    for (int = 0;i&lt;n;i++){
+        total =+=ar[i];
+    }
+    return total;
+}
+</code></pre>
+
+<ul>
+<li>const修饰的区别的理解</li>
+</ul>
+
+<pre><code>const double *pd1;
+double *const pd2;
+</code></pre>
+
+<p>要区分这两个含义，要从本质上理解，pd1的const修饰的是double *pd1,也就是这个指针变量，这个整体是值。也就是值是常量。<br/>
+而，pd2的const修饰的pd2这个地址。是这个指针。也就是指针是常量</p>
+
+<pre><code>int val = 10;
+const double *pd1 = &amp;val;
+*pd1 = 20;//不允许(因为修改了指针所指向内容的值)
+</code></pre>
+
+<pre><code>double rate[] = {10,20,30};
+double *const pc = rate;
+ pc = &amp;rate[2];//不允许(因为是修改了指针的值)
+
+</code></pre>
+
+<p>哈哈，终于里理解了这个东西。</p>
+
+<h3 id="toc_7">指针与object的关系</h3>
+
+<p>指针与NSObject的关系，要从C的内存管理角度去思考。</p>
+
+<h3 id="toc_8">指针与数组的关</h3>
+
+<p>指针指向的就是数组的首地址。</p>
+
+<h3 id="toc_9">指针与函数</h3>
+
+<p>指向函数的指针中存储着函数代码的起始地址。</p>
+
+<pre><code>void func (char *);
+void (*pf) (cahr *);
+pf 即是指向函数的指针
+</code></pre>
+
+<pre><code>void ToUpper(char *);
+void ToLower(char *);
+pf = ToUpper;//将函数地址赋值给函数指针
+pf = ToLower;//将函数地址赋值给函数指针
+(*pf)(&quot;nihao&quot;);//调用函数
+</code></pre>
+
+<h2 id="toc_10">三：C中的字符串</h2>
+
+<ul>
+<li>字符串常量</li>
+</ul>
+
+<p>这个字符串在编译的时候就已经确定。所以是在静态存储区。</p>
+
+<pre><code>char *str = &quot;nihao&quot;;
+//实际上&quot;nihao&quot;是一个字符数组。一个在末尾加了\0元素的字符数组。
+</code></pre>
+
+<ul>
+<li><strong>数组形式</strong>与<strong>指针形式</strong>的不同</li>
+</ul>
+
+<p>字符串常量是在编译时就确定好的在静态存储区。</p>
+
+<pre><code>const char ar[] = &quot;something1&quot;;
+const char *p = &quot;something2&quot;;
+
+对比说明:
+&quot;something1&quot;是一个字符串常量，在给ar[]赋值时会将其拷贝到这个数组里。
+&quot;something2&quot;是一个字符串常量，在静态存储区，在给*p赋值时，直接将静态区字符串的地址值给它。因为它是一个常量，内容没法修改，所以通常在前面加一个const;
+</code></pre>
+
+<h2 id="toc_11">四：C的内存管理</h2>
+
+<p>三个维度描述变量<br/>
+链接<br/>
+作用域<br/>
+存储区</p>
+
+<p>链接，作用域描述变量的可见性<br/>
+存储区，描述变量的存储位置</p>
+
+<ul>
+<li>外部变量</li>
+</ul>
+
+<p>（在一个源文件里，在所有函数之外的变量），作用域是本文件，存储是静态存储，链接默认是外部链接，<strong>如果用static修饰，就是内部链接。</strong></p>
+
+<ul>
+<li><p>局部变量</p>
+
+<p>在块，函数里的是局部变量，作用域是块或者函数内，存储默认是栈上，链接是内部链接。<strong>但若用static修饰，就是存储在静态区。</strong></p></li>
+</ul>
+
+<p>extern 申明这个源文件使用了外部变量。（哈哈，这里才是extern的本质）</p>
+
+<h3 id="toc_12">动态内存分配</h3>
+
+<p>思考：为什么会有动态内存分配？<br/>
+在我们的编译，执行时，<strong>根据已经制定好的内存管理规则，将自动选择作用域与存储区，自己管理内存（静态数据编译时分配，自动数据在执行时分配）</strong>。但，<strong>我们也可以程序员自己申请内存，自己释放内存，就是动态内存的分配。</strong></p>
+
+<h2 id="toc_13">五：结构体</h2>
+
+<p>结构体在实际的应用中相当重要。一些重要的库的数据描述都是用结构体表示。与结构体指针一同构建起一个大的程序库。比如objc-runtime,ffmpeg库。</p>
+
+<pre><code>struct book {
+    char title[10];
+    char author[20];
+    float value;
+} abook;
+book 是类型，abook是变量名
+</code></pre>
+
+<p>将结构体类型当做普通的变量类型就可以了。</p>
+
+<pre><code>struct book aBook;  //结构变量
+struct book *b;     //指向结构的指针
+aBook.value;//取值
+b-&gt;value;//取值
+</code></pre>
+
+<ul>
+<li>结构体了字符数组与字符指针表示的区别</li>
+</ul>
+
+<pre><code>struct names{
+    char first[10];
+    char last[10];
+}
+</code></pre>
+
+<pre><code>struct pnames {
+    char *first;
+    char *last;
+}
+</code></pre>
+
+<p>names占用20字节，pnames占用16字节。<br/>
+names的本身存储位置是在它自己申请的位置。<br/>
+pnames的first,last存存储在别处。用的时候要特别小心。</p>
+
+<p>示例结构体内部字符指针表示的用法。（很重要）<br/>
+下面是将结构体力的变量设置成字符指针。因为没有地方存储实际的值，所以需要用动态创建内存。</p>
+
+<pre><code>struct namect {
+    char *fname;
+    char *lname;
+}
+
+void getinfo(struct namect *pst){
+    char temp[20];
+    scanf(&quot;%s&quot;,tmp);//将输入的暂时存入tmp
+    pst-&gt;fanme= (char *)malloc(strlen(temp)+1);//动态创建一个空间
+    strcpy(pst-&gt;fname,temp);//将tmp的拷贝到动态空间
+}
+</code></pre>
+
+<h2 id="toc_14">六：抽象数据接口</h2>
+
+<p>链表<br/>
+队列</p>
+
+<p>结语：至此关于C的一些核心概念就都搞清楚了。</p>
+
+<h2 id="toc_15">七：示例</h2>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#define SLENGTH 80
+
+struct namect {
+    char *fname;
+    char *lname;
+    int letters;
+};
+
+typedef struct namect NAMEct;
+//以下都是函数声明
+//将结构体指针作为参数传递
+
+void getinfo (struct namect *);
+void makeinfo (struct namect *);
+void showinfo (const struct namect *);
+void cleanup (struct namect *);
+
+char * s_gets(char *st ,int n);
+
+int main () {
+    NAMEct person;
+
+    getinfo(&amp;person);
+    makeinfo(&amp;person);
+    showinfo(&amp;person);//显示信息
+    cleanup(&amp;person);//调用该函数时释放内存
+}
+
+void getinfo (struct namect *pst){
+    char temp[] = &quot;naihao&quot;;
+    char temp2[] =  &quot;naihao2&quot;;
+
+    pst-&gt;fname = (char *) malloc(strlen(temp) +1);//申请内存
+    strcpy(pst-&gt;fname,temp);//将字符拷贝到生成的内存中
+
+    pst-&gt;lname = (char *) malloc(strlen(temp2) +1);//申请内存
+    strcpy(pst-&gt;lname,temp2);
+}
+
+
+void makeinfo (struct namect *pst){
+    pst-&gt;letters = strlen(pst-&gt;fname) + strlen(pst-&gt;lname);
+}
+
+void showinfo(const struct namect *pst){
+    printf(&quot;firstName:%s secondName:%s letters:%d&quot;,pst-&gt;fname,pst-&gt;lname,pst-&gt;letters);
+}
+
+void cleanup (struct namect *pst){
+    free(pst-&gt;fname);//释放内存
+    free(pst-&gt;lname);//释放内存
+}
+
+
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理（八）文本处理]]></title>
+    <link href="https://raojunbo.github.io/15443591203562.html"/>
+    <updated>2018-12-09T20:38:40+08:00</updated>
+    <id>https://raojunbo.github.io/15443591203562.html</id>
+    <content type="html"><![CDATA[
+<p>文本处理带真正用到时再研究吧。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理 （六）函数]]></title>
+    <link href="https://raojunbo.github.io/15443590303184.html"/>
+    <updated>2018-12-09T20:37:10+08:00</updated>
+    <id>https://raojunbo.github.io/15443590303184.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">函数</h2>
+
+<pre><code>#!/bin/bash
+function testFunc(){
+    echo $1:$2
+    return 100;
+}
+
+echo &quot;调用前&quot;
+testFunc &quot;rao&quot; &quot;jun&quot;;
+echo &quot;返回结果$?&quot;
+echo &quot;调用后&quot;
+</code></pre>
+
+<p>函数的传参数与在命令里的传参数基本相同。返回值用$?记录上次函数的返回值。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理（零）linux 基础命令]]></title>
+    <link href="https://raojunbo.github.io/15443316930228.html"/>
+    <updated>2018-12-09T13:01:33+08:00</updated>
+    <id>https://raojunbo.github.io/15443316930228.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">linux的文件权限</a>
+</li>
+<li>
+<a href="#toc_1">Linux的文件与目录管理</a>
+<ul>
+<li>
+<a href="#toc_2">目录操作</a>
+</li>
+<li>
+<a href="#toc_3">文件操作</a>
+</li>
+<li>
+<a href="#toc_4">查看文件</a>
+</li>
+<li>
+<a href="#toc_5">查找文件名</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>shell的基础命令，列出已经掌握的基本命令</p>
+
+<h2 id="toc_0">linux的文件权限</h2>
+
+<pre><code>-rwxr--r--  1 raojunbo  staff   159 12  8 17:20 file2.sh
+</code></pre>
+
+<p><code>chmod</code> 改变文件的权限<br/>
+<code>chown</code> 改变文件所有者<br/>
+<code>chgrp</code> 改变文件所属用户</p>
+
+<h2 id="toc_1">Linux的文件与目录管理</h2>
+
+<p>ls 列出文件及目录列表<br/>
+cd 进入目录<br/>
+pwd 显示文件路径<br/>
+touch 创建新文件<br/>
+file 查看文件类型</p>
+
+<h3 id="toc_2">目录操作</h3>
+
+<p>mkdir<br/>
+rmdir</p>
+
+<h3 id="toc_3">文件操作</h3>
+
+<p>cp<br/>
+rm<br/>
+mv</p>
+
+<h3 id="toc_4">查看文件</h3>
+
+<p>cat<br/>
+more<br/>
+less<br/>
+head<br/>
+tail</p>
+
+<h3 id="toc_5">查找文件名</h3>
+
+<p>whereis<br/>
+locate<br/>
+find</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理（七）SQL应用处理]]></title>
+    <link href="https://raojunbo.github.io/15442673526076.html"/>
+    <updated>2018-12-08T19:09:12+08:00</updated>
+    <id>https://raojunbo.github.io/15442673526076.html</id>
+    <content type="html"><![CDATA[
+<p>导出.cvs格式</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理（五）输出]]></title>
+    <link href="https://raojunbo.github.io/15441102869614.html"/>
+    <updated>2018-12-06T23:31:26+08:00</updated>
+    <id>https://raojunbo.github.io/15441102869614.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">echo</a>
+</li>
+<li>
+<a href="#toc_1">printf 格式化输出</a>
+</li>
+<li>
+<a href="#toc_2">管道</a>
+</li>
+<li>
+<a href="#toc_3">重定向输出</a>
+<ul>
+<li>
+<a href="#toc_4">命令行里的输入与输出重定向</a>
+</li>
+<li>
+<a href="#toc_5">脚本文件里的输入与输出重定向</a>
+</li>
+<li>
+<a href="#toc_6">自定义文件描述符</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">总结</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">echo</h2>
+
+<h2 id="toc_1">printf 格式化输出</h2>
+
+<p>[TOC]<br/>
+- 区别一<br/>
+print不会自动换行<br/>
+echo 会自动换行</p>
+
+<ul>
+<li>区别二
+print 用于格式打印
+echo 用于标准的输出</li>
+</ul>
+
+<pre><code>printf &quot;%-4s%-8s%-4s\n&quot; 姓名 性别 体重
+printf &quot;%-4s%-8s%-4s\n&quot; raoraoraorao 男 120
+printf &quot;%-4s%-8s%-4s\n&quot; jun 女 130
+printf &quot;%-4s%-8s%-4s\n&quot; bo 女 140
+</code></pre>
+
+<p>格式化输出 &quot;s&quot;表示字符串，一个宽度是10的字符,如果超出也显示，不足10用空白不齐，”-“表示左对齐。</p>
+
+<h2 id="toc_2">管道</h2>
+
+<p>将一个命令的输出做威另一个命令的输入</p>
+
+<h2 id="toc_3">重定向输出</h2>
+
+<ul>
+<li>
+<a href="#toc_0">echo</a>
+</li>
+<li>
+<a href="#toc_1">printf 格式化输出</a>
+</li>
+<li>
+<a href="#toc_2">管道</a>
+</li>
+<li>
+<a href="#toc_3">重定向输出</a>
+<ul>
+<li>
+<a href="#toc_4">命令行里的输入与输出重定向</a>
+</li>
+<li>
+<a href="#toc_5">脚本文件里的输入与输出重定向</a>
+</li>
+<li>
+<a href="#toc_6">自定义文件描述符</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">总结</a>
+</li>
+</ul>
+
+
+<p>原来是重定向到控制台输出，现在是重定向输出到文件</p>
+
+<p>文件重定向<br/>
+以控制台为参照<br/>
+<strong>系统已经存在的文件描述符0（标准输入即键盘），1(标准输出即控制台)，2(标准错误)，其他是可自定义的文件描述符</strong></p>
+
+<p>白话理解cat命令行重定向<br/>
+原来是从键盘输入，现在是从文件输入<br/>
+<code>cat</code> 命令直接输入cat命令，从键盘输入，然后在控制台输出。<br/>
+<code>cat file</code> 采用cat接收一个非STDIN文件输入，即将输入变成从文件读取<br/>
+特别说明</p>
+
+<blockquote>
+<p>重定向不限制于cat命令,任何命令都可以。<br/>
+就是将一个命令的输出重定向到其他文件或者标准输出。在一个命令的输入时，也可以从一个文件或者标准输入作为输入，即输入重定向</p>
+</blockquote>
+
+<pre><code>“&gt; ” 重定向输出到一个文件
+&quot;&gt;&gt;&quot; 重定向输出到一个文件并且是追加到后面
+</code></pre>
+
+<h3 id="toc_4">命令行里的输入与输出重定向</h3>
+
+<p>案例一：重定向错误输出到一个文件中<br/>
+    当我们的命令发生错误时，shell并不会将错误重定向到输出的重定向文件。重定向时要写上文件描述符</p>
+
+<pre><code>ls -al fileC 2&gt; errfile.sh 
+</code></pre>
+
+<p>案例二：将正确信息重定向到一个文件，将错误信息重定向到一个文件</p>
+
+<pre><code>ls -al fileA.sh fileC.sh 2&gt; errfile.sh 1&gt; fileD.sh
+</code></pre>
+
+<p>案例三：将正确与错误输入到同一个文件</p>
+
+<pre><code>ls -al fileA.sh fileC.sh &amp;&gt;  fileD.sh 
+</code></pre>
+
+<h3 id="toc_5">脚本文件里的输入与输出重定向</h3>
+
+<p>要想在脚本文件里指定文件的输入与输出重定向，需要对这个要输出的内容做标记。告诉要输入或者输出到哪个文件。那么这个文件的描述符就需要在脚本里写出</p>
+
+<ul>
+<li>临时重定向
+这里的&amp;2是一种标记，标记其内容将会进入那个重定向，因为只起到临时标记的作用。所以叫临时重定向。这里的临时，永久是在脚本文件里告诉，命令的输入与输入。也就是在脚本文件里告诉有输出，有输入的一个流。</li>
+</ul>
+
+<pre><code># 临时重定向 在一个shell脚本里，将一个输出设置成临时重定向
+
+echo &quot;hello owrk&quot; &gt;&amp;2;
+echo &quot;你好&quot; &gt;&amp;2;
+</code></pre>
+
+<ul>
+<li>永久重定向
+这里的永久重定向，说白点就是一次性标记。</li>
+</ul>
+
+<pre><code>exec 1&gt; fileContent.sh
+echo &quot;hello world&quot;
+echo &quot;你好&quot;
+
+# 更改为重定向
+exec 2&gt; errorfile.sh
+echo &quot;我报错了&quot; &gt;&amp;2   
+# 将我报错了进行标记 
+</code></pre>
+
+<pre><code>exec 0&lt; fileContent.sh
+# 读物文件的所有行
+count=1;
+while read line  
+do
+echo &quot;读取的内容${line},行数${count}&quot;;
+count=`expr $count + 1`;
+done
+</code></pre>
+
+<h3 id="toc_6">自定义文件描述符</h3>
+
+<ul>
+<li>创建文件读写描述符号示例</li>
+</ul>
+
+<pre><code>#创建文件的读写描述符
+exec 3&lt;&gt; fileContent.sh
+
+#读取文件中的一行数据
+read line &lt;&amp;3
+
+#打印数据
+echo &quot;读取数据:&quot;$line;
+echo &quot;哈哈，看写入文件了没wwwww有&quot; &gt;&amp;3
+</code></pre>
+
+<ul>
+<li>关闭文件描述符 关闭文件描述符后，不能写入文件</li>
+</ul>
+
+<p><code>exec 3&gt;&amp;-</code></p>
+
+<ul>
+<li>恢复文件描述符(这个很难理解，实际上是一个暂存)</li>
+</ul>
+
+<pre><code># 创建一个文件描述符3，执行原有文件描述符1，也就是是控制台输出
+exec 3&gt;&amp;1;
+
+# 创建文件描述符1，重定向到一个文件
+exec 1&gt; fileContent.sh
+
+echo &quot;工作1&quot;;
+
+echo &quot;工作2&quot;;
+
+# 将1重定向到预先保存的控制台输出,所左这之后会输出都屏幕,也就是恢复了
+exec 1&gt;&amp;3
+echo &quot;完成了&quot;;
+
+</code></pre>
+
+<pre><code>修改输入并恢复输入
+exec 6&lt;&amp;0;
+exec 0&lt; fileContent.sh
+
+# 系统还是会从0所指向的文件进行读取，输出还是原有的输出
+while read line 
+do
+ echo &quot;文件内容${line}&quot;
+done
+
+exec 0&lt;&amp;6;
+
+echo &quot;读取完成&quot;;
+</code></pre>
+
+<h2 id="toc_7">总结</h2>
+
+<blockquote>
+<p>0，1，2,是系统默认已经指定了的文件描述符，分别指向键盘文件，控台台文件，错误文件。exec的本质是在一个进程里创建一个文件描述符。在shell脚本里可以创建文件描述符指定特定的文件进行输入与输出。<br/>
+文件描述符的理解，文件描述符只是一个符号</p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理（三） 流程控制]]></title>
+    <link href="https://raojunbo.github.io/15440981221870.html"/>
+    <updated>2018-12-06T20:08:42+08:00</updated>
+    <id>https://raojunbo.github.io/15440981221870.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">if语句</h2>
+
+<blockquote>
+<p>这里的条件就是上节说的test命令的参数</p>
+</blockquote>
+
+<pre><code>if [ 条件 ]
+then
+    代码
+fi
+</code></pre>
+
+<pre><code>if [ 条件]
+then
+    代码
+else
+    代码
+fi
+</code></pre>
+
+<pre><code>if [ 条件 ]
+then
+    代码
+elif [ 条件 ]
+then
+    代码
+fi
+
+</code></pre>
+
+<h2 id="toc_1">for语句</h2>
+
+<pre><code>for 变量名 in item1 item2 item3
+do
+    代码    
+done
+</code></pre>
+
+<pre><code>for name in &quot;rao&quot; &quot;jun&quot; &quot;bo&quot;
+do
+    echo ${name}
+done    
+</code></pre>
+
+<pre><code>//列出当前目录所有文件(用的for in)
+file=`pwd`/*;
+for name in ${file}
+do
+    echo ${name}
+done
+</code></pre>
+
+<pre><code>//for 的c形式
+for (( i = 0; i &lt; 10; i++ )); do
+    echo $i;
+    for (( j = 0; j &lt; 10; j++ )); do
+        echo $j;
+    done
+done
+</code></pre>
+
+<pre><code>//一个一个显示文件列表
+for i in `ls `
+do
+echo &quot;这是文件${i}&quot;;
+done
+</code></pre>
+
+<h2 id="toc_2">while</h2>
+
+<pre><code>while [] 
+do
+
+done
+</code></pre>
+
+<pre><code>//示例
+var=10;
+while [ ${var} -gt 0 ];
+do
+echo $var;
+var=`expr ${var} - 1`;
+done
+</code></pre>
+
+<h2 id="toc_3">switch case</h2>
+
+<pre><code>number=1
+case $number in
+    1) echo &quot;等于1&quot;;;
+    2) echo &quot;等于2&quot;;;
+esac
+</code></pre>
 
 ]]></content>
   </entry>

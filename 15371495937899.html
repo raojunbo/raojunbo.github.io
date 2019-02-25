@@ -1,0 +1,435 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  《算法图解》 - 北哥传奇
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">北哥传奇</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 北哥传奇</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>软件开发</label></li>
+
+          
+            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>音视频技术</label></li>
+
+          
+            <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+          
+            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+          
+            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+          
+            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+          
+            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+          
+            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+          
+            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+          
+            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+          
+            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>金融理论</label></li>
+
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>软件开发</span></li>
+                        
+                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>音视频技术</span></li>
+                        
+                          <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+                        
+                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+                        
+                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+                        
+                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+                        
+                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+                        
+                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+                        
+                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+                        
+                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+                        
+                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>金融理论</span></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>《算法图解》</h1>
+
+<p>最容易读懂的算法入门书</p>
+
+<h2 id="toc_0">O()表示法</h2>
+
+<p>一些常见的大O表示<br/>
+O(logn) 如二分查找<br/>
+O(n)    如普通的线性查找<br/>
+O(n * logn)<br/>
+O( N<sup>2</sup> )<br/>
+O(n!)</p>
+
+<p>算法的速度 指的并非时间，而是<strong>操纵数的增速</strong><br/>
+谈论算法速度时，我们说的是随着输入的增加，运行时间将一怎样的速度增加</p>
+
+<p>随机访问<br/>
+数组擅长随机访问。且在同一数组中元素类型都必须相同。（元素相同）</p>
+
+<p>顺序访问<br/>
+链表擅长顺序访问</p>
+
+<p>数组与链表的存储<br/>
+有时候将两者的结合起来存储。更快。利用了随机访问的快速，也可利用链表插入的快速</p>
+
+<p>特别思考<br/>
+<strong>在iOS中数组时可以存放不同对象类型的数据的。从这个可以推测，NSArray实际不是数组，而是由其他数据结构实现的数组的特性的数组。</strong></p>
+
+<h2 id="toc_1">排序</h2>
+
+<h3 id="toc_2">冒泡排序</h3>
+
+<p>比较相邻的元素，如果前一个比后一个大，就把它们两个调换位置。<br/>
+对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。<br/>
+针对所有的元素重复以上的步骤，除了最后一个。<br/>
+持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+
+<h3 id="toc_3">选择排序</h3>
+
+<p>选择排序实际上是每次将从原数据里取出最大，放到新数组的后面。时间复杂度时O( N<sup>2</sup> )<br/>
+特别说明：有个小疑问？因为选择排序每次的查找都会少一个元素，为什么时间复杂度还是N<sup>2呢。n,n-1,....2和1。即O(n*</sup> n*1/2)。大O表示法省略常数。即O( N<sup>2</sup> )</p>
+
+<p>特别说明<br/>
+选择排序相比与冒泡排序只需要交换一次。</p>
+
+<h3 id="toc_4">快速排序</h3>
+
+<h4 id="toc_5">分治法</h4>
+
+<p>分而治之是解决问题的的一种思路。<br/>
+每一步都对问题的规模进行缩小。<br/>
+<strong>分治工作原理(很重要)</strong><br/>
+1. 找到简单的基线条件<br/>
+2. 确定如何缩小问题规模，使其最终符合基线条线条件<br/>
+（也就是基线条件是确定的，要找到将问题规模缩小的方法）<br/>
+特别说明:<br/>
+分治法有点类似于数学归纳法。由小确定推到大确定。</p>
+
+<p>示例<br/>
+快速排序算法是一种分治法的典范。<br/>
+所以找到规模的缩小方法。</p>
+
+<ul>
+<li><p>求sum(2,4,6)的和<br/>
+sum(2,4,6) = 2 + sum(4,6) ;<br/>
+<strong>大规模变成一个小规模，小规模在变成小规模，最终变成一个确定的值。然后又利用小规模的值逐级计算大规模。</strong></p></li>
+<li><p>快速排序<br/>
+数组为空或者一个元素时本身就是有序的。<br/>
+规模缩小的方法是每一个有序都包括左有序+ 基准 + 右有序<br/>
+所以关键问题变成左右划分的问题了。</p></li>
+</ul>
+
+<p>下面是划分的一种方法<br/>
+<img src="media/15371495937899/quicksort.png" alt="quicksort"/></p>
+
+<p>（这个个我没有实现上面对的东西?????）<br/>
+快速排序是不稳定的算法。不稳定性在于分区交换时，如果有相同的值，那个值不一定是原有的那个值了。</p>
+
+<h3 id="toc_6">归并排序</h3>
+
+<h3 id="toc_7">堆排序</h3>
+
+<h2 id="toc_8">递归</h2>
+
+<p>编写递归函数时，每个递归函数有两部分，<strong>退出条件</strong>，<strong>递归表达式</strong><br/>
+在理解递归前需要理解<strong>调用栈</strong></p>
+
+<ul>
+<li>5!(5的阶乘)</li>
+</ul>
+
+<pre><code>public static int factorial(int n){
+        //5的阶乘
+        if(n == 1){
+            return 1;
+        }
+        return n * factorial(n-1);
+     }
+</code></pre>
+
+<ul>
+<li>斐波那契数列
+1、2、3、5、8、13、21</li>
+</ul>
+
+<pre><code>// 1、2、3、5、8、13、21
+     public static int factorial2(int n){
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+        return factorial2(n -1) + factorial2(n-2);
+     }
+</code></pre>
+
+<h2 id="toc_9">散列表</h2>
+
+<p>散列函数</p>
+
+<h2 id="toc_10">广度优先搜索</h2>
+
+<h2 id="toc_11">图</h2>
+
+<ol>
+<li><p>广度优先搜索<br/>
+用于解决无权有向图的最短路径问题</p></li>
+<li><p>狄克斯特拉算法<br/>
+解决有带权有向图的最短路径问题</p></li>
+</ol>
+
+<p>算法的宗旨：每次以最短路径为基准，计算其他未做过基准的节点的距离，重复。</p>
+
+<p>示例<br/>
+<img src="media/15371495937899/Xnip2018-09-17_11-56-35.png" alt="Xnip2018-09-17_11-56-35"/></p>
+
+<p>有个疑问？狄克斯特拉算法这么保存路径<br/>
+？？？？？？</p>
+
+<ol>
+<li>贝尔曼-福德算法（不是重点）
+解决带负边权的图的最短路径</li>
+</ol>
+
+<h2 id="toc_12">贪婪算法</h2>
+
+<p>找局部最优解，最总得到的就是全局的最优解。<br/>
+贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。贪心算法不是对所有都能得到整体的最优解，选择贪心策略必须具备无后效性（某个状态以后的过程不会影响前面的状态）。</p>
+
+<ul>
+<li><p>教室调度<br/>
+希望在这间教室上尽可能多的课。<br/>
+具体做法<br/>
+<strong>选出结束最早的课（贪心策略）</strong>，接下来选上节课结束后的能结束最早的课。<br/>
+实际的贪心策略就是找出结束最早的课</p></li>
+<li><p>背包问题</p>
+
+<p>包能装35磅的东西，有3000美元，30磅的音响。有2000美元，20磅的电脑，有1500美元15磅的吉他。</p>
+
+<p>采用贪心策略<br/>
+先选最贵的3000美元，30磅，但容不下其他的物件。<br/>
+实际的答案是可以是电脑与吉他一起放进去。<br/>
+所以背包问题用贪心解决不了，这个只能得到<strong>近似值</strong>。<br/>
+因为不符合无后效性。当然背包问题可以用动态规划方法找到最优解。</p></li>
+<li><p>集合覆盖问题</p>
+
+<p>全美50州的观众收听得到广播。因为每个广播播出需要支付一定的费用。所以需要决定哪些广播播出。问题变成在50州里找出能满足要求的集合（实际上每一广播的覆盖就是一个集合）。50个元素的子集合有2的n次方个，n很大时，这个值将变的很大。所以用计算机计算也是不可能的。</p>
+
+<p>对于以上的问题只能得到<strong>近似算法</strong><br/>
+贪心算法<br/>
+选出这样一个广播台，即它覆盖了最多的未覆盖州。重复第一步，直到覆盖了所有的州。（至于如何找到覆盖了最多的的未覆盖，就是集合运算，比如集合的交集，差集）</p></li>
+<li><p>NP完全问题(nondeterministic polynomial time)</p>
+
+<p><em>旅行商问题</em><br/>
+我们假定不知道从那里离出发的5个城市。找出前往这5个城市的最短路径。<br/>
+5个城市，路线有2的5次方。加入城市在多点。就会有路线2的n次方条。这样就会是一个很大的数。</p>
+
+<p><em>集合覆盖问题</em><br/>
+上面已经讲过了</p>
+
+<p>以上两个问题都是NP完全问题。NP完全问题，一般都是采用贪婪算法求近似值。</p>
+
+<p><strong>NP完全问题识别</strong></p>
+
+<ul>
+<li>元素较少时算法的运行速度非常快。但随着元素的数量的增加，速度会变得非常慢。 </li>
+<li>涉及到&quot;所有组合&quot;的问题通常都是NP问题</li>
+<li>不能讲问题分成小问题，必须考虑各种可能的情况</li>
+<li>如果问题涉及集合，集合覆盖，旅行商问题等且难以解决</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_13">动态规划</h2>
+
+<p>把多阶段过程转化成一系列单个问题，利用各个阶段之间的关系或者结果，逐个求解。</p>
+
+<p>维基百科：<br/>
+动态规划背后的基本思想非常简单。大致上，若要解一个给定问题，我们需要解其不同部分（即子问题），再根据子问题的解以得出原问题的解。<br/>
+通常许多子问题非常相似，为此动态规划法试图仅仅解决每个子问题一次，从而减少计算量：一旦某个给定子问题的解已经算出，则将其记忆化存储，以便下次需要同一个子问题解之时直接查表。这种做法在重复子问题的数目关于输入的规模呈指数增长时特别有用。</p>
+
+<p>示例</p>
+
+<p><img src="media/15371495937899/IMG_0263.jpg" alt="IMG_0263"/></p>
+
+<p>每一行都是利用上一行的计算的结果。（每一行都是上面物品的价值与重量的最优解），这里利用表来存计算结果数据。</p>
+
+<p>小结<br/>
+需要给定约束条件下优化某种之前时<br/>
+问题可以分散为离散的子问题时<br/>
+每种动态规划解决方案都涉及网络<br/>
+单元格中的值通常就是你要优化的值<br/>
+每个单元格都是一个子问题<br/>
+动态规划解决方案的公式不同问题公式也不同，需要自己摸索</p>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="15372661258374.html"  title="Previous Post: OFFER">&laquo; OFFER</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15364733386397.html" 
+	        title="Next Post: ---">--- &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15371495937899.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>

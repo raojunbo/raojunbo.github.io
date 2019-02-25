@@ -1,0 +1,259 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  GCD源码核心概念 - 北哥传奇
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">北哥传奇</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 北哥传奇</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>软件开发</label></li>
+
+          
+            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>音视频技术</label></li>
+
+          
+            <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+          
+            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+          
+            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+          
+            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+          
+            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+          
+            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+          
+            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+          
+            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+          
+            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>金融理论</label></li>
+
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>软件开发</span></li>
+                        
+                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>音视频技术</span></li>
+                        
+                          <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+                        
+                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+                        
+                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+                        
+                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+                        
+                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+                        
+                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+                        
+                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+                        
+                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+                        
+                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>金融理论</span></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>GCD源码核心概念</h1>
+
+<ul>
+<li><p>dispatch_queue<br/>
+<img src="media/15462987177847/c8319b785fd73afa2150a3710190f3cd.png" alt="c8319b785fd73afa2150a3710190f3cd"/><br/>
+从这张图中能看出，我们创建的dispatch_queue_t实际上是统一由GCD Thread Pool来进行统一管理。他会根据多线程队列设置的Priority，来统一管理执行的优先级。</p></li>
+<li><p>dispatch_async<br/>
+dispatch_async的流程是用链表保存所有提交的block，然后在底层线程池中，依次取出block并执行；而向主队列提交block则会向主线程的Runloop发送消息并唤醒Runloop，接着会在回调函数中取出block并执行。主线程，专门有个存储queue里需要执行的代码段。当执行到主线程的一个循环玩了后，会从这些队列里拿任务一个一个去执行。</p></li>
+</ul>
+
+<blockquote>
+<p>当我们调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调<code>__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__()</code> 里执行这个 block</p>
+</blockquote>
+
+<ul>
+<li>dispatch_sync</li>
+</ul>
+
+<blockquote>
+<p>理解dispathch_sync 在执行的时候,会<strong>阻塞 上下文 任务</strong>的执行.</p>
+
+<p>造成死锁的情况<br/>
+在主线程里执行<code>dispatch_sync(dispatch_main_queue,block);</code>即，上下文环境是主线程，要将任务放到主线程里执行，而且是同步的。dispatch_sync会阻塞当前主线程，又要在主线程里执行block，所以会造成死锁。造成死锁的原因是“当前执行的上下文环境”与“即将要执行的任务也是这个环境&quot;且是同步执行。同步执行不会开启新的线程，会在当前线程里执行。（所以<strong>同步执行将任务放到哪种队列没有关系，任务会在当前线程执行</strong>）哈哈哈。这个三个条件到达时就会死锁。终于弄懂了。</p>
+</blockquote>
+
+<p><strong>同步，异步的概念始终与当前执行代码的上下文线程有关系。同步就是讲当前放到其他队列里的任务拿到当前线程执行，执行完后然后返回，继续执行，执行完后返回，继续执行下面的代码。（也就说可以把加到其他队列里的任务拿到当前上下文的线程里去执行）。</strong></p>
+
+<ul>
+<li><p>dispatch_semaphore</p></li>
+<li><p>dispatch_source<br/>
+dispatch_source是BSD系统内核kqueue的包装，kqueue() 生成一个<strong>内核事件队列</strong>，返回该队列的文件描述符。kqueue是在XNU内核中发生各种事件时，在应用程序编程方执行处理的技术。操作dispatch_source实际上就是，通过操作这个 kqueue，进而对内核事件的处理。（哈哈，这个终于可以解释通了）相当于可以监听内核的事件，然后给一个回调，并将回调的代码在指定的线程里面执行。</p>
+
+<p>特别说明：<br/>
+这里的dispatch_source与runloop里的source还是有区别的。dispatch_source是   内核事件，runloop的source是端口事件（线程通信的方式），timer事件源（runloop的Timer依赖于线程的runloop）。</p></li>
+</ul>
+
+<p>重要理解<br/>
+<strong>dispatch_asyn与dispatch_syn，dispatch_queue,任务队列是任务列，只管装任务。至于是在当前上下文线程，还是开启新的线程执行，是由同步还是异步决定的。同步不用新的线程执行，异步有创建新线程的权利。</strong></p>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="15511076195140.html"  title="Previous Post: 这是一个读书笔记">&laquo; 这是一个读书笔记</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15459973166637.html" 
+	        title="Next Post: iOS UI视图相关深入">iOS UI视图相关深入 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15462987177847.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>

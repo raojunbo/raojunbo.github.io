@@ -1,0 +1,587 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  C语言捡漏 - 北哥传奇
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">北哥传奇</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 北哥传奇</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>软件开发</label></li>
+
+          
+            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>音视频技术</label></li>
+
+          
+            <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+          
+            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+          
+            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+          
+            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+          
+            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+          
+            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+          
+            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+          
+            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+          
+            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+          
+            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>金融理论</label></li>
+
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>软件开发</span></li>
+                        
+                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>音视频技术</span></li>
+                        
+                          <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
+                        
+                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
+                        
+                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
+                        
+                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
+                        
+                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
+                        
+                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
+                        
+                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
+                        
+                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
+                        
+                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
+                        
+                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>金融理论</span></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ 
+
+
+	
+		<div class="markdown-body">
+		<h1>C语言拾遗</h1>
+
+		<ul>
+<li>
+<a href="#toc_0">一：编译</a>
+<ul>
+<li>
+<a href="#toc_1">makefile的编译</a>
+</li>
+<li>
+<a href="#toc_2">预处理</a>
+<ul>
+<li>
+<a href="#toc_3">条件编译</a>
+</li>
+<li>
+<a href="#toc_4">预定义宏</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">完整项目多文件编译</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">二：指针的概念</a>
+<ul>
+<li>
+<a href="#toc_7">指针与object的关系</a>
+</li>
+<li>
+<a href="#toc_8">指针与数组的关</a>
+</li>
+<li>
+<a href="#toc_9">指针与函数</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">三：C中的字符串</a>
+</li>
+<li>
+<a href="#toc_11">四：C的内存管理</a>
+<ul>
+<li>
+<a href="#toc_12">动态内存分配</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">五：结构体</a>
+</li>
+<li>
+<a href="#toc_14">六：抽象数据接口</a>
+</li>
+<li>
+<a href="#toc_15">七：示例</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一：编译</h2>
+
+<p>不同的CPU制造商使用的指令系统和编码格式不同。例如Intel Corei7与ARM采用的就是不同的指令集。在编译时，编译器就需要将C语言编译成相应CPU的机器码。</p>
+
+<p>补充说明：汇编语言是为特殊的CPU设计的一系列内部指令，是用助记符号表示，不同的CPU使用不同的汇编指令，就像C语言编译器编译成机器指令</p>
+
+<p>C语言标准定义，C89,C99，C11（2011）等标准，而这种<strong>标准实际上是一种抽象</strong>。具体的实现是由相应的编译器解释。</p>
+
+<blockquote>
+<p>编译流程，把源代码文件转换为可执行文件，具体是首先把源代码转换成中间代码（这个中间代码是没有连接其他模块的代码，因为这个中间代码可能用到了其他模块的函数，这个模块可以是其他模块也可是标准库），连接器把中间代码和其他代码合并（这个合并的过程就是连接的过程，是模块之间能正常找到调用），最终生成可执行文件。</p>
+</blockquote>
+
+<p>GNU编译合集，LLVM项目分别是连个开源编译合集。都支持C的编译，在苹果系统目前采用LLVM项目里的Clang来编译C程序。</p>
+
+<p>哈哈，从上述的整理，终于理解了Xcode里的Architectures（CPU架构），FrameSearchPath,Header SearchPath,Library SearchPath,Apple Clang的编译选项设置。</p>
+
+<h3 id="toc_1">makefile的编译</h3>
+
+<p>在编译一个开源的C库时，比如Objectc的runtime，编译FFmpeg的库时，都会用到makefile文件来进行构建。</p>
+
+<p>make通常被视为一种软件构建工具，是一个命令行工具。该工具主要经由读取一种名为“makefile”或“Makefile”的文件来实现软件的自动化建构程序。makeFile有其自己的语法。</p>
+
+<ul>
+<li>文件包含</li>
+</ul>
+
+<p>include <stdio.h>的实质：实际上是相当于把stdio.h文件中的所有内容都输入该行所在的位置。</p>
+
+<h3 id="toc_2">预处理</h3>
+
+<pre><code>#define PI 3.13444
+</code></pre>
+
+<pre><code>//带固定参数个数的宏
+#define Men(X,Y) ((X)+(Y))  
+</code></pre>
+
+<pre><code>//可变参数个数的宏
+#define PR(...) printf(__VA_ARGS__) //可变参数的宏
+PR(&quot;Howdy&quot;);
+PR(&quot;weight=%d, shipping=%d&quot;,wt,sp);
+</code></pre>
+
+<pre><code>//文件包含
+#include
+当预处理器发现#include指令时，会替换源文件中的include指令。
+（相当于把被包含的文件的全部内容输入到源文件#include指令所在的位置）
+要深度的理解这句话的含义，包含，就是将代码实现替换到这。
+头文件提供函数声明或者原型，库选项（也就是真正的库）告诉系统到哪里查找函数代码，或者是到源文件里查找代码。
+</code></pre>
+
+<ul>
+<li>区分宏定义的函数与函数区别</li>
+</ul>
+
+<p>宏每调用一次，都会展开一次，是一种内联。而函数的调用。是会在一段函数指令里执行一次又一次。</p>
+
+<h4 id="toc_3">条件编译</h4>
+
+<pre><code>#define
+#ifdef
+#else
+#endif
+#ifndef
+#if
+#elif
+</code></pre>
+
+<h4 id="toc_4">预定义宏</h4>
+
+<pre><code>C标准规定了一些预定义宏
+__LINE__
+__FILE__
+__func__
+</code></pre>
+
+<h3 id="toc_5">完整项目多文件编译</h3>
+
+<h2 id="toc_6">二：指针的概念</h2>
+
+<p>从核心的去理解指针，就是一个<strong>地址值</strong>，一个变量的地址值。一个数组的首原始地址值。一个函数代码段的开始地址值。<br/>
+指针的操作，是根据他们指向的数据的所占空间的大小来操作的。指向整数时，p+1,就是指向下一个整数。</p>
+
+<pre><code>int *p1 //指向int的指针变量（理解成一个整形变量的地址）
+double *p2;
+</code></pre>
+
+<ul>
+<li>指针的应用</li>
+</ul>
+
+<p>有时候，在函数外有个数组，想通过，这个函数修改数组里的值，要将整个修改逻辑放在这里。就需要传地址。(但外面是一个结构体时，有时遇到需要通过一个函数修改这个结构体的值，也会采用传地址的方式)。这是一个非常典型的应用场景。</p>
+
+<pre><code>//在采用传地址时，不允许修改这个数组的内容的值时，可以添加const。
+//const修饰指针时，表示内容不允许修改
+int sum (const int ar[],int n);
+int sum (const int ar[],int n) {
+    int i;
+    int total = 0;
+    for (int = 0;i&lt;n;i++){
+        total =+=ar[i];
+    }
+    return total;
+}
+</code></pre>
+
+<ul>
+<li>const修饰的区别的理解</li>
+</ul>
+
+<pre><code>const double *pd1;
+double *const pd2;
+</code></pre>
+
+<p>要区分这两个含义，要从本质上理解，pd1的const修饰的是double *pd1,也就是这个指针变量，这个整体是值。也就是值是常量。<br/>
+而，pd2的const修饰的pd2这个地址。是这个指针。也就是指针是常量</p>
+
+<pre><code>int val = 10;
+const double *pd1 = &amp;val;
+*pd1 = 20;//不允许(因为修改了指针所指向内容的值)
+</code></pre>
+
+<pre><code>double rate[] = {10,20,30};
+double *const pc = rate;
+ pc = &amp;rate[2];//不允许(因为是修改了指针的值)
+
+</code></pre>
+
+<p>哈哈，终于里理解了这个东西。</p>
+
+<h3 id="toc_7">指针与object的关系</h3>
+
+<p>指针与NSObject的关系，要从C的内存管理角度去思考。</p>
+
+<h3 id="toc_8">指针与数组的关</h3>
+
+<p>指针指向的就是数组的首地址。</p>
+
+<h3 id="toc_9">指针与函数</h3>
+
+<p>指向函数的指针中存储着函数代码的起始地址。</p>
+
+<pre><code>void func (char *);
+void (*pf) (cahr *);
+pf 即是指向函数的指针
+</code></pre>
+
+<pre><code>void ToUpper(char *);
+void ToLower(char *);
+pf = ToUpper;//将函数地址赋值给函数指针
+pf = ToLower;//将函数地址赋值给函数指针
+(*pf)(&quot;nihao&quot;);//调用函数
+</code></pre>
+
+<h2 id="toc_10">三：C中的字符串</h2>
+
+<ul>
+<li>字符串常量</li>
+</ul>
+
+<p>这个字符串在编译的时候就已经确定。所以是在静态存储区。</p>
+
+<pre><code>char *str = &quot;nihao&quot;;
+//实际上&quot;nihao&quot;是一个字符数组。一个在末尾加了\0元素的字符数组。
+</code></pre>
+
+<ul>
+<li><strong>数组形式</strong>与<strong>指针形式</strong>的不同</li>
+</ul>
+
+<p>字符串常量是在编译时就确定好的在静态存储区。</p>
+
+<pre><code>const char ar[] = &quot;something1&quot;;
+const char *p = &quot;something2&quot;;
+
+对比说明:
+&quot;something1&quot;是一个字符串常量，在给ar[]赋值时会将其拷贝到这个数组里。
+&quot;something2&quot;是一个字符串常量，在静态存储区，在给*p赋值时，直接将静态区字符串的地址值给它。因为它是一个常量，内容没法修改，所以通常在前面加一个const;
+</code></pre>
+
+<h2 id="toc_11">四：C的内存管理</h2>
+
+<p>三个维度描述变量<br/>
+链接<br/>
+作用域<br/>
+存储区</p>
+
+<p>链接，作用域描述变量的可见性<br/>
+存储区，描述变量的存储位置</p>
+
+<ul>
+<li>外部变量</li>
+</ul>
+
+<p>（在一个源文件里，在所有函数之外的变量），作用域是本文件，存储是静态存储，链接默认是外部链接，<strong>如果用static修饰，就是内部链接。</strong></p>
+
+<ul>
+<li><p>局部变量</p>
+
+<p>在块，函数里的是局部变量，作用域是块或者函数内，存储默认是栈上，链接是内部链接。<strong>但若用static修饰，就是存储在静态区。</strong></p></li>
+</ul>
+
+<p>extern 申明这个源文件使用了外部变量。（哈哈，这里才是extern的本质）</p>
+
+<h3 id="toc_12">动态内存分配</h3>
+
+<p>思考：为什么会有动态内存分配？<br/>
+在我们的编译，执行时，<strong>根据已经制定好的内存管理规则，将自动选择作用域与存储区，自己管理内存（静态数据编译时分配，自动数据在执行时分配）</strong>。但，<strong>我们也可以程序员自己申请内存，自己释放内存，就是动态内存的分配。</strong></p>
+
+<h2 id="toc_13">五：结构体</h2>
+
+<p>结构体在实际的应用中相当重要。一些重要的库的数据描述都是用结构体表示。与结构体指针一同构建起一个大的程序库。比如objc-runtime,ffmpeg库。</p>
+
+<pre><code>struct book {
+    char title[10];
+    char author[20];
+    float value;
+} abook;
+book 是类型，abook是变量名
+</code></pre>
+
+<p>将结构体类型当做普通的变量类型就可以了。</p>
+
+<pre><code>struct book aBook;  //结构变量
+struct book *b;     //指向结构的指针
+aBook.value;//取值
+b-&gt;value;//取值
+</code></pre>
+
+<ul>
+<li>结构体了字符数组与字符指针表示的区别</li>
+</ul>
+
+<pre><code>struct names{
+    char first[10];
+    char last[10];
+}
+</code></pre>
+
+<pre><code>struct pnames {
+    char *first;
+    char *last;
+}
+</code></pre>
+
+<p>names占用20字节，pnames占用16字节。<br/>
+names的本身存储位置是在它自己申请的位置。<br/>
+pnames的first,last存存储在别处。用的时候要特别小心。</p>
+
+<p>示例结构体内部字符指针表示的用法。（很重要）<br/>
+下面是将结构体力的变量设置成字符指针。因为没有地方存储实际的值，所以需要用动态创建内存。</p>
+
+<pre><code>struct namect {
+    char *fname;
+    char *lname;
+}
+
+void getinfo(struct namect *pst){
+    char temp[20];
+    scanf(&quot;%s&quot;,tmp);//将输入的暂时存入tmp
+    pst-&gt;fanme= (char *)malloc(strlen(temp)+1);//动态创建一个空间
+    strcpy(pst-&gt;fname,temp);//将tmp的拷贝到动态空间
+}
+</code></pre>
+
+<h2 id="toc_14">六：抽象数据接口</h2>
+
+<p>链表<br/>
+队列</p>
+
+<p>结语：至此关于C的一些核心概念就都搞清楚了。</p>
+
+<h2 id="toc_15">七：示例</h2>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#define SLENGTH 80
+
+struct namect {
+    char *fname;
+    char *lname;
+    int letters;
+};
+
+typedef struct namect NAMEct;
+//以下都是函数声明
+//将结构体指针作为参数传递
+
+void getinfo (struct namect *);
+void makeinfo (struct namect *);
+void showinfo (const struct namect *);
+void cleanup (struct namect *);
+
+char * s_gets(char *st ,int n);
+
+int main () {
+    NAMEct person;
+
+    getinfo(&amp;person);
+    makeinfo(&amp;person);
+    showinfo(&amp;person);//显示信息
+    cleanup(&amp;person);//调用该函数时释放内存
+}
+
+void getinfo (struct namect *pst){
+    char temp[] = &quot;naihao&quot;;
+    char temp2[] =  &quot;naihao2&quot;;
+
+    pst-&gt;fname = (char *) malloc(strlen(temp) +1);//申请内存
+    strcpy(pst-&gt;fname,temp);//将字符拷贝到生成的内存中
+
+    pst-&gt;lname = (char *) malloc(strlen(temp2) +1);//申请内存
+    strcpy(pst-&gt;lname,temp2);
+}
+
+
+void makeinfo (struct namect *pst){
+    pst-&gt;letters = strlen(pst-&gt;fname) + strlen(pst-&gt;lname);
+}
+
+void showinfo(const struct namect *pst){
+    printf(&quot;firstName:%s secondName:%s letters:%d&quot;,pst-&gt;fname,pst-&gt;lname,pst-&gt;letters);
+}
+
+void cleanup (struct namect *pst){
+    free(pst-&gt;fname);//释放内存
+    free(pst-&gt;lname);//释放内存
+}
+
+
+
+</code></pre>
+
+
+		</div>
+	
+
+  
+  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>
