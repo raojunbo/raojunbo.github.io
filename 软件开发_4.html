@@ -47,8 +47,6 @@
         <li><label>软件开发</label></li>
 
           
-            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
-          
 
       
         <li class="divider"></li>
@@ -102,8 +100,6 @@
                     
                       <li class="side-title"><span>软件开发</span></li>
                         
-                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
-                        
 
                     
                       <li class="side-title"><span>音视频技术</span></li>
@@ -148,165 +144,65 @@
 
 	
 		<div class="markdown-body">
-		<h1>iOS保持界面流畅的技巧（性能优化）</h1>
+		<h1>AFNetWorking源码阅读</h1>
 
-		<ul>
-<li>
-<a href="#toc_0">卡顿原理</a>
-</li>
-<li>
-<a href="#toc_1">卡顿监控思路</a>
-</li>
-<li>
-<a href="#toc_2">线程卡顿监控方案一的实现</a>
-</li>
+		<hr/>
+
+<p>layout: post<br/>
+title: 我从AFNetworking学到点什么“<br/>
+date: 2018-08-10 23:34:15.000000000 +09:00</p>
+
+<h2 id="toc_0">tags: iOS技术</h2>
+
+<p>AFNetworking很早以前就也阅读过，一直想写对其做详细的注释。现在回过头来看，其架构在心中很明了。就说说学到的东西吧。</p>
+
+<h2 id="toc_1">一：常量字符串的定义</h2>
+
+<ul>
+<li>其他地方不用导入即可使用的字符串（对外公开的常量字符串）</li>
 </ul>
 
-
-<p>参考<a href="https://juejin.im/post/5ace078cf265da23994ee493">iOS 性能优化总结</a><br/>
-参考<a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/">微信读书 iOS 性能优化总结</a><br/>
-参考<a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿监控</a><br/>
-参考<a href="http://www.52im.net/thread-136-1-1.html">移动端IM实践：iOS版微信界面卡顿监测方案</a><br/>
-参考<a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/">iOS保持界面流畅的技巧</a></p>
-
-<p>本文是对上面几篇文章的总结。并与我自己的知识体系相融合，以达到一个自相融洽的整体。</p>
-
-<h2 id="toc_0">卡顿原理</h2>
-
-<p>VSync信号到来时，系统图形服务会通过CADisplayLink等机制通知App，APP主线程开始在CPU中计算显示内容，比如视图的创建，布局计算，图片解码，文本绘制等。随后CPU会将计算好的内容提交到GPU，由GPU进行变换，合成，渲染。随后GPU会把渲染结果提交到帧缓冲区区，等待下一次VSync信号到来时显示到屏幕上。<br/>
-由于垂直同步机制，若果在一个VSync时间内，CPU或者GPU没有完成内容的提交，则这个没有完成的提交不会显示到屏幕，在其提交后会到缓冲区，等待下一次机会在显示。那么这个下一次有可能是正常时间提交修改，则会将缓存区的内容覆盖。导致被覆盖的永远没机会显示了。就是掉帧了。<br/>
-那么与runloop有什么关系呢？<br/>
-Runloop的时间概念比1/60更小，也就是Runloop处理事物的时间远远比1/60要小。绝大部分时间是睡眠的。所以它们两个本身是没有关系的。绝大部分时候是主线程早就处理完毕所有显示数据，并提交到了渲染系统，渲染系统也完成了合成，也就是提交到了缓存区。只需要等待时钟的到来，将这个缓冲区的内容显示到屏幕上。</p>
-
-<p>FPS的真正含义是，1s的时间真正有多少帧显示到了屏幕上。</p>
-
-<h2 id="toc_1">卡顿监控思路</h2>
-
-<ol>
-<li><p>主线程卡顿监控<br/>
-通过子线程监测主线程的runloop，判断两个状态区域之间的耗时是否达到一定阈值。这两个状态就是kCFRunLoopBeforeSources与kCFRunLoopAfterWaiting</p></li>
-<li><p>借助FPS监控<br/>
-CADisplayLink 可以将其看做一个定时器。定时器都与机器的硬件有关系。而这个定时器是有屏幕“垂直时钟”驱动。也就是与垂直时钟同步，1/60时间跳动一次。因为CADisplayLink的回调也要在线程里执行，将其加入到主线程的Runloop里。runloop的TimerSource就会触发runloop的“叫醒”，执行该执行的内容。若果不将CADisplayLink加入，当然就不会定固定时间“叫醒”。</p></li>
-</ol>
-
-<p>CADislayLink的timestampe的两次差为1s之内的tick次数，即使FPS。</p>
-
-<h2 id="toc_2">线程卡顿监控方案一的实现</h2>
-
-<p><a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿检测</a><br/>
-这一方案的思路，就是从引起卡顿的本质来优化。引起卡顿，在kCFRunLoopBeforeSources通知后执行主队列里的代码，执行block的代码等。或则在kCFRunLoopAfterWaiting被唤起后，也会执行队列里的代码，block代码。</p>
-
-<pre><code>#import &lt;CrashReporter/CrashReporter.h&gt;
-
-@interface PerformanceMonitor ()
-{
-    int timeoutCount;
-    CFRunLoopObserverRef observer;
-    
-    @public
-    dispatch_semaphore_t semaphore;
-    CFRunLoopActivity activity;
-}
-@end
-
-@implementation PerformanceMonitor
-
-+ (instancetype)sharedInstance
-{
-    static id instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&amp;onceToken, ^{
-        instance = [[self alloc] init];
-    });
-    return instance;
-}
-
-static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info)
-{
-    PerformanceMonitor *moniotr = (__bridge PerformanceMonitor*)info;
-    
-    moniotr-&gt;activity = activity;
-    
-    dispatch_semaphore_t semaphore = moniotr-&gt;semaphore;
-    dispatch_semaphore_signal(semaphore);//没当状态发生变化的时候+1；这是在主线程执行
-}
-
-- (void)stop
-{
-    if (!observer)
-        return;
-    
-    CFRunLoopRemoveObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
-    CFRelease(observer);
-    observer = NULL;
-}
-
-- (void)start
-{
-    if (observer)
-        return;
-    
-    // 信号
-    semaphore = dispatch_semaphore_create(0);
-    
-    // 注册RunLoop状态观察
-    CFRunLoopObserverContext context = {0,(__bridge void*)self,NULL,NULL};
-    observer = CFRunLoopObserverCreate(kCFAllocatorDefault,
-                                       kCFRunLoopAllActivities,
-                                       YES,
-                                       0,
-                                       &amp;runLoopObserverCallBack,
-                                       &amp;context);
-    CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
-    
-    //在子线程监控时长
-    //在子线程不断的监控信号量，如果在50 ms里还没有超时，也就是在50ms状态没有发生该边的话。就说明在两个状态的时间间隔里有执行时长超过50ms的
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        while (YES)
-        {
-            long st = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 50*NSEC_PER_MSEC));
-            if (st != 0)
-            {
-                if (!observer)
-                {
-                    timeoutCount = 0;
-                    semaphore = 0;
-                    activity = 0;
-                    return;
-                }
-                
-                //若果超时的是kCFRunLoopBeforeSources 或者kCFRunLoopAfterWaiting 就更能说明问题
-                //如果5此都是这样，说明有问题。几下主线程的调用堆栈。
-                if (activity==kCFRunLoopBeforeSources || activity==kCFRunLoopAfterWaiting)
-                {
-                    if (++timeoutCount &lt; 5)
-                        continue;
-                    
-                    PLCrashReporterConfig *config = [[PLCrashReporterConfig alloc] initWithSignalHandlerType:PLCrashReporterSignalHandlerTypeBSD
-                                                                                       symbolicationStrategy:PLCrashReporterSymbolicationStrategyAll];
-                    PLCrashReporter *crashReporter = [[PLCrashReporter alloc] initWithConfiguration:config];
-                    
-                    NSData *data = [crashReporter generateLiveReport];
-                    PLCrashReport *reporter = [[PLCrashReport alloc] initWithData:data error:NULL];
-                    NSString *report = [PLCrashReportTextFormatter stringValueForCrashReport:reporter
-                                                                              withTextFormat:PLCrashReportTextFormatiOS];
-                    
-                    NSLog(@&quot;------------\n%@\n------------&quot;, report);
-                }
-            }
-            timeoutCount = 0;
-        }
-    });
-}
-
-@end
+<pre><code>NSString * const AFNetworkingTaskDidResumeNotification = @&quot;com.alamofire.networking.task.resume&quot;;
+NSString * const AFNetworkingTaskDidCompleteNotification = @&quot;com.alamofire.networking.task.complete&quot;;
+NSString * const AFNetworkingTaskDidSuspendNotification = @&quot;com.alamofire.networking.task.suspend&quot;;
 </code></pre>
+
+<p>在需要使用的地方写上extern(提示编译器遇到此变量和函数时在其他模块中寻找其定义)</p>
+
+<pre><code>extern NSString * const AFNetworkingTaskDidResumeNotification;
+extern NSString * const AFNetworkingTaskDidCompleteNotification;
+</code></pre>
+
+<ul>
+<li>只是本文件使用的常量字符串(加个static外面无论怎么样都不能使用了)</li>
+</ul>
+
+<pre><code>static NSString * const AFURLSessionManagerLockName = @&quot;com.alamofire.networking.session.manager.lock&quot;;
+static NSUInteger const AFMaximumNumberOfAttemptsToRecreateBackgroundSessionUploadTask = 3;
+</code></pre>
+
+<h2 id="toc_2">二：AFURLSessionManager将处理操作给AFURLSessionManagerTaskDelegate</h2>
+
+<p>也就是将一些通用的操作抽象出来，单独用一个类去处理这些操作。</p>
+
+<h2 id="toc_3">三：需要外部配置时的API</h2>
+
+<p>在类里面有些操作依赖外部配置时，可以通过提供一个具有反回值的block。（哈哈，想起了masory里的链式操作，就是这种处理方法）</p>
+
+<h2 id="toc_4">四：NSURLRequest的重新理解</h2>
+
+<p>NSURLRequest以下是文档描述</p>
+
+<pre><code>A URL load request that is independent of protocol or URL scheme.
+NSURLRequest encapsulates two basic data elements of a load request: the URL to load, and the policy to use when consulting the URL content cache made available by the implementation.
+</code></pre>
+
+<p>也就是说这个是苹果对网络请求的一个抽象层。只是处理数据元素与policy。不处理与协议和scheme相关的东西（因为这些东西可以是http协议，ftp协议）目前苹果给出的只有NSURLRequest (NSHTTPURLRequest) (要实现ftp需要使用CFNetwork)，也就是在Foundation里只是给出了对http的对外API，而且是是对NSURLRequest使用分类实现，从API来看就是采用分类添加了一些HTTP特有的属性。</p>
+
+<h2 id="toc_5">五：AFURLRequestSerialization</h2>
 
 
 		</div>
-	
-
- 
 	
 
  

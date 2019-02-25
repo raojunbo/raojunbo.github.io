@@ -47,8 +47,6 @@
         <li><label>软件开发</label></li>
 
           
-            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
-          
 
       
         <li class="divider"></li>
@@ -102,8 +100,6 @@
                     
                       <li class="side-title"><span>软件开发</span></li>
                         
-                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
-                        
 
                     
                       <li class="side-title"><span>音视频技术</span></li>
@@ -148,70 +144,347 @@
 
 	
 		<div class="markdown-body">
-		<h1>---</h1>
+		<h1>组件化系列（一） 组件化原理及方案</h1>
 
-		<p>layout: post<br/>
-title: 详解Git里的Rebase操作<br/>
-date: 2018-08-10 23:34:15.000000000 +09:00</p>
+		<hr/>
 
-<h2 id="toc_0">tags: iOS技术</h2>
+<p>本系列文章是对大神的博客文章的研读与总结。我们公司从18年初开始组件化的开发的构建。为了理解组件开发的原理，找了相关资料做了对比分析。以下是我参考的文章<br/>
+<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a><br/>
+<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。<br/>
+<a href="https://github.com/meili/MGJRouter.git">蘑菇街的开源</a><br/>
+<a href="https://github.com/raojunbo/CTMediator.git">Casa的组件化方案开源</a></p>
 
-<p>前言:<br/>
-用了一段时间的git，基础命令已经使用的比较熟练，在回顾时，发现平时使用git rebase比价少。找了些文章，都是支离破碎的。最终自己从命令行的文档里找到了平易见人的解释。</p>
+<h2 id="toc_0">一：模块化与解耦</h2>
 
-<p>下面跟着文章的实践思路一步步走完，会有异想不到的收获</p>
+<p><a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a></p>
 
-<p>在命令行里git rebase --help 可以查看英文版本的解释<br/>
-下面将对这个英文的文档做理解输出</p>
+<h3 id="toc_1">1.为什么模块化</h3>
 
-<p>假定下面历史记录<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-08.png" alt="Xnip2018-08-27_19-14-08"/></p>
+<p>因为在实际的开发中，项目业务较多，一个APP会有多个小组进行开发，比如我们公司的有数学组，语文组，英语组，商业组，等，出现的问题大多数情况下一个开发人员只关心我这个组的代码。这样在编译时实际上是编译整个项目，<strong>编译效率低</strong>。每个小组在同一个工程里增，删，改文件，<strong>xcode的工程文件会经常发生冲突</strong>（我们用git进行版本控制），合并代码时很痛苦。在整个项目查找自己忘记类名了的功能时，犹如<strong>大海捞针</strong>。有些基础模块核心模块需要专人维护，对基础的开发人员不开发，需要<strong>隔离基础库</strong>，也需要进行解耦。</p>
 
-<p>当前在topic分支上<br/>
-执行 <br/>
-<code>git rebase master</code> <br/>
-或者<br/>
- <code>git rebase master topic</code></p>
+<p>这些理由已经足以说明进行模块化组件化的迫切了。</p>
 
-<p>将得到如下结果<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-18.png" alt="Xnip2018-08-27_19-14-18"/></p>
+<h3 id="toc_2">2. 模块设计原则</h3>
 
-<p>NOTE:<code>git rebase master topic</code> 形式是<code>git checkout topic ,git rebase master</code>两条命令的相继执行。</p>
+<blockquote>
+<ol>
+<li>越底层的模块，应该越稳定，越抽象，越具有高度复用度。</li>
+<li>不要让稳定的模块依赖不稳定的模块，减少依赖</li>
+<li>提升模块的复用度，<strong>自完备性有时候要优于代码复用</strong></li>
+<li>每个模块只做好一件事情，不要让Common出现</li>
+<li>按照你架构的层数从上到下依赖，<strong>不要出现下层模块依赖上层模块的现象</strong>，业务模块之间也尽量不要耦合</li>
+</ol>
+</blockquote>
 
-<p>如果upstream分支(在这里举例的就是master分支,因为topic从master分支开分支而来)已经包含一个改变的提交，这个提交将会跳过。（A,A`是相同的改变，不同的提交信息）<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-28.png" alt="Xnip2018-08-27_19-14-28"/></p>
+<h3 id="toc_3">3. 模块解耦手段</h3>
 
-<p>执行 <code>git rebase master</code></p>
+<p>要实现模块之间真正的解耦才算真正的模块化。<br/>
+解耦目标：</p>
 
-<p>将会得到<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-36.png" alt="Xnip2018-08-27_19-14-36"/></p>
+<blockquote>
+<p><strong>在基于模块设计原则上让模块之间没有循环依赖，让业务模块之间解除依赖</strong>。</p>
+</blockquote>
 
-<p>下面将介绍如何使用rebase --onto将一个分支的base迁移到另一个分支。<br/>
-假设现在是如下历史记录<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-48.png" alt="Xnip2018-08-27_19-14-48"/></p>
+<p>公共模块可以通过架构设计来避免耦合业务。但业务模块之间还是会有耦合的。<br/>
+业务模块之间的比如页面跳转，数据传递，怎么实现解耦不同业务模块之间的代码调用呢？</p>
 
-<p>我们要得到如下结果<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-14-58.png" alt="Xnip2018-08-27_19-14-58"/></p>
+<h4 id="toc_4">1. 面向接口调用（很妙）</h4>
 
-<p>执行 git rebase --onto master next topic </p>
+<p>直接引用有依赖的情况</p>
 
-<p>另一种使用<br/>
-<img src="media/15352828379687/Xnip2018-08-28_09-55-15.png" alt="Xnip2018-08-28_09-55-15"/><br/>
-执行 git rebase --onto master topicA topicB</p>
+<pre><code>//A 模块
+- (void)getSomeDataFromB {
+    B.getSomeData();
+}
+//B 模块
+- (void)getSomeData {
+    return self.data;
+}
+</code></pre>
 
-<p>（我对这条的理解，checkout到topicB,取topicA到topcB多出来的变更，以master为新的基础）<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-15-17.png" alt="Xnip2018-08-27_19-15-17"/></p>
+<pre><code>//接口
+@protocol BService&lt;NSObject&gt;
+- (void)getSomeData;
+@end
 
-<p>另一种使用<br/>
-假设当前历史记录<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-15-25.png" alt="Xnip2018-08-27_19-15-25"/><br/>
-执行 git rebase --onto topicA~5 topicA~3 topicA <br/>
-得到如下结果<br/>
-<img src="media/15352828379687/Xnip2018-08-27_19-15-33.png" alt="Xnip2018-08-27_19-15-33"/></p>
+//A 模块，只依赖接口(针对协议编程)
+- (void)getSomeDataFromB {
+    id b = findService(@protocol(BService));
+    b.getSomeData;
+}
+//B模块，实现BService接口
+@interface B:NSObject&lt;BService&gt;
+- (void)getSomeData {
+    return self.data;
+}
 
-<p>在rebase操作时，如果有冲突，git rebase将停止让你解决冲突，解决后git add ,在执行git rebase --continue,直到没有冲突为止。想取消rebase可以执行git rebase --abort;</p>
+</code></pre>
 
-<p>从上面的总结，可以看出，rebase,其内在含义就是变基础（起点）。有两个参数，一个是”找到变基的提交“。另一个是指“定变基的到哪”。</p>
+<p>这样就可以实现了既满足了模块之间的调用，也实现了解耦<br/>
+优点</p>
+
+<p><code>接口类似代码，可以非常灵活的定义函数和回调</code></p>
+
+<p>缺点</p>
+
+<pre><code>1. 接口定义文件需要放在一个模块里以供依赖，但是这个模块不贡献代码。还好。
+2. 使用麻烦，每个调用都需要定义一个service的接口，幷实现。
+</code></pre>
+
+<h4 id="toc_5">2. 面向自定义协议的调用</h4>
+
+<p>面向接口的调用的缺点导致幷不能满足所有的需求，也解耦的不彻底（对接口的依赖）。<br/>
+终极手段就是通过定义一套自定义协议来实现模块间的通信，可以采用现成的协议如URL协议，简单，易于上手，这也是很多人采用url作为协议原因。可统一实现本地于远程的页面跳转，并且实现业务间的解耦。<br/>
+要实现真正的解耦，采用注册机制。</p>
+
+<h4 id="toc_6">3.利用运行时的反射机制</h4>
+
+<p>Object-C的反射机制是通过一个字符串找到一个类的类对象，即NSClassFromString();<br/>
+要实现真正的解耦，可以采用通过反射机制获取类，在创建对象，实现跳转或者通信。这样就不用依赖”要跳转的类“了。</p>
+
+<blockquote>
+<p>总结<br/>
+以上的解耦方式是从<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a>得到的启发。这些解耦方式无论是在平时开发中，还是要搭建组件化的框架都可以使用。具体的组件化框架我们将在下面对前人的组件化探索做下分析</p>
+</blockquote>
+
+<h2 id="toc_7">二：模块拆分</h2>
+
+<ol>
+<li><p>基础库组件<br/>
+第三方库如AFNetWorking,SDWebImage等，还有一些工具也要从主库重剥离出来，形成自己的私有基础仓库。</p></li>
+<li><p>服务组件</p></li>
+<li><p>业务组件</p></li>
+</ol>
+
+<p><a href="https://blog.csdn.net/xinzhou201/article/details/51000807">https://blog.csdn.net/xinzhou201/article/details/51000807</a></p>
+
+<ol>
+<li>拆分中遇到的问题
+主工程与壳工程的pods版本的管理问题</li>
+</ol>
+
+<h2 id="toc_8">三：蘑菇街组件化</h2>
+
+<h3 id="toc_9">蘑菇街的方案一</h3>
+
+<p>原理采用的是面向自定义协议的方式实现解耦。自定义协议采用的是现成的url协议，url协议成熟，方便，利用URL可以在这里做key值，方便的参数解析，与应用之间的调用相吻合。<br/>
+嫌在这里看代码代码麻烦的话，可以下载我自己写的原理 <a href="https://github.com/raojunbo/iOSCoreConcept.git">Demo组件化原理分析</a></p>
+
+<pre><code>//Mediator3.h文件
+typedef void(^componetBlock)(id param);
+typedef id(^objectComponetBlock)(id param);
+
+/*
+ 原理就是将url与Block进行映射
+ url起到两个作用：一是作为key值与block进行映射，二是可以直接接参数就想普通url后面跟参数一样。
+ 
+ 特别说明:
+ url传递参数受到一定的限制。比如对本地来说，需要传非常规的参数时，就办不到。
+ 这里我自己的Demo直接将参数放在了函数后面省去对url进行解析的操作。实际的开发中将这个参数从url里解析出来。如果要传递非常规的参数。也可以直接在后面添加有一个param。
+ */
+
+@interface Mediator3 : NSObject
+
++ (instancetype)shareInstance;
+
+//指定相应的url的执行操作
+//例如，只是简单的打开一个页面
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block;
+//打开某个页面
+- (void)openURL:(NSString *)url withParam:(id)param;
+
+
+//指定相应rul的执行操作，并给一个返回值
+//例如打开一个页面，或者在一个组件里面取值后返回来
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block;
+//取得某个组件操作后的值
+- (id)objectForURL:(NSString *)url withParam:(id)param;
+</code></pre>
+
+<pre><code>//Mediator3.m文件
+@interface Mediator3()
+@property (nonatomic, strong)NSMutableDictionary *cache;
+@end
+
+@implementation Mediator3
+
+- (instancetype)init {
+    if(self = [super init]){
+        _cache = [[NSMutableDictionary alloc]init];
+    }
+    return self;
+}
+
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    static Mediator3 *mediator = nil;
+    dispatch_once(&amp;onceToken, ^{
+        
+        mediator = [[self alloc]init];
+    });
+    return mediator;
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (void)openURL:(NSString *)url withParam:(id)param {
+    componetBlock block = [self.cache objectForKey:url];
+    if(block){
+        block(param);
+    }
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (id)objectForURL:(NSString *)url withParam:(id)param{
+    objectComponetBlock block = [self.cache objectForKey:url];
+    if(block){
+        return block(param);
+    }
+    return nil;
+}
+
+@end
+</code></pre>
+
+<pre><code>//BookDetailViewController.m
+@implementation BookDetailViewController
+
++ (void)load {
+    //实现跳转功能
+    [[Mediator3 shareInstance] registerURLPattern:@&quot;weread://bookDetail&quot; toHandler:^(id param) {
+        NSDictionary *paramDict = (NSDictionary *)param;
+        BookDetailViewController *bookDetailVC = [[BookDetailViewController alloc]initWithBookId:paramDict[@&quot;bookId&quot;]];
+        UINavigationController *nav = (UINavigationController *) [UIApplication sharedApplication].keyWindow.rootViewController;
+        [nav pushViewController:bookDetailVC animated:YES];
+    }];
+    
+    
+    //只是取值的操作
+    [[Mediator3 shareInstance]registerURLPattern:@&quot;weread://bookCount&quot; toObjectHandler:^id(id param) {
+        //执行一定的操作后
+        return @&quot;5&quot;;
+    }];
+    
+</code></pre>
+
+<pre><code>//ReadingViewController.m
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ //注册url与block的映射,实现调转的操作
+    [[Mediator3 shareInstance] openURL:@&quot;weread://bookDetail&quot; withParam:@{@&quot;bookId&quot;:@&quot;2&quot;}];
+    
+    //注册url与block映射，实现只是取值的操作
+    NSString *bookCount =  [[Mediator3 shareInstance] objectForURL:@&quot;weread://bookCount&quot; withParam:@&quot;&quot;];
+    NSLog(@&quot;这是从某个组件取回来的值%@&quot;,bookCount);
+    }
+</code></pre>
+
+<h3 id="toc_10">蘑菇街的方案二</h3>
+
+<blockquote>
+<p>实现原理：<br/>
+面向接口调用，即新开了一个对象叫做ModuleManager，提供了一个registerClass:forProtocol:的方法，注册后，@protocol和Class进行配对。因此ModuleManager中就有了一个字典来记录这个配对。<br/>
+当有涉及非常规参数的调用时，业务方就不会去使用[MGJRouter openURL:@&quot;mgj://detail?id=404&quot;]的方案了，转而采用ModuleManager的classForProtocol:方法。业务传入一个@protocol给ModuleManager，然后ModuleManager通过之前注册过的字典查找到对应的Class返回给业务方，然后业务方再自己执行alloc和init方法得到一个符合刚才传入@protocol的对象，然后再执行相应的逻辑。</p>
+</blockquote>
+
+<p>这里的protocol统样起到两个作用，一是key值，另一个是起到定义调用接口的作用，可以定义任意类型的参数。</p>
+
+<p>缺点<br/>
+1. 被调用方与调用方，虽然不相互依赖，但都得依赖这个协议。这实际上是一种不彻底的解耦。</p>
+
+<ol>
+<li>同url注册形式一样，都得维持注册表。</li>
+</ol>
+
+<h2 id="toc_11">四：casa组件化</h2>
+
+<p>基于Mediator模式和Target-Action模式，中间采用了runtime来完成调用。这套组件化方案将远程应用调用和本地应用调用做了拆分，而且是由本地应用调用为远程应用调用提供服务</p>
+
+<blockquote>
+<p>实现原理<br/>
+[[CTMediator sharedInstance] performTarget:targetName action:actionName params:@{...}]向CTMediator发起跨组件调用，CTMediator根据获得的target和action信息，通过objective-C的runtime转化生成target实例以及对应的action选择子，然后最终调用到目标业务提供的逻辑，完成需求。</p>
+</blockquote>
+
+<p><img src="media/15351909215000/Xnip2018-09-04_16-42-52.png" alt="Xnip2018-09-04_16-42-52"/></p>
+
+<p>下面是工程实践<br/>
+下面是casa开源的实现的头文件。.m文件请自行下载</p>
+
+<pre><code>//casa开源的CTMeditor.h
+@interface CTMediator : NSObject
+
++ (instancetype)sharedInstance;
+
+// 远程App调用入口
+- (id)performActionWithUrl:(NSURL *)url completion:(void(^)(NSDictionary *info))completion;
+// 本地组件调用入口
+- (id)performTarget:(NSString *)targetName action:(NSString *)actionName params:(NSDictionary *)params shouldCacheTarget:(BOOL)shouldCacheTarget;
+- (void)releaseCachedTargetWithTargetName:(NSString *)targetName;
+
+@end
+
+//CTMeditor.m
+略
+采用运行时构建可执行的NSInvocation。在内部都给其添加了前缀
+ NSString * targetClassString = [NSString stringWithFormat:@&quot;Target_%@&quot;, targetName];
+ NSString *actionString = [NSString stringWithFormat:@&quot;Action_%@:&quot;, actionName];
+</code></pre>
+
+<pre><code>//Target_B.h
+@interface Target_B : NSObject
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)dict;
+
+@end
+
+//Target_B.m
+#import &quot;Target_B.h&quot;
+#import &quot;DemoModuleBDetailViewController.h&quot;
+@implementation Target_B
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)param {
+    DemoModuleBDetailViewController *bDetailVC = [[DemoModuleBDetailViewController alloc]init];
+    return bDetailVC;
+}
+@end
+</code></pre>
+
+<pre><code>//ViewController.m
+//这是调用方
+#import &quot;CTMediator+CTMediatorModuleAActions.h&quot;
+#import &quot;CTMediator+CTMediatorModuleBActions.h&quot;
+- (void）viewDidLoad {
+//直接调用
+  if (indexPath.row == 6) {
+        [[CTMediator sharedInstance] performTarget:@&quot;InvalidTarget&quot; action:@&quot;InvalidAction&quot; params:nil shouldCacheTarget:NO];
+    }
+    //通过分类调用
+    if(indexPath.row == 7){
+        UIViewController *vc =  [[CTMediator sharedInstance]CTMediator_viewControllerForModuleBDetail:@{}];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+</code></pre>
+
+<ol>
+<li><p>从.h文件里可以看到，外部的调用将远程与本地分开，内部实现时远程利用了本地（通过解析url,将url转换成了本地的调用）。</p></li>
+<li><p>Mediator分别对每一个模块有个一个分类，提供对外部的调用的列表。这些分类被需要调用的模块所依赖。也就是只需要依赖Mediator就可以了，是单向依赖。</p></li>
+<li><p>为了更好的实现组件对外接口的管理。此种方案专门针对每个模块有一个Target_A类似的对外服务接口的实现。</p></li>
+<li><p>用户调用都是通过对Mediator的分类，对固定的模块的类的名字的反射，来对Target_A的调用，当然就调用到了A的服务。</p></li>
+<li><p>此种方式为了使代码方便管理，会为每个模块提供Target和一个对Mediator的分类。</p></li>
+<li><p>Mediator与其分类可以是单独一个repo，方便其他组件依赖。也就是其他组件只依赖于这个中间件。解耦与组件化就完成了。</p></li>
+</ol>
+
+<h2 id="toc_12">五：总结</h2>
+
+<p>组件化就是在与解耦，解耦的方式大致就是上面提到的三种方法（也可能有其他办法，但至少现在我看到的最好实践就这三）。然后是基于各个原理的工程化实践。从工程实践来看casa的Mediator+target-action更胜一筹。思路清晰，调用统一，没有注册机制的维护，模块的服务的实现（Target）在同一个地方，不用耦合到真正的模块里。<br/>
+多说一句，滴滴组件化，页面间的跳转采用openURL,页面在+(void)load方法里进行注册，ONERoute内部保存一份URL与Class的对应表。当调用openURL时，会查找到相应的类，然后生成相应的实例对象。<br/>
+最后强烈建议大家认真读<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。</p>
 
 
 		</div>

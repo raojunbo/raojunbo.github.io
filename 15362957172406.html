@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  --- - 北哥传奇
+  iOS如何将像素显示到屏幕 - 北哥传奇
   
   </title>
  <meta name="description" content="">
@@ -46,8 +46,6 @@
         <li class="divider"></li>
         <li><label>软件开发</label></li>
 
-          
-            <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
           
 
       
@@ -102,8 +100,6 @@
                     
                       <li class="side-title"><span>软件开发</span></li>
                         
-                          <li><a title="面试小问题研究" href="15352065805603.html">面试小问题研究</a></li>
-                        
 
                     
                       <li class="side-title"><span>音视频技术</span></li>
@@ -144,15 +140,11 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-<h1>---</h1>
+<h1>iOS如何将像素显示到屏幕</h1>
 
-<p>layout: post<br/>
-title: iOS如何将像素显示到屏幕<br/>
-date: 2018-09-8 23:34:15.000000000 +09:00</p>
+<hr/>
 
-<h2 id="toc_0">tags: iOS技术</h2>
-
-<h1 id="toc_1">绘制像素到屏幕</h1>
+<h1 id="toc_0">绘制像素到屏幕</h1>
 
 <p>参考文章<a href="https://www.objccn.io/issue-3-1/">绘制像素到屏幕</a></p>
 
@@ -167,23 +159,23 @@ date: 2018-09-8 23:34:15.000000000 +09:00</p>
 6. 绘制与动画的关系？<br/>
 7. 渲染性能优化的总结</p>
 
-<h2 id="toc_2">一.像素</h2>
+<h2 id="toc_1">一.像素</h2>
 
 <p>显示在屏幕上的是什么?<br/>
 当像素映射到屏幕的时候，每一个像素均由三个颜色组件构成：红，绿，蓝，透明度。三个独立的颜色单元会根据给定的颜色显示到一个像素上。例如在iPhone5的显示屏上是1136 *640个像素。</p>
 
-<h3 id="toc_3">1.1 像素在内存里的默认布局</h3>
+<h3 id="toc_2">1.1 像素在内存里的默认布局</h3>
 
 <pre><code>  A   R   G   B   A   R   G   B   A   R   G   B  
 | pixel 0       | pixel 1       | pixel 2   
   0   1   2   3   4   5   6   7   8   9   10  11 ...
 </code></pre>
 
-<h3 id="toc_4">1.2 二维数据</h3>
+<h3 id="toc_3">1.2 二维数据</h3>
 
 <p>在实际使用像素数据时，有时会使用二位数据。就时颜色组件红，绿，蓝，alpha,每一个组件是一个数组。这样可以实现很好的对数据进行压缩或者其他处理。</p>
 
-<h2 id="toc_5">二. 软件构成</h2>
+<h2 id="toc_4">二. 软件构成</h2>
 
 <p><img src="media/15362957172406/Xnip2018-09-09_08-32-56.png" alt="Xnip2018-09-09_08-32-56"/></p>
 
@@ -198,12 +190,12 @@ OpenGL<br/>
 <p>GPU是一个专门为图形并发计算而量身定做的处理单元。<br/>
 CoreAnimation使用CoreGraphics来做渲染。CoreGraphics在CPU里进行运算出数据，形成位图包装成纹理交给OpenGl进行操作GPU进行渲染。</p>
 
-<h3 id="toc_6">2.1 工作大致流程</h3>
+<h3 id="toc_5">2.1 工作大致流程</h3>
 
 <p>GPU需要将每一个frame的纹理合成在一起。每一个纹理会占用VRAM，<br/>
 CPU开始程序时，会让CPU从bundle加载一张PNG的图片并且<strong>解压</strong>它，这所有的事情都在CPU上。在显示文本时，会促进CoreText和CoreGrapic生成一个位图(coreText排版器最终也是要绘制到图片上下文)，一旦准备好，它将会被作为一个纹理上传到GPU并显示出来。但滚动或者在屏幕上移动文本时，不管怎样，同样的纹理会能够复用，CPU只需要简单告诉GPU新的位置就可以，所有GPU可以重用存在的纹理，CPU并不需要重新渲染文本，并且位图也不需要重新上传到GPU。</p>
 
-<h2 id="toc_7">三. 纹理合成</h2>
+<h2 id="toc_6">三. 纹理合成</h2>
 
 <p>在简化的理解中，纹理相当于CoreAnimatio里的CALayer，纹理可以有位图内容，其实CALayer也是有位图内容的，对于每一个纹理，所有的纹理都以某种方式叠加在彼此的顶部。当两个纹理覆盖在一起时候，GPU要为所有像素做合成操作。</p>
 
@@ -215,7 +207,7 @@ CPU开始程序时，会让CPU从bundle加载一张PNG的图片并且<strong>解
 所谓的mask就是一mask的不透明区域，显示本身的内容。实际上mask也是一种合成。</p></li>
 </ul>
 
-<h3 id="toc_8">3.1 离屏渲染</h3>
+<h3 id="toc_7">3.1 离屏渲染</h3>
 
 <ul>
 <li><p>帧缓冲区<br/>
@@ -232,11 +224,11 @@ CoreAnimation设置阴影也会出现屏幕外渲染<br/>
 一般情况下需要避免离屏渲染，因为这是很大的消耗。直接将图层合成到帧的缓冲区（屏幕上）比先创建屏幕外缓冲区，然后将屏幕外缓冲区内容般到帧缓冲区要廉价很多。但有时候需要渲染树很复杂，可以强制离屏渲染那些图层，这样就可以缓存合成的结果。性能就会有所提升。（当使用离屏渲染时，GPU第一次会混合所有图层到一个基于新的纹理的位图缓存上，然后使用这个纹理来绘制到屏幕上）。当对这个纹理进行移动，变形等操作时，可以使用这个位图缓存。这样这部分的合成将减少很多工作。其实这就是做动画的流畅的原因。所以要不要离屏渲染，要看有取舍,一般对于静态的不经常变更的可以使用离屏，增加缓存。对于经常变更的就最好不要使用离屏。这样会增加建立屏幕外缓冲区的时间，以及屏幕内与屏幕外的切换时间。</p></li>
 </ul>
 
-<h3 id="toc_9">3.2离屏渲染检测</h3>
+<h3 id="toc_8">3.2离屏渲染检测</h3>
 
 <p>Instrument的CoreAnimationg工具，Color Offscreen-Rendered Yellow，是检测离屏渲染。Color Hits Green and Misses Red 选项，绿色代表无论何时一个屏幕外缓冲区被复用，而红色代表当缓冲区被重新创建。</p>
 
-<h2 id="toc_10">四. CoreAnimation与CoreGraphics与OpenGLES</h2>
+<h2 id="toc_9">四. CoreAnimation与CoreGraphics与OpenGLES</h2>
 
 <p>CoreAnimation利用CoreGraphics绘制，CoreGraphics利用OpenGLES实现绘制。。</p>
 
@@ -244,12 +236,12 @@ CoreAnimation设置阴影也会出现屏幕外渲染<br/>
 
 <p>CoreAnimation重要的任务是判断出哪些图层需要被重新绘制，绘制完成后会有生成bitmap,CoreAnimion里的图层有backsore，就是一这个bitmap;这个bitmap可以是读取的图片数据，也可以是利用CoreGrapics绘制的。无论是给的图片还是自己通过CrorCrapics绘制的最终，提交把这个位图数据交个生成的纹理（这个纹理与这个Layer相对应）。</p>
 
-<h2 id="toc_11">五. CPU瓶颈与GPU瓶颈优化</h2>
+<h2 id="toc_10">五. CPU瓶颈与GPU瓶颈优化</h2>
 
 <p>要在1/60里完成渲染工作，CPU与GPU的总时间不能操作这个时间。否则就会出现掉帧。<br/>
 在出现性能瓶颈时, 我们采用Instrument里的，OpenGL ES Driver instrument 进行查看。</p>
 
-<h2 id="toc_12">六. CoreGraphics</h2>
+<h2 id="toc_11">六. CoreGraphics</h2>
 
 <p>CPU实现的是位图绘制，这个绘制过程是用CoreGraphics完成的，也就是通过CPU进行计算而来。我们自己画的线条，长方形，通过CPU计算，最终将数据形成与CGContext里。<br/>
 当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用CGContextRef 绘制</p>
@@ -261,14 +253,14 @@ CoreAnimation设置阴影也会出现屏幕外渲染<br/>
 自己创建的CGContext，那么绘制的数据在这个自己创建的CGContext里，可以用这个CGGcontext形成位图或者图片。(这里可以自己绘制然后生成图片，也可以实现异步绘制，哈哈)</p></li>
 </ul>
 
-<h3 id="toc_13">6.1 drawRect原理</h3>
+<h3 id="toc_12">6.1 drawRect原理</h3>
 
 <p>当你调用 -setNeedsDisplay，UIKit 将会在这个视图的图层上调用 -setNeedsDisplay。这为图层设置了一个标识，标记为 dirty，但还显示原来的内容。它实际上没做任何工作，所以多次调用 -setNeedsDisplay并不会造成性能损失。<strong>当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用 CGContextRef 绘制</strong>。<br/>
 当你使用 UIKit 的绘制方法，例如: UIRectFill() 或者 -[UIBezierPath fill] 代替你的 -drawRect: 方法，他们将会使用这个上下文。使用方法是，UIKit 将后备存储的 CGContextRef 推进他的 graphics context stack，也就是说，它会将那个上下文设置为当前的。因此 UIGraphicsGetCurrent() 将会返回那个对应的上下文。既然 UIKit 使用 UIGraphicsGetCurrent() 绘制方法，绘图将会进入到图层的后备存储。如果你想直接使用 Core Graphics 方法，你可以自己调用 UIGraphicsGetCurrent() 得到相同的上下文，并且将这个上下文传给 Core Graphics 方法。</p>
 
 <p>总结下：检测是否需要重绘，需要重绘，若果实现了drawRect就会生成一个相应大小的后备存储。然后调用drawRect里的代码进行绘制。将数据写入上下文，幷形成新的后备存储。幷将新的后备存储交给GPU渲染。（这里如果不需要绘制，就不要重写drawRect方法了，这样就不会生成后没有必要的备存储对象了，以免造成性能的浪费），幷切每次出现重绘时，都会执行drawRect方法。造成时间和内存浪费。可以采用自己创建位图上下文，生成图片后，赋值给视图。这样可以避免不断绘制。</p>
 
-<h3 id="toc_14">6.2 异步绘制</h3>
+<h3 id="toc_13">6.2 异步绘制</h3>
 
 <p>将一些耗时的工作，避过图片的获取，图片的解码等工作放到子线程中去做，形成图片后，在放到主线程里将图片放进去。<br/>
 <code><br/>
@@ -283,21 +275,21 @@ CGSize size = view.bounds.size;<br/>
 }];<br/>
 </code></p>
 
-<h3 id="toc_15">6.3 图片解码</h3>
+<h3 id="toc_14">6.3 图片解码</h3>
 
 <p>你需要知道在 GPU 内，一个 CALayer 在某种方式上和一个纹理类似。图层有一个后备存储，这便是被用来绘制到屏幕上的位图。<br/>
 在给CALayer设置图片时，CoreAnimation会将其查看这个图片时否已经解码，没解码的化话进行解码(这里就是一个优化点，可以将解码的工作全部放到子线程里进行，哈哈)。<br/>
 imageNamed:从 bundle 里加载会立马解压。一般的情况是在赋值给 UIImageView 的 image 或者 layer 的 contents 或者画到一个 core graphic context 里才会解压。</p>
 
-<h3 id="toc_16">6.4 可变尺寸的图片</h3>
+<h3 id="toc_15">6.4 可变尺寸的图片</h3>
 
 <p>使用较小的图片好处<br/>
 解码快<br/>
 占用内存小</p>
 
-<h2 id="toc_17">七. 完整的绘制与动画流程</h2>
+<h2 id="toc_16">七. 完整的绘制与动画流程</h2>
 
-<h3 id="toc_18">动画在APP内部的4个阶段</h3>
+<h3 id="toc_17">动画在APP内部的4个阶段</h3>
 
 <ol>
 <li><p>布局：<br/>
@@ -307,7 +299,7 @@ imageNamed:从 bundle 里加载会立马解压。一般的情况是在赋值给 
 <li><p>提交：在这个阶段，Core Animation 打包 layer 的信息以及需要做的动画的参数，通过 IPC（inter-Process Communication）传递給 render server。</p></li>
 </ol>
 
-<h3 id="toc_19">动画在APP外部的2个阶段</h3>
+<h3 id="toc_18">动画在APP外部的2个阶段</h3>
 
 <p>当这些数据到达 render server 后，会被反序列化成 render tree。然后 render server 会做下面的两件事：</p>
 
@@ -318,7 +310,7 @@ imageNamed:从 bundle 里加载会立马解压。一般的情况是在赋值给 
 
 <p>如果做动画的话，最后的两个步骤会一直重复知道动画结束。</p>
 
-<h2 id="toc_20">八. 渲染性能优化的总结</h2>
+<h2 id="toc_19">八. 渲染性能优化的总结</h2>
 
 <ul>
 <li><p>隐藏的绘制<br/>
@@ -354,8 +346,8 @@ UILabel将text画入backing image。也就是将文字搞成相对应的图片�
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="15361359458840.html" 
-	        title="Next Post: 利用cocoapods进行组件多工程组件化管理">利用cocoapods进行组件多工程组件化管理 &raquo;</a>
+	        <a href="15361293454277.html" 
+	        title="Next Post: 利用Cocoapods构建自己的私有与公有库">利用Cocoapods构建自己的私有与公有库 &raquo;</a>
 	    
 	</div>
   </div>
