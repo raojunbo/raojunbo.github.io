@@ -4,7 +4,7 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-02-25T23:26:18+08:00</updated>
+  <updated>2019-02-25T23:27:27+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -752,87 +752,6 @@ K线最高价和最低价之间的幅度，反映运动的难易程度和结果�
 <li>平均成交量
 价格运动减速，遇到一些需求</li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[2019年成长时间轴]]></title>
-    <link href="https://raojunbo.github.io/15508519143583.html"/>
-    <updated>2019-02-23T00:11:54+08:00</updated>
-    <id>https://raojunbo.github.io/15508519143583.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">1. Swift工程化（2月1日-2月30日）</h2>
-
-<pre><code>1. 实践：达到工程实践目标，能用Swift写出一个需求
-2. 思考Swift实现的本质
-</code></pre>
-
-<h2 id="toc_1">2. iOS从高级到资深（2月30日-4月30日）</h2>
-
-<pre><code>1. 思考：动手写关键的东西，解决关键的问题。
-2. 手动重写SDWeb开源框架，看看自己与SD有什么差别
-3. 手动重写AF开源框架，看看自己与其的差别
-4. 手动重写题型绘制，搞出对图文混排的理解
-5. 优化工作，cash奔溃优化，结构优化，性能优化，流程优化
-</code></pre>
-
-<h2 id="toc_2">3. 技术领导力（5月1日--6月30日）</h2>
-
-<pre><code>1. 极客时间里的“技术领导力”课程
-2. 领导梯度，德鲁克系列，执行力培训
-3. 公司的领导力培训
-</code></pre>
-
-<h2 id="toc_3">3. 英语阅读能力（5月-12月）</h2>
-
-<pre><code>1. 阅读能力
-2. 听力能力
-3. 写作能力
-4. 培训：还是找一家公司培训下吧
-5. 订阅经济学人开始经济阅读之路吧
-</code></pre>
-
-<h2 id="toc_4">4. Python，Mysql（6月-6月）</h2>
-
-<pre><code>1. 实践：到达工程实践
-2. 用Python写出一个东西，写出一个什么东西，暂时还没想好
-</code></pre>
-
-<h2 id="toc_5">5. JS,CSS,React（7月）</h2>
-
-<ol>
-<li>实践 达到工程实践 </li>
-<li>写一个复杂的前端</li>
-</ol>
-
-<h2 id="toc_6">6. 威氏理论（3月-6月）</h2>
-
-<pre><code>1. 已有课程，中阶，高阶，波段课程整理完
-2. 进行横向整理，总结出一套自己的套路
-2. 开一个公众账号，坚持写自己的分析日报
-</code></pre>
-
-<h2 id="toc_7">7. 房产逻辑（7月-8月）</h2>
-
-<pre><code>1. 已有课程，刘德科课程，大胡子课程
-2. 形成自己的投资逻辑
-3. 房地产的逻辑
-</code></pre>
-
-<h2 id="toc_8">8. 阅读计划（全年)</h2>
-
-<pre><code>1. 每月一本书籍的整理输出，即阅读笔记
-</code></pre>
-
-<h2 id="toc_9">9. 金融学考研</h2>
-
-<p>咨询相关考研的培训机构，进行相应的计划准备<br/>
-1. 基础的经济学原理<br/>
-2. 国际金融<br/>
-3. 货币银行学<br/>
-4. 数学<br/>
-5. 英语</p>
 
 ]]></content>
   </entry>
@@ -2425,6 +2344,31 @@ void cleanup (struct namect *pst){
     <id>https://raojunbo.github.io/15443591203562.html</id>
     <content type="html"><![CDATA[
 <p>文本处理带真正用到时再研究吧。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[shell脚本知识梳理 （六）函数]]></title>
+    <link href="https://raojunbo.github.io/15443590303184.html"/>
+    <updated>2018-12-09T20:37:10+08:00</updated>
+    <id>https://raojunbo.github.io/15443590303184.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">函数</h2>
+
+<pre><code>#!/bin/bash
+function testFunc(){
+    echo $1:$2
+    return 100;
+}
+
+echo &quot;调用前&quot;
+testFunc &quot;rao&quot; &quot;jun&quot;;
+echo &quot;返回结果$?&quot;
+echo &quot;调用后&quot;
+</code></pre>
+
+<p>函数的传参数与在命令里的传参数基本相同。返回值用$?记录上次函数的返回值。</p>
 
 ]]></content>
   </entry>

@@ -82,37 +82,6 @@ $(document).ready(function(event) {
 
 	<article>
 		 <header>
-		  	<h1 class="entry-title"><a href="15443590303184.html">shell脚本知识梳理 （六）函数</a></h1>
-			<p class="meta"><time datetime="2018-12-09T20:37:10+08:00" 
-			pubdate data-updated="true">2018/12/9</time></p>
-		 </header>
-	  	<div class="entry-content">
-		  	
-		  	<h2 id="toc_0">函数</h2>
-
-<pre><code>#!/bin/bash
-function testFunc(){
-    echo $1:$2
-    return 100;
-}
-
-echo &quot;调用前&quot;
-testFunc &quot;rao&quot; &quot;jun&quot;;
-echo &quot;返回结果$?&quot;
-echo &quot;调用后&quot;
-</code></pre>
-
-<p>函数的传参数与在命令里的传参数基本相同。返回值用$?记录上次函数的返回值。</p>
-
-
-		</div>
-
-		
-
-	</article>
- 
-	<article>
-		 <header>
 		  	<h1 class="entry-title"><a href="15443316930228.html">shell脚本知识梳理（零）linux 基础命令</a></h1>
 			<p class="meta"><time datetime="2018-12-09T13:01:33+08:00" 
 			pubdate data-updated="true">2018/12/9</time></p>
@@ -1089,6 +1058,28 @@ RTP是基于UDP上的。即时非链接的。RTP里的载荷是媒体的分包<b
 		
 
 	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15427076070232.html">FLV封装格式解析（基础系列五）</a></h1>
+			<p class="meta"><time datetime="2018-11-20T17:53:27+08:00" 
+			pubdate data-updated="true">2018/11/20</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p><img src="media/15427076070232/%E8%A7%86%E9%A2%91%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE.png" alt="视频封装数据"/></p>
+
+<p>原理<br/>
+<img src="media/15427076070232/flvtag.png" alt="flvtag"/></p>
+
+<p>FLV封装格式是一个FLV Header文件头和一个一个的Tag组成。Tag包括音频数据以及视频数据。整个的解析过程就是将上面的图的数据进行解析。</p>
+
+
+		</div>
+
+		
+
+	</article>
   
 	<div class="pagination">
 	 <a class="prev" href="all_3.html">&larr; Older</a> 
@@ -1111,7 +1102,7 @@ RTP是基于UDP上的。即时非链接的。RTP里的载荷是媒体的分包<b
 	      </li>
 	  
 	      <li class="post">
-	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(8)</strong></a>
+	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(7)</strong></a>
 	         <p class="cat-children-p"> 
 	        
 	        	<a href="%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0.html">投资笔记&nbsp;(7)</a>&nbsp;&nbsp;
