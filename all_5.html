@@ -82,366 +82,6 @@ $(document).ready(function(event) {
 
 	<article>
 		 <header>
-		  	<h1 class="entry-title"><a href="15362957172406.html">iOS如何将像素显示到屏幕</a></h1>
-			<p class="meta"><time datetime="2018-09-07T12:48:37+08:00" 
-			pubdate data-updated="true">2018/9/7</time></p>
-		 </header>
-	  	<div class="entry-content">
-		  	
-		  	<hr/>
-
-<h1 id="toc_0">绘制像素到屏幕</h1>
-
-<p>参考文章<a href="https://www.objccn.io/issue-3-1/">绘制像素到屏幕</a></p>
-
-<p>参考文章<a href="https://segmentfault.com/a/1190000004164291">iOS视图，动画渲染机制</a></p>
-
-<p>本文将总结<br/>
-1. 位图数据如何存储的？<br/>
-2. 像素绘制到屏幕上需要经历的流程？<br/>
-3. CPU的工作是什么？<br/>
-4. GPU的工作是什么？<br/>
-5. 离屏渲染的取舍？<br/>
-6. 绘制与动画的关系？<br/>
-7. 渲染性能优化的总结</p>
-
-<h2 id="toc_1">一.像素</h2>
-
-<p>显示在屏幕上的是什么?<br/>
-当像素映射到屏幕的时候，每一个像素均由三个颜色组件构成：红，绿，蓝，透明度。三个独立的颜色单元会根据给定的颜色显示到一个像素上。例如在iPhone5的显示屏上是1136 *640个像素。</p>
-
-<h3 id="toc_2">1.1 像素在内存里的默认布局</h3>
-
-<pre><code>  A   R   G   B   A   R   G   B   A   R   G   B  
-| pixel 0       | pixel 1       | pixel 2   
-  0   1   2   3   4   5   6   7   8   9   10  11 ...
-</code></pre>
-
-<h3 id="toc_3">1.2 二维数据</h3>
-
-<p>在实际使用像素数据时，有时会使用二位数据。就时颜色组件红，绿，蓝，alpha,每一个组件是一个数组。这样可以实现很好的对数据进行压缩或者其他处理。</p>
-
-<h2 id="toc_4">二. 软件构成</h2>
-
-<p><img src="media/15362957172406/Xnip2018-09-09_08-32-56.png" alt="Xnip2018-09-09_08-32-56"/></p>
-
-<p>Display(显示屏)<br/>
-GPU<br/>
-GPU Driver<br/>
-OpenGL<br/>
-    CoreGraphics<br/>
-    CoreAnimation<br/>
-    CoreImage</p>
-
-<p>GPU是一个专门为图形并发计算而量身定做的处理单元。<br/>
-CoreAnimation使用CoreGraphics来做渲染。CoreGraphics在CPU里进行运算出数据，形成位图包装成纹理交给OpenGl进行操作GPU进行渲染。</p>
-
-<h3 id="toc_5">2.1 工作大致流程</h3>
-
-<p>GPU需要将每一个frame的纹理合成在一起。每一个纹理会占用VRAM，<br/>
-CPU开始程序时，会让CPU从bundle加载一张PNG的图片并且<strong>解压</strong>它，这所有的事情都在CPU上。在显示文本时，会促进CoreText和CoreGrapic生成一个位图(coreText排版器最终也是要绘制到图片上下文)，一旦准备好，它将会被作为一个纹理上传到GPU并显示出来。但滚动或者在屏幕上移动文本时，不管怎样，同样的纹理会能够复用，CPU只需要简单告诉GPU新的位置就可以，所有GPU可以重用存在的纹理，CPU并不需要重新渲染文本，并且位图也不需要重新上传到GPU。</p>
-
-<h2 id="toc_6">三. 纹理合成</h2>
-
-<p>在简化的理解中，纹理相当于CoreAnimatio里的CALayer，纹理可以有位图内容，其实CALayer也是有位图内容的，对于每一个纹理，所有的纹理都以某种方式叠加在彼此的顶部。当两个纹理覆盖在一起时候，GPU要为所有像素做合成操作。</p>
-
-<ul>
-<li><p>不透明的合成<br/>
-在不透明时，即opaque=yes时，不用合成，直接取上面的纹理。这样就减少了合成的时间。（这也就是为什么在做性能优化时，减少层次关系，减少不必要的透明）</p></li>
-<li><p>mask合成<br/>
-一个图层可以有一个和它相关联的 mask(蒙板)，mask 是一个拥有 alpha 值的位图，当像素要和它下面包含的像素合并之前都会把 mask 应用到图层的像素上去。当你要设置一个图层的圆角半径时，你可以有效的在图层上面设置一个 mask。但是也可以指定任意一个蒙板。比如，一个字母 A 形状的 mask。最终只有在 mask 中显示出来的(即图层中的部分)才会被渲染出来。<br/>
-所谓的mask就是一mask的不透明区域，显示本身的内容。实际上mask也是一种合成。</p></li>
-</ul>
-
-<h3 id="toc_7">3.1 离屏渲染</h3>
-
-<ul>
-<li><p>帧缓冲区<br/>
-屏幕缓存区，在屏幕上</p></li>
-<li><p>屏幕外缓冲区<br/>
-屏幕外缓冲区</p></li>
-<li><p>哪些情况会默认会强制进行离屏渲染?<br/>
-CoreAnimation为了应用mask会强制进行屏幕外渲染。<br/>
-CoreAnimation设置圆角半径会进行屏幕外渲染<br/>
-CoreAnimation设置阴影也会出现屏幕外渲染<br/>
-设置层为光栅化layer.shouldRasterize = yes<br/>
-(特别说明下，rasterize是图层的光栅化，会造成离屏渲染)</p></li>
-<li><p>离屏渲染的性能取舍？<br/>
-一般情况下需要避免离屏渲染，因为这是很大的消耗。直接将图层合成到帧的缓冲区（屏幕上）比先创建屏幕外缓冲区，然后将屏幕外缓冲区内容般到帧缓冲区要廉价很多。但有时候需要渲染树很复杂，可以强制离屏渲染那些图层，这样就可以缓存合成的结果。性能就会有所提升。（当使用离屏渲染时，GPU第一次会混合所有图层到一个基于新的纹理的位图缓存上，然后使用这个纹理来绘制到屏幕上）。当对这个纹理进行移动，变形等操作时，可以使用这个位图缓存。这样这部分的合成将减少很多工作。其实这就是做动画的流畅的原因。所以要不要离屏渲染，要看有取舍,一般对于静态的不经常变更的可以使用离屏，增加缓存。对于经常变更的就最好不要使用离屏。这样会增加建立屏幕外缓冲区的时间，以及屏幕内与屏幕外的切换时间。</p></li>
-</ul>
-
-<h3 id="toc_8">3.2离屏渲染检测</h3>
-
-<p>Instrument的CoreAnimationg工具，Color Offscreen-Rendered Yellow，是检测离屏渲染。Color Hits Green and Misses Red 选项，绿色代表无论何时一个屏幕外缓冲区被复用，而红色代表当缓冲区被重新创建。</p>
-
-<h2 id="toc_9">四. CoreAnimation与CoreGraphics与OpenGLES</h2>
-
-<p>CoreAnimation利用CoreGraphics绘制，CoreGraphics利用OpenGLES实现绘制。。</p>
-
-<p>OpenGLES做的就是将纹理合并，做些另外的操作，比如mask，阴影等。OpenGLES对这些有层次关系的纹理进行合成，而这些具体的操作是通过GPU来实现的（也就是通过OpenGLES来操作GPU,OpenGLES只是编程接口）。</p>
-
-<p>CoreAnimation重要的任务是判断出哪些图层需要被重新绘制，绘制完成后会有生成bitmap,CoreAnimion里的图层有backsore，就是一这个bitmap;这个bitmap可以是读取的图片数据，也可以是利用CoreGrapics绘制的。无论是给的图片还是自己通过CrorCrapics绘制的最终，提交把这个位图数据交个生成的纹理（这个纹理与这个Layer相对应）。</p>
-
-<h2 id="toc_10">五. CPU瓶颈与GPU瓶颈优化</h2>
-
-<p>要在1/60里完成渲染工作，CPU与GPU的总时间不能操作这个时间。否则就会出现掉帧。<br/>
-在出现性能瓶颈时, 我们采用Instrument里的，OpenGL ES Driver instrument 进行查看。</p>
-
-<h2 id="toc_11">六. CoreGraphics</h2>
-
-<p>CPU实现的是位图绘制，这个绘制过程是用CoreGraphics完成的，也就是通过CPU进行计算而来。我们自己画的线条，长方形，通过CPU计算，最终将数据形成与CGContext里。<br/>
-当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用CGContextRef 绘制</p>
-
-<ul>
-<li><p>UIKit 版本的代码为何不传入一个上下文参数到方法中？<br/>
-这是因为当使用 UIKit 或者 AppKit 时，上下文是唯一的。UIkit 维护着一个上下文堆栈，UIKit 方法总是绘制到最顶层的上下文中。UIGraphicsGetCurrentContext() 来得到最顶层的上下文。你可以使用 UIGraphicsPushContext() 和 UIGraphicsPopContext() 在 UIKit 的堆栈中推进或取出上下文。</p></li>
-<li><p>自己创建一个位图上下文<br/>
-自己创建的CGContext，那么绘制的数据在这个自己创建的CGContext里，可以用这个CGGcontext形成位图或者图片。(这里可以自己绘制然后生成图片，也可以实现异步绘制，哈哈)</p></li>
-</ul>
-
-<h3 id="toc_12">6.1 drawRect原理</h3>
-
-<p>当你调用 -setNeedsDisplay，UIKit 将会在这个视图的图层上调用 -setNeedsDisplay。这为图层设置了一个标识，标记为 dirty，但还显示原来的内容。它实际上没做任何工作，所以多次调用 -setNeedsDisplay并不会造成性能损失。<strong>当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用 CGContextRef 绘制</strong>。<br/>
-当你使用 UIKit 的绘制方法，例如: UIRectFill() 或者 -[UIBezierPath fill] 代替你的 -drawRect: 方法，他们将会使用这个上下文。使用方法是，UIKit 将后备存储的 CGContextRef 推进他的 graphics context stack，也就是说，它会将那个上下文设置为当前的。因此 UIGraphicsGetCurrent() 将会返回那个对应的上下文。既然 UIKit 使用 UIGraphicsGetCurrent() 绘制方法，绘图将会进入到图层的后备存储。如果你想直接使用 Core Graphics 方法，你可以自己调用 UIGraphicsGetCurrent() 得到相同的上下文，并且将这个上下文传给 Core Graphics 方法。</p>
-
-<p>总结下：检测是否需要重绘，需要重绘，若果实现了drawRect就会生成一个相应大小的后备存储。然后调用drawRect里的代码进行绘制。将数据写入上下文，幷形成新的后备存储。幷将新的后备存储交给GPU渲染。（这里如果不需要绘制，就不要重写drawRect方法了，这样就不会生成后没有必要的备存储对象了，以免造成性能的浪费），幷切每次出现重绘时，都会执行drawRect方法。造成时间和内存浪费。可以采用自己创建位图上下文，生成图片后，赋值给视图。这样可以避免不断绘制。</p>
-
-<h3 id="toc_13">6.2 异步绘制</h3>
-
-<p>将一些耗时的工作，避过图片的获取，图片的解码等工作放到子线程中去做，形成图片后，在放到主线程里将图片放进去。<br/>
-<code><br/>
-UIImageView *view; // assume we have this<br/>
-NSOperationQueue *renderQueue; // assume we have this<br/>
-CGSize size = view.bounds.size;<br/>
-[renderQueue addOperationWithBlock:^(){<br/>
-        UIImage *image = [renderer renderInImageOfSize:size];<br/>
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^(){<br/>
-            view.image = image;<br/>
-        }];<br/>
-}];<br/>
-</code></p>
-
-<h3 id="toc_14">6.3 图片解码</h3>
-
-<p>你需要知道在 GPU 内，一个 CALayer 在某种方式上和一个纹理类似。图层有一个后备存储，这便是被用来绘制到屏幕上的位图。<br/>
-在给CALayer设置图片时，CoreAnimation会将其查看这个图片时否已经解码，没解码的化话进行解码(这里就是一个优化点，可以将解码的工作全部放到子线程里进行，哈哈)。<br/>
-imageNamed:从 bundle 里加载会立马解压。一般的情况是在赋值给 UIImageView 的 image 或者 layer 的 contents 或者画到一个 core graphic context 里才会解压。</p>
-
-<h3 id="toc_15">6.4 可变尺寸的图片</h3>
-
-<p>使用较小的图片好处<br/>
-解码快<br/>
-占用内存小</p>
-
-<h2 id="toc_16">七. 完整的绘制与动画流程</h2>
-
-<h3 id="toc_17">动画在APP内部的4个阶段</h3>
-
-<ol>
-<li><p>布局：<br/>
-在这个阶段，程序设置 View/Layer 的层级信息，设置 layer 的属性，如 frame，background color 等等。</p></li>
-<li><p>创建 backing image：在这个阶段程序会创建 layer 的 backing image，无论是通过 setContents 将一个 image 传給 layer，还是通过 drawRect：或 drawLayer:inContext：来画出来的。所以 drawRect：等函数是在这个阶段被调用的。</p></li>
-<li><p>准备：在这个阶段，Core Animation 框架准备要渲染的 layer 的各种属性数据，以及要做的动画的参数，准备传递給 render server。同时在这个阶段也会解压要渲染的 image。（除了用 imageNamed：方法从 bundle 加载的 image 会立刻解压之外，其他的比如直接从硬盘读入，或者从网络上下载的 image 不会立刻解压，只有在真正要渲染的时候才会解压）。</p></li>
-<li><p>提交：在这个阶段，Core Animation 打包 layer 的信息以及需要做的动画的参数，通过 IPC（inter-Process Communication）传递給 render server。</p></li>
-</ol>
-
-<h3 id="toc_18">动画在APP外部的2个阶段</h3>
-
-<p>当这些数据到达 render server 后，会被反序列化成 render tree。然后 render server 会做下面的两件事：</p>
-
-<ul>
-<li><p>根据 layer 的各种属性（如果是动画的，会计算动画 layer 的属性的中间值），用 OpenGL 准备渲染。</p></li>
-<li><p>渲染这些可视的 layer 到屏幕。</p></li>
-</ul>
-
-<p>如果做动画的话，最后的两个步骤会一直重复知道动画结束。</p>
-
-<h2 id="toc_19">八. 渲染性能优化的总结</h2>
-
-<ul>
-<li><p>隐藏的绘制<br/>
-UILabel将text画入backing image。也就是将文字搞成相对应的图片（文字最终都会是图片）。如果改了一个包含 text 的 view 的 frame 的话，text 会被重新绘制。</p></li>
-<li><p>Rasterize<br/>
-当使用layer的shouldRasterize的时候，layer会被强制绘制到一个offscreen image上，并且会被缓存起来。这种方法可以在比较复杂的不会变化的图层上。</p></li>
-<li><p>离屏绘制<br/>
-使用 Rounded corner， layer masks， drop shadows 的效果可以使用 stretchable images。比如实现 rounded corner，可以<strong>将一个圆形的图片赋值于 layer 的 content 的属性</strong>。并且设置好 contentsCenter 和 contentScale 属性。</p></li>
-<li><p>Blending<br/>
-如果一个 layer 被另一个 layer 完全遮盖，GPU 会做优化不渲染被遮盖的 layer，但是计算一个 layer 是否被另一个 layer 完全遮盖是很耗 cpu 的。将几个半透明的 layer 的 color 融合在一起也是很消耗的。</p></li>
-<li><p>opaque<br/>
-减少透明，减少合成时间</p></li>
-<li><p>drawRect<br/>
-没有必要不要在drawRect里实现。可以采用异步绘制。</p></li>
-<li><p>图片解码<br/>
-图片解码可以异步进行，不要在设置图片的时候解码</p></li>
-</ul>
-
-
-		</div>
-
-		
-
-	</article>
- 
-	<article>
-		 <header>
-		  	<h1 class="entry-title"><a href="15361293454277.html">利用Cocoapods构建自己的私有与公有库</a></h1>
-			<p class="meta"><time datetime="2018-09-05T14:35:45+08:00" 
-			pubdate data-updated="true">2018/9/5</time></p>
-		 </header>
-	  	<div class="entry-content">
-		  	
-		  	<h2 id="toc_0">一：Spec文件</h2>
-
-<p>在我们第一次安装pods时，都会主动的去拉取公有的repo,其实无论是共有的还是私有的下载后都在用户的/Users/用户名/.cocoapods/repos 目录下。每一个第三库都有一个spec文件，或者你自己的私有库也应该有这个spec文件。这些spec文件就在相应的repo里。<br/>
-我将我自己创建一个私有库的spec文件贴出来</p>
-
-<pre><code>#
-# Be sure to run `pod lib lint KBRCategory.podspec&#39; to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
-Pod::Spec.new do |s|
-  s.name             = &#39;KBRCategory&#39;
-  s.version          = &#39;0.1.2&#39;
-  s.summary          = &#39;KBRCategory.&#39;
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don&#39;t worry about the indent, CocoaPods strips it!
-
-  s.description      = &quot;a description KBRCategory&quot;
-
-  s.homepage         = &#39;https://gitee.com/BlueLegend&#39;
-  # s.screenshots     = &#39;www.example.com/screenshots_1&#39;, &#39;www.example.com/screenshots_2&#39;
-  s.license          = { :type =&gt; &#39;MIT&#39;, :file =&gt; &#39;LICENSE&#39; }
-  s.author           = { &#39;raojb@knowbox.cn&#39; =&gt; &#39;raojb@knowbox.cn&#39; }
-  s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;, :tag =&gt; s.version.to_s }
-  #这里改成了不以tag版本来拉取，以最新的commit
-    # s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;}
-  # s.social_media_url = &#39;https://twitter.com/&lt;TWITTER_USERNAME&gt;&#39;
-
-  s.ios.deployment_target = &#39;8.0&#39;
-
-  s.source_files = &#39;KBRCategory/Classes/**/*&#39;
-  
-  # s.resource_bundles = {
-  #   &#39;KBRCategory&#39; =&gt; [&#39;KBRCategory/Assets/*.png&#39;]
-  # }
-
-  # s.public_header_files = &#39;Pod/Classes/**/*.h&#39;
-  # s.frameworks = &#39;UIKit&#39;, &#39;MapKit&#39;
-  s.dependency &#39;AFNetworking&#39;
-end
-
-</code></pre>
-
-<p>里面无非就是你要提交到Cocoapods上的名字、版本号，简介、主页、License、作者信息、最低平台信息、从哪个Git上下载、需要引入的framework、那些文件需要被引入，那些文件是资源文件以及是否需要ARC的模式。</p>
-
-<ul>
-<li><p>license<br/>
-用MIT就可以了，一定要正确填写不然在验证的时候验证通过</p></li>
-<li><p>source<br/>
-是库的地址</p></li>
-<li><p>s.source_files <br/>
-是要将哪些文件放入进去</p></li>
-<li><p>s.subspec 添加子模块<br/>
-其实可以添加子模块，所谓的子模块，就是在pods出来后有子文件夹</p></li>
-</ul>
-
-<pre><code>s.subspec &#39;Security&#39; do |ss|  
-  ss.source_files = &#39;AFNetworking/AFSecurityPolicy.{h,m}&#39;
-  ss.public_header_files = &#39;AFNetworking/AFSecurityPolicy.h&#39;
-  ss.frameworks = &#39;Security&#39;
-end  
-</code></pre>
-
-<h2 id="toc_1">二：创建公有库</h2>
-
-<ul>
-<li>向Cocoapods方面注册一个账号
-这个命令会收到一份邮件，让你进行会话授权。具体机制没有研究过，当你切换电脑时，需要重新进行会话授权
-<code>pod trunk register raojb@knowbox.cn &#39;rjb&#39; --description=&#39;My own computer&#39;</code></li>
-</ul>
-
-<ul>
-<li><p>创建spec文件<br/>
-<code>pod spec create &#39;KBCategory&#39;</code><br/>
-在写好代码后，在你项目的根目录下运行，会在该项目目录下生成一个spec文件。修改这个spec文件的里的相关信息。<br/>
-如果是项目已经建立好了，需要创建时，可以在根目录下执行<br/>
-<code>pod spec create &#39;KBCategory&#39;</code>也会生成一个spec文件</p></li>
-<li><p>验证Podspec文件<br/>
-<code>pod lib lint Name.podspec</code><br/>
-这一步是最坑人的地方。会有各种让你通不过的理由。比如，找不到文件，找不到Lience等。<br/>
-我遇到了，spec文件与s.source_files文件路径设置的不一致问题。<br/>
-开源协议文件也要生成。路径也要设置正确。</p>
-
-<pre><code>    - ERROR | [iOS] xcodebuild: Returned an unsuccessful exit code.
-</code></pre>
-
-<p>遇到这样的错误，是编译没有通过的情况。如果自己在工程里编译通过，看是不是依赖库没有设置正确。别忘了依赖系统库也要填写。总之基本没有一次性验证通过的，具体问题具体查吧。</p>
-
-<p>例如 <br/>
-<code>s.framework  = &quot;UIKit&quot;</code> <br/>
-最终你出现<code>passed validation</code>就表示验证通过。验证通过表示，你给定的环境，单独编译这部分你提供的目录下的代码能自行编译通过。</p></li>
-<li><p>上传<br/>
-可上传项目到Cocoapods官方的仓库里。<br/>
-pod trunk push 项目名.podspec<br/><br/>
-上传成功后，可以在命令行里pod search &quot;库名字&quot;,若果没有应该是有缓存，删除这个文件<br/>
-<code>~/Library/Caches/CocoaPods/search_index.json</code><br/>
-重新pod search就可以了。</p></li>
-</ul>
-
-<h2 id="toc_2">三：创建私有库</h2>
-
-<p>其实创建私有库的核心过程还是跟公有库是差不多的。不管是私有库还是公有库，关注点都在于Podspec文件的书写。<strong>其实我们讲到pod trunk push 项目名.podspec这条命令，其实是默认我们的Podspec文件提交到Cocoapod的仓库(Specs),然后我们之后的pod install或者pod update都是从这个仓库中提取Podspec文件，然后根据文件里面的信息去取对应的源代码。大家可以上去找找自己的开源的Podespec文件转换成json的文件</strong>。</p>
-
-<ul>
-<li><p>建立自己的私有仓库<br/>
-<code>pod repo add &#39;仓库名&#39; &#39;仓库地址&#39;</code>建立好后，可以在你的cd <code>~/.cocoapods/repos</code>目录下查看，是否有你的私有仓库。</p></li>
-<li><p>写代码-&gt;写Podspec文件了-&gt;检查项目和Podspec文件-&gt;打tag<br/>
-这些工作与创建公有库一样</p></li>
-<li><p>提交podspec文件到仓库<br/>
-公有库是pod trunk push 项目名.podspec<br/>
-私有库是pod repo push &#39;私有仓库名&#39; 项目名.podspec<br/>
-其实就都是讲podspec文件提交到相应的仓库里</p></li>
-</ul>
-
-<p>特别说明</p>
-
-<h2 id="toc_3">四：使用私有库</h2>
-
-<p>使用公有库与使用私有库的方式一样。都是在podfile文件里有一个source。这个source就是标识所要使用的源(spec文件仓库)。</p>
-
-<pre><code>#公用的私有远程索引库源
-source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;
-#github远程索引库源
-source &#39;https://github.com/CocoaPods/Specs.git&#39;
-platform :ios, &#39;8.0&#39;
-
-target ‘testdown’ do
-    #pod &#39;lottie-ios&#39;
-    pod &#39;Masonry&#39;
-    pod &#39;SDWebImage&#39;, &#39;~&gt; 4.3.0&#39;
-    pod &#39;YYModel&#39;, &#39;~&gt; 1.0.4&#39;
-    pod &#39;MJRefresh&#39;, &#39;~&gt; 3.1.15.3&#39;
-    pod &#39;KBRCategory&#39;
-end
-</code></pre>
-
-
-		</div>
-
-		
-
-	</article>
- 
-	<article>
-		 <header>
 		  	<h1 class="entry-title"><a href="15360720067630.html">Cocoapods入门</a></h1>
 			<p class="meta"><time datetime="2018-09-04T22:40:06+08:00" 
 			pubdate data-updated="true">2018/9/4</time></p>
@@ -1912,6 +1552,176 @@ NSURLRequest encapsulates two basic data elements of a load request: the URL to 
 		
 
 	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15349990744771.html">我从SDWebImage学到点什么</a></h1>
+			<p class="meta"><time datetime="2018-08-23T12:37:54+08:00" 
+			pubdate data-updated="true">2018/8/23</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>本篇文章主要是总结，我从读SDWebImage源码里学到了什么?<br/>
+本来想写个长篇大论一句句解释的。但需要的时间太长。因为是开源项目，不是基本的需要深入理解的东西。都是平时使用的知识点的一个汇集。感觉还是没必要细说了。</p>
+
+<h2 id="toc_0">Category</h2>
+
+<p>UIImageView的分类的API设计时，其他的方法都是基于这个<strong>全参数函数</strong>来设计。也就是真正的核心函数就是这一个。其他的对外扩展的函数都是调用这个函数来实现的。注意此处的API设计都采用添加了添加前缀。（这就是一种很好的设计方法）</p>
+
+<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock {
+</code></pre>
+
+<p>在对系统的某个框架里的内容做扩展时，就可以采取这种方法。用分类的方法，调用自己的核心逻辑类。</p>
+
+<h2 id="toc_1">SDWebImageManager</h2>
+
+<p>SDWebImageManager是一个门面类。利用SDWebImageCache与SDWebImageDowloader实现图片的下载与缓存的逻辑。</p>
+
+<ul>
+<li>难点</li>
+</ul>
+
+<p>这里的难点在取图片与下载图片时需要满足能取消操作。比如正在下载图片，用户取消了这个图片的下载。这时我需要知道当前所处的阶段（时正在从缓存区呢，还是正在下载呢）。<br/>
+SDWebImageManager对这种情况采用了operation的操作。将取图，下载搞成两种操作。因为操作是可以取消的。（哈哈，这就是用operation的好处）</p>
+
+<h2 id="toc_2">SDWebImageCache</h2>
+
+<p>SDWebImageCache有内存缓存与磁盘缓存，幷专门针对SDWebImage给定一个命名空间（我觉得给命名空间是一个很好的设计）。</p>
+
+<ul>
+<li><p>内存缓存<br/>
+NSCache</p></li>
+<li><p>磁盘缓存<br/>
+直接是文件存储</p></li>
+<li><p>清除缓存策略<br/>
+每种缓存都有过期时间，条目数目限制，总占用空间大小。当进入后台或者收到清除缓存通知时。首先排序最后修改日期，然后清除过期文件。在查看是否超过了总占用空间，占用了就冲排序好的最后面删除以半。如此反复。</p></li>
+<li><p>缓存里的多线程<br/>
+其实只有缓存到磁盘时会对目录做操作。</p></li>
+</ul>
+
+<p>综上所述 缓存其实就是内存缓存如何做，磁盘缓存如何做，还要缓存策略如何设计。</p>
+
+<h2 id="toc_3">SDWebImageDownloader</h2>
+
+<p>整个SDWebImageDownloader就是下面这个函数的实现。</p>
+
+<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url
+                                         options:(SDWebImageDownloaderOptions)options
+                                        progress:(SDWebImageDownloaderProgressBlock)progressBlock
+                                       completed:(SDWebImageDownloaderCompletedBlock)completedBlock;
+</code></pre>
+
+<p>难点</p>
+
+<ul>
+<li><p>取消<br/>
+下载需要支持取消，具有这种可以取消的特性的操作，就用operation来是实现是最完美不过的了。从而在整个dowloader里管理这些operation。</p></li>
+<li><p>同一url的一次下载<br/>
+为了防止同一url下载多次。在downloader里保存了urlCallBacks，通过下载玩后，在urlCallBacks里遍历取出相对应的url的callBacks来执行回调。如果不这样处理。虽然能正常执行，但同url的下载会执行多次。</p></li>
+<li><p>下载operation<br/>
+SDWebImageDownloaderOperation这个主要管理单个下载的过程。利用NSURLSession进行数据的处理。实现operation的协议，比如executing，finished等，以辅助operation的可操作性。</p></li>
+</ul>
+
+<h2 id="toc_4">SDWebImageDecoder</h2>
+
+<p>下载的图片通常不是位图，在加载显示前都会解码。这里SDWebImage进行了提前解码的工作。幷没有自己写算法进行解码。而是将苹果的解码提前了。或者放在了一个子线程里执行。(其实就时将图片绘制，然后取出位图，是不是很巧妙)</p>
+
+<pre><code>  CGContextRef context = CGBitmapContextCreate(NULL,
+                                                     width,
+                                                     height,
+                                                     bitsPerComponent,
+                                                     bytesPerRow,
+                                                     colorspaceRef,
+                                                     kCGBitmapByteOrderDefault|kCGImageAlphaNoneSkipLast);
+        
+        // Draw the image into the context and retrieve the new bitmap image without alpha
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+        CGImageRef imageRefWithoutAlpha = CGBitmapContextCreateImage(context);
+        UIImage *imageWithoutAlpha = [UIImage imageWithCGImage:imageRefWithoutAlpha
+                                                         scale:image.scale
+                                                   orientation:image.imageOrientation];
+</code></pre>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15349190375007.html">HTTP/HTTPS协议</a></h1>
+			<p class="meta"><time datetime="2018-08-22T14:23:57+08:00" 
+			pubdate data-updated="true">2018/8/22</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<h2 id="toc_0">URL编码</h2>
+
+<p>为什么需要进行url编码？<br/>
+Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符。Url中只允许使用可打印字符。<br/>
+还有一些保留字符，比如url划分成若干组件的分隔符。<br/>
+url编码被称为百分号编码。%字符的十六进制表示。</p>
+
+<h2 id="toc_1">HTTP的实体类型</h2>
+
+<p>在HTTP协议的GET请求的参数内容直接拼接在url后面(这些个工作可以自己做，也可以通过第三方比如iOS的AFNetworking就为我们做了这个工作，哈哈，我们用AFNet只需给个字，详情可以参见AFURLRequestSerialization)。</p>
+
+<p>在HTTP协议的POST请求的参数放在请求体里。那么请求体力到底是些什么内容？<br/>
+常见的post提交数据类型有四种：</p>
+
+<p>1.第一种：application/json：这是最常见的json格式如下<br/>
+{&quot;input1&quot;:&quot;xxx&quot;,&quot;input2&quot;:&quot;ooo&quot;,&quot;remember&quot;:false}</p>
+
+<p>2.第二种：application/x-www-form-urlencoded：浏览器的原生 form 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数<br/>
+input1=xxx&amp;input2=ooo&amp;remember=false</p>
+
+<p>3.第三种：multipart/form-data:这一种是表单格式的，数据类型如下</p>
+
+<p>------WebKitFormBoundaryrGKCBY7qhFd3TrwAContent-Disposition: form-data; name=&quot;text&quot;<br/>
+title------WebKitFormBoundaryrGKCBY7qhFd3TrwAContent-Disposition:form-data;name=&quot;file&quot;;filename=&quot;chrome.png&quot;Content-Type: image/pngPNG ... content of chrome.png ...<br/>
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</p>
+
+<p>4.第四种：text/xml:这种直接传的xml格式</p>
+
+<p>AFNetworking这部分搞的很复杂</p>
+
+<h2 id="toc_2">HTTP在断点下载，断点续传的应用</h2>
+
+<h2 id="toc_3">HTTP里的Cookie与Session</h2>
+
+<ul>
+<li><p>Cookie<br/>
+用于在客户端记录用户的的数据。因为http是一种无状态协议。且工作都是在一次性中完成。有时为了方便记录数据。会将一些数据存在cookie里。比如用户的登陆状态信息，。（若果）</p></li>
+<li><p>Session<br/>
+session就是一种保存上下文信息的机制，它是针对每一个用户的，变量的值保存在服务器端，通过SessionID来区分不同的客户。默认传给客户端用cookie存储，在在每次请求是传给服务端，服务端根据这个Session找出当前用户的状态信息</p></li>
+</ul>
+
+<h2 id="toc_4">HTTP,TCP,IP协议层关系</h2>
+
+<h2 id="toc_5">HTTPS如何做到安全传输的</h2>
+
+<ol>
+<li>服务器把自己的公钥传给证书机构</li>
+<li>证书机构用自己的私有秘钥把服务器的公钥进行数字签名（标识这是数字机构的签名）</li>
+<li>证书机构的公开秘钥已经事先植入在浏览器里了</li>
+<li>客户端在向服务器请求时，会拿到经过证书机构签名的证书（这个证书里包含服务器的公钥）</li>
+<li>客户端收到这个证书会取出浏览器里的机构公钥对其进行验证（整个的信任机构就是对机构的信任了）</li>
+<li>如果是该证书机构颁发的，就取出公钥。这个公钥就时服务端公钥</li>
+<li>使用公钥对数据加密协商对称加密方法。。。</li>
+</ol>
+
+<p>采用证书机构的原因是防止第三方任攻击。防止伪装。</p>
+
+<h2 id="toc_6">HTTP的性能优化（可不搞）</h2>
+
+
+		</div>
+
+		
+
+	</article>
   
 	<div class="pagination">
 	 <a class="prev" href="all_6.html">&larr; Older</a> 
@@ -1934,10 +1744,10 @@ NSURLRequest encapsulates two basic data elements of a load request: the URL to 
 	      </li>
 	  
 	      <li class="post">
-	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(10)</strong></a>
+	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(8)</strong></a>
 	         <p class="cat-children-p"> 
 	        
-	        	<a href="%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0.html">投资笔记&nbsp;(9)</a>&nbsp;&nbsp;
+	        	<a href="%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0.html">投资笔记&nbsp;(7)</a>&nbsp;&nbsp;
 	        
 	         </p> 
 	      </li>
