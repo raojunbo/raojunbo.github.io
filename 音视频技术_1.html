@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  北哥传奇
+  音视频技术 - 北哥传奇
   
   </title>
  <meta name="description" content="">
@@ -152,43 +152,70 @@
 
 	
 		<div class="markdown-body">
-		<h1>这是一个读书笔记</h1>
+		<h1>[TOC]</h1>
 
-		<p>在《朝花夕拾》这本书中，鲁迅先生笔下的日本老师“藤野先生”，既是良师，亦是益友。作为一位异乡人，鲁迅先生身在他乡留学，受到了不少日本学生的欺辱，而此时出现的老师——藤野先生，给了鲁迅先生莫大的鼓励和勇气。</p>
+		<p>参考博客<a href="https://blog.csdn.net/leixiaohua1020/article/details/18893769">视音频编解码技术零基础学习方法</a></p>
 
-<p>人生的旅途上遇到一位良师是多么的不易啊！</p>
+<h2 id="toc_0">数字音频</h2>
 
-<p>藤野先生冲破了国界，他没有为难、歧视来自清国的留学生鲁迅，而是在百般忙碌之中抽出时间去修改鲁迅先生所抄的讲义，圈圈改改之中，是一位老师对异国留学生的浓浓师生情。</p>
+<h3 id="toc_1">音频表示</h3>
+
+<p>音频的裸数据格式就是脉冲编码调制PCM数据。<br/>
+PCM数据数字化：位深度，采样率，声道数。</p>
+
+<h3 id="toc_2">音频编码</h3>
+
+<p>wav:wav就是在pcm数据外面加上一层头<br/>
+mp3:压缩比较高<br/>
+aac:文件更小，质量更高</p>
+
+<h2 id="toc_3">数字视频</h2>
+
+<h3 id="toc_4">封装格式</h3>
+
+<p>AVI<br/>
+FLV <br/>
+MP4<br/>
+MOV<br/>
+WMV<br/>
+MKV<br/>
+RMVB<br/>
+就是把视频数据和音频数据打包成一个文件的规范</p>
+
+<h3 id="toc_5">视频编码</h3>
+
+<p>MPEG<br/>
+H.264</p>
+
+<ul>
+<li>IPB帧</li>
+</ul>
+
+<p>I帧，帧内编码<br/>
+p帧，前向预测编码<br/>
+B帧，双向预测内插编码帧</p>
+
+<blockquote>
+<p>这个地方不太理解。fdsatsa</p>
+</blockquote>
+
+<ul>
+<li>DTS与PTS</li>
+</ul>
+
+<h3 id="toc_6">视频像素数据表示</h3>
+
+<p>YUV<br/>
+RGB</p>
+
+<h2 id="toc_7">FFmepg命令</h2>
+
+<p>ffmpeg视频转码<br/>
+mp4-&gt;mov,mov-&gt;mp4,wmv-&gt;mp4<br/>
+命令格式 ffmpeg -i {指定输入文件路径} -b:v {输出文件路径}</p>
 
 
 		</div>
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
 	
 
   

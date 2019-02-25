@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[北哥传奇]]></title>
+  <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
+  <link href="https://raojunbo.github.io/"/>
+  <updated>2019-02-28T05:20:49+08:00</updated>
+  <id>https://raojunbo.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im">MWeb</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[这是一个读书笔记]]></title>
+    <link href="https://raojunbo.github.io/15511076195140.html"/>
+    <updated>2019-02-25T23:13:39+08:00</updated>
+    <id>https://raojunbo.github.io/15511076195140.html</id>
+    <content type="html"><![CDATA[
+<p>在《朝花夕拾》这本书中，鲁迅先生笔下的日本老师“藤野先生”，既是良师，亦是益友。作为一位异乡人，鲁迅先生身在他乡留学，受到了不少日本学生的欺辱，而此时出现的老师——藤野先生，给了鲁迅先生莫大的鼓励和勇气。</p>
+
+<p>人生的旅途上遇到一位良师是多么的不易啊！</p>
+
+<p>藤野先生冲破了国界，他没有为难、歧视来自清国的留学生鲁迅，而是在百般忙碌之中抽出时间去修改鲁迅先生所抄的讲义，圈圈改改之中，是一位老师对异国留学生的浓浓师生情。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[基础实践系列之实现解码功能]]></title>
+    <link href="https://raojunbo.github.io/15429468991101.html"/>
+    <updated>2018-11-23T12:21:39+08:00</updated>
+    <id>https://raojunbo.github.io/15429468991101.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[基础实践系列之编译成iOS可用的.a静态库]]></title>
+    <link href="https://raojunbo.github.io/15429406911904.html"/>
+    <updated>2018-11-23T10:38:11+08:00</updated>
+    <id>https://raojunbo.github.io/15429406911904.html</id>
+    <content type="html"><![CDATA[
+<p>比较完整的iOS编译脚本，可以一条命令执行<br/>
+<a href="https://github.com/kewlbear/FFmpeg-iOS-build-script">https://github.com/kewlbear/FFmpeg-iOS-build-script</a> </p>
+
+<p>下面来分解这条脚本的执行过程</p>
+
+<ol>
+<li><p>下载FFmpeg<br/>
+<a href="http://ffmpeg.org/download.html">http://ffmpeg.org/download.html</a></p></li>
+<li><p>编写编译脚本<br/>
+主要是设置编译的参数，如下面的ffmpeg-build.sh。这个文件主要是配置编译到iOS设备的一些参数</p></li>
+<li><p>下载gas-preprocessor.pl<br/>
+编译库需要的支持，将其拷贝到/usr/local/bin目录下<br/>
+<a href="https://github.com/mansr/gas-preprocessor">https://github.com/mansr/gas-preprocessor</a>  下载 perl 支持库</p></li>
+<li><p>执行编译脚本<br/>
+下载FFmpeg后的目录名是ffmpeg。在脚本文件里指定下载的文件目录名。./ffmpeg-build.sh执行完后就会在my-ffmpeg-iOS目录下生成相应的架构的.a库</p></li>
+</ol>
+
+<p>ffmpeg-build.sh   文件内容如下<br/>
+（这个文件直接可以拿过去使用）</p>
+
+<pre><code>#!/bin/bash
+
+#1、首先：定义下载的库名称
+source=&quot;ffmpeg&quot;
+
+#2、其次：定义&quot;.h/.m/.c&quot;文件编译的结果目录
+#目录作用：用于保存.h/.m/.c文件编译后的结果.o文件
+cache=&quot;cache&quot;
+
+#3、定义&quot;.a&quot;静态库保存目录
+#pwd命令：表示获取当前目录
+staticdir=`pwd`/&quot;my-ffmpeg-iOS&quot;
+
+#4、添加FFmpeg配置选项-&gt;默认配置
+#Toolchain options:工具链选项（指定我么需要编译平台CPU架构类型，例如：arm64、x86等等…）
+#--enable-cross-compile: 交叉编译
+#Developer options:开发者选项
+#--disable-debug: 禁止使用调试模式
+#Program options选项
+#--disable-programs:禁用程序(不允许建立命令行程序)
+#Documentation options：文档选项
+#--disable-doc：不需要编译文档
+#Toolchain options：工具链选项
+#--enable-pic：允许建立与位置无关代码
+configure_flags=&quot;--enable-cross-compile --disable-debug --disable-programs --disable-doc --enable-pic&quot;
+
+#5、定义默认CPU平台架构类型
+#arm64 armv7-&gt;真机-&gt;CPU架构类型
+#x86_64 i386-&gt;模拟器-&gt;CPU架构类型
+archs=&quot;arm64 armv7 x86_64 i386&quot;
+
+#6、指定我们的这个库编译系统版本-&gt;iOS系统下的7.0以及以上版本使用这个静态库
+targetversion=&quot;8.0&quot;
+
+#7、接受命令后输入参数
+#我是动态接受命令行输入CPU平台架构类型(输入参数：编译指定的CPU库)
+if [ &quot;$*&quot; ]
+then
+    #存在输入参数，也就说：外部指定需要编译CPU架构类型
+    archs=&quot;$*&quot;
+fi
+
+#8、安装汇编器-&gt;yasm
+#判断一下是否存在这个汇编器
+#目的：通过软件管理器(Homebrew)，然后下载安装（或者更新）我的汇编器
+#一个命令就能够帮助我们完成所有的操作
+#错误一：`which` yasm
+#正确一：`which yasm`
+if [ ! `which yasm`  ]
+then
+    #Homebrew:软件管理器
+    #下载一个软件管理器:安装、卸载、更新、搜索等等...
+    #错误二：`which` brew
+    #正确二：`which brew`
+    if [ ! `which brew` ]
+    then
+        echo &quot;安装brew&quot;
+        ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; || exit 1
+    fi
+    echo &quot;安装yasm&quot;
+    #成功了
+    #下载安装这个汇编器
+    #exit 1-&gt;安装失败了，那么退出程序
+    brew install yasm || exit 1
+fi
+
+echo &quot;循环编译&quot;
+
+#9、for循环编译FFmpeg静态库
+currentdir=`pwd`
+echo &quot;当前执行编译路径&quot; ${currentdir};
+for arch in $archs
+do
+    echo &quot;开始编译&quot;
+    #9.1、创建目录
+    #在编译结果目录下-创建对应的平台架构类型
+    mkdir -p &quot;$cache/$arch&quot;
+    #9.2、进入这个目录
+    cd &quot;$cache/$arch&quot;
+
+    #9.3、配置编译CPU架构类型-&gt;指定当前编译CPU架构类型
+    #错误三：&quot;--arch $arch&quot;
+    #正确三：&quot;-arch $arch&quot;
+    archflags=&quot;-arch $arch&quot;
+
+    #9.4、判定一下你到底是编译的是模拟器.a静态库，还是真机.a静态库
+    if [ &quot;$arch&quot; = &quot;i386&quot; -o &quot;$arch&quot; = &quot;x86_64&quot; ]
+    then
+        #模拟器
+        platform=&quot;iPhoneSimulator&quot;
+        #支持最小系统版本-&gt;iOS系统
+        archflags=&quot;$archflags -mios-simulator-version-min=$targetversion&quot;
+    else
+        #真机(mac、iOS都支持)
+        platform=&quot;iPhoneOS&quot;
+        #支持最小系统版本-&gt;iOS系统
+        archflags=&quot;$archflags -mios-version-min=$targetversion -fembed-bitcode&quot;
+        #注意:优化处理(可有可无)
+        #如果架构类型是&quot;arm64&quot;，那么
+        if [ &quot;$arch&quot; = &quot;arm64&quot; ]
+        then
+            #GNU汇编器（GNU Assembler），简称为GAS
+            #GASPP-&gt;汇编器预处理程序
+            #解决问题：分段错误
+            #通俗一点：就是程序运行时,变量访问越界一类的问题
+            EXPORT=&quot;GASPP_FIX_XCODE5=1&quot;
+        fi
+    fi
+
+
+    #10、正式编译
+    #tr命令可以对来自标准输入的字符进行替换、压缩和删除
+    #&#39;[:upper:]&#39;-&gt;将小写转成大写
+    #&#39;[:lower:]&#39;-&gt;将大写转成小写
+    #将platform-&gt;转成大写或者小写
+    XCRUN_SDK=`echo $platform | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39;`
+    #编译器-&gt;编译平台
+    CC=&quot;xcrun -sdk $XCRUN_SDK clang&quot;
+
+    #架构类型-&gt;arm64
+    if [ &quot;$arch&quot; = &quot;arm64&quot; ]
+    then
+        #音视频默认一个编译命令
+        #preprocessor.pl帮助我们编译FFmpeg-&gt;arm64位静态库
+        AS=&quot;gas-preprocessor.pl -arch aarch64 -- $CC&quot;
+    else
+        #默认编译平台
+        AS=&quot;$CC&quot;
+    fi
+
+    echo &quot;执行到了1&quot;
+
+    #目录找到FFmepg编译源代码目录-&gt;设置编译配置-&gt;编译FFmpeg源码
+    #--target-os:目标系统-&gt;darwin(mac系统早起版本名字)
+    #darwin:是mac系统、iOS系统祖宗
+    #--arch:CPU平台架构类型
+    #--cc：指定编译器类型选项
+    #--as:汇编程序
+    #$configure_flags最初配置
+    #--extra-cflags
+    #--prefix：静态库输出目录
+    TMPDIR=${TMPDIR/%\/} $currentdir/$source/configure \
+        --target-os=darwin \
+        --arch=$arch \
+        --cc=&quot;$CC&quot; \
+        --as=&quot;$AS&quot; \
+        $configure_flags \
+        --extra-cflags=&quot;$archflags&quot; \
+        --extra-ldflags=&quot;$archflags&quot; \
+        --prefix=&quot;$staticdir/$arch&quot; \
+        || exit 1
+
+    echo &quot;执行了&quot;
+
+    #解决问题-&gt;分段错误问题
+    #安装-&gt;导出静态库(编译.a静态库)
+    #执行命令
+    make -j3 install $EXPORT || exit 1
+    #回到了我们的脚本文件目录
+    cd $currentdir
+done
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEG视音频基础探索-API(系列二)]]></title>
+    <link href="https://raojunbo.github.io/15427852627727.html"/>
+    <updated>2018-11-21T15:27:42+08:00</updated>
+    <id>https://raojunbo.github.io/15427852627727.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEG视音频基础探索-命令行(系列一)]]></title>
+    <link href="https://raojunbo.github.io/15427812231625.html"/>
+    <updated>2018-11-21T14:20:23+08:00</updated>
+    <id>https://raojunbo.github.io/15427812231625.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">ffmpeg命令行</h2>
+
+<h2 id="toc_1">ffplay命令行</h2>
+
+<h2 id="toc_2">ffprobe命令行</h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[UDP-RTP协议解析（基础系列六）]]></title>
+    <link href="https://raojunbo.github.io/15427692957422.html"/>
+    <updated>2018-11-21T11:01:35+08:00</updated>
+    <id>https://raojunbo.github.io/15427692957422.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15427692957422/ftpudp.png" alt="ftpudp"/></p>
+
+<p>原理<br/>
+RTP是基于UDP上的。即时非链接的。RTP里的载荷是媒体的分包<br/>
+<img src="media/15427692957422/rtp%E5%9B%BE.png" alt="rtp图"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FLV封装格式解析（基础系列五）]]></title>
+    <link href="https://raojunbo.github.io/15427076070232.html"/>
+    <updated>2018-11-20T17:53:27+08:00</updated>
+    <id>https://raojunbo.github.io/15427076070232.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15427076070232/%E8%A7%86%E9%A2%91%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE.png" alt="视频封装数据"/></p>
+
+<p>原理<br/>
+<img src="media/15427076070232/flvtag.png" alt="flvtag"/></p>
+
+<p>FLV封装格式是一个FLV Header文件头和一个一个的Tag组成。Tag包括音频数据以及视频数据。整个的解析过程就是将上面的图的数据进行解析。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AAC音频码流解析（基础系列四）]]></title>
+    <link href="https://raojunbo.github.io/15427004394453.html"/>
+    <updated>2018-11-20T15:53:59+08:00</updated>
+    <id>https://raojunbo.github.io/15427004394453.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">原理</a>
+</li>
+</ul>
+
+
+<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/50535042">AAC音频码流解析</a><br/>
+<img src="media/15427004394453/%E9%9F%B3%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="音频码流"/></p>
+
+<h2 id="toc_0">原理</h2>
+
+<p>AAC原始码流是一个一个ADTS进行分隔，同步字为0xfff<br/>
+AAC码流解析的步骤就是首先从码流中搜索0x0FFF，分离出ADTS frame；然后再分析ADTS frame的首部各个字段。</p>
+
+<p><img src="media/15427004394453/AAC%E7%A0%81%E6%B5%81%E7%9A%84%E7%89%87%E6%AE%B5.png" alt="AAC码流的片段"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[H.264视频码流解析（基础系列三）]]></title>
+    <link href="https://raojunbo.github.io/15426950827326.html"/>
+    <updated>2018-11-20T14:24:42+08:00</updated>
+    <id>https://raojunbo.github.io/15426950827326.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">原理</a>
+</li>
+</ul>
+
+
+<p>参考文章<a href="https://blog.csdn.net/leixiaohua1020/article/details/50534369">视音频数据处理入门：H.264视频码流解析</a><br/>
+<img src="media/15426950827326/%E8%A7%86%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="视频码流"/></p>
+
+<p>可以从H.264码流中分析得到它的基本单元NALU，并且可以简单解析NALU首部的字段。通过修改该程序可以实现不同的H.264码流处理功能。</p>
+
+<h2 id="toc_0">原理</h2>
+
+<p><img src="media/15426950827326/H264%E7%A0%81%E6%B5%81.png" alt="H264码流"/><br/>
+每个NALU之间通过起始码进行分隔，起始码分成两种：0x000001（3Byte）或者0x00000001（4Byte）,如果NALU对应的Slice为一帧的开始就用0x00000001，否则就用0x000001。<br/>
+H.264码流解析的步骤就是首先从码流中搜索0x000001和0x00000001，分离出NALU；然后再分析NALU的各个字段。本文的程序即实现了上述的两个步骤。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[音频采样数据处理（基础系列二）]]></title>
+    <link href="https://raojunbo.github.io/15426806992852.html"/>
+    <updated>2018-11-20T10:24:59+08:00</updated>
+    <id>https://raojunbo.github.io/15426806992852.html</id>
+    <content type="html"><![CDATA[
+
+
+<p><img src="media/15426806992852/20160117235313221.png" alt="20160117235313221"/></p>
+
+<p>注：本文中声音样值的采样频率一律是44100Hz，采样格式一律为16LE。“16”代表采样位数是16bit。由于1Byte=8bit，所以一个声道的一个采样值占用2Byte。“LE”代表Little Endian，代表2 Byte采样值的存储方式为高位存在高地址中。<br/>
+<img src="media/15426806992852/%E5%A3%B0%E9%9F%B3%E5%AD%98%E5%82%A8.png" alt="声音存储"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[视频像素数据处理(基础系列一)]]></title>
+    <link href="https://raojunbo.github.io/15426223369165.html"/>
+    <updated>2018-11-19T18:12:16+08:00</updated>
+    <id>https://raojunbo.github.io/15426223369165.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">YUV处理</a>
+</li>
+<li>
+<a href="#toc_1">RGB处理</a>
+</li>
+</ul>
+
+
+<p>参考<a href="https://blog.csdn.net/leixiaohua1020/article/details/50534150">视音频数据处理入门：RGB、YUV像素数据处理</a></p>
+
+<p><img src="media/15426223369165/15426224657307.jpg" alt=""/></p>
+
+<h1 id="toc_0">YUV处理</h1>
+
+<p>Y,U,V是单独存储的方式。所以很容易处理。<br/>
+为节省带宽起见，大多数YUV格式平均使用的每像素位数都少于24位。主要的抽样（subsample）格式有YCbCr4:2:0、YCbCr4:2:2、YCbCr4:1:1和YCbCr4:4:4。YUV的表示法称为A:B:C表示法：<br/>
+4:4:4表示完全取样。<br/>
+4:2:2表示2:1的水平取样，垂直完全采样。<br/>
+4:2:0表示2:1的水平取样，垂直2：1采样。<br/>
+4:1:1表示4:1的水平取样，垂直完全采样。<br/>
+<img src="media/15426223369165/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-19%20%E4%B8%8B%E5%8D%888.04.15.png" alt="屏幕快照 2018-11-19 下午8.04.15"/></p>
+
+<h1 id="toc_1">RGB处理</h1>
+
+<p>RGB的存储存储是一个RGB一个RGB来存的。所以对于图像的处理不太好处理。<br/>
+<img src="media/15426223369165/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-11-19%20%E4%B8%8B%E5%8D%888.13.30.png" alt="屏幕快照 2018-11-19 下午8.13.30"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[财务报表分析]]></title>
+    <link href="https://raojunbo.github.io/15423493894054.html"/>
+    <updated>2018-11-16T14:23:09+08:00</updated>
+    <id>https://raojunbo.github.io/15423493894054.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[TOC]]]></title>
+    <link href="https://raojunbo.github.io/15420339112607.html"/>
+    <updated>2018-11-12T22:45:11+08:00</updated>
+    <id>https://raojunbo.github.io/15420339112607.html</id>
+    <content type="html"><![CDATA[
+<p>参考博客<a href="https://blog.csdn.net/leixiaohua1020/article/details/18893769">视音频编解码技术零基础学习方法</a></p>
+
+<h2 id="toc_0">数字音频</h2>
+
+<h3 id="toc_1">音频表示</h3>
+
+<p>音频的裸数据格式就是脉冲编码调制PCM数据。<br/>
+PCM数据数字化：位深度，采样率，声道数。</p>
+
+<h3 id="toc_2">音频编码</h3>
+
+<p>wav:wav就是在pcm数据外面加上一层头<br/>
+mp3:压缩比较高<br/>
+aac:文件更小，质量更高</p>
+
+<h2 id="toc_3">数字视频</h2>
+
+<h3 id="toc_4">封装格式</h3>
+
+<p>AVI<br/>
+FLV <br/>
+MP4<br/>
+MOV<br/>
+WMV<br/>
+MKV<br/>
+RMVB<br/>
+就是把视频数据和音频数据打包成一个文件的规范</p>
+
+<h3 id="toc_5">视频编码</h3>
+
+<p>MPEG<br/>
+H.264</p>
+
+<ul>
+<li>IPB帧</li>
+</ul>
+
+<p>I帧，帧内编码<br/>
+p帧，前向预测编码<br/>
+B帧，双向预测内插编码帧</p>
+
+<blockquote>
+<p>这个地方不太理解。fdsatsa</p>
+</blockquote>
+
+<ul>
+<li>DTS与PTS</li>
+</ul>
+
+<h3 id="toc_6">视频像素数据表示</h3>
+
+<p>YUV<br/>
+RGB</p>
+
+<h2 id="toc_7">FFmepg命令</h2>
+
+<p>ffmpeg视频转码<br/>
+mp4-&gt;mov,mov-&gt;mp4,wmv-&gt;mp4<br/>
+命令格式 ffmpeg -i {指定输入文件路径} -b:v {输出文件路径}</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Markdown 语法和 MWeb 写作使用说明]]></title>
+    <link href="https://raojunbo.github.io/15346594344474.html"/>
+    <updated>2018-08-19T14:17:14+08:00</updated>
+    <id>https://raojunbo.github.io/15346594344474.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">Markdown 的设计哲学</h2>
+
+<blockquote>
+<p>Markdown 的目標是實現「易讀易寫」。<br/>
+不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。<br/>
+Markdown 的語法有個主要的目的：用來作為一種網路內容的<em>寫作</em>用語言。</p>
+</blockquote>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_1">本文约定</h2>
+
+<p>如果有写 <code>效果如下：</code>， 在 MWeb 编辑状态下只有用 <code>CMD + 4</code> 或 <code>CMD + R</code> 预览才可以看效果。</p>
+
+<h2 id="toc_2">标题</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code># 第一级标题 `&lt;h1&gt;` 
+## 第二级标题 `&lt;h2&gt;` 
+###### 第六级标题 `&lt;h6&gt;` 
+</code></pre>
+
+<p>效果如下：</p>
+
+<h1 id="toc_3">第一级标题 <code>&lt;h1&gt;</code></h1>
+
+<h2 id="toc_4">第二级标题 <code>&lt;h2&gt;</code></h2>
+
+<h6 id="toc_5">第六级标题 <code>&lt;h6&gt;</code></h6>
+
+<h2 id="toc_6">强调</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>*这些文字会生成`&lt;em&gt;`*
+_这些文字会生成`&lt;u&gt;`_
+
+**这些文字会生成`&lt;strong&gt;`**
+__这些文字会生成`&lt;strong&gt;`__
+</code></pre>
+
+<p>在 MWeb 中的快捷键为： <code>CMD + U</code>、<code>CMD + I</code>、<code>CMD + B</code><br/>
+效果如下：</p>
+
+<p><em>这些文字会生成<code>&lt;em&gt;</code></em><br/>
+<u>这些文字会生成<code>&lt;u&gt;</code></u></p>
+
+<p><strong>这些文字会生成<code>&lt;strong&gt;</code></strong><br/>
+<strong>这些文字会生成<code>&lt;strong&gt;</code></strong></p>
+
+<h2 id="toc_7">换行</h2>
+
+<p>四个及以上空格加回车。<br/>
+如果不想打这么多空格，只要回车就为换行，请勾选：<code>Preferences</code> - <code>Themes</code> - <code>Translate newlines to &lt;br&gt; tags</code></p>
+
+<h2 id="toc_8">列表</h2>
+
+<h3 id="toc_9">无序列表</h3>
+
+<p>Markdown 语法：</p>
+
+<pre><code>* 项目一 无序列表 `* + 空格键`
+* 项目二
+    * 项目二的子项目一 无序列表 `TAB + * + 空格键`
+    * 项目二的子项目二
+</code></pre>
+
+<p>在 MWeb 中的快捷键为： <code>Option + U</code><br/>
+效果如下：</p>
+
+<ul>
+<li>项目一 无序列表 <code>* + 空格键</code></li>
+<li>项目二
+
+<ul>
+<li>项目二的子项目一 无序列表 <code>TAB + * + 空格键</code></li>
+<li>项目二的子项目二</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_10">有序列表</h3>
+
+<p>Markdown 语法：</p>
+
+<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
+2. 项目二 
+3. 项目三
+    1. 项目三的子项目一 有序列表 `TAB + 数字 + . + 空格键`
+    2. 项目三的子项目二
+</code></pre>
+
+<p>效果如下：</p>
+
+<ol>
+<li>项目一 有序列表 <code>数字 + . + 空格键</code></li>
+<li>项目二 </li>
+<li>项目三
+
+<ol>
+<li>项目三的子项目一 有序列表 <code>TAB + 数字 + . + 空格键</code></li>
+<li>项目三的子项目二</li>
+</ol></li>
+</ol>
+
+<h3 id="toc_11">列表中嵌入代码块语法</h3>
+
+<pre><code>1. 项目一 有序列表 `数字 + . + 空格键`
+
+    列表中嵌入代码块必须前后空一行，如这个写法
+
+    ```
+    js
+    function fancyAlert(arg) {
+      if(arg) {
+        $.facebox({div:&#39;#foo&#39;})
+      }
+    }
+    ```
+
+    其他文本。
+
+2. 项目二
+</code></pre>
+
+<h3 id="toc_12">任务列表（Task lists）</h3>
+
+<p>Markdown 语法：</p>
+
+<pre><code>- [ ] 任务一 未做任务 `- + 空格 + [ ]`
+- [x] 任务二 已做任务 `- + 空格 + [x]`
+</code></pre>
+
+<p>效果如下：</p>
+
+<ul>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 任务一 未做任务 <code>- + 空格 + [ ]</code>
+</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked /> 任务二 已做任务 <code>- + 空格 + [x]</code>
+</li>
+</ul>
+
+<h2 id="toc_13">图片</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)
+格式: ![Alt Text](url)
+</code></pre>
+
+<p><code>Control + Shift + I</code> 可插入Markdown语法。<br/>
+如果是 MWeb 的文档库中的文档，还可以用拖放图片、<code>CMD + V</code> 粘贴、<code>CMD + Option + I</code> 导入这三种方式来增加图片。<br/>
+效果如下：</p>
+
+<p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up"/></p>
+
+<p>MWeb 引入的特别的语法来设置图片宽度，方法是在图片描述后加 <code>-w + 图片宽度</code> 即可，比如说要设置上面的图片的宽度为 140，语法如为 <code>![GitHub-w140](set-up-git.gif)</code>：</p>
+
+<p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up" style="width:140px;"/></p>
+
+<h2 id="toc_14">链接</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>email &lt;example@example.com&gt;
+[GitHub](http://github.com)
+自动生成连接  &lt;http://www.github.com/&gt;
+</code></pre>
+
+<p><code>Control + Shift + L</code> 可插入Markdown语法。<br/>
+如果是 MWeb 的文档库中的文档，拖放或<code>CMD + Option + I</code> 导入非图片时，会生成连接。<br/>
+效果如下：</p>
+
+<p>Email 连接： <a href="mailto:example@example.com">example@example.com</a><br/>
+<a href="http://github.com">连接标题Github网站</a><br/>
+自动生成连接像： <a href="http://www.github.com/">http://www.github.com/</a> 这样</p>
+
+<h2 id="toc_15">区块引用</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>某某说:
+&gt; 第一行引用
+&gt; 第二行费用文字
+</code></pre>
+
+<p><code>CMD + Shift + B</code> 可插入Markdown语法。<br/>
+效果如下：</p>
+
+<p>某某说:</p>
+
+<blockquote>
+<p>第一行引用<br/>
+第二行费用文字</p>
+</blockquote>
+
+<h2 id="toc_16">行内代码</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>像这样即可：`&lt;addr&gt;` `code`
+</code></pre>
+
+<p><code>CMD + K</code> 可插入Markdown语法。<br/>
+效果如下：</p>
+
+<p>像这样即可：<code>&lt;addr&gt;</code> <code>code</code></p>
+
+<h2 id="toc_17">多行或者一段代码</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>```js
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:&#39;#foo&#39;})
+  }
+
+}
+```
+</code></pre>
+
+<p><code>CMD + Shift + K</code> 可插入Markdown语法。<br/>
+效果如下：</p>
+
+<pre><code class="language-js">function fancyAlert(arg) {
+    if(arg) {
+        $.facebox({div:&#39;#foo&#39;})
+    }
+
+}
+</code></pre>
+
+<h2 id="toc_18">顺序图或流程图</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>```sequence
+张三-&gt;李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四--&gt;张三: 忙得吐血，哪有时间写。
+```
+
+```flow
+st=&gt;start: 开始
+e=&gt;end: 结束
+op=&gt;operation: 我的操作
+cond=&gt;condition: 确认？
+
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+```
+</code></pre>
+
+<p>效果如下（ <code>Preferences</code> - <code>Themes</code> - <code>Enable sequence &amp; flow chart</code> 才会看到效果 ）：</p>
+
+<pre><code class="language-sequence">张三-&gt;李四: 嘿，小四儿, 写博客了没?
+Note right of 李四: 李四愣了一下，说：
+李四--&gt;张三: 忙得吐血，哪有时间写。
+</code></pre>
+
+<pre><code class="language-flow">st=&gt;start: 开始
+e=&gt;end: 结束
+op=&gt;operation: 我的操作
+cond=&gt;condition: 确认？
+
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+</code></pre>
+
+<p>更多请参考：<a href="http://bramp.github.io/js-sequence-diagrams/">http://bramp.github.io/js-sequence-diagrams/</a>, <a href="http://adrai.github.io/flowchart.js/">http://adrai.github.io/flowchart.js/</a></p>
+
+<h2 id="toc_19">表格</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code class="language-txt">第一格表头 | 第二格表头
+--------- | -------------
+内容单元格 第一列第一格 | 内容单元格第二列第一格
+内容单元格 第一列第二格 多加文字 | 内容单元格第二列第二格
+</code></pre>
+
+<p>效果如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>第一格表头</th>
+<th>第二格表头</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>内容单元格 第一列第一格</td>
+<td>内容单元格第二列第一格</td>
+</tr>
+<tr>
+<td>内容单元格 第一列第二格 多加文字</td>
+<td>内容单元格第二列第二格</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_20">删除线</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>加删除线像这样用： ~~删除这些~~
+</code></pre>
+
+<p>效果如下：</p>
+
+<p>加删除线像这样用： <del>删除这些</del></p>
+
+<h2 id="toc_21">分隔线</h2>
+
+<p>以下三种方式都可以生成分隔线：</p>
+
+<pre><code>***
+
+*****
+
+- - -
+</code></pre>
+
+<p>效果如下：</p>
+
+<hr/>
+
+<hr/>
+
+<hr/>
+
+<h2 id="toc_22">MathJax</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>块级公式：
+$$  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+
+\\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \\]
+
+行内公式： $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$
+</code></pre>
+
+<p>效果如下（<code>Preferences</code> - <code>Themes</code> - <code>Enable MathJax</code> 才会看到效果）：</p>
+
+<p>块级公式：<br/>
+\[  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</p>
+
+<p>\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =<br/>
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}<br/>
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]</p>
+
+<p>行内公式： \(\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N\)</p>
+
+<h2 id="toc_23">脚注（Footnote）</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>这是一个脚注：[^sample_footnote]
+</code></pre>
+
+<p>效果如下：</p>
+
+<p>这是一个脚注：<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
+
+<h2 id="toc_24">注释和阅读更多</h2>
+
+<!-- comment -->
+
+<!-- more -->
+
+<p>Actions-&gt;Insert Read More Comment <em>或者</em> <code>Command + .</code><br/>
+<strong>注</strong> 阅读更多的功能只用在生成网站或博客时，插入时注意要后空一行。</p>
+
+<h2 id="toc_25">TOC</h2>
+
+<p>Markdown 语法：</p>
+
+<pre><code>[TOC]
+</code></pre>
+
+<p>效果如下：</p>
+
+<ul>
+<li>
+<a href="#toc_0">Markdown 的设计哲学</a>
+</li>
+<li>
+<a href="#toc_1">本文约定</a>
+</li>
+<li>
+<a href="#toc_2">标题</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_3">第一级标题 <code>&lt;h1&gt;</code></a>
+<ul>
+<li>
+<a href="#toc_4">第二级标题 <code>&lt;h2&gt;</code></a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<a href="#toc_5">第六级标题 <code>&lt;h6&gt;</code></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">强调</a>
+</li>
+<li>
+<a href="#toc_7">换行</a>
+</li>
+<li>
+<a href="#toc_8">列表</a>
+<ul>
+<li>
+<a href="#toc_9">无序列表</a>
+</li>
+<li>
+<a href="#toc_10">有序列表</a>
+</li>
+<li>
+<a href="#toc_11">列表中嵌入代码块语法</a>
+</li>
+<li>
+<a href="#toc_12">任务列表（Task lists）</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">图片</a>
+</li>
+<li>
+<a href="#toc_14">链接</a>
+</li>
+<li>
+<a href="#toc_15">区块引用</a>
+</li>
+<li>
+<a href="#toc_16">行内代码</a>
+</li>
+<li>
+<a href="#toc_17">多行或者一段代码</a>
+</li>
+<li>
+<a href="#toc_18">顺序图或流程图</a>
+</li>
+<li>
+<a href="#toc_19">表格</a>
+</li>
+<li>
+<a href="#toc_20">删除线</a>
+</li>
+<li>
+<a href="#toc_21">分隔线</a>
+</li>
+<li>
+<a href="#toc_22">MathJax</a>
+</li>
+<li>
+<a href="#toc_23">脚注（Footnote）</a>
+</li>
+<li>
+<a href="#toc_24">注释和阅读更多</a>
+</li>
+<li>
+<a href="#toc_25">TOC</a>
+</li>
+</ul>
+
+
+<div class="footnotes">
+<hr/>
+<ol>
+
+<li id="fn1">
+<p>这里是脚注信息&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[欢迎使用 MWeb]]></title>
+    <link href="https://raojunbo.github.io/15346594344475.html"/>
+    <updated>2018-08-19T14:17:14+08:00</updated>
+    <id>https://raojunbo.github.io/15346594344475.html</id>
+    <content type="html"><![CDATA[
+<p>首先介绍一下 MWeb 是什么，MWeb 是专业的 Markdown 写作、记笔记、静态博客生成软件。MWeb 使用的是 Github Flavored Markdown 语法，在使用 MWeb 前，建议你一定要去 <a href="http://zh.mweb.im/">MWeb 官网首页</a> 看一下介绍视频，MWeb 官网也做了比较详细的帮助，建议你也看一下大概内容，帮助的网址为：<a href="http://zh.mweb.im/help.html">http://zh.mweb.im/help.html</a>。</p>
+
+<h2 id="toc_0">需要您重点注意的</h2>
+
+<p>MWeb 是有<strong>两种模式</strong>的：外部模式和文档库模式。MWeb 为了满足所有 Markdown 使用需求，设计了两种模式！外部模式用于打开和编辑所有本地 Markdown 文档。另外为了方便用 Markdown 记笔记，MWeb 设计了文档库模式，文档库中的文档也支持一键生成静态博客，以便于分享。关于两个模式的情况，还是建议您去看一下官网的视频和帮助。</p>
+
+<h2 id="toc_1">帮助我们改进 MWeb</h2>
+
+<p>如果你喜欢 MWeb，想让它变得更好，你可以：</p>
+
+<ol>
+<li>推荐 MWeb，让更多的人知道。</li>
+<li>给我们发反馈和建议：<a href="mailto:coderforart+233@gmail.com">coderforart+233@gmail.com</a></li>
+<li>在 Mac App Store 上评价 （如果是在 MAS 上购买的话）。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  北哥传奇
+  AAC音频码流解析（基础系列四） - 北哥传奇
   
   </title>
  <meta name="description" content="">
@@ -147,52 +147,65 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
+ <div class="markdown-body">
+<h1>AAC音频码流解析（基础系列四）</h1>
+
+<ul>
+<li>
+<a href="#toc_0">原理</a>
+</li>
+</ul>
 
 
-	
-		<div class="markdown-body">
-		<h1>这是一个读书笔记</h1>
+<p><a href="https://blog.csdn.net/leixiaohua1020/article/details/50535042">AAC音频码流解析</a><br/>
+<img src="media/15427004394453/%E9%9F%B3%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="音频码流"/></p>
 
-		<p>在《朝花夕拾》这本书中，鲁迅先生笔下的日本老师“藤野先生”，既是良师，亦是益友。作为一位异乡人，鲁迅先生身在他乡留学，受到了不少日本学生的欺辱，而此时出现的老师——藤野先生，给了鲁迅先生莫大的鼓励和勇气。</p>
+<h2 id="toc_0">原理</h2>
 
-<p>人生的旅途上遇到一位良师是多么的不易啊！</p>
+<p>AAC原始码流是一个一个ADTS进行分隔，同步字为0xfff<br/>
+AAC码流解析的步骤就是首先从码流中搜索0x0FFF，分离出ADTS frame；然后再分析ADTS frame的首部各个字段。</p>
 
-<p>藤野先生冲破了国界，他没有为难、歧视来自清国的留学生鲁迅，而是在百般忙碌之中抽出时间去修改鲁迅先生所抄的讲义，圈圈改改之中，是一位老师对异国留学生的浓浓师生情。</p>
+<p><img src="media/15427004394453/AAC%E7%A0%81%E6%B5%81%E7%9A%84%E7%89%87%E6%AE%B5.png" alt="AAC码流的片段"/></p>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="15427076070232.html"  title="Previous Post: FLV封装格式解析（基础系列五）">&laquo; FLV封装格式解析（基础系列五）</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15426950827326.html" 
+	        title="Next Post: H.264视频码流解析（基础系列三）">H.264视频码流解析（基础系列三） &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15427004394453.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 

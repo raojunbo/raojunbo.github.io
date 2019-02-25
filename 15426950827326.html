@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  北哥传奇
+  H.264视频码流解析（基础系列三） - 北哥传奇
   
   </title>
  <meta name="description" content="">
@@ -147,52 +147,66 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
+ <div class="markdown-body">
+<h1>H.264视频码流解析（基础系列三）</h1>
+
+<ul>
+<li>
+<a href="#toc_0">原理</a>
+</li>
+</ul>
 
 
-	
-		<div class="markdown-body">
-		<h1>这是一个读书笔记</h1>
+<p>参考文章<a href="https://blog.csdn.net/leixiaohua1020/article/details/50534369">视音频数据处理入门：H.264视频码流解析</a><br/>
+<img src="media/15426950827326/%E8%A7%86%E9%A2%91%E7%A0%81%E6%B5%81.png" alt="视频码流"/></p>
 
-		<p>在《朝花夕拾》这本书中，鲁迅先生笔下的日本老师“藤野先生”，既是良师，亦是益友。作为一位异乡人，鲁迅先生身在他乡留学，受到了不少日本学生的欺辱，而此时出现的老师——藤野先生，给了鲁迅先生莫大的鼓励和勇气。</p>
+<p>可以从H.264码流中分析得到它的基本单元NALU，并且可以简单解析NALU首部的字段。通过修改该程序可以实现不同的H.264码流处理功能。</p>
 
-<p>人生的旅途上遇到一位良师是多么的不易啊！</p>
+<h2 id="toc_0">原理</h2>
 
-<p>藤野先生冲破了国界，他没有为难、歧视来自清国的留学生鲁迅，而是在百般忙碌之中抽出时间去修改鲁迅先生所抄的讲义，圈圈改改之中，是一位老师对异国留学生的浓浓师生情。</p>
+<p><img src="media/15426950827326/H264%E7%A0%81%E6%B5%81.png" alt="H264码流"/><br/>
+每个NALU之间通过起始码进行分隔，起始码分成两种：0x000001（3Byte）或者0x00000001（4Byte）,如果NALU对应的Slice为一帧的开始就用0x00000001，否则就用0x000001。<br/>
+H.264码流解析的步骤就是首先从码流中搜索0x000001和0x00000001，分离出NALU；然后再分析NALU的各个字段。本文的程序即实现了上述的两个步骤。</p>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="15427004394453.html"  title="Previous Post: AAC音频码流解析（基础系列四）">&laquo; AAC音频码流解析（基础系列四）</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15426806992852.html" 
+	        title="Next Post: 音频采样数据处理（基础系列二）">音频采样数据处理（基础系列二） &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15426950827326.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 
