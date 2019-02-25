@@ -1,222 +1,1077 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>
     
   iOS性能优化 - 北哥传奇
   
+
   </title>
- <meta name="description" content="">
- <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
-    <link rel="stylesheet" href="asset/css/foundation.min.css" />
-    <link rel="stylesheet" href="asset/css/docs.css" />
+  <meta name="author" content="">
+  <meta name="description" content="">
 
-    <script src="asset/js/vendor/modernizr.js"></script>
-    <script src="asset/js/vendor/jquery.js"></script>
-    <script src="asset/highlightjs/highlight.pack.js"></script>
-    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-  </head>
-  <body class="antialiased hide-extras">
-    
-    <div class="marketing off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="asset/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+  <script src="asset/js/modernizr-2.0.js"></script>
+  <script src="asset/js/jquery.min.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/solarized_light.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
 
+  <style type="text/css">
+  .cat-children-p{ padding: 6px 0px;}
+  .hljs{background: none;}
+  </style>
+  <script type="text/javascript">
+  var isAddSildbar = true;
+  </script>
+  <script src="asset/js/octopress.js" type="text/javascript"></script>
+</head>
+<script type="text/javascript">
+//链接新开窗口
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+$(document).ready(function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="index.html">北哥传奇</a></h1>
+  
+    <h2></h2>
+  
+</hgroup>
 
-<nav class="top-bar docs-bar hide-for-small" data-topbar>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:raojunbo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
 
-<div id="header">
-    <h1><a href="index.html">北哥传奇</a></h1>
-</div>
+  <li id=""><a target="self" href="index.html">Home</a></li>
+
+  <li id=""><a target="_self" href="archives.html">Archives</a></li>
+
+</ul>
 
 </nav>
-        <nav class="tab-bar show-for-small">
-  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
-    <span> &nbsp; 北哥传奇</span>
-  </a>
-</nav>
+  <div id="main">
+    <div id="content"> 
+<div class="blog-index">
 
-<aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-      <li><a href="index.html">Home</a></li>
-      
-        <li class="divider"></li>
-        <li><label>前言</label></li>
-
-          
-            <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>软件开发</label></li>
-
-          
-
-      
-        <li class="divider"></li>
-        <li><label>音视频技术</label></li>
-
-          
-            <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
-          
-            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-          
-            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-          
-            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-          
-            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-          
-            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-          
-            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-          
-            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-          
-            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>金融理论</label></li>
-
-          
-
-      
-      </ul>
-    </aside>
-
-<a class="exit-off-canvas" href="#"></a>
-
-        <section id="main-content" role="main" class="scroll-container">
-
-          <div class="row">
-            <div class="large-3 medium-3 columns">
-              <div class="hide-for-small">
-                <div class="sidebar">
-                <nav>
-                  <ul id="side-nav" class="side-nav">
-
-                    
-                      <li class="side-title"><span>前言</span></li>
-                        
-                          <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-                        
-
-                    
-                      <li class="side-title"><span>软件开发</span></li>
-                        
-
-                    
-                      <li class="side-title"><span>音视频技术</span></li>
-                        
-                          <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
-                        
-                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-                        
-                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-                        
-                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-                        
-                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-                        
-                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-                        
-                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-                        
-                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-                        
-                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-                        
-
-                    
-                      <li class="side-title"><span>金融理论</span></li>
-                        
-
-                    
-                  </ul>
-                </nav>
-                </div>
-              </div>
-            </div>
-            <div class="large-9 medium-9 columns">
-
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>Xcode里的Instruments的应用</h1>
-
-		<h2 id="toc_0">TimerPofile</h2>
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15454940280965.html">Xcode里的Instruments的应用</a></h1>
+			<p class="meta"><time datetime="2018-12-22T23:53:48+08:00" 
+			pubdate data-updated="true">2018/12/22</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<h2 id="toc_0">TimerPofile</h2>
 
 <p>可以查看应用程序的那个方法耗时比较长，然后针对性优化</p>
 
 
 		</div>
-	
 
+		
+
+	</article>
  
-	
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15378464323310.html">xcode项目编译过程</a></h1>
+			<p class="meta"><time datetime="2018-09-25T11:33:52+08:00" 
+			pubdate data-updated="true">2018/9/25</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>在xcode的IDE工具很少关注整个的编译过程。<br/>
+实际编译过程就是buildPhases的列表，一件一件执行这里面的工作。<br/>
+比如</p>
 
+<pre><code>Check Pods Manifest.lock
+runScript
+Compile Sourse
+Link Binary With Libraries
+Copy Bundle Resources
+Copy Pods Resources
+RunScript
+RunScript
+Embed Pods Frameworks
+</code></pre>
+
+<ol>
+<li><p>先检查podfile的本地使用清单与Git后的清单，保证使用的是最小的pod清单</p></li>
+<li><p>runSript 执行自定义的脚本，比如提前下载编译需要的文件(这些大文件不好用git进行管理)</p></li>
+<li><p>Compile Source 编译.m文件，项目中的文件</p></li>
+<li><p>Link Binary  链接所有的静态库文件（包括.framework的静态库文件，.a的静态库文件）</p></li>
+<li><p>Copy Bundle Resources 拷贝资源文件到可执行文件目录</p></li>
+<li><p>Copy Pods Resources 拷贝Pods的资源文件到可执行的文件目录(如果pods库里包含boundle的资源文件，就会执行这个脚本，将其拷贝到可执行目录)</p></li>
+<li><p>RunScript 执行自定义脚本，在这里可以执行编译完成后的一些脚本。比如有bugTag的可以上传一些符号表。</p></li>
+</ol>
+
+<p>当然执行自己的脚本方可以自己调整执行顺序。即是在编译前执行还是在编译后执行。</p>
+
+
+		</div>
+
+		
+
+	</article>
  
-	
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15362957172406.html">iOS如何将像素显示到屏幕</a></h1>
+			<p class="meta"><time datetime="2018-09-07T12:48:37+08:00" 
+			pubdate data-updated="true">2018/9/7</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<hr/>
 
+<h1 id="toc_0">绘制像素到屏幕</h1>
+
+<p>参考文章<a href="https://www.objccn.io/issue-3-1/">绘制像素到屏幕</a></p>
+
+<p>参考文章<a href="https://segmentfault.com/a/1190000004164291">iOS视图，动画渲染机制</a></p>
+
+<p>本文将总结<br/>
+1. 位图数据如何存储的？<br/>
+2. 像素绘制到屏幕上需要经历的流程？<br/>
+3. CPU的工作是什么？<br/>
+4. GPU的工作是什么？<br/>
+5. 离屏渲染的取舍？<br/>
+6. 绘制与动画的关系？<br/>
+7. 渲染性能优化的总结</p>
+
+<h2 id="toc_1">一.像素</h2>
+
+<p>显示在屏幕上的是什么?<br/>
+当像素映射到屏幕的时候，每一个像素均由三个颜色组件构成：红，绿，蓝，透明度。三个独立的颜色单元会根据给定的颜色显示到一个像素上。例如在iPhone5的显示屏上是1136 *640个像素。</p>
+
+<h3 id="toc_2">1.1 像素在内存里的默认布局</h3>
+
+<pre><code>  A   R   G   B   A   R   G   B   A   R   G   B  
+| pixel 0       | pixel 1       | pixel 2   
+  0   1   2   3   4   5   6   7   8   9   10  11 ...
+</code></pre>
+
+<h3 id="toc_3">1.2 二维数据</h3>
+
+<p>在实际使用像素数据时，有时会使用二位数据。就时颜色组件红，绿，蓝，alpha,每一个组件是一个数组。这样可以实现很好的对数据进行压缩或者其他处理。</p>
+
+<h2 id="toc_4">二. 软件构成</h2>
+
+<p><img src="media/15362957172406/Xnip2018-09-09_08-32-56.png" alt="Xnip2018-09-09_08-32-56"/></p>
+
+<p>Display(显示屏)<br/>
+GPU<br/>
+GPU Driver<br/>
+OpenGL<br/>
+    CoreGraphics<br/>
+    CoreAnimation<br/>
+    CoreImage</p>
+
+<p>GPU是一个专门为图形并发计算而量身定做的处理单元。<br/>
+CoreAnimation使用CoreGraphics来做渲染。CoreGraphics在CPU里进行运算出数据，形成位图包装成纹理交给OpenGl进行操作GPU进行渲染。</p>
+
+<h3 id="toc_5">2.1 工作大致流程</h3>
+
+<p>GPU需要将每一个frame的纹理合成在一起。每一个纹理会占用VRAM，<br/>
+CPU开始程序时，会让CPU从bundle加载一张PNG的图片并且<strong>解压</strong>它，这所有的事情都在CPU上。在显示文本时，会促进CoreText和CoreGrapic生成一个位图(coreText排版器最终也是要绘制到图片上下文)，一旦准备好，它将会被作为一个纹理上传到GPU并显示出来。但滚动或者在屏幕上移动文本时，不管怎样，同样的纹理会能够复用，CPU只需要简单告诉GPU新的位置就可以，所有GPU可以重用存在的纹理，CPU并不需要重新渲染文本，并且位图也不需要重新上传到GPU。</p>
+
+<h2 id="toc_6">三. 纹理合成</h2>
+
+<p>在简化的理解中，纹理相当于CoreAnimatio里的CALayer，纹理可以有位图内容，其实CALayer也是有位图内容的，对于每一个纹理，所有的纹理都以某种方式叠加在彼此的顶部。当两个纹理覆盖在一起时候，GPU要为所有像素做合成操作。</p>
+
+<ul>
+<li><p>不透明的合成<br/>
+在不透明时，即opaque=yes时，不用合成，直接取上面的纹理。这样就减少了合成的时间。（这也就是为什么在做性能优化时，减少层次关系，减少不必要的透明）</p></li>
+<li><p>mask合成<br/>
+一个图层可以有一个和它相关联的 mask(蒙板)，mask 是一个拥有 alpha 值的位图，当像素要和它下面包含的像素合并之前都会把 mask 应用到图层的像素上去。当你要设置一个图层的圆角半径时，你可以有效的在图层上面设置一个 mask。但是也可以指定任意一个蒙板。比如，一个字母 A 形状的 mask。最终只有在 mask 中显示出来的(即图层中的部分)才会被渲染出来。<br/>
+所谓的mask就是一mask的不透明区域，显示本身的内容。实际上mask也是一种合成。</p></li>
+</ul>
+
+<h3 id="toc_7">3.1 离屏渲染</h3>
+
+<ul>
+<li><p>帧缓冲区<br/>
+屏幕缓存区，在屏幕上</p></li>
+<li><p>屏幕外缓冲区<br/>
+屏幕外缓冲区</p></li>
+<li><p>哪些情况会默认会强制进行离屏渲染?<br/>
+CoreAnimation为了应用mask会强制进行屏幕外渲染。<br/>
+CoreAnimation设置圆角半径会进行屏幕外渲染<br/>
+CoreAnimation设置阴影也会出现屏幕外渲染<br/>
+设置层为光栅化layer.shouldRasterize = yes<br/>
+(特别说明下，rasterize是图层的光栅化，会造成离屏渲染)</p></li>
+<li><p>离屏渲染的性能取舍？<br/>
+一般情况下需要避免离屏渲染，因为这是很大的消耗。直接将图层合成到帧的缓冲区（屏幕上）比先创建屏幕外缓冲区，然后将屏幕外缓冲区内容般到帧缓冲区要廉价很多。但有时候需要渲染树很复杂，可以强制离屏渲染那些图层，这样就可以缓存合成的结果。性能就会有所提升。（当使用离屏渲染时，GPU第一次会混合所有图层到一个基于新的纹理的位图缓存上，然后使用这个纹理来绘制到屏幕上）。当对这个纹理进行移动，变形等操作时，可以使用这个位图缓存。这样这部分的合成将减少很多工作。其实这就是做动画的流畅的原因。所以要不要离屏渲染，要看有取舍,一般对于静态的不经常变更的可以使用离屏，增加缓存。对于经常变更的就最好不要使用离屏。这样会增加建立屏幕外缓冲区的时间，以及屏幕内与屏幕外的切换时间。</p></li>
+</ul>
+
+<h3 id="toc_8">3.2离屏渲染检测</h3>
+
+<p>Instrument的CoreAnimationg工具，Color Offscreen-Rendered Yellow，是检测离屏渲染。Color Hits Green and Misses Red 选项，绿色代表无论何时一个屏幕外缓冲区被复用，而红色代表当缓冲区被重新创建。</p>
+
+<h2 id="toc_9">四. CoreAnimation与CoreGraphics与OpenGLES</h2>
+
+<p>CoreAnimation利用CoreGraphics绘制，CoreGraphics利用OpenGLES实现绘制。。</p>
+
+<p>OpenGLES做的就是将纹理合并，做些另外的操作，比如mask，阴影等。OpenGLES对这些有层次关系的纹理进行合成，而这些具体的操作是通过GPU来实现的（也就是通过OpenGLES来操作GPU,OpenGLES只是编程接口）。</p>
+
+<p>CoreAnimation重要的任务是判断出哪些图层需要被重新绘制，绘制完成后会有生成bitmap,CoreAnimion里的图层有backsore，就是一这个bitmap;这个bitmap可以是读取的图片数据，也可以是利用CoreGrapics绘制的。无论是给的图片还是自己通过CrorCrapics绘制的最终，提交把这个位图数据交个生成的纹理（这个纹理与这个Layer相对应）。</p>
+
+<h2 id="toc_10">五. CPU瓶颈与GPU瓶颈优化</h2>
+
+<p>要在1/60里完成渲染工作，CPU与GPU的总时间不能操作这个时间。否则就会出现掉帧。<br/>
+在出现性能瓶颈时, 我们采用Instrument里的，OpenGL ES Driver instrument 进行查看。</p>
+
+<h2 id="toc_11">六. CoreGraphics</h2>
+
+<p>CPU实现的是位图绘制，这个绘制过程是用CoreGraphics完成的，也就是通过CPU进行计算而来。我们自己画的线条，长方形，通过CPU计算，最终将数据形成与CGContext里。<br/>
+当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用CGContextRef 绘制</p>
+
+<ul>
+<li><p>UIKit 版本的代码为何不传入一个上下文参数到方法中？<br/>
+这是因为当使用 UIKit 或者 AppKit 时，上下文是唯一的。UIkit 维护着一个上下文堆栈，UIKit 方法总是绘制到最顶层的上下文中。UIGraphicsGetCurrentContext() 来得到最顶层的上下文。你可以使用 UIGraphicsPushContext() 和 UIGraphicsPopContext() 在 UIKit 的堆栈中推进或取出上下文。</p></li>
+<li><p>自己创建一个位图上下文<br/>
+自己创建的CGContext，那么绘制的数据在这个自己创建的CGContext里，可以用这个CGGcontext形成位图或者图片。(这里可以自己绘制然后生成图片，也可以实现异步绘制，哈哈)</p></li>
+</ul>
+
+<h3 id="toc_12">6.1 drawRect原理</h3>
+
+<p>当你调用 -setNeedsDisplay，UIKit 将会在这个视图的图层上调用 -setNeedsDisplay。这为图层设置了一个标识，标记为 dirty，但还显示原来的内容。它实际上没做任何工作，所以多次调用 -setNeedsDisplay并不会造成性能损失。<strong>当渲染系统准备好，它会调用视图图层的-display方法.此时，图层会装配它的后备存储。然后建立一个 Core Graphics 上下文(CGContextRef)，将后备存储对应内存中的数据恢复出来，绘图会进入对应的内存区域，并使用 CGContextRef 绘制</strong>。<br/>
+当你使用 UIKit 的绘制方法，例如: UIRectFill() 或者 -[UIBezierPath fill] 代替你的 -drawRect: 方法，他们将会使用这个上下文。使用方法是，UIKit 将后备存储的 CGContextRef 推进他的 graphics context stack，也就是说，它会将那个上下文设置为当前的。因此 UIGraphicsGetCurrent() 将会返回那个对应的上下文。既然 UIKit 使用 UIGraphicsGetCurrent() 绘制方法，绘图将会进入到图层的后备存储。如果你想直接使用 Core Graphics 方法，你可以自己调用 UIGraphicsGetCurrent() 得到相同的上下文，并且将这个上下文传给 Core Graphics 方法。</p>
+
+<p>总结下：检测是否需要重绘，需要重绘，若果实现了drawRect就会生成一个相应大小的后备存储。然后调用drawRect里的代码进行绘制。将数据写入上下文，幷形成新的后备存储。幷将新的后备存储交给GPU渲染。（这里如果不需要绘制，就不要重写drawRect方法了，这样就不会生成后没有必要的备存储对象了，以免造成性能的浪费），幷切每次出现重绘时，都会执行drawRect方法。造成时间和内存浪费。可以采用自己创建位图上下文，生成图片后，赋值给视图。这样可以避免不断绘制。</p>
+
+<h3 id="toc_13">6.2 异步绘制</h3>
+
+<p>将一些耗时的工作，避过图片的获取，图片的解码等工作放到子线程中去做，形成图片后，在放到主线程里将图片放进去。<br/>
+<code><br/>
+UIImageView *view; // assume we have this<br/>
+NSOperationQueue *renderQueue; // assume we have this<br/>
+CGSize size = view.bounds.size;<br/>
+[renderQueue addOperationWithBlock:^(){<br/>
+        UIImage *image = [renderer renderInImageOfSize:size];<br/>
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(){<br/>
+            view.image = image;<br/>
+        }];<br/>
+}];<br/>
+</code></p>
+
+<h3 id="toc_14">6.3 图片解码</h3>
+
+<p>你需要知道在 GPU 内，一个 CALayer 在某种方式上和一个纹理类似。图层有一个后备存储，这便是被用来绘制到屏幕上的位图。<br/>
+在给CALayer设置图片时，CoreAnimation会将其查看这个图片时否已经解码，没解码的化话进行解码(这里就是一个优化点，可以将解码的工作全部放到子线程里进行，哈哈)。<br/>
+imageNamed:从 bundle 里加载会立马解压。一般的情况是在赋值给 UIImageView 的 image 或者 layer 的 contents 或者画到一个 core graphic context 里才会解压。</p>
+
+<h3 id="toc_15">6.4 可变尺寸的图片</h3>
+
+<p>使用较小的图片好处<br/>
+解码快<br/>
+占用内存小</p>
+
+<h2 id="toc_16">七. 完整的绘制与动画流程</h2>
+
+<h3 id="toc_17">动画在APP内部的4个阶段</h3>
+
+<ol>
+<li><p>布局：<br/>
+在这个阶段，程序设置 View/Layer 的层级信息，设置 layer 的属性，如 frame，background color 等等。</p></li>
+<li><p>创建 backing image：在这个阶段程序会创建 layer 的 backing image，无论是通过 setContents 将一个 image 传給 layer，还是通过 drawRect：或 drawLayer:inContext：来画出来的。所以 drawRect：等函数是在这个阶段被调用的。</p></li>
+<li><p>准备：在这个阶段，Core Animation 框架准备要渲染的 layer 的各种属性数据，以及要做的动画的参数，准备传递給 render server。同时在这个阶段也会解压要渲染的 image。（除了用 imageNamed：方法从 bundle 加载的 image 会立刻解压之外，其他的比如直接从硬盘读入，或者从网络上下载的 image 不会立刻解压，只有在真正要渲染的时候才会解压）。</p></li>
+<li><p>提交：在这个阶段，Core Animation 打包 layer 的信息以及需要做的动画的参数，通过 IPC（inter-Process Communication）传递給 render server。</p></li>
+</ol>
+
+<h3 id="toc_18">动画在APP外部的2个阶段</h3>
+
+<p>当这些数据到达 render server 后，会被反序列化成 render tree。然后 render server 会做下面的两件事：</p>
+
+<ul>
+<li><p>根据 layer 的各种属性（如果是动画的，会计算动画 layer 的属性的中间值），用 OpenGL 准备渲染。</p></li>
+<li><p>渲染这些可视的 layer 到屏幕。</p></li>
+</ul>
+
+<p>如果做动画的话，最后的两个步骤会一直重复知道动画结束。</p>
+
+<h2 id="toc_19">八. 渲染性能优化的总结</h2>
+
+<ul>
+<li><p>隐藏的绘制<br/>
+UILabel将text画入backing image。也就是将文字搞成相对应的图片（文字最终都会是图片）。如果改了一个包含 text 的 view 的 frame 的话，text 会被重新绘制。</p></li>
+<li><p>Rasterize<br/>
+当使用layer的shouldRasterize的时候，layer会被强制绘制到一个offscreen image上，并且会被缓存起来。这种方法可以在比较复杂的不会变化的图层上。</p></li>
+<li><p>离屏绘制<br/>
+使用 Rounded corner， layer masks， drop shadows 的效果可以使用 stretchable images。比如实现 rounded corner，可以<strong>将一个圆形的图片赋值于 layer 的 content 的属性</strong>。并且设置好 contentsCenter 和 contentScale 属性。</p></li>
+<li><p>Blending<br/>
+如果一个 layer 被另一个 layer 完全遮盖，GPU 会做优化不渲染被遮盖的 layer，但是计算一个 layer 是否被另一个 layer 完全遮盖是很耗 cpu 的。将几个半透明的 layer 的 color 融合在一起也是很消耗的。</p></li>
+<li><p>opaque<br/>
+减少透明，减少合成时间</p></li>
+<li><p>drawRect<br/>
+没有必要不要在drawRect里实现。可以采用异步绘制。</p></li>
+<li><p>图片解码<br/>
+图片解码可以异步进行，不要在设置图片的时候解码</p></li>
+</ul>
+
+
+		</div>
+
+		
+
+	</article>
  
-	
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15351910189854.html">iOS保持界面流畅的技巧（性能优化）</a></h1>
+			<p class="meta"><time datetime="2018-08-25T17:56:58+08:00" 
+			pubdate data-updated="true">2018/8/25</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<ul>
+<li>
+<a href="#toc_0">卡顿原理</a>
+</li>
+<li>
+<a href="#toc_1">卡顿监控思路</a>
+</li>
+<li>
+<a href="#toc_2">线程卡顿监控方案一的实现</a>
+</li>
+</ul>
 
+
+<p>参考<a href="https://juejin.im/post/5ace078cf265da23994ee493">iOS 性能优化总结</a><br/>
+参考<a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/">微信读书 iOS 性能优化总结</a><br/>
+参考<a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿监控</a><br/>
+参考<a href="http://www.52im.net/thread-136-1-1.html">移动端IM实践：iOS版微信界面卡顿监测方案</a><br/>
+参考<a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/">iOS保持界面流畅的技巧</a></p>
+
+<p>本文是对上面几篇文章的总结。并与我自己的知识体系相融合，以达到一个自相融洽的整体。</p>
+
+<h2 id="toc_0">卡顿原理</h2>
+
+<p>VSync信号到来时，系统图形服务会通过CADisplayLink等机制通知App，APP主线程开始在CPU中计算显示内容，比如视图的创建，布局计算，图片解码，文本绘制等。随后CPU会将计算好的内容提交到GPU，由GPU进行变换，合成，渲染。随后GPU会把渲染结果提交到帧缓冲区区，等待下一次VSync信号到来时显示到屏幕上。<br/>
+由于垂直同步机制，若果在一个VSync时间内，CPU或者GPU没有完成内容的提交，则这个没有完成的提交不会显示到屏幕，在其提交后会到缓冲区，等待下一次机会在显示。那么这个下一次有可能是正常时间提交修改，则会将缓存区的内容覆盖。导致被覆盖的永远没机会显示了。就是掉帧了。<br/>
+那么与runloop有什么关系呢？<br/>
+Runloop的时间概念比1/60更小，也就是Runloop处理事物的时间远远比1/60要小。绝大部分时间是睡眠的。所以它们两个本身是没有关系的。绝大部分时候是主线程早就处理完毕所有显示数据，并提交到了渲染系统，渲染系统也完成了合成，也就是提交到了缓存区。只需要等待时钟的到来，将这个缓冲区的内容显示到屏幕上。</p>
+
+<p>FPS的真正含义是，1s的时间真正有多少帧显示到了屏幕上。</p>
+
+<h2 id="toc_1">卡顿监控思路</h2>
+
+<ol>
+<li><p>主线程卡顿监控<br/>
+通过子线程监测主线程的runloop，判断两个状态区域之间的耗时是否达到一定阈值。这两个状态就是kCFRunLoopBeforeSources与kCFRunLoopAfterWaiting</p></li>
+<li><p>借助FPS监控<br/>
+CADisplayLink 可以将其看做一个定时器。定时器都与机器的硬件有关系。而这个定时器是有屏幕“垂直时钟”驱动。也就是与垂直时钟同步，1/60时间跳动一次。因为CADisplayLink的回调也要在线程里执行，将其加入到主线程的Runloop里。runloop的TimerSource就会触发runloop的“叫醒”，执行该执行的内容。若果不将CADisplayLink加入，当然就不会定固定时间“叫醒”。</p></li>
+</ol>
+
+<p>CADislayLink的timestampe的两次差为1s之内的tick次数，即使FPS。</p>
+
+<h2 id="toc_2">线程卡顿监控方案一的实现</h2>
+
+<p><a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿检测</a><br/>
+这一方案的思路，就是从引起卡顿的本质来优化。引起卡顿，在kCFRunLoopBeforeSources通知后执行主队列里的代码，执行block的代码等。或则在kCFRunLoopAfterWaiting被唤起后，也会执行队列里的代码，block代码。</p>
+
+<pre><code>#import &lt;CrashReporter/CrashReporter.h&gt;
+
+@interface PerformanceMonitor ()
+{
+    int timeoutCount;
+    CFRunLoopObserverRef observer;
+    
+    @public
+    dispatch_semaphore_t semaphore;
+    CFRunLoopActivity activity;
+}
+@end
+
+@implementation PerformanceMonitor
+
++ (instancetype)sharedInstance
+{
+    static id instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
+static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info)
+{
+    PerformanceMonitor *moniotr = (__bridge PerformanceMonitor*)info;
+    
+    moniotr-&gt;activity = activity;
+    
+    dispatch_semaphore_t semaphore = moniotr-&gt;semaphore;
+    dispatch_semaphore_signal(semaphore);//没当状态发生变化的时候+1；这是在主线程执行
+}
+
+- (void)stop
+{
+    if (!observer)
+        return;
+    
+    CFRunLoopRemoveObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
+    CFRelease(observer);
+    observer = NULL;
+}
+
+- (void)start
+{
+    if (observer)
+        return;
+    
+    // 信号
+    semaphore = dispatch_semaphore_create(0);
+    
+    // 注册RunLoop状态观察
+    CFRunLoopObserverContext context = {0,(__bridge void*)self,NULL,NULL};
+    observer = CFRunLoopObserverCreate(kCFAllocatorDefault,
+                                       kCFRunLoopAllActivities,
+                                       YES,
+                                       0,
+                                       &amp;runLoopObserverCallBack,
+                                       &amp;context);
+    CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
+    
+    //在子线程监控时长
+    //在子线程不断的监控信号量，如果在50 ms里还没有超时，也就是在50ms状态没有发生该边的话。就说明在两个状态的时间间隔里有执行时长超过50ms的
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        while (YES)
+        {
+            long st = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 50*NSEC_PER_MSEC));
+            if (st != 0)
+            {
+                if (!observer)
+                {
+                    timeoutCount = 0;
+                    semaphore = 0;
+                    activity = 0;
+                    return;
+                }
+                
+                //若果超时的是kCFRunLoopBeforeSources 或者kCFRunLoopAfterWaiting 就更能说明问题
+                //如果5此都是这样，说明有问题。几下主线程的调用堆栈。
+                if (activity==kCFRunLoopBeforeSources || activity==kCFRunLoopAfterWaiting)
+                {
+                    if (++timeoutCount &lt; 5)
+                        continue;
+                    
+                    PLCrashReporterConfig *config = [[PLCrashReporterConfig alloc] initWithSignalHandlerType:PLCrashReporterSignalHandlerTypeBSD
+                                                                                       symbolicationStrategy:PLCrashReporterSymbolicationStrategyAll];
+                    PLCrashReporter *crashReporter = [[PLCrashReporter alloc] initWithConfiguration:config];
+                    
+                    NSData *data = [crashReporter generateLiveReport];
+                    PLCrashReport *reporter = [[PLCrashReport alloc] initWithData:data error:NULL];
+                    NSString *report = [PLCrashReportTextFormatter stringValueForCrashReport:reporter
+                                                                              withTextFormat:PLCrashReportTextFormatiOS];
+                    
+                    NSLog(@&quot;------------\n%@\n------------&quot;, report);
+                }
+            }
+            timeoutCount = 0;
+        }
+    });
+}
+
+@end
+</code></pre>
+
+
+		</div>
+
+		
+
+	</article>
  
-	
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15351909215000.html">组件化系列（一） 组件化原理及方案</a></h1>
+			<p class="meta"><time datetime="2018-08-25T17:55:21+08:00" 
+			pubdate data-updated="true">2018/8/25</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<hr/>
 
+<p>本系列文章是对大神的博客文章的研读与总结。我们公司从18年初开始组件化的开发的构建。为了理解组件开发的原理，找了相关资料做了对比分析。以下是我参考的文章<br/>
+<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a><br/>
+<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。<br/>
+<a href="https://github.com/meili/MGJRouter.git">蘑菇街的开源</a><br/>
+<a href="https://github.com/raojunbo/CTMediator.git">Casa的组件化方案开源</a></p>
+
+<h2 id="toc_0">一：模块化与解耦</h2>
+
+<p><a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a></p>
+
+<h3 id="toc_1">1.为什么模块化</h3>
+
+<p>因为在实际的开发中，项目业务较多，一个APP会有多个小组进行开发，比如我们公司的有数学组，语文组，英语组，商业组，等，出现的问题大多数情况下一个开发人员只关心我这个组的代码。这样在编译时实际上是编译整个项目，<strong>编译效率低</strong>。每个小组在同一个工程里增，删，改文件，<strong>xcode的工程文件会经常发生冲突</strong>（我们用git进行版本控制），合并代码时很痛苦。在整个项目查找自己忘记类名了的功能时，犹如<strong>大海捞针</strong>。有些基础模块核心模块需要专人维护，对基础的开发人员不开发，需要<strong>隔离基础库</strong>，也需要进行解耦。</p>
+
+<p>这些理由已经足以说明进行模块化组件化的迫切了。</p>
+
+<h3 id="toc_2">2. 模块设计原则</h3>
+
+<blockquote>
+<ol>
+<li>越底层的模块，应该越稳定，越抽象，越具有高度复用度。</li>
+<li>不要让稳定的模块依赖不稳定的模块，减少依赖</li>
+<li>提升模块的复用度，<strong>自完备性有时候要优于代码复用</strong></li>
+<li>每个模块只做好一件事情，不要让Common出现</li>
+<li>按照你架构的层数从上到下依赖，<strong>不要出现下层模块依赖上层模块的现象</strong>，业务模块之间也尽量不要耦合</li>
+</ol>
+</blockquote>
+
+<h3 id="toc_3">3. 模块解耦手段</h3>
+
+<p>要实现模块之间真正的解耦才算真正的模块化。<br/>
+解耦目标：</p>
+
+<blockquote>
+<p><strong>在基于模块设计原则上让模块之间没有循环依赖，让业务模块之间解除依赖</strong>。</p>
+</blockquote>
+
+<p>公共模块可以通过架构设计来避免耦合业务。但业务模块之间还是会有耦合的。<br/>
+业务模块之间的比如页面跳转，数据传递，怎么实现解耦不同业务模块之间的代码调用呢？</p>
+
+<h4 id="toc_4">1. 面向接口调用（很妙）</h4>
+
+<p>直接引用有依赖的情况</p>
+
+<pre><code>//A 模块
+- (void)getSomeDataFromB {
+    B.getSomeData();
+}
+//B 模块
+- (void)getSomeData {
+    return self.data;
+}
+</code></pre>
+
+<pre><code>//接口
+@protocol BService&lt;NSObject&gt;
+- (void)getSomeData;
+@end
+
+//A 模块，只依赖接口(针对协议编程)
+- (void)getSomeDataFromB {
+    id b = findService(@protocol(BService));
+    b.getSomeData;
+}
+//B模块，实现BService接口
+@interface B:NSObject&lt;BService&gt;
+- (void)getSomeData {
+    return self.data;
+}
+
+</code></pre>
+
+<p>这样就可以实现了既满足了模块之间的调用，也实现了解耦<br/>
+优点</p>
+
+<p><code>接口类似代码，可以非常灵活的定义函数和回调</code></p>
+
+<p>缺点</p>
+
+<pre><code>1. 接口定义文件需要放在一个模块里以供依赖，但是这个模块不贡献代码。还好。
+2. 使用麻烦，每个调用都需要定义一个service的接口，幷实现。
+</code></pre>
+
+<h4 id="toc_5">2. 面向自定义协议的调用</h4>
+
+<p>面向接口的调用的缺点导致幷不能满足所有的需求，也解耦的不彻底（对接口的依赖）。<br/>
+终极手段就是通过定义一套自定义协议来实现模块间的通信，可以采用现成的协议如URL协议，简单，易于上手，这也是很多人采用url作为协议原因。可统一实现本地于远程的页面跳转，并且实现业务间的解耦。<br/>
+要实现真正的解耦，采用注册机制。</p>
+
+<h4 id="toc_6">3.利用运行时的反射机制</h4>
+
+<p>Object-C的反射机制是通过一个字符串找到一个类的类对象，即NSClassFromString();<br/>
+要实现真正的解耦，可以采用通过反射机制获取类，在创建对象，实现跳转或者通信。这样就不用依赖”要跳转的类“了。</p>
+
+<blockquote>
+<p>总结<br/>
+以上的解耦方式是从<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a>得到的启发。这些解耦方式无论是在平时开发中，还是要搭建组件化的框架都可以使用。具体的组件化框架我们将在下面对前人的组件化探索做下分析</p>
+</blockquote>
+
+<h2 id="toc_7">二：模块拆分</h2>
+
+<ol>
+<li><p>基础库组件<br/>
+第三方库如AFNetWorking,SDWebImage等，还有一些工具也要从主库重剥离出来，形成自己的私有基础仓库。</p></li>
+<li><p>服务组件</p></li>
+<li><p>业务组件</p></li>
+</ol>
+
+<p><a href="https://blog.csdn.net/xinzhou201/article/details/51000807">https://blog.csdn.net/xinzhou201/article/details/51000807</a></p>
+
+<ol>
+<li>拆分中遇到的问题
+主工程与壳工程的pods版本的管理问题</li>
+</ol>
+
+<h2 id="toc_8">三：蘑菇街组件化</h2>
+
+<h3 id="toc_9">蘑菇街的方案一</h3>
+
+<p>原理采用的是面向自定义协议的方式实现解耦。自定义协议采用的是现成的url协议，url协议成熟，方便，利用URL可以在这里做key值，方便的参数解析，与应用之间的调用相吻合。<br/>
+嫌在这里看代码代码麻烦的话，可以下载我自己写的原理 <a href="https://github.com/raojunbo/iOSCoreConcept.git">Demo组件化原理分析</a></p>
+
+<pre><code>//Mediator3.h文件
+typedef void(^componetBlock)(id param);
+typedef id(^objectComponetBlock)(id param);
+
+/*
+ 原理就是将url与Block进行映射
+ url起到两个作用：一是作为key值与block进行映射，二是可以直接接参数就想普通url后面跟参数一样。
  
-	
+ 特别说明:
+ url传递参数受到一定的限制。比如对本地来说，需要传非常规的参数时，就办不到。
+ 这里我自己的Demo直接将参数放在了函数后面省去对url进行解析的操作。实际的开发中将这个参数从url里解析出来。如果要传递非常规的参数。也可以直接在后面添加有一个param。
+ */
 
+@interface Mediator3 : NSObject
+
++ (instancetype)shareInstance;
+
+//指定相应的url的执行操作
+//例如，只是简单的打开一个页面
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block;
+//打开某个页面
+- (void)openURL:(NSString *)url withParam:(id)param;
+
+
+//指定相应rul的执行操作，并给一个返回值
+//例如打开一个页面，或者在一个组件里面取值后返回来
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block;
+//取得某个组件操作后的值
+- (id)objectForURL:(NSString *)url withParam:(id)param;
+</code></pre>
+
+<pre><code>//Mediator3.m文件
+@interface Mediator3()
+@property (nonatomic, strong)NSMutableDictionary *cache;
+@end
+
+@implementation Mediator3
+
+- (instancetype)init {
+    if(self = [super init]){
+        _cache = [[NSMutableDictionary alloc]init];
+    }
+    return self;
+}
+
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    static Mediator3 *mediator = nil;
+    dispatch_once(&amp;onceToken, ^{
+        
+        mediator = [[self alloc]init];
+    });
+    return mediator;
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (void)openURL:(NSString *)url withParam:(id)param {
+    componetBlock block = [self.cache objectForKey:url];
+    if(block){
+        block(param);
+    }
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (id)objectForURL:(NSString *)url withParam:(id)param{
+    objectComponetBlock block = [self.cache objectForKey:url];
+    if(block){
+        return block(param);
+    }
+    return nil;
+}
+
+@end
+</code></pre>
+
+<pre><code>//BookDetailViewController.m
+@implementation BookDetailViewController
+
++ (void)load {
+    //实现跳转功能
+    [[Mediator3 shareInstance] registerURLPattern:@&quot;weread://bookDetail&quot; toHandler:^(id param) {
+        NSDictionary *paramDict = (NSDictionary *)param;
+        BookDetailViewController *bookDetailVC = [[BookDetailViewController alloc]initWithBookId:paramDict[@&quot;bookId&quot;]];
+        UINavigationController *nav = (UINavigationController *) [UIApplication sharedApplication].keyWindow.rootViewController;
+        [nav pushViewController:bookDetailVC animated:YES];
+    }];
+    
+    
+    //只是取值的操作
+    [[Mediator3 shareInstance]registerURLPattern:@&quot;weread://bookCount&quot; toObjectHandler:^id(id param) {
+        //执行一定的操作后
+        return @&quot;5&quot;;
+    }];
+    
+</code></pre>
+
+<pre><code>//ReadingViewController.m
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ //注册url与block的映射,实现调转的操作
+    [[Mediator3 shareInstance] openURL:@&quot;weread://bookDetail&quot; withParam:@{@&quot;bookId&quot;:@&quot;2&quot;}];
+    
+    //注册url与block映射，实现只是取值的操作
+    NSString *bookCount =  [[Mediator3 shareInstance] objectForURL:@&quot;weread://bookCount&quot; withParam:@&quot;&quot;];
+    NSLog(@&quot;这是从某个组件取回来的值%@&quot;,bookCount);
+    }
+</code></pre>
+
+<h3 id="toc_10">蘑菇街的方案二</h3>
+
+<blockquote>
+<p>实现原理：<br/>
+面向接口调用，即新开了一个对象叫做ModuleManager，提供了一个registerClass:forProtocol:的方法，注册后，@protocol和Class进行配对。因此ModuleManager中就有了一个字典来记录这个配对。<br/>
+当有涉及非常规参数的调用时，业务方就不会去使用[MGJRouter openURL:@&quot;mgj://detail?id=404&quot;]的方案了，转而采用ModuleManager的classForProtocol:方法。业务传入一个@protocol给ModuleManager，然后ModuleManager通过之前注册过的字典查找到对应的Class返回给业务方，然后业务方再自己执行alloc和init方法得到一个符合刚才传入@protocol的对象，然后再执行相应的逻辑。</p>
+</blockquote>
+
+<p>这里的protocol统样起到两个作用，一是key值，另一个是起到定义调用接口的作用，可以定义任意类型的参数。</p>
+
+<p>缺点<br/>
+1. 被调用方与调用方，虽然不相互依赖，但都得依赖这个协议。这实际上是一种不彻底的解耦。</p>
+
+<ol>
+<li>同url注册形式一样，都得维持注册表。</li>
+</ol>
+
+<h2 id="toc_11">四：casa组件化</h2>
+
+<p>基于Mediator模式和Target-Action模式，中间采用了runtime来完成调用。这套组件化方案将远程应用调用和本地应用调用做了拆分，而且是由本地应用调用为远程应用调用提供服务</p>
+
+<blockquote>
+<p>实现原理<br/>
+[[CTMediator sharedInstance] performTarget:targetName action:actionName params:@{...}]向CTMediator发起跨组件调用，CTMediator根据获得的target和action信息，通过objective-C的runtime转化生成target实例以及对应的action选择子，然后最终调用到目标业务提供的逻辑，完成需求。</p>
+</blockquote>
+
+<p><img src="media/15351909215000/Xnip2018-09-04_16-42-52.png" alt="Xnip2018-09-04_16-42-52"/></p>
+
+<p>下面是工程实践<br/>
+下面是casa开源的实现的头文件。.m文件请自行下载</p>
+
+<pre><code>//casa开源的CTMeditor.h
+@interface CTMediator : NSObject
+
++ (instancetype)sharedInstance;
+
+// 远程App调用入口
+- (id)performActionWithUrl:(NSURL *)url completion:(void(^)(NSDictionary *info))completion;
+// 本地组件调用入口
+- (id)performTarget:(NSString *)targetName action:(NSString *)actionName params:(NSDictionary *)params shouldCacheTarget:(BOOL)shouldCacheTarget;
+- (void)releaseCachedTargetWithTargetName:(NSString *)targetName;
+
+@end
+
+//CTMeditor.m
+略
+采用运行时构建可执行的NSInvocation。在内部都给其添加了前缀
+ NSString * targetClassString = [NSString stringWithFormat:@&quot;Target_%@&quot;, targetName];
+ NSString *actionString = [NSString stringWithFormat:@&quot;Action_%@:&quot;, actionName];
+</code></pre>
+
+<pre><code>//Target_B.h
+@interface Target_B : NSObject
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)dict;
+
+@end
+
+//Target_B.m
+#import &quot;Target_B.h&quot;
+#import &quot;DemoModuleBDetailViewController.h&quot;
+@implementation Target_B
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)param {
+    DemoModuleBDetailViewController *bDetailVC = [[DemoModuleBDetailViewController alloc]init];
+    return bDetailVC;
+}
+@end
+</code></pre>
+
+<pre><code>//ViewController.m
+//这是调用方
+#import &quot;CTMediator+CTMediatorModuleAActions.h&quot;
+#import &quot;CTMediator+CTMediatorModuleBActions.h&quot;
+- (void）viewDidLoad {
+//直接调用
+  if (indexPath.row == 6) {
+        [[CTMediator sharedInstance] performTarget:@&quot;InvalidTarget&quot; action:@&quot;InvalidAction&quot; params:nil shouldCacheTarget:NO];
+    }
+    //通过分类调用
+    if(indexPath.row == 7){
+        UIViewController *vc =  [[CTMediator sharedInstance]CTMediator_viewControllerForModuleBDetail:@{}];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+</code></pre>
+
+<ol>
+<li><p>从.h文件里可以看到，外部的调用将远程与本地分开，内部实现时远程利用了本地（通过解析url,将url转换成了本地的调用）。</p></li>
+<li><p>Mediator分别对每一个模块有个一个分类，提供对外部的调用的列表。这些分类被需要调用的模块所依赖。也就是只需要依赖Mediator就可以了，是单向依赖。</p></li>
+<li><p>为了更好的实现组件对外接口的管理。此种方案专门针对每个模块有一个Target_A类似的对外服务接口的实现。</p></li>
+<li><p>用户调用都是通过对Mediator的分类，对固定的模块的类的名字的反射，来对Target_A的调用，当然就调用到了A的服务。</p></li>
+<li><p>此种方式为了使代码方便管理，会为每个模块提供Target和一个对Mediator的分类。</p></li>
+<li><p>Mediator与其分类可以是单独一个repo，方便其他组件依赖。也就是其他组件只依赖于这个中间件。解耦与组件化就完成了。</p></li>
+</ol>
+
+<h2 id="toc_12">五：总结</h2>
+
+<p>组件化就是在与解耦，解耦的方式大致就是上面提到的三种方法（也可能有其他办法，但至少现在我看到的最好实践就这三）。然后是基于各个原理的工程化实践。从工程实践来看casa的Mediator+target-action更胜一筹。思路清晰，调用统一，没有注册机制的维护，模块的服务的实现（Target）在同一个地方，不用耦合到真正的模块里。<br/>
+多说一句，滴滴组件化，页面间的跳转采用openURL,页面在+(void)load方法里进行注册，ONERoute内部保存一份URL与Class的对应表。当调用openURL时，会查找到相应的类，然后生成相应的实例对象。<br/>
+最后强烈建议大家认真读<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。</p>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346749892115.html">iOS APP启动如何优化</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:36:29+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>参考文章<br/>
+<a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653579242&amp;idx=1&amp;sn=8f2313711f96a62e7a80d63851653639&amp;chksm=84b3b5edb3c43cfb08e30f2affb1895e8bac8c5c433a50e74e18cda794dcc5bd53287ba69025&amp;mpshare=1&amp;scene=1&amp;srcid=081075Vt9sYPaGgAWwb7xd1x&amp;key=4b95006583a3cb388791057645bf19a825b73affa9d3c1303dbc0040c75548ef548be21acce6a577731a08112119a29dfa75505399bba67497ad729187c6a98469674924c7b447788c7370f6c2003fb4&amp;ascene=0&amp;uin=NDA2NTgwNjc1&amp;devicetype=iMac16%2C2+OSX+OSX+10.12.6+build(16G29)&amp;version=12020110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=IDZVtt6EyfPD9ZLcACRVJZYH8WaaMPtT%2BF3nfv7yZUQBCMKM4H1rDCbevGd7bXoG">iOS App 启动性能优化</a></p>
+
+<h1 id="toc_0">iOS APP启动如何优化</h1>
+
+<p>App总的启动时间 = main()之前加载装载时间 + didFinishLaunchingWithOptions()之后时间</p>
+
+<ul>
+<li><p>didFinishLaunchingWithOptions之后<br/>
+在didFinishLaunching时间后，我们有SDK的初始化，视图控制器的创建。网络请求，配置等信息。可以将这个进行类，并分别时间进行配置</p>
+
+<ul>
+<li>日志，统计可以继续放在最先配置</li>
+<li>推送，即是通讯，项目配置</li>
+<li>其他sdk的初始化</li>
+</ul>
+
+<p>一点：日志，统计配置先启动，其次是推送，环境配置，项目配置，可以放在加载广告时进行处理，最后是一般SDK的配置，可以在第一个页面渲染完成后进行配置。</p>
+
+<p>二点：可以将网络请求放在didAppear里进行，并将数据解析渲染等操作，放在didAppear里进行。首页面给一个缓存的数据先显示出来。<br/>
+总的思路：1.didFinishLaunchingWithOptions里的配置操作 2.减少第一个页面的渲染时间。</p></li>
+<li><p>main之前的加载时间</p></li>
+</ul>
+
+<p>动态库加载越多，启动越慢(因为在启动时，需要将编译时依赖的动态库的函数真正绑定)<br/>
+Objc类越多，启动越慢(因为要解析更多的二进制数据)<br/>
+静态数据越多，启动越慢<br/>
++load越多，启动越慢</p>
+
+<pre><code>Total pre-main time: 1.7 seconds (100.0%)
+         dylib loading time: 252.96 milliseconds (14.7%)
+        rebase/binding time: 939.94 milliseconds (54.7%)
+            ObjC setup time: 113.02 milliseconds (6.5%)
+           initializer time: 410.92 milliseconds (23.9%)
+</code></pre>
+
+<p>优化手段<br/>
+移出不需要的动态库<br/>
+移出不需要用到的类<br/>
+合并功能类似的类和扩展（一般不做优化，对程序员成本太高）<br/>
+减少+load方法里执行耗时的操作，可以用dispatch_once来替代的只执行一次的方案<br/>
+减少图片大小</p>
+
+
+		</div>
+
+		
+
+	</article>
   
-  
-</div></div>
-
-
-<div class="page-bottom">
-  <div class="row">
-  <hr />
-  <div class="small-9 columns">
-  <p class="copyright">Copyright &copy; 2015
-Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
-Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
-  </div>
-  <div class="small-3 columns">
-  <p class="copyright text-right"><a href="#header">TOP</a></p>
-  </div>
-   
-  </div>
+	<div class="pagination">
+	
+<a href="archives.html">Blog Archives</a>
+	 
+	    
+	</div>
 </div>
+ <aside class="sidebar"> 
 
-        </section>
-      </div>
-    </div>
+	<section>
+	  <h1>Categories</h1>
+	  <ul id="recent_posts">
+	  
+	      <li class="post">
+	        <a href="%E5%89%8D%E8%A8%80.html"><strong>前言&nbsp;(1)</strong></a>
+	        
+	        
+	        
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(10)</strong></a>
+	         <p class="cat-children-p"> 
+	        
+	        	<a href="%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0.html">投资笔记&nbsp;(9)</a>&nbsp;&nbsp;
+	        
+	         </p> 
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.html"><strong>软件工程&nbsp;(49)</strong></a>
+	         <p class="cat-children-p"> 
+	        
+	        	<a href="%E7%AE%97%E6%B3%95.html">算法&nbsp;(8)</a>&nbsp;&nbsp;
+	        
+	        	<a href="%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE.html">网络协议&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">iOS基础概念&nbsp;(11)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%BC%80%E6%BA%90%E5%88%86%E6%9E%90.html">iOS开源分析&nbsp;(2)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">iOS性能优化&nbsp;(6)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html">iOS工具深入&nbsp;(2)</a>&nbsp;&nbsp;
+	        
+	        	<a href="shell%E8%84%9A%E6%9C%AC.html">shell脚本&nbsp;(9)</a>&nbsp;&nbsp;
+	        
+	        	<a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html">C语言捡漏&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="Git%E5%B7%A5%E5%85%B7.html">Git工具&nbsp;(3)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">iOS架构设计&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="Swift.html">Swift&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">设计模式&nbsp;(4)</a>&nbsp;&nbsp;
+	        
+	         </p> 
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html"><strong>音视频技术&nbsp;(9)</strong></a>
+	        
+	        
+	        
+	      </li>
+	   
+	  </ul>
+	</section>
+	<section>
+	  <h1>Recent Posts</h1>
+	  <ul id="recent_posts">
+	  
+	      
+		      <li class="post">
+		        <a href="15512048926912.html">设计模式系列（四）-- 行为型</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048797799.html">设计模式系列（三）-- 结构型</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048653711.html">设计模式系列（二）--创建型设计模式</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048416439.html">设计模式系列（一）设计模式概要</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512046578708.html">Swift梳理</a>
+		      </li>
+	     
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	   
+	  </ul>
+	</section>
+	
+</aside> </div></div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; Theme by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+
+  
     
-    
-    <script src="asset/js/foundation.min.js"></script>
-    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
-    <script>
-      $(document).foundation();
-
-     
-    </script>
-    
 
 
-  </body>
+
+
+</body>
 </html>

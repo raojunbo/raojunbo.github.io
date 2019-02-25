@@ -4,30 +4,24 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-02-25T22:18:03+08:00</updated>
+  <updated>2019-02-25T23:20:16+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im">MWeb</generator>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[---]]></title>
+    <title type="html"><![CDATA[设计模式系列（四）-- 行为型]]></title>
     <link href="https://raojunbo.github.io/15512048926912.html"/>
     <updated>2019-02-27T02:14:52+08:00</updated>
     <id>https://raojunbo.github.io/15512048926912.html</id>
     <content type="html"><![CDATA[
-<p>layout: post<br/>
-title: 设计模式系列（四）-- 行为型<br/>
-date: 2018-08-28 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
-
 <p>具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
 
-<h2 id="toc_1">13. 责任链模式</h2>
+<h2 id="toc_0">13. 责任链模式</h2>
 
 <p>避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些<br/>
 对象连接成一条链，并且沿着者条链传递请求，直到有对象处理它为止。<br/>
@@ -36,21 +30,21 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 有多个对象可以处理一个请求，具体哪个对象处理该请求由运行时自动确定。<br/>
 在不确定指定接收者的情况写，向多个对象中的一个提交一个请求。</p>
 
-<h2 id="toc_2">14：命令模式(很重要)</h2>
+<h2 id="toc_1">14：命令模式(很重要)</h2>
 
 <p>将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化。<br/>
 使用场景<br/>
 需要对<strong>行为进行记录</strong>，<strong>撤销</strong>或者重做，事物等的处理时。凡是有命令的地方，都可以使用命令模式。命令模式实现了很容易对命令的扩展（即对扩展开放），添加一个命令就可以了，同过这些命令取修改接受者的状态，其实我们直接执行函数就可以修改接受者的状态，当我们需要添加一些行为的记录，撤销的等行为，为了将行为的<strong>实现者receiver</strong>与行为的请求者(既可以是receiver也可以是其他对象)实现松耦合。</p>
 
-<h2 id="toc_3">15：解释器模式</h2>
+<h2 id="toc_2">15：解释器模式</h2>
 
-<h2 id="toc_4">16：迭代器模式</h2>
+<h2 id="toc_3">16：迭代器模式</h2>
 
 <p>提供一种按顺序访问一个聚合对象中的各个元素。而又无需暴露该对象的内部表示。<br/>
 迭代器的关键代码是实现hasNext,next。<br/>
 迭代器简化并且统一了对于集合类型的访问方法。在新添加的集合类型里，无需修改原有代码，只需要实现针对这个心添加的集合的迭代器就可以了。所以对扩展时开放的。</p>
 
-<h2 id="toc_5">17：中介者模式</h2>
+<h2 id="toc_4">17：中介者模式</h2>
 
 <p>中介者模式和我们日常生活中的中介者其实是一样的。房产中介。解决了买家与卖家之间错综复杂的关系。实现了。买家与中介联系，卖家与中介联系,当然这里协调的对象也可以是相同类型的比如都是&quot;买家&quot;,我们把买家与卖家统一称为“同事”（这类在初看文章的时候不理解为什么都是”同事“，其是为了方便描述罢了。在实际的开发中，那你想协调哪两种或者多种对象之间的交互都是可以的）。在对象的世界里面，也是如此。<br/>
 实际的例子<br/><br/>
@@ -60,7 +54,7 @@ MVC里的模式，c就是中介者，m,v都是同事。c需要协调m与v的交�
 那么就有个问题，我同事A修改了值，我还要通过A取修改B的值，B的值修改了，B还要去修改C的值。这样就是对象间非常复杂的操作关系。<br/>
 引入中介这后，这个几个对象之间的关系就变成只有中介者之间交互。这样关系就轻松多了。</p>
 
-<h2 id="toc_6">18：备忘录模式</h2>
+<h2 id="toc_5">18：备忘录模式</h2>
 
 <p>保存一个对象的某个状态，以便在适当的时候恢复对象。<br/>
 在不破话封装的前提下，捕获一个对象的内部状态，幷在该对象之外保存这个状态，这样可以<br/>
@@ -69,44 +63,38 @@ MVC里的模式，c就是中介者，m,v都是同事。c需要协调m与v的交�
 信息。和将保存的信息恢复为类的过程。整个是在需要备忘得对象实现的。<br/>
 所以，备忘录其实，就时搞一个类专门实现“存”与&quot;取&quot;一个对象的状态，以备忘。</p>
 
-<h2 id="toc_7">19：观察者模式</h2>
+<h2 id="toc_6">19：观察者模式</h2>
 
 <p>当一个对象的状态发生改变的时候，所有的依赖对象都将得到通知。<br/>
 解决一对多的情况。<br/>
 观察者模式，在iOS里到处都有。通知中心，Kvo,等.</p>
 
-<h2 id="toc_8">20：状态模式(很重要,实际的开始中很常见)</h2>
+<h2 id="toc_7">20：状态模式(很重要,实际的开始中很常见)</h2>
 
 <p>对象的行为依赖于他的状态，并且可以根据它的状态的改变而改变相关的行为。<br/>
 使用场景<br/>
 当代码中包含有大量于状态有关的行为时。</p>
 
-<h2 id="toc_9">21：策略模式</h2>
+<h2 id="toc_8">21：策略模式</h2>
 
 <p>策略模式同状态模式一样，不同的是将策略进行隔离。当有新的策略时，只需要扩展新的策略就行了。</p>
 
-<h2 id="toc_10">22：模板方法模式</h2>
+<h2 id="toc_9">22：模板方法模式</h2>
 
-<h2 id="toc_11">23：访问者模式</h2>
+<h2 id="toc_10">23：访问者模式</h2>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[---]]></title>
+    <title type="html"><![CDATA[设计模式系列（三）-- 结构型]]></title>
     <link href="https://raojunbo.github.io/15512048797799.html"/>
     <updated>2019-02-27T02:14:39+08:00</updated>
     <id>https://raojunbo.github.io/15512048797799.html</id>
     <content type="html"><![CDATA[
-<p>layout: post<br/>
-title: 设计模式系列（三）-- 结构型<br/>
-date: 2018-08-28 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
-
 <p>具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
 
-<h2 id="toc_1">6. 适配器模式</h2>
+<h2 id="toc_0">6. 适配器模式</h2>
 
 <p>适配器模式将某个类的接口转换成客户端期望的另一个接口表示。目的是消除由于接口不匹配所造成的类的兼容性问题。分为3类，类适配器，对象的适配器</p>
 
@@ -121,12 +109,12 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 类适配器只能适配一个类，而对象适配器可以将不同的待适配者适配到统一目标。<br/>
 而类适配器由于是继承，可以置换待适配对象的一些方法。</p>
 
-<h2 id="toc_2">7. 外观模式</h2>
+<h2 id="toc_1">7. 外观模式</h2>
 
 <p>外观模式让子系统更加易用，使用端不需要了解子系统的内部的实现。<br/>
 也不需要跟众多子系统的内部的模块进行交互，只需要跟门面交互就可以了。外观角色好比一道屏障，对客户端屏蔽了子系统的具体实现。</p>
 
-<h2 id="toc_3">8. 桥接模式</h2>
+<h2 id="toc_2">8. 桥接模式</h2>
 
 <p>桥接模式的场景：<br/>
 类似于绘制形状，有多个形状，每个形状的颜色还不一样。为每种形状都提供各种颜色的版本，会造成n*n个类。</p>
@@ -134,7 +122,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 <p>这是可以采用桥接模式，将<strong>继承关系转换成关联</strong>关系，为每种形状都提供各种颜色的版本。<br/>
 桥接模式的本质是将继承关系转换成关联的关系。从而降低了类与类之间的耦合度，减少了系统中的类的数量，也减少了代码量。</p>
 
-<h2 id="toc_4">9. 装饰</h2>
+<h2 id="toc_3">9. 装饰</h2>
 
 <p>有这样一个场景，购买咖啡时，可以要求在其中加入各种调料。例如<br/>
 豆浆，摩卡，蒸奶，有时添加，有时不添加。这样就会导致类的爆炸，并且无法满足混合添加,多次添加的的情况。<br/>
@@ -142,15 +130,15 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 
 <p>装饰类的设计，装饰类既有主类的属性，本类也是主类类型。这样可以递归的方式来获得最总被装饰了的对象。</p>
 
-<h2 id="toc_5">10. 代理</h2>
+<h2 id="toc_4">10. 代理</h2>
 
 <p>代理不说了，开始做iOS时就是代理模式。</p>
 
-<h2 id="toc_6">11. 享元</h2>
+<h2 id="toc_5">11. 享元</h2>
 
 <p>享元就是共享对象。既可以内存缓存对象，也可复用对象（通过一个唯一的标识）。</p>
 
-<h2 id="toc_7">12. 组合模式</h2>
+<h2 id="toc_6">12. 组合模式</h2>
 
 <p>我的理解，组合的设计模式在这里有两层含义。<br/>
 一层含义：对象包含对象的问题，通过组合的方式（在对象内部引用对象）来进行布局。<br/>
@@ -160,27 +148,21 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[---]]></title>
+    <title type="html"><![CDATA[设计模式系列（二）--创建型设计模式]]></title>
     <link href="https://raojunbo.github.io/15512048653711.html"/>
     <updated>2019-02-27T02:14:25+08:00</updated>
     <id>https://raojunbo.github.io/15512048653711.html</id>
     <content type="html"><![CDATA[
-<p>layout: post<br/>
-title: 设计模式系列（二）--创建型设计模式<br/>
-date: 2018-08-28 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
-
 <p>接下来将进入设计模式里的创建型设计模式。这里将对设计模式的使用场景与优劣，以及UML图做描述。<br/>
 具体的实现Demo请进入<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>查看</p>
 
-<h2 id="toc_1">0. 简单工厂（if type）</h2>
+<h2 id="toc_0">0. 简单工厂（if type）</h2>
 
 <p>（通过传类型进行区分，对修改是开放的，所有不好）<br/>
 简单工厂就是一个工厂，将类型传进去，在一个类里面生成不同的类型。<br/>
 弊端：这个工厂会包括多个需要生产的产品的引用。而且对于修改是开放的，因为需要修改类里面的内容。对于扩展也是需要在同一个类里面做修改。</p>
 
-<h2 id="toc_2">1. 工厂方法（一个产品线）</h2>
+<h2 id="toc_1">1. 工厂方法（一个产品线）</h2>
 
 <p>使用场景：<br/>
 当需要创建多种分Type的对象时，特别是针对多种类型有共同的行为特征时。或者写出简单工厂时，思考是否可以用工厂方法。</p>
@@ -193,7 +175,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 
 <p>费曼<strong>工厂方法会针对每个产品都有一个工厂实现类</strong>。工厂实现类有一个相应工厂的一个实现，这个实现是生产产品的实现。我们可以将工厂方法理解成一个产品线。</p>
 
-<h2 id="toc_3">2. 抽象工厂（多个产品线及真正的工厂）</h2>
+<h2 id="toc_2">2. 抽象工厂（多个产品线及真正的工厂）</h2>
 
 <p>使用场景<br/>
 1.通过对象组合创建抽象产品<br/><br/>
@@ -205,7 +187,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 <p>突然想到一个例子<br/>
 ”北京杂酱面“ 与 “重庆杂酱面”都是杂酱面，都是配料都是面条，汤，酱，但北京面馆（一个工厂），是北京面条，北京汤，北京酱，重庆面馆（一个工厂）是重庆面条，重庆汤，重庆酱，这个工厂是一个产品线。</p>
 
-<h2 id="toc_4">3. 单例模式(整个应用程序只用一个对象)</h2>
+<h2 id="toc_3">3. 单例模式(整个应用程序只用一个对象)</h2>
 
 <p>使用场景<br/>
 在一个应用程序中，当需要在多个地方共享数据时</p>
@@ -216,7 +198,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 <p>在实际的使用中，单例模式也不能滥用。举个例子，单例有个isLogin，我判定isLogin为true进入一个操作，其他线程将isLogin改成false，那么在这个单例里执行的操作都将有问题。<br/>
 因为数据被其他线程改变了。在实际的开发中，这种情况会是一个大坑。</p>
 
-<h2 id="toc_5">4. 构建者(子部分算法的变化无常，当构成这个对象组成相对固定)</h2>
+<h2 id="toc_4">4. 构建者(子部分算法的变化无常，当构成这个对象组成相对固定)</h2>
 
 <p>构建者模式使用多个简单的对象一步一步构建一个复杂的对象。<br/>
 <strong>主要解决的问题，有时候面临着&quot;一个复杂的对象&quot;的创建工作，通常其子对象部分有着剧烈的变换，需要将他们组合在一起</strong>。</p>
@@ -225,7 +207,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 例如<br/>
 构造电脑，电脑的组成由CPU,显示器，主板，这是相对固定的。但子部分，CPU有各种实现的算法。所以这种情况使用构建者最好。</p>
 
-<h2 id="toc_6">5. 原型模式</h2>
+<h2 id="toc_5">5. 原型模式</h2>
 
 <p>原型模式<br/>
 原型遵循copy或者clone的协议。执行copy或者clone就是按照原型创建一个对象。在iOS里理解成copy就行了。</p>
@@ -234,24 +216,18 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[---]]></title>
+    <title type="html"><![CDATA[设计模式系列（一）设计模式概要]]></title>
     <link href="https://raojunbo.github.io/15512048416439.html"/>
     <updated>2019-02-27T02:14:01+08:00</updated>
     <id>https://raojunbo.github.io/15512048416439.html</id>
     <content type="html"><![CDATA[
-<p>layout: post<br/>
-title: 设计模式系列（一）设计模式概要<br/>
-date: 2018-08-28 23:34:15.000000000 +09:00</p>
-
-<h2 id="toc_0">tags: iOS技术</h2>
-
 <p>在这里给大家推荐一本设计模式入门的书《HeadFirst 设计模式》，这是我真正理解设计模式的开始。当然对于设计模式的理解，需要一定的开发经验才能真正理解的。<br/>
 <img src="https://github.com/raojunbo/picres/blob/master/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-02-02%2012.50.34.png?raw=true" alt="image"/><br/>
 本篇文章不是对设计模式的全解。而是我自己在iOS的实践中对设计模式的理解的一个一个梳理。我在<a href="https://github.com/raojunbo/DesignPatterns.git">DesignPatterns iOS工程实现</a>里写出了相关的<a href="https://github.com/raojunbo/DesignPatterns.git">Demo</a></p>
 
 <p>学习方法：抽象—》具体—》应用—》引申。重点在与理解设计模式的几大原则在设计模式里的体现。当你理解了几大原则在设计模式里的体现，也就理解了设计的精髓所在。在自己写出相关Demo后，然后自己默写出相关设计模式的UML图，分析每种设计模式的优劣是为解决什么问题而诞生。那么那你就真正理解了设计模式。</p>
 
-<h2 id="toc_1">设计模式的六大原则</h2>
+<h2 id="toc_0">设计模式的六大原则</h2>
 
 <ol>
 <li><p>开闭原则（面向对向设计的首要目标:<strong>对扩展开放，对修改关闭</strong>）<br/>
@@ -270,13 +246,13 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 这条在实际的开发中，的确很有感触。继承用的不好会导致维护的困难。</p></li>
 </ol>
 
-<h2 id="toc_2">设计模式分类</h2>
+<h2 id="toc_1">设计模式分类</h2>
 
 <p>创建型设计模式<br/>
 结构型设计模式<br/>
 行为型设计模式</p>
 
-<h3 id="toc_3">一：创建型（5种）</h3>
+<h3 id="toc_2">一：创建型（5种）</h3>
 
 <p>1:单例模式<br/>
 2:工厂方法(生成单一产品)<br/>
@@ -284,7 +260,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 4:建造模式（生产比较复杂的具有统一生产流程的产品，将生产流程固话）<br/>
 5:原型设计模式(clone的实现)</p>
 
-<h3 id="toc_4">二：结构型（7种）</h3>
+<h3 id="toc_3">二：结构型（7种）</h3>
 
 <p>6:适配器模式（将一个对象适配成需要的接口）<br/>
 7:桥接模式<br/>
@@ -294,7 +270,7 @@ date: 2018-08-28 23:34:15.000000000 +09:00</p>
 11:代理模式<br/>
 12:装饰模式</p>
 
-<h3 id="toc_5">三：行为型（11种）</h3>
+<h3 id="toc_4">三：行为型（11种）</h3>
 
 <p>13:责任链模式<br/>
 14:命令模式<br/>
@@ -649,16 +625,841 @@ print(result(10,10));
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[这是一个读书笔记]]></title>
-    <link href="https://raojunbo.github.io/15511076195140.html"/>
-    <updated>2019-02-25T23:13:39+08:00</updated>
-    <id>https://raojunbo.github.io/15511076195140.html</id>
+    <title type="html"><![CDATA[威科夫中阶课程（六）]]></title>
+    <link href="https://raojunbo.github.io/15511053969907.html"/>
+    <updated>2019-02-25T22:36:36+08:00</updated>
+    <id>https://raojunbo.github.io/15511053969907.html</id>
     <content type="html"><![CDATA[
-<p>在《朝花夕拾》这本书中，鲁迅先生笔下的日本老师“藤野先生”，既是良师，亦是益友。作为一位异乡人，鲁迅先生身在他乡留学，受到了不少日本学生的欺辱，而此时出现的老师——藤野先生，给了鲁迅先生莫大的鼓励和勇气。</p>
 
-<p>人生的旅途上遇到一位良师是多么的不易啊！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[威科夫中阶课程（五）]]></title>
+    <link href="https://raojunbo.github.io/15509867976030.html"/>
+    <updated>2019-02-24T13:39:57+08:00</updated>
+    <id>https://raojunbo.github.io/15509867976030.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">UTAD/UT</h2>
 
-<p>藤野先生冲破了国界，他没有为难、歧视来自清国的留学生鲁迅，而是在百般忙碌之中抽出时间去修改鲁迅先生所抄的讲义，圈圈改改之中，是一位老师对异国留学生的浓浓师生情。</p>
+<ul>
+<li>Spring的反面
+UPAT是Spring的反面</li>
+<li>UTAD
+在刺穿阻力时，有成交量的上升，就是一种很好的UTAD</li>
+</ul>
+
+<p>越快速回来（价差宽），成交量很大，越看空<br/>
+其分析其实和Spring是一样的。<br/>
+只不过Spring是想下为努力失败<br/>
+UTAP是想上为努力失败</p>
+
+<h2 id="toc_1">1. 供给分析的元素（很重要）</h2>
+
+<ul>
+<li><p>价差<br/>
+K线最高价和最低价之间的幅度，反映运动的难易程度和结果；宽的话结果好些。</p></li>
+<li><p>成交量<br/>
+单位时间成交的买盘或卖盘数量，反映买盘或卖盘付出的力量；</p></li>
+<li><p>k线摆动<br/>
+价格如何从开盘运动到收盘结束；</p></li>
+<li><p>收盘价<br/>
+收盘价的变动，揭示了对应买盘或者卖盘所取得的成果</p></li>
+<li><p>需求<br/>
+买盘的力量</p></li>
+<li><p>供应<br/>
+卖盘的力量</p></li>
+<li><p>供求关系<br/>
+买盘力量和卖盘力量之间的关系</p></li>
+</ul>
+
+<p>威科夫不对一根一根K线做分析，而是对波动作分析。每一波每一波的需求与供应。</p>
+
+<h3 id="toc_2">1.1 价差分析总则（重要）</h3>
+
+<ol>
+<li><p>价差增加<br/>
+价格行进中，阻力较小<br/>
+例如：在收盘价较高时</p>
+
+<ul>
+<li>供应下降，需求增加</li>
+<li>供应不变，需求增加</li>
+<li>供应上升，需求上升的更多</li>
+</ul></li>
+<li><p>价差减少<br/>
+价格行进中有一些阻力</p></li>
+<li><p>平均价差 <br/>
+表明正常的趋势或者正常的价格行进</p></li>
+</ol>
+
+<h3 id="toc_3">1.2 成交量分析总则（重要）</h3>
+
+<ol>
+<li><p>一般规则<br/>
+成交量表明需求和供应的质量，但通常<strong>我们观察成交量时，更倾向于它代表着的供应的出现或者缺乏，供应是第一位的，其次才是需求</strong></p></li>
+<li><p>成交量的增加<br/>
+代表着支撑价格运动的力量在增加，或者供求即将改变的迹象，或者只是供应出现的迹象</p></li>
+<li><p>高量<br/>
+通常表明供应的出现，如果价格想要继续上涨，那么就必须吸收掉这些供应。要么是CO吸收，要么被散户买走</p></li>
+<li><p>极高量<br/>
+通常是BC</p></li>
+<li><p>成交量极少<br/>
+支撑价格运动的力量在减少，或者供求其中一方在减少，或者只是供应减少的证据。</p></li>
+</ol>
+
+<p>6.低量<br/>
+支撑价格运动的力量很小，或者只有很少的供应</p>
+
+<h3 id="toc_4">1.3 成交量分析情况（重要）</h3>
+
+<h4 id="toc_5">上涨市场，价差增加</h4>
+
+<ol>
+<li><p>成交量增加<br/>
+需求增加，健康的价格向上运动<br/>
+如果是极高量，可能是BC</p></li>
+<li><p>成交量极少<br/>
+轻松反弹<br/>
+或则需求减少的迹象，容易引发下跌</p></li>
+<li><p>平均成交量<br/>
+正常的价格向上运动<br/>
+但是成交量应该跟上价差的变化</p></li>
+</ol>
+
+<h4 id="toc_6">上涨市场，价差减少</h4>
+
+<ol>
+<li><p>成交量增加<br/>
+可能有高质量的供应进入，尝试向下反转价格运动</p></li>
+<li><p>成交量减少<br/>
+需求耗尽，容易产生回落</p></li>
+<li><p>平均成交量<br/>
+价格运动减速，遇到一些供应，指示价差减少</p></li>
+</ol>
+
+<h4 id="toc_7">下跌市场，价差增加</h4>
+
+<ol>
+<li>成交量增加
+供应增加，健康的价格向下运动
+如果是极高量，可能是SC</li>
+<li>成交量减少
+轻松下跌
+或者有供应减少，容易引发反弹</li>
+<li>平均成交量
+正常的价格向下运动
+但是成交量应该要跟上价差的变化</li>
+</ol>
+
+<h4 id="toc_8">下跌市场，价差减少</h4>
+
+<ol>
+<li>成交量增加
+可能有高质量的需求进入，尝试向上反转价格运动</li>
+<li>成交量减少
+供应耗尽，容易引发反弹</li>
+<li>平均成交量
+价格运动减速，遇到一些需求</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2019年成长时间轴]]></title>
+    <link href="https://raojunbo.github.io/15508519143583.html"/>
+    <updated>2019-02-23T00:11:54+08:00</updated>
+    <id>https://raojunbo.github.io/15508519143583.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">1. Swift工程化（2月1日-2月30日）</h2>
+
+<pre><code>1. 实践：达到工程实践目标，能用Swift写出一个需求
+2. 思考Swift实现的本质
+</code></pre>
+
+<h2 id="toc_1">2. iOS从高级到资深（2月30日-4月30日）</h2>
+
+<pre><code>1. 思考：动手写关键的东西，解决关键的问题。
+2. 手动重写SDWeb开源框架，看看自己与SD有什么差别
+3. 手动重写AF开源框架，看看自己与其的差别
+4. 手动重写题型绘制，搞出对图文混排的理解
+5. 优化工作，cash奔溃优化，结构优化，性能优化，流程优化
+</code></pre>
+
+<h2 id="toc_2">3. 技术领导力（5月1日--6月30日）</h2>
+
+<pre><code>1. 极客时间里的“技术领导力”课程
+2. 领导梯度，德鲁克系列，执行力培训
+3. 公司的领导力培训
+</code></pre>
+
+<h2 id="toc_3">3. 英语阅读能力（5月-12月）</h2>
+
+<pre><code>1. 阅读能力
+2. 听力能力
+3. 写作能力
+4. 培训：还是找一家公司培训下吧
+5. 订阅经济学人开始经济阅读之路吧
+</code></pre>
+
+<h2 id="toc_4">4. Python，Mysql（6月-6月）</h2>
+
+<pre><code>1. 实践：到达工程实践
+2. 用Python写出一个东西，写出一个什么东西，暂时还没想好
+</code></pre>
+
+<h2 id="toc_5">5. JS,CSS,React（7月）</h2>
+
+<ol>
+<li>实践 达到工程实践 </li>
+<li>写一个复杂的前端</li>
+</ol>
+
+<h2 id="toc_6">6. 威氏理论（3月-6月）</h2>
+
+<pre><code>1. 已有课程，中阶，高阶，波段课程整理完
+2. 进行横向整理，总结出一套自己的套路
+2. 开一个公众账号，坚持写自己的分析日报
+</code></pre>
+
+<h2 id="toc_7">7. 房产逻辑（7月-8月）</h2>
+
+<pre><code>1. 已有课程，刘德科课程，大胡子课程
+2. 形成自己的投资逻辑
+3. 房地产的逻辑
+</code></pre>
+
+<h2 id="toc_8">8. 阅读计划（全年)</h2>
+
+<pre><code>1. 每月一本书籍的整理输出，即阅读笔记
+</code></pre>
+
+<h2 id="toc_9">9. 金融学考研</h2>
+
+<p>咨询相关考研的培训机构，进行相应的计划准备<br/>
+1. 基础的经济学原理<br/>
+2. 国际金融<br/>
+3. 货币银行学<br/>
+4. 数学<br/>
+5. 英语</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[威科夫中阶课程（四）]]></title>
+    <link href="https://raojunbo.github.io/15507609402868.html"/>
+    <updated>2019-02-21T22:55:40+08:00</updated>
+    <id>https://raojunbo.github.io/15507609402868.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">1. 行为，反应和测试</h2>
+
+<p>行为：通常有高波动率，宽价差，高成交量<br/>
+ 反应：对前面行为的反应，价差，成交量<br/>
+ 测试：对行为的测试，成交量，低点</p>
+
+<ul>
+<li><p>描述动作的因素<br/>
+成交量（努力），价差（结果），位置（结果）</p></li>
+<li><p>行为理解</p></li>
+<li><p>反应理解</p></li>
+<li><p>测试理解<br/>
+测试最好是更高的地点，并且成交量是低的。如果成交量较大，并且没有下跌到更地点，那么说明供应较大且需求也较大，那么就会进入震荡区，需要进行二次测试。</p></li>
+<li><p>前后对比<br/>
+通过<strong>前后的行为比较</strong>，<strong>前后反应程度比较</strong>，然后是<strong>前后测试有效度比较</strong>。</p></li>
+<li><p>Spring示例<br/><br/>
+左侧    向下刺穿支撑<br/>
+右侧   Reaction： 反弹<br/>
+     Test： 再次回落测试供应</p></li>
+</ul>
+
+<h2 id="toc_1">2. Spring的买入点（说实话这里不是很理解）</h2>
+
+<ul>
+<li><p>NS(NO Supply)（不是好的买点）<br/>
+不好放止损。因为在支撑位置时，很可能是无供应，也无需求，价格的上涨，是需要需求的。很多情况下是阴跌。所以最好是买在需求柱的地方。交易成本较大。</p></li>
+<li><p>GBD（更好的买入点）<br/>
+需求柱的收盘位置进，止损放在需求柱底部。</p></li>
+</ul>
+
+<h2 id="toc_2">3. 趋势线工具</h2>
+
+<p>支撑：需求战胜供应的区域<br/>
+阻力：供应战胜需求<br/>
+趋势：<br/>
+趋势通道<br/>
+步幅：在上升通道里，步幅会越来越小，从而上升趋势减速<br/>
+1/2回落：回落要在1/2之上</p>
+
+<p>供应线与需求线<br/>
+阻力线与支撑线</p>
+
+<h2 id="toc_3">4. 思考路径</h2>
+
+<pre><code>v,p--&gt;s,d--&gt;co--&gt;direction
+量价推断--》供应与需求--》推断CO目的--》市场方向
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[威科夫中阶课程（三）]]></title>
+    <link href="https://raojunbo.github.io/15503292008544.html"/>
+    <updated>2019-02-16T23:00:00+08:00</updated>
+    <id>https://raojunbo.github.io/15503292008544.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">1. 练习方法</h2>
+
+<p>practice  模拟练习<br/>
+case study  案例分享<br/><br/>
+paper trade  历史纸上交易（在历史走势里一屏一屏过）<br/>
+actual trade  实盘</p>
+
+<h2 id="toc_1">2. 吸筹备忘录</h2>
+
+<h3 id="toc_2">2.1 A段与B段</h3>
+
+<ul>
+<li><p>A段和B段的意图</p>
+
+<ul>
+<li>A:停止行为</li>
+<li>B:测试供应，产生需求，换手，从公众手里换手到CM手里</li>
+</ul></li>
+<li><p>威科夫原理</p>
+
+<ul>
+<li>A:PS,SC,AR,ST</li>
+<li>B:UA,ST,ST as SOW</li>
+</ul></li>
+<li><p>初次支撑PS</p>
+
+<ul>
+<li> 停止下跌的第一次尝试</li>
+<li> 尝试总是失败，价格会继续走低到SC</li>
+</ul></li>
+<li><p>SC卖盘高潮 </p>
+
+<ul>
+<li>宽价差/高的成交量</li>
+<li>例外1 持续走低的SC运动，供应减少</li>
+<li>例外2 SC行为可能持续一段时间，其最低的k线未必有最高的成交量</li>
+<li>SC的低点定义了TR的支撑线</li>
+</ul></li>
+<li><p>自动反弹AR</p>
+
+<ul>
+<li>供应的耗尽产生了从SC低点的初始反弹，随后由空头回补来继续推高价格</li>
+<li>AR的高点定义了TR的阻力线</li>
+</ul></li>
+<li><p>二次测试ST    </p>
+
+<ul>
+<li>ST可以是SC和AR的一个局部事件（可以理解成AR中的一个ST，还会反弹跟高，只是一个中产休息）</li>
+<li>ST可以做为一个更重要的确认</li>
+<li>ST可以是一个小型的TR,整个小型TR作为一个测试行为</li>
+<li>B中的一个产生更低的点的ST,可以理解为一个SOW,它指示出吸筹需要进行更多的测试，或者进行更久的盘整。（也就是这个ST也是需要被测试的）<br/></li>
+</ul></li>
+<li><p>上冲回落型的行为UA</p>
+
+<ul>
+<li>UA为了与派发中的UT进行区分</li>
+<li>价格短暂的离开交易区间的阻力，又快速地回到阻力之下，意味着向上的突破失败，也意味着供应的出现</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_3">2.2 C段与D段</h3>
+
+<ul>
+<li><p>C和D的意图</p>
+
+<ul>
+<li>C：对TR支撑的最后测试（我们一般交易C段）</li>
+<li>D：TR中的上涨，展现摆脱阻力的能力，并测试阻力已经转换成支撑</li>
+</ul></li>
+<li><p>威科夫原理</p>
+
+<ul>
+<li>C:Spring,TSO,LPS</li>
+<li>D:SOS,LPS,JOC,BU</li>
+</ul></li>
+<li><p>Spring</p>
+
+<ul>
+<li>测试[A]与[B]的低点</li>
+<li>可能成功，也可能失败</li>
+<li>三种类型 Spring1,Spring2,Spring3</li>
+<li>Spring与Spring的测试，等同于一个LPS</li>
+</ul></li>
+<li><p>终极震仓TSO</p>
+
+<ul>
+<li>宽价差和高成量的陡峭下跌</li>
+<li>大幅打破TR支撑</li>
+<li>快速的修复并回到TR支撑之上（必须）</li>
+<li>在交易前需要测试</li>
+</ul></li>
+<li><p>强势信号SOS</p>
+
+<ul>
+<li>通常情况下，价格以宽价差和增加的成交量运动到TR的高位，甚至TR的阻力之上，指示出潜在的需求的增加</li>
+<li>它可以是跳过小溪的第N次尝试，但却是最成功的一次</li>
+<li>产生HH,HL(更高的高点，更高的低点)</li>
+<li>次要的SOS可以发生在[B]中，主要SOS则发生在[D]中</li>
+</ul></li>
+<li><p>最后的支撑点LPS</p>
+
+<ul>
+<li>形成HL</li>
+<li>低的成交量，窄的价差，或者减少的成家量和缩窄的价差</li>
+<li>价格无法走的更低，并且之后不会在回到这个点，LPS本身可以被认为是一个强势信号</li>
+<li>D中可以有多个LPS</li>
+</ul></li>
+<li><p>回测小溪BU</p>
+
+<ul>
+<li>上涨趋势之前，最后的较大回落</li>
+<li>价格无法回到原有阻力之下，或者只能暂时地回到原阻力之下</li>
+<li>回落幅度小于之前反弹的1/2最佳（即JOC那段的一半以上）</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_4">3. JOC</h2>
+
+<h3 id="toc_5">注意点</h3>
+
+<ul>
+<li>展现突破阻力的能力</li>
+<li>阻力区是一个区间，并且有厚度，是TR的最高点与次高点之间的区域</li>
+<li>需要<strong>突破TR的最高点</strong>（一定要过最高点，才是完全突破了）</li>
+<li>若果不是在突破最高点，交易的胜率很低 </li>
+</ul>
+
+<h3 id="toc_6">突破有效性</h3>
+
+<ul>
+<li><p>传统的判断方法</p>
+
+<ul>
+<li>Margin 突破幅度1-3%以上（依赖于品种）</li>
+<li>Close 收盘价在阻力区之上</li>
+<li>Time 两根K线在阻力区上</li>
+<li>Volume 最好适当放量</li>
+<li>Mixed Method 混合以上方法</li>
+</ul></li>
+<li><p>突破可以被预测吗</p>
+
+<ul>
+<li><p>不要买突破的原因分析？<br/>
+如果是假突破，<strong>胜率</strong>就会降低<br/>
+如果有回测，<strong>盈亏比</strong>会降低，而且回测较大时，会头寸很容易被打掉</p></li>
+<li><p>买LPS还是买BU的比较 ？<br/>
+LPS:胜率低，盈亏较高<br/>
+BU:高胜率，盈亏比较低</p></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_7">4. Spring</h2>
+
+<p>一个<strong>潜在spring</strong>是对一个支撑水平的刺穿。即向下突破失败。</p>
+
+<ul>
+<li><p>为什么用&quot;潜在&quot;?</p>
+
+<ul>
+<li><p>支撑水平的重要程度不同<br/>
+意思是要有足够的cause。spring通过向下突破失败去测试水平支撑</p></li>
+<li><p>刺穿的行为<br/>
+价差，成交量</p></li>
+</ul></li>
+<li><p>Spring分类</p>
+
+<ul>
+<li><p>1类<br/><br/>
+不是真正的Spring,是SOW</p></li>
+<li><p>2类<br/><br/>
+稍微较高的成交量</p></li>
+<li><p>3类<br/><br/>
+低成交量</p></li>
+<li><p>后续变化<br/><br/>
+2--&gt;3,2类转到3类，就是对2类的测试，是很好的交易时机<br/><br/>
+2--&gt;1,2类有可能会转换成1，特别是在下跌趋势中  </p></li>
+<li><p>Spring的质量</p></li>
+<li><p>对支撑水平的刺穿深度（刺穿比较浅，收回比较快）</p></li>
+<li><p>向潜在spring位置运动时，和进入spring位置时的价差（价差小）</p></li>
+<li><p>向潜在spring位置运动时，和进入spring位置时的成交量（成交量小）</p></li>
+</ul>
+
+<blockquote>
+<ol>
+<li>成交量合适标准：前期横盘区的平均成交量的1/2,前期横盘区的平均价差1/2</li>
+<li>Spring也可以是一个区域，并不完全是一个带下影的k线。</li>
+</ol>
+</blockquote></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[威科夫中阶课程（二）]]></title>
+    <link href="https://raojunbo.github.io/15486866737545.html"/>
+    <updated>2019-01-28T22:44:33+08:00</updated>
+    <id>https://raojunbo.github.io/15486866737545.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">派发的原理和事件</a>
+</li>
+<li>
+<a href="#toc_1">特征改变</a>
+</li>
+<li>
+<a href="#toc_2">如何制定基于结构的策略</a>
+</li>
+<li>
+<a href="#toc_3">再次吸筹</a>
+</li>
+<li>
+<a href="#toc_4">吸收供应的特征(趋势可能向上)</a>
+</li>
+<li>
+<a href="#toc_5">供应吞没需求的特征(趋势可能向下)</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">派发的原理和事件</h2>
+
+<ul>
+<li><p>PSY<br/>
+在上涨一定时间后卖盘开始提供明显的阻力，价格创新高，成交量增加，价差扩大，它指出上涨运动可能接近尾声</p></li>
+<li><p>BC<br/>
+价差的宽度和卖盘力量通常到达顶点的地方，在顶部附件，大型专业机构满足来自于公众的急切买盘。(通常成交量比前面更大)</p></li>
+<li><p>AR<br/>
+BC到AR，与前面的回调的成交量相比较，判断是否是AR;通常成交量较大。回调幅度较大。</p></li>
+<li><p>ST<br/>
+测试市场的需求是否还存在。通常看到ST后就会进入盘整时期。成交量较BC小一点</p></li>
+<li><p>UT<br/>
+突破后，立马回到了TR。测试A段，看需求的能力。</p></li>
+<li><p>UTAD<br/>
+它是对价格突破到阻力线之上所产生的需求的最后的测试。与吸筹中的Spring和终极震仓一样。</p></li>
+<li><p>LPSY</p></li>
+</ul>
+
+<p>UP与JOC的区分</p>
+
+<p>有效突破：幅度，时间（在2到3根K线，收盘都在最好在原阻力之上），成交量（适当放量，不能是天量，成交量上升意味S放大，同时D也变大，回落时成交量不能很大）</p>
+
+<p>波动性：通常在派发时波动性较强。因为CM在达到目标时，进入派发区，留给CM的时间比较少。</p>
+
+<h2 id="toc_1">特征改变</h2>
+
+<ul>
+<li>Main SOS
+下跌趋势到横盘
+比如 SC,AR,ST</li>
+<li>Main SOW
+横盘到上升趋势
+Spring,LPS,JOC,</li>
+</ul>
+
+<h2 id="toc_2">如何制定基于结构的策略</h2>
+
+<p>交易策略制定原则：<strong>方向，目标，时机</strong> + 衡量盈亏比</p>
+
+<ul>
+<li>定义市场背景
+划出趋势线。定义时在上升趋势，还是横盘，还是下跌趋势
+遇到阻力去做空，遇到支撑去做多
+
+<ul>
+<li>如果做空了的人
+寻找趋势改变的迹象（SC,AR,ST）去平仓。可以在SC，AR期间，ST时平仓</li>
+</ul></li>
+<li><p>定义A段</p>
+
+<p>SC到AR的目标位无法确定,AR的反弹都比较高。SC的位置也无法确定，有可能SC不是SC，而是继续SC。所以这个段最好不要做。<br/>
+AR到ST的目标位知道（暂时是ST的位置），SC有可能继续下跌，即ST有可能是失败的。</p></li>
+<li><p>ST确定了</p>
+
+<ul>
+<li><p>如果持有空仓的人<br/>
+就应该平仓了<br/>
+ST确定就表示A段已经发生了，进入B段。ST就很有可能会有横盘。B段的波动性幅度都会很大，难度很大。</p></li>
+<li><p>如果此时B段后期有低点<br/>
+可以去尝试做多。因为B段走一段时间后，有可能进入C段。但此时我们无法判断是C段，C段是后期走出来然后判断出来的。如果出现SOS，基本就会是C段。</p></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_3">再次吸筹</h2>
+
+<ul>
+<li><p>再次吸筹的形式<br/>
+<img src="media/15486866737545/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-02-09%2004.57.44.png" alt="屏幕快照 2019-02-09 04.57.44"/></p></li>
+<li><p>再次吸筹的分辨<br/>
+只能通过对供求分析</p></li>
+</ul>
+
+<h2 id="toc_4">吸收供应的特征(趋势可能向上)</h2>
+
+<ul>
+<li><p>尝试<em>突破阻力</em>的行为，所产生的反应较小（<strong>成交量小，幅度小，价差小</strong>）<br/>
+    比如：回落较小</p></li>
+<li><p>尝试<em>突破阻力</em>的反应较大时，持续性较差（<strong>无跟进，不能维持成果</strong>）<br/>
+    比如：有一根较大的阴线，就但后面很快没有了，又立马收回去了，被吸收了</p></li>
+<li><p>最好形成HH+HL（<strong>更高的高点，或者更高的低点</strong>）</p></li>
+<li><p>UA所引发的回落没有结果<br/>
+    比如：它随后的走势<strong>没有出现SOW</strong>，成交量高时，是庄家需求，成交量低时，庄家没有提供供应。</p></li>
+<li><p>有时候吸收以spring结束</p></li>
+<li><p>波动性通常会降低（回落的结果会越来越差）</p></li>
+<li><p>价格与助理争锋相对</p></li>
+</ul>
+
+<h2 id="toc_5">供应吞没需求的特征(趋势可能向下)</h2>
+
+<ul>
+<li><p>尝试<em>突破支撑</em>的行为，所产生的反应较小<br/><br/>
+比如：尝试向下突破支撑，但反弹回支撑之上的力度较小</p></li>
+<li><p>尝试<em>突破支撑</em>的反应较大时，持续性较差<br/>
+比如：有较大的反弹，但又立马火大支撑附近。并且成交量较大。</p></li>
+<li><p>最好形成LL，LH<br/>
+即，更低的低点，更低的高点</p></li>
+<li><p>潜在Spring/ST in |B|所引发的反弹没有结果</p></li>
+<li><p>有时候吞没以UTAD结束</p></li>
+<li><p>波动性通常上升（回落的结果越来越差）</p></li>
+<li><p>价格与支撑针峰相对</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[威科夫中阶课程(一)]]></title>
+    <link href="https://raojunbo.github.io/15486697437875.html"/>
+    <updated>2019-01-28T18:02:23+08:00</updated>
+    <id>https://raojunbo.github.io/15486697437875.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">1. 现代技术分析历史</a>
+</li>
+<li>
+<a href="#toc_1">2. 学术对技术分析的质疑</a>
+<ul>
+<li>
+<a href="#toc_2">随机漫步理论</a>
+</li>
+<li>
+<a href="#toc_3">有效市场假说</a>
+</li>
+<li>
+<a href="#toc_4">自证预言</a>
+</li>
+<li>
+<a href="#toc_5">主观成分</a>
+</li>
+<li>
+<a href="#toc_6">无法长线分析</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">3. 道氏理论</a>
+</li>
+<li>
+<a href="#toc_8">4. 成功交易系统的最低要求</a>
+</li>
+<li>
+<a href="#toc_9">5. 胜率，盈亏比</a>
+</li>
+<li>
+<a href="#toc_10">6. 价格循环VS经济循环</a>
+</li>
+<li>
+<a href="#toc_11">7. 如何辨认价格循环中的交易机会</a>
+</li>
+<li>
+<a href="#toc_12">8. 市场角色分类</a>
+</li>
+<li>
+<a href="#toc_13">9. 吸筹原理和事件</a>
+<ul>
+<li>
+<a href="#toc_14">吸筹术语</a>
+</li>
+<li>
+<a href="#toc_15">吸筹分段与目的</a>
+</li>
+<li>
+<a href="#toc_16">如何寻找C段的边界（即如何定义C段）</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">1. 现代技术分析历史</h2>
+
+<ol>
+<li>查尔斯 道（《股市晴雨表》），汉密尔顿，雷亚</li>
+<li>威科夫，埃文斯，汉克 普鲁顿 大卫 * 怀斯（威科夫理论的继任者）</li>
+<li>沙巴克  爱德华 麦吉（《股市趋势技术分析》）</li>
+<li>唐奇安 （均线）</li>
+</ol>
+
+<h2 id="toc_1">2. 学术对技术分析的质疑</h2>
+
+<h3 id="toc_2">随机漫步理论</h3>
+
+<h3 id="toc_3">有效市场假说</h3>
+
+<p>A股更适合威科夫理论。因为在A股市场上散户有比较少的专业度，是非理性的。</p>
+
+<h3 id="toc_4">自证预言</h3>
+
+<h3 id="toc_5">主观成分</h3>
+
+<h3 id="toc_6">无法长线分析</h3>
+
+<h2 id="toc_7">3. 道氏理论</h2>
+
+<p>说明：威科夫理论基于道氏理论</p>
+
+<ul>
+<li>前提假设
+主要趋势不会被人操纵，价格反映所有信息</li>
+<li><p>主要原则 </p>
+
+<ul>
+<li><p>市场存在三种趋势</p></li>
+<li><p>主要趋势分为三个阶段<br/>
+Acc,Public,Dis</p></li>
+<li><p>收盘价与线<br/>
+关键点位的收盘价</p></li>
+<li><p>相互验证<br/>
+工业指数，等指数的相互验证</p></li>
+<li><p>成交量的重要性</p></li>
+<li><p>趋势会已知延续，直到反转信号</p></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_8">4. 成功交易系统的最低要求</h2>
+
+<p><img src="media/15486697437875/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-01-28%2018.41.17.png" alt="屏幕快照 2019-01-28 18.41.17"/></p>
+
+<h2 id="toc_9">5. 胜率，盈亏比</h2>
+
+<p>盘整中追求高胜率（达60以上）<br/>
+趋势中追求高盈亏比 （可以放弃一些胜率，比如在D段不断尝试）</p>
+
+<p>胜率与盈亏比，交易频率的关系<br/>
+<img src="media/15486697437875/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-01-28%2018.54.10.png" alt="屏幕快照 2019-01-28 18.54.10"/></p>
+
+<h2 id="toc_10">6. 价格循环VS经济循环</h2>
+
+<p>股市是经济的晴雨表。股市领先于经济。</p>
+
+<ul>
+<li><p>价格循环<br/>
+<img src="media/15486697437875/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-01-28%2019.01.01.png" alt="屏幕快照 2019-01-28 19.01.01"/></p></li>
+<li><p>价格循环影响经济循环<br/>
+<img src="media/15486697437875/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-01-28%2019.01.08.png" alt="屏幕快照 2019-01-28 19.01.08"/></p></li>
+</ul>
+
+<h2 id="toc_11">7. 如何辨认价格循环中的交易机会</h2>
+
+<ol>
+<li>确定交易性质（短线，中线，长线）</li>
+<li>基于交易性质，辨认出价格循环中的交易机会(在大的交易循环中找到属于符合你的交易机会)</li>
+</ol>
+
+<p>也就是不要摇摆不定。不要发现是短线机会而做了长线，也不要是做长线的而又做了短线</p>
+
+<h2 id="toc_12">8. 市场角色分类</h2>
+
+<ul>
+<li><p>CM(优质持股人，强手)<br/>
+中央汇金，社保基金,国家队</p></li>
+<li><p>Public（劣质持股人，弱手）</p>
+
+<ul>
+<li>共同基金（证券投资信托基金）</li>
+<li>对冲基金 （私募基金）</li>
+<li>小型保险公司</li>
+<li>专业交易人士</li>
+<li>普通散户</li>
+</ul></li>
+</ul>
+
+<p>阿尔法驱动：考验基金经理的水平<br/>
+贝塔驱动：市场的平均收益，比如上证ETF</p>
+
+<p>Tip：共同基金，对冲基金的概念？ETF的概念？</p>
+
+<h2 id="toc_13">9. 吸筹原理和事件</h2>
+
+<h3 id="toc_14">吸筹术语</h3>
+
+<ul>
+<li><p>PS<br/>
+初步支撑，在一段长期下跌后，大量的买盘开始提供明显的支撑，当最终支撑失败，价格随后任然创新低。成交量增加，<strong>价差扩大</strong>。那么下跌有<strong>可能</strong>接近尾声。（注意是可能，也有可能继续下跌，这个需要后期走势的验证，CM有机会大量的买进，完成一些建仓任务（比如10%的建仓任务），散户此时提供的流动性，正好给了CM建仓的机会）</p></li>
+<li><p>SC<br/>
+市场出现恐慌，CM大量买进建立仓位（比如20%的建仓任务），散户因为害怕而卖出。经典的是大的价差，大的成交量。但也有可能是小的价差，小的成交量，然后突然上涨，原因是，可能在下跌中CM就边跌边买，公众该卖的都卖了，导致小的成交量，CM增加一点点买盘，就可以将价格迅速推高。</p></li>
+<li><p>AR<br/>
+卖盘被耗尽，买盘可以轻易将价格推高，随后空头平仓继续推高价格，并通常形成长期下跌以来的最高的反弹。并且定义了TR的阻力水平。<br/>
+在AR处若果成交量较大，反弹力度较大，那么可能说明CM参与了反弹的购买<br/>
+如果成交量较小，并且反弹力度较小，可能是一个失败的AR。<br/>
+从AR的质量能大致能判定出ST的可能出现的最低点位置。</p></li>
+<li><p>ST<br/>
+去确认在SC的是否真的发生，也就是否还有供应。通常好的ST是比SC更高的位置停止住。或者小量。也就是公众不会在以更低的价格卖出了。</p></li>
+<li><p>Spring<br/>
+Spring最好是低量的，也就是不会有更低的卖盘。这个地方是机会也是风险点。</p></li>
+<li><p>LPS<br/>
+在D段，有一些HH,HL,都是很好的LPS。</p></li>
+<li><p>JOC（Major SOS）<br/>
+收盘价过区间最高点。（高量，宽价差），（低量，低价差），都可以。</p></li>
+<li><p>SOS<br/>
+大的价差，放大的成交量，突破短期阻力</p></li>
+<li><p>BU<br/>
+Backingup 回测，或者LPS</p></li>
+</ul>
+
+<h3 id="toc_15">吸筹分段与目的</h3>
+
+<p>A段：PS，SC,AR,ST   ---》停止下跌趋势<br/>
+B段：UA，ST in B持股由散户转换到CM手中，也就是换手阶段，B段早起波动性较大，看空，看多的都较多。B段成交量会越来越小。通过B段的表现，判断C段可能发生的地方。--》建立原因，测试供应，产生需求<br/>
+C段：Spring,SO（Shake out）,LPS --》最后的支撑的测试<br/>
+D段：SOS,LPS,JOC,BU（backUp） --》展现出摆脱区间的能力，确认阻力是否变成了支撑<br/>
+E段：UpTrend（趋势分析的工具，如趋势线，均线），吸引买盘跟随（吸引公募私募专业交易者跟随推动价格进一不发展）或者再次吸收浮动供应。</p>
+
+<p>Tip:盘感锻炼方法：手绘k线图，手绘点数图</p>
+
+<p>我们主要在C段，D段做交易</p>
+
+<h3 id="toc_16">如何寻找C段的边界（即如何定义C段）</h3>
+
+<p>找到前期局部支撑<br/>
+刺穿前期局部支撑，<strong>左边界</strong><br/>
+收盘又在局部支撑之上，<strong>右边界</strong></p>
+
+<ul>
+<li><p>局部支撑怎么找？</p>
+
+<p>良好的需求柱的底部 <br/>
+ST</p></li>
+<li><p>总结</p>
+
+<p>如果是LPS，寻找前期支撑<br/>
+如果是Spring,就是ST的价格位置</p></li>
+</ul>
+
+<blockquote>
+<p>支撑位要素<br/>
+成交量，长时间，最近的支撑</p>
+</blockquote>
 
 ]]></content>
   </entry>
@@ -1225,873 +2026,73 @@ TCP的三次握手
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[C语言拾遗]]></title>
-    <link href="https://raojunbo.github.io/15444947240000.html"/>
-    <updated>2018-12-11T10:18:43+08:00</updated>
-    <id>https://raojunbo.github.io/15444947240000.html</id>
+    <title type="html"><![CDATA[*# 威科夫高阶结构课程]]></title>
+    <link href="https://raojunbo.github.io/15447065945223.html"/>
+    <updated>2018-12-13T21:09:54+08:00</updated>
+    <id>https://raojunbo.github.io/15447065945223.html</id>
     <content type="html"><![CDATA[
+<h2 id="toc_0">ART</h2>
+
+<h2 id="toc_1">吸筹的分段规则</h2>
+
+<p><img src="media/15447065945223/Xnip2018-12-14_05-36-23.png" alt="Xnip2018-12-14_05-36-23"/></p>
+
 <ul>
-<li>
-<a href="#toc_0">一：编译</a>
-<ul>
-<li>
-<a href="#toc_1">makefile的编译</a>
-</li>
-<li>
-<a href="#toc_2">预处理</a>
-<ul>
-<li>
-<a href="#toc_3">条件编译</a>
-</li>
-<li>
-<a href="#toc_4">预定义宏</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_5">完整项目多文件编译</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_6">二：指针的概念</a>
-<ul>
-<li>
-<a href="#toc_7">指针与object的关系</a>
-</li>
-<li>
-<a href="#toc_8">指针与数组的关</a>
-</li>
-<li>
-<a href="#toc_9">指针与函数</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_10">三：C中的字符串</a>
-</li>
-<li>
-<a href="#toc_11">四：C的内存管理</a>
-<ul>
-<li>
-<a href="#toc_12">动态内存分配</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_13">五：结构体</a>
-</li>
-<li>
-<a href="#toc_14">六：抽象数据接口</a>
-</li>
-<li>
-<a href="#toc_15">七：示例</a>
-</li>
+<li><p>A段<br/>
+A段的ST,测试前面的BC，是否还有足够的供应。测试短期内极端的市场行为是否结束。</p></li>
+<li><p>B段<br/>
+B段ST，测试前面A段的供应是否消耗完。波动性较大。B段CM操纵的比较最多的，只有CM才能使下跌趋势停止。</p></li>
+<li><p>C段<br/>
+C段ST,测试前面的B段的供应是否消耗完</p></li>
+<li><p>D段<br/>
+D段ST，对前面的测试最后供应测试，若果是低量，则是成功的测试。</p></li>
 </ul>
 
+<p>一般吸筹都会有三次以上的分段测试，去测试供应是否还存在。</p>
 
-<h2 id="toc_0">一：编译</h2>
+<h2 id="toc_2">TR区间交易的选择</h2>
 
-<p>不同的CPU制造商使用的指令系统和编码格式不同。例如Intel Corei7与ARM采用的就是不同的指令集。在编译时，编译器就需要将C语言编译成相应CPU的机器码。</p>
+<h3 id="toc_3">BC</h3>
 
-<p>补充说明：汇编语言是为特殊的CPU设计的一系列内部指令，是用助记符号表示，不同的CPU使用不同的汇编指令，就像C语言编译器编译成机器指令</p>
+<p>想在BC底部买？<br/>
+很难捕捉到这个AR。一是难以确定反弹目标，只能用阻力区确认。但在这这里的确认，一般不确定。而且这里抄底是是逆势交易。<strong>不建议交易</strong>。</p>
 
-<p>C语言标准定义，C89,C99，C11（2011）等标准，而这种<strong>标准实际上是一种抽象</strong>。具体的实现是由相应的编译器解释。</p>
+<h3 id="toc_4">AR</h3>
+
+<p>想在AR卖？<br/>
+首先确认这个就是AR，AR有时可能不是AR（即不是横盘），而是突破BC的最低点，形成新的下跌趋势。所以AR做空<strong>可以尝试做空</strong>。</p>
+
+<h3 id="toc_5">第一次测试</h3>
+
+<p>进入交易区间，选择做这个TR（交易区间）。从结构上来讲，可以做TR短期交易。当越来越来向右发展时，就要比较小心了。停止短期交易，观察选择市场选择方向。</p>
+
+<h3 id="toc_6">B段二次恐慌或者Spring</h3>
+
+<p>在B段，或者C段里都可能出现震仓，或者Spring<br/>
+特征：下跌幅度较大（与其前面的相比较），或者价差较大。有一定的成交量(成交量越小越好)，击穿密集区然后立马回到TR内。</p>
+
+<h3 id="toc_7">C段</h3>
+
+<p>C段特征是低量测试。</p>
+
+<h3 id="toc_8">D段的LPS</h3>
+
+<p>特征是测试时，低量并且，底部比前面都高，<strong>最佳买入点</strong></p>
+
+<h3 id="toc_9">D段的JOC</h3>
+
+<p>在突破平台后，通过左手边的震荡可以通过点数图算出目标位。突破形成JOC,<strong>次佳买入点</strong></p>
 
 <blockquote>
-<p>编译流程，把源代码文件转换为可执行文件，具体是首先把源代码转换成中间代码（这个中间代码是没有连接其他模块的代码，因为这个中间代码可能用到了其他模块的函数，这个模块可以是其他模块也可是标准库），连接器把中间代码和其他代码合并（这个合并的过程就是连接的过程，是模块之间能正常找到调用），最终生成可执行文件。</p>
+<p>复盘方法：辨认好的交易时机，不要的交易时机。我在哪里做了交易。我为什么没有识别出这些交易。<br/>
+要以wave波的形式去理解（很重要）。而不是一根根K线。</p>
 </blockquote>
 
-<p>GNU编译合集，LLVM项目分别是连个开源编译合集。都支持C的编译，在苹果系统目前采用LLVM项目里的Clang来编译C程序。</p>
+<p>如何区分，二次恐慌是吸筹的二次恐慌，而不是在次的派发。</p>
 
-<p>哈哈，从上述的整理，终于理解了Xcode里的Architectures（CPU架构），FrameSearchPath,Header SearchPath,Library SearchPath,Apple Clang的编译选项设置。</p>
+<h3 id="toc_10">E段的主升浪</h3>
 
-<h3 id="toc_1">makefile的编译</h3>
-
-<p>在编译一个开源的C库时，比如Objectc的runtime，编译FFmpeg的库时，都会用到makefile文件来进行构建。</p>
-
-<p>make通常被视为一种软件构建工具，是一个命令行工具。该工具主要经由读取一种名为“makefile”或“Makefile”的文件来实现软件的自动化建构程序。makeFile有其自己的语法。</p>
-
-<ul>
-<li>文件包含</li>
-</ul>
-
-<p>include <stdio.h>的实质：实际上是相当于把stdio.h文件中的所有内容都输入该行所在的位置。</p>
-
-<h3 id="toc_2">预处理</h3>
-
-<pre><code>#define PI 3.13444
-</code></pre>
-
-<pre><code>//带固定参数个数的宏
-#define Men(X,Y) ((X)+(Y))  
-</code></pre>
-
-<pre><code>//可变参数个数的宏
-#define PR(...) printf(__VA_ARGS__) //可变参数的宏
-PR(&quot;Howdy&quot;);
-PR(&quot;weight=%d, shipping=%d&quot;,wt,sp);
-</code></pre>
-
-<pre><code>//文件包含
-#include
-当预处理器发现#include指令时，会替换源文件中的include指令。
-（相当于把被包含的文件的全部内容输入到源文件#include指令所在的位置）
-要深度的理解这句话的含义，包含，就是将代码实现替换到这。
-头文件提供函数声明或者原型，库选项（也就是真正的库）告诉系统到哪里查找函数代码，或者是到源文件里查找代码。
-</code></pre>
-
-<ul>
-<li>区分宏定义的函数与函数区别</li>
-</ul>
-
-<p>宏每调用一次，都会展开一次，是一种内联。而函数的调用。是会在一段函数指令里执行一次又一次。</p>
-
-<h4 id="toc_3">条件编译</h4>
-
-<pre><code>#define
-#ifdef
-#else
-#endif
-#ifndef
-#if
-#elif
-</code></pre>
-
-<h4 id="toc_4">预定义宏</h4>
-
-<pre><code>C标准规定了一些预定义宏
-__LINE__
-__FILE__
-__func__
-</code></pre>
-
-<h3 id="toc_5">完整项目多文件编译</h3>
-
-<h2 id="toc_6">二：指针的概念</h2>
-
-<p>从核心的去理解指针，就是一个<strong>地址值</strong>，一个变量的地址值。一个数组的首原始地址值。一个函数代码段的开始地址值。<br/>
-指针的操作，是根据他们指向的数据的所占空间的大小来操作的。指向整数时，p+1,就是指向下一个整数。</p>
-
-<pre><code>int *p1 //指向int的指针变量（理解成一个整形变量的地址）
-double *p2;
-</code></pre>
-
-<ul>
-<li>指针的应用</li>
-</ul>
-
-<p>有时候，在函数外有个数组，想通过，这个函数修改数组里的值，要将整个修改逻辑放在这里。就需要传地址。(但外面是一个结构体时，有时遇到需要通过一个函数修改这个结构体的值，也会采用传地址的方式)。这是一个非常典型的应用场景。</p>
-
-<pre><code>//在采用传地址时，不允许修改这个数组的内容的值时，可以添加const。
-//const修饰指针时，表示内容不允许修改
-int sum (const int ar[],int n);
-int sum (const int ar[],int n) {
-    int i;
-    int total = 0;
-    for (int = 0;i&lt;n;i++){
-        total =+=ar[i];
-    }
-    return total;
-}
-</code></pre>
-
-<ul>
-<li>const修饰的区别的理解</li>
-</ul>
-
-<pre><code>const double *pd1;
-double *const pd2;
-</code></pre>
-
-<p>要区分这两个含义，要从本质上理解，pd1的const修饰的是double *pd1,也就是这个指针变量，这个整体是值。也就是值是常量。<br/>
-而，pd2的const修饰的pd2这个地址。是这个指针。也就是指针是常量</p>
-
-<pre><code>int val = 10;
-const double *pd1 = &amp;val;
-*pd1 = 20;//不允许(因为修改了指针所指向内容的值)
-</code></pre>
-
-<pre><code>double rate[] = {10,20,30};
-double *const pc = rate;
- pc = &amp;rate[2];//不允许(因为是修改了指针的值)
-
-</code></pre>
-
-<p>哈哈，终于里理解了这个东西。</p>
-
-<h3 id="toc_7">指针与object的关系</h3>
-
-<p>指针与NSObject的关系，要从C的内存管理角度去思考。</p>
-
-<h3 id="toc_8">指针与数组的关</h3>
-
-<p>指针指向的就是数组的首地址。</p>
-
-<h3 id="toc_9">指针与函数</h3>
-
-<p>指向函数的指针中存储着函数代码的起始地址。</p>
-
-<pre><code>void func (char *);
-void (*pf) (cahr *);
-pf 即是指向函数的指针
-</code></pre>
-
-<pre><code>void ToUpper(char *);
-void ToLower(char *);
-pf = ToUpper;//将函数地址赋值给函数指针
-pf = ToLower;//将函数地址赋值给函数指针
-(*pf)(&quot;nihao&quot;);//调用函数
-</code></pre>
-
-<h2 id="toc_10">三：C中的字符串</h2>
-
-<ul>
-<li>字符串常量</li>
-</ul>
-
-<p>这个字符串在编译的时候就已经确定。所以是在静态存储区。</p>
-
-<pre><code>char *str = &quot;nihao&quot;;
-//实际上&quot;nihao&quot;是一个字符数组。一个在末尾加了\0元素的字符数组。
-</code></pre>
-
-<ul>
-<li><strong>数组形式</strong>与<strong>指针形式</strong>的不同</li>
-</ul>
-
-<p>字符串常量是在编译时就确定好的在静态存储区。</p>
-
-<pre><code>const char ar[] = &quot;something1&quot;;
-const char *p = &quot;something2&quot;;
-
-对比说明:
-&quot;something1&quot;是一个字符串常量，在给ar[]赋值时会将其拷贝到这个数组里。
-&quot;something2&quot;是一个字符串常量，在静态存储区，在给*p赋值时，直接将静态区字符串的地址值给它。因为它是一个常量，内容没法修改，所以通常在前面加一个const;
-</code></pre>
-
-<h2 id="toc_11">四：C的内存管理</h2>
-
-<p>三个维度描述变量<br/>
-链接<br/>
-作用域<br/>
-存储区</p>
-
-<p>链接，作用域描述变量的可见性<br/>
-存储区，描述变量的存储位置</p>
-
-<ul>
-<li>外部变量</li>
-</ul>
-
-<p>（在一个源文件里，在所有函数之外的变量），作用域是本文件，存储是静态存储，链接默认是外部链接，<strong>如果用static修饰，就是内部链接。</strong></p>
-
-<ul>
-<li><p>局部变量</p>
-
-<p>在块，函数里的是局部变量，作用域是块或者函数内，存储默认是栈上，链接是内部链接。<strong>但若用static修饰，就是存储在静态区。</strong></p></li>
-</ul>
-
-<p>extern 申明这个源文件使用了外部变量。（哈哈，这里才是extern的本质）</p>
-
-<h3 id="toc_12">动态内存分配</h3>
-
-<p>思考：为什么会有动态内存分配？<br/>
-在我们的编译，执行时，<strong>根据已经制定好的内存管理规则，将自动选择作用域与存储区，自己管理内存（静态数据编译时分配，自动数据在执行时分配）</strong>。但，<strong>我们也可以程序员自己申请内存，自己释放内存，就是动态内存的分配。</strong></p>
-
-<h2 id="toc_13">五：结构体</h2>
-
-<p>结构体在实际的应用中相当重要。一些重要的库的数据描述都是用结构体表示。与结构体指针一同构建起一个大的程序库。比如objc-runtime,ffmpeg库。</p>
-
-<pre><code>struct book {
-    char title[10];
-    char author[20];
-    float value;
-} abook;
-book 是类型，abook是变量名
-</code></pre>
-
-<p>将结构体类型当做普通的变量类型就可以了。</p>
-
-<pre><code>struct book aBook;  //结构变量
-struct book *b;     //指向结构的指针
-aBook.value;//取值
-b-&gt;value;//取值
-</code></pre>
-
-<ul>
-<li>结构体了字符数组与字符指针表示的区别</li>
-</ul>
-
-<pre><code>struct names{
-    char first[10];
-    char last[10];
-}
-</code></pre>
-
-<pre><code>struct pnames {
-    char *first;
-    char *last;
-}
-</code></pre>
-
-<p>names占用20字节，pnames占用16字节。<br/>
-names的本身存储位置是在它自己申请的位置。<br/>
-pnames的first,last存存储在别处。用的时候要特别小心。</p>
-
-<p>示例结构体内部字符指针表示的用法。（很重要）<br/>
-下面是将结构体力的变量设置成字符指针。因为没有地方存储实际的值，所以需要用动态创建内存。</p>
-
-<pre><code>struct namect {
-    char *fname;
-    char *lname;
-}
-
-void getinfo(struct namect *pst){
-    char temp[20];
-    scanf(&quot;%s&quot;,tmp);//将输入的暂时存入tmp
-    pst-&gt;fanme= (char *)malloc(strlen(temp)+1);//动态创建一个空间
-    strcpy(pst-&gt;fname,temp);//将tmp的拷贝到动态空间
-}
-</code></pre>
-
-<h2 id="toc_14">六：抽象数据接口</h2>
-
-<p>链表<br/>
-队列</p>
-
-<p>结语：至此关于C的一些核心概念就都搞清楚了。</p>
-
-<h2 id="toc_15">七：示例</h2>
-
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
-#define SLENGTH 80
-
-struct namect {
-    char *fname;
-    char *lname;
-    int letters;
-};
-
-typedef struct namect NAMEct;
-//以下都是函数声明
-//将结构体指针作为参数传递
-
-void getinfo (struct namect *);
-void makeinfo (struct namect *);
-void showinfo (const struct namect *);
-void cleanup (struct namect *);
-
-char * s_gets(char *st ,int n);
-
-int main () {
-    NAMEct person;
-
-    getinfo(&amp;person);
-    makeinfo(&amp;person);
-    showinfo(&amp;person);//显示信息
-    cleanup(&amp;person);//调用该函数时释放内存
-}
-
-void getinfo (struct namect *pst){
-    char temp[] = &quot;naihao&quot;;
-    char temp2[] =  &quot;naihao2&quot;;
-
-    pst-&gt;fname = (char *) malloc(strlen(temp) +1);//申请内存
-    strcpy(pst-&gt;fname,temp);//将字符拷贝到生成的内存中
-
-    pst-&gt;lname = (char *) malloc(strlen(temp2) +1);//申请内存
-    strcpy(pst-&gt;lname,temp2);
-}
-
-
-void makeinfo (struct namect *pst){
-    pst-&gt;letters = strlen(pst-&gt;fname) + strlen(pst-&gt;lname);
-}
-
-void showinfo(const struct namect *pst){
-    printf(&quot;firstName:%s secondName:%s letters:%d&quot;,pst-&gt;fname,pst-&gt;lname,pst-&gt;letters);
-}
-
-void cleanup (struct namect *pst){
-    free(pst-&gt;fname);//释放内存
-    free(pst-&gt;lname);//释放内存
-}
-
-
-
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理（八）文本处理]]></title>
-    <link href="https://raojunbo.github.io/15443591203562.html"/>
-    <updated>2018-12-09T20:38:40+08:00</updated>
-    <id>https://raojunbo.github.io/15443591203562.html</id>
-    <content type="html"><![CDATA[
-<p>文本处理带真正用到时再研究吧。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理 （六）函数]]></title>
-    <link href="https://raojunbo.github.io/15443590303184.html"/>
-    <updated>2018-12-09T20:37:10+08:00</updated>
-    <id>https://raojunbo.github.io/15443590303184.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">函数</h2>
-
-<pre><code>#!/bin/bash
-function testFunc(){
-    echo $1:$2
-    return 100;
-}
-
-echo &quot;调用前&quot;
-testFunc &quot;rao&quot; &quot;jun&quot;;
-echo &quot;返回结果$?&quot;
-echo &quot;调用后&quot;
-</code></pre>
-
-<p>函数的传参数与在命令里的传参数基本相同。返回值用$?记录上次函数的返回值。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理（零）linux 基础命令]]></title>
-    <link href="https://raojunbo.github.io/15443316930228.html"/>
-    <updated>2018-12-09T13:01:33+08:00</updated>
-    <id>https://raojunbo.github.io/15443316930228.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0">linux的文件权限</a>
-</li>
-<li>
-<a href="#toc_1">Linux的文件与目录管理</a>
-<ul>
-<li>
-<a href="#toc_2">目录操作</a>
-</li>
-<li>
-<a href="#toc_3">文件操作</a>
-</li>
-<li>
-<a href="#toc_4">查看文件</a>
-</li>
-<li>
-<a href="#toc_5">查找文件名</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<p>shell的基础命令，列出已经掌握的基本命令</p>
-
-<h2 id="toc_0">linux的文件权限</h2>
-
-<pre><code>-rwxr--r--  1 raojunbo  staff   159 12  8 17:20 file2.sh
-</code></pre>
-
-<p><code>chmod</code> 改变文件的权限<br/>
-<code>chown</code> 改变文件所有者<br/>
-<code>chgrp</code> 改变文件所属用户</p>
-
-<h2 id="toc_1">Linux的文件与目录管理</h2>
-
-<p>ls 列出文件及目录列表<br/>
-cd 进入目录<br/>
-pwd 显示文件路径<br/>
-touch 创建新文件<br/>
-file 查看文件类型</p>
-
-<h3 id="toc_2">目录操作</h3>
-
-<p>mkdir<br/>
-rmdir</p>
-
-<h3 id="toc_3">文件操作</h3>
-
-<p>cp<br/>
-rm<br/>
-mv</p>
-
-<h3 id="toc_4">查看文件</h3>
-
-<p>cat<br/>
-more<br/>
-less<br/>
-head<br/>
-tail</p>
-
-<h3 id="toc_5">查找文件名</h3>
-
-<p>whereis<br/>
-locate<br/>
-find</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理（七）SQL应用处理]]></title>
-    <link href="https://raojunbo.github.io/15442673526076.html"/>
-    <updated>2018-12-08T19:09:12+08:00</updated>
-    <id>https://raojunbo.github.io/15442673526076.html</id>
-    <content type="html"><![CDATA[
-<p>导出.cvs格式</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理（五）输出]]></title>
-    <link href="https://raojunbo.github.io/15441102869614.html"/>
-    <updated>2018-12-06T23:31:26+08:00</updated>
-    <id>https://raojunbo.github.io/15441102869614.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0">echo</a>
-</li>
-<li>
-<a href="#toc_1">printf 格式化输出</a>
-</li>
-<li>
-<a href="#toc_2">管道</a>
-</li>
-<li>
-<a href="#toc_3">重定向输出</a>
-<ul>
-<li>
-<a href="#toc_4">命令行里的输入与输出重定向</a>
-</li>
-<li>
-<a href="#toc_5">脚本文件里的输入与输出重定向</a>
-</li>
-<li>
-<a href="#toc_6">自定义文件描述符</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_7">总结</a>
-</li>
-</ul>
-
-
-<h2 id="toc_0">echo</h2>
-
-<h2 id="toc_1">printf 格式化输出</h2>
-
-<p>[TOC]<br/>
-- 区别一<br/>
-print不会自动换行<br/>
-echo 会自动换行</p>
-
-<ul>
-<li>区别二
-print 用于格式打印
-echo 用于标准的输出</li>
-</ul>
-
-<pre><code>printf &quot;%-4s%-8s%-4s\n&quot; 姓名 性别 体重
-printf &quot;%-4s%-8s%-4s\n&quot; raoraoraorao 男 120
-printf &quot;%-4s%-8s%-4s\n&quot; jun 女 130
-printf &quot;%-4s%-8s%-4s\n&quot; bo 女 140
-</code></pre>
-
-<p>格式化输出 &quot;s&quot;表示字符串，一个宽度是10的字符,如果超出也显示，不足10用空白不齐，”-“表示左对齐。</p>
-
-<h2 id="toc_2">管道</h2>
-
-<p>将一个命令的输出做威另一个命令的输入</p>
-
-<h2 id="toc_3">重定向输出</h2>
-
-<ul>
-<li>
-<a href="#toc_0">echo</a>
-</li>
-<li>
-<a href="#toc_1">printf 格式化输出</a>
-</li>
-<li>
-<a href="#toc_2">管道</a>
-</li>
-<li>
-<a href="#toc_3">重定向输出</a>
-<ul>
-<li>
-<a href="#toc_4">命令行里的输入与输出重定向</a>
-</li>
-<li>
-<a href="#toc_5">脚本文件里的输入与输出重定向</a>
-</li>
-<li>
-<a href="#toc_6">自定义文件描述符</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_7">总结</a>
-</li>
-</ul>
-
-
-<p>原来是重定向到控制台输出，现在是重定向输出到文件</p>
-
-<p>文件重定向<br/>
-以控制台为参照<br/>
-<strong>系统已经存在的文件描述符0（标准输入即键盘），1(标准输出即控制台)，2(标准错误)，其他是可自定义的文件描述符</strong></p>
-
-<p>白话理解cat命令行重定向<br/>
-原来是从键盘输入，现在是从文件输入<br/>
-<code>cat</code> 命令直接输入cat命令，从键盘输入，然后在控制台输出。<br/>
-<code>cat file</code> 采用cat接收一个非STDIN文件输入，即将输入变成从文件读取<br/>
-特别说明</p>
-
-<blockquote>
-<p>重定向不限制于cat命令,任何命令都可以。<br/>
-就是将一个命令的输出重定向到其他文件或者标准输出。在一个命令的输入时，也可以从一个文件或者标准输入作为输入，即输入重定向</p>
-</blockquote>
-
-<pre><code>“&gt; ” 重定向输出到一个文件
-&quot;&gt;&gt;&quot; 重定向输出到一个文件并且是追加到后面
-</code></pre>
-
-<h3 id="toc_4">命令行里的输入与输出重定向</h3>
-
-<p>案例一：重定向错误输出到一个文件中<br/>
-    当我们的命令发生错误时，shell并不会将错误重定向到输出的重定向文件。重定向时要写上文件描述符</p>
-
-<pre><code>ls -al fileC 2&gt; errfile.sh 
-</code></pre>
-
-<p>案例二：将正确信息重定向到一个文件，将错误信息重定向到一个文件</p>
-
-<pre><code>ls -al fileA.sh fileC.sh 2&gt; errfile.sh 1&gt; fileD.sh
-</code></pre>
-
-<p>案例三：将正确与错误输入到同一个文件</p>
-
-<pre><code>ls -al fileA.sh fileC.sh &amp;&gt;  fileD.sh 
-</code></pre>
-
-<h3 id="toc_5">脚本文件里的输入与输出重定向</h3>
-
-<p>要想在脚本文件里指定文件的输入与输出重定向，需要对这个要输出的内容做标记。告诉要输入或者输出到哪个文件。那么这个文件的描述符就需要在脚本里写出</p>
-
-<ul>
-<li>临时重定向
-这里的&amp;2是一种标记，标记其内容将会进入那个重定向，因为只起到临时标记的作用。所以叫临时重定向。这里的临时，永久是在脚本文件里告诉，命令的输入与输入。也就是在脚本文件里告诉有输出，有输入的一个流。</li>
-</ul>
-
-<pre><code># 临时重定向 在一个shell脚本里，将一个输出设置成临时重定向
-
-echo &quot;hello owrk&quot; &gt;&amp;2;
-echo &quot;你好&quot; &gt;&amp;2;
-</code></pre>
-
-<ul>
-<li>永久重定向
-这里的永久重定向，说白点就是一次性标记。</li>
-</ul>
-
-<pre><code>exec 1&gt; fileContent.sh
-echo &quot;hello world&quot;
-echo &quot;你好&quot;
-
-# 更改为重定向
-exec 2&gt; errorfile.sh
-echo &quot;我报错了&quot; &gt;&amp;2   
-# 将我报错了进行标记 
-</code></pre>
-
-<pre><code>exec 0&lt; fileContent.sh
-# 读物文件的所有行
-count=1;
-while read line  
-do
-echo &quot;读取的内容${line},行数${count}&quot;;
-count=`expr $count + 1`;
-done
-</code></pre>
-
-<h3 id="toc_6">自定义文件描述符</h3>
-
-<ul>
-<li>创建文件读写描述符号示例</li>
-</ul>
-
-<pre><code>#创建文件的读写描述符
-exec 3&lt;&gt; fileContent.sh
-
-#读取文件中的一行数据
-read line &lt;&amp;3
-
-#打印数据
-echo &quot;读取数据:&quot;$line;
-echo &quot;哈哈，看写入文件了没wwwww有&quot; &gt;&amp;3
-</code></pre>
-
-<ul>
-<li>关闭文件描述符 关闭文件描述符后，不能写入文件</li>
-</ul>
-
-<p><code>exec 3&gt;&amp;-</code></p>
-
-<ul>
-<li>恢复文件描述符(这个很难理解，实际上是一个暂存)</li>
-</ul>
-
-<pre><code># 创建一个文件描述符3，执行原有文件描述符1，也就是是控制台输出
-exec 3&gt;&amp;1;
-
-# 创建文件描述符1，重定向到一个文件
-exec 1&gt; fileContent.sh
-
-echo &quot;工作1&quot;;
-
-echo &quot;工作2&quot;;
-
-# 将1重定向到预先保存的控制台输出,所左这之后会输出都屏幕,也就是恢复了
-exec 1&gt;&amp;3
-echo &quot;完成了&quot;;
-
-</code></pre>
-
-<pre><code>修改输入并恢复输入
-exec 6&lt;&amp;0;
-exec 0&lt; fileContent.sh
-
-# 系统还是会从0所指向的文件进行读取，输出还是原有的输出
-while read line 
-do
- echo &quot;文件内容${line}&quot;
-done
-
-exec 0&lt;&amp;6;
-
-echo &quot;读取完成&quot;;
-</code></pre>
-
-<h2 id="toc_7">总结</h2>
-
-<blockquote>
-<p>0，1，2,是系统默认已经指定了的文件描述符，分别指向键盘文件，控台台文件，错误文件。exec的本质是在一个进程里创建一个文件描述符。在shell脚本里可以创建文件描述符指定特定的文件进行输入与输出。<br/>
-文件描述符的理解，文件描述符只是一个符号</p>
-</blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[shell脚本知识梳理（三） 流程控制]]></title>
-    <link href="https://raojunbo.github.io/15440981221870.html"/>
-    <updated>2018-12-06T20:08:42+08:00</updated>
-    <id>https://raojunbo.github.io/15440981221870.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">if语句</h2>
-
-<blockquote>
-<p>这里的条件就是上节说的test命令的参数</p>
-</blockquote>
-
-<pre><code>if [ 条件 ]
-then
-    代码
-fi
-</code></pre>
-
-<pre><code>if [ 条件]
-then
-    代码
-else
-    代码
-fi
-</code></pre>
-
-<pre><code>if [ 条件 ]
-then
-    代码
-elif [ 条件 ]
-then
-    代码
-fi
-
-</code></pre>
-
-<h2 id="toc_1">for语句</h2>
-
-<pre><code>for 变量名 in item1 item2 item3
-do
-    代码    
-done
-</code></pre>
-
-<pre><code>for name in &quot;rao&quot; &quot;jun&quot; &quot;bo&quot;
-do
-    echo ${name}
-done    
-</code></pre>
-
-<pre><code>//列出当前目录所有文件(用的for in)
-file=`pwd`/*;
-for name in ${file}
-do
-    echo ${name}
-done
-</code></pre>
-
-<pre><code>//for 的c形式
-for (( i = 0; i &lt; 10; i++ )); do
-    echo $i;
-    for (( j = 0; j &lt; 10; j++ )); do
-        echo $j;
-    done
-done
-</code></pre>
-
-<pre><code>//一个一个显示文件列表
-for i in `ls `
-do
-echo &quot;这是文件${i}&quot;;
-done
-</code></pre>
-
-<h2 id="toc_2">while</h2>
-
-<pre><code>while [] 
-do
-
-done
-</code></pre>
-
-<pre><code>//示例
-var=10;
-while [ ${var} -gt 0 ];
-do
-echo $var;
-var=`expr ${var} - 1`;
-done
-</code></pre>
-
-<h2 id="toc_3">switch case</h2>
-
-<pre><code>number=1
-case $number in
-    1) echo &quot;等于1&quot;;;
-    2) echo &quot;等于2&quot;;;
-esac
-</code></pre>
+<p>*</p>
 
 ]]></content>
   </entry>

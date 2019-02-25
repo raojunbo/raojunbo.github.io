@@ -1,208 +1,1735 @@
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>
     
   北哥传奇
   
+
   </title>
- <meta name="description" content="">
- <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
-    <link rel="stylesheet" href="asset/css/foundation.min.css" />
-    <link rel="stylesheet" href="asset/css/docs.css" />
+  <meta name="author" content="">
+  <meta name="description" content="">
 
-    <script src="asset/js/vendor/modernizr.js"></script>
-    <script src="asset/js/vendor/jquery.js"></script>
-    <script src="asset/highlightjs/highlight.pack.js"></script>
-    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-  </head>
-  <body class="antialiased hide-extras">
-    
-    <div class="marketing off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="asset/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+  <script src="asset/js/modernizr-2.0.js"></script>
+  <script src="asset/js/jquery.min.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/solarized_light.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
 
+  <style type="text/css">
+  .cat-children-p{ padding: 6px 0px;}
+  .hljs{background: none;}
+  </style>
+  <script type="text/javascript">
+  var isAddSildbar = true;
+  </script>
+  <script src="asset/js/octopress.js" type="text/javascript"></script>
+</head>
+<script type="text/javascript">
+//链接新开窗口
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+$(document).ready(function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="index.html">北哥传奇</a></h1>
+  
+    <h2></h2>
+  
+</hgroup>
 
-<nav class="top-bar docs-bar hide-for-small" data-topbar>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:raojunbo.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
 
-<div id="header">
-    <h1><a href="index.html">北哥传奇</a></h1>
-</div>
+  <li id=""><a target="self" href="index.html">Home</a></li>
+
+  <li id=""><a target="_self" href="archives.html">Archives</a></li>
+
+</ul>
 
 </nav>
-        <nav class="tab-bar show-for-small">
-  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
-    <span> &nbsp; 北哥传奇</span>
-  </a>
-</nav>
+  <div id="main">
+    <div id="content"> 
+<div class="blog-index">
 
-<aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-      <li><a href="index.html">Home</a></li>
-      
-        <li class="divider"></li>
-        <li><label>前言</label></li>
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15349990744771.html">我从SDWebImage学到点什么</a></h1>
+			<p class="meta"><time datetime="2018-08-23T12:37:54+08:00" 
+			pubdate data-updated="true">2018/8/23</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>本篇文章主要是总结，我从读SDWebImage源码里学到了什么?<br/>
+本来想写个长篇大论一句句解释的。但需要的时间太长。因为是开源项目，不是基本的需要深入理解的东西。都是平时使用的知识点的一个汇集。感觉还是没必要细说了。</p>
 
-          
-            <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-          
+<h2 id="toc_0">Category</h2>
 
-      
-        <li class="divider"></li>
-        <li><label>软件开发</label></li>
+<p>UIImageView的分类的API设计时，其他的方法都是基于这个<strong>全参数函数</strong>来设计。也就是真正的核心函数就是这一个。其他的对外扩展的函数都是调用这个函数来实现的。注意此处的API设计都采用添加了添加前缀。（这就是一种很好的设计方法）</p>
 
-          
+<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock {
+</code></pre>
 
-      
-        <li class="divider"></li>
-        <li><label>音视频技术</label></li>
+<p>在对系统的某个框架里的内容做扩展时，就可以采取这种方法。用分类的方法，调用自己的核心逻辑类。</p>
 
-          
-            <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
-          
-            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-          
-            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-          
-            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-          
-            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-          
-            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-          
-            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-          
-            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-          
-            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-          
+<h2 id="toc_1">SDWebImageManager</h2>
 
-      
-        <li class="divider"></li>
-        <li><label>金融理论</label></li>
+<p>SDWebImageManager是一个门面类。利用SDWebImageCache与SDWebImageDowloader实现图片的下载与缓存的逻辑。</p>
 
-          
+<ul>
+<li>难点</li>
+</ul>
 
-      
-      </ul>
-    </aside>
+<p>这里的难点在取图片与下载图片时需要满足能取消操作。比如正在下载图片，用户取消了这个图片的下载。这时我需要知道当前所处的阶段（时正在从缓存区呢，还是正在下载呢）。<br/>
+SDWebImageManager对这种情况采用了operation的操作。将取图，下载搞成两种操作。因为操作是可以取消的。（哈哈，这就是用operation的好处）</p>
 
-<a class="exit-off-canvas" href="#"></a>
+<h2 id="toc_2">SDWebImageCache</h2>
 
-        <section id="main-content" role="main" class="scroll-container">
+<p>SDWebImageCache有内存缓存与磁盘缓存，幷专门针对SDWebImage给定一个命名空间（我觉得给命名空间是一个很好的设计）。</p>
 
-          <div class="row">
-            <div class="large-3 medium-3 columns">
-              <div class="hide-for-small">
-                <div class="sidebar">
-                <nav>
-                  <ul id="side-nav" class="side-nav">
+<ul>
+<li><p>内存缓存<br/>
+NSCache</p></li>
+<li><p>磁盘缓存<br/>
+直接是文件存储</p></li>
+<li><p>清除缓存策略<br/>
+每种缓存都有过期时间，条目数目限制，总占用空间大小。当进入后台或者收到清除缓存通知时。首先排序最后修改日期，然后清除过期文件。在查看是否超过了总占用空间，占用了就冲排序好的最后面删除以半。如此反复。</p></li>
+<li><p>缓存里的多线程<br/>
+其实只有缓存到磁盘时会对目录做操作。</p></li>
+</ul>
 
-                    
-                      <li class="side-title"><span>前言</span></li>
-                        
-                          <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-                        
+<p>综上所述 缓存其实就是内存缓存如何做，磁盘缓存如何做，还要缓存策略如何设计。</p>
 
-                    
-                      <li class="side-title"><span>软件开发</span></li>
-                        
+<h2 id="toc_3">SDWebImageDownloader</h2>
 
-                    
-                      <li class="side-title"><span>音视频技术</span></li>
-                        
-                          <li><a title="基础实践系列之实现解码功能" href="15429468991101.html">基础实践系列之实现解码功能</a></li>
-                        
-                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-API(系列二)" href="15427852627727.html">FFMPEG视音频基础探索-API(系列二)</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-                        
-                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-                        
-                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-                        
-                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-                        
-                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-                        
-                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-                        
-                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-                        
-                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-                        
+<p>整个SDWebImageDownloader就是下面这个函数的实现。</p>
 
-                    
-                      <li class="side-title"><span>金融理论</span></li>
-                        
+<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url
+                                         options:(SDWebImageDownloaderOptions)options
+                                        progress:(SDWebImageDownloaderProgressBlock)progressBlock
+                                       completed:(SDWebImageDownloaderCompletedBlock)completedBlock;
+</code></pre>
 
-                    
-                  </ul>
-                </nav>
-                </div>
-              </div>
-            </div>
-            <div class="large-9 medium-9 columns">
+<p>难点</p>
 
- 
+<ul>
+<li><p>取消<br/>
+下载需要支持取消，具有这种可以取消的特性的操作，就用operation来是实现是最完美不过的了。从而在整个dowloader里管理这些operation。</p></li>
+<li><p>同一url的一次下载<br/>
+为了防止同一url下载多次。在downloader里保存了urlCallBacks，通过下载玩后，在urlCallBacks里遍历取出相对应的url的callBacks来执行回调。如果不这样处理。虽然能正常执行，但同url的下载会执行多次。</p></li>
+<li><p>下载operation<br/>
+SDWebImageDownloaderOperation这个主要管理单个下载的过程。利用NSURLSession进行数据的处理。实现operation的协议，比如executing，finished等，以辅助operation的可操作性。</p></li>
+</ul>
 
+<h2 id="toc_4">SDWebImageDecoder</h2>
 
-	
-		<div class="markdown-body">
-		<h1>开始自己的博客啦</h1>
+<p>下载的图片通常不是位图，在加载显示前都会解码。这里SDWebImage进行了提前解码的工作。幷没有自己写算法进行解码。而是将苹果的解码提前了。或者放在了一个子线程里执行。(其实就时将图片绘制，然后取出位图，是不是很巧妙)</p>
 
-		<p>之前一直在gitbook上写些总结，都不是原创的东西，觉得没有必要拿到自己的博客上。随着对技术，生活的体验与思考，有了些心得与体会。我觉得有必要开始表达我自己的想法了。于是这个博客就诞生了。</p>
+<pre><code>  CGContextRef context = CGBitmapContextCreate(NULL,
+                                                     width,
+                                                     height,
+                                                     bitsPerComponent,
+                                                     bytesPerRow,
+                                                     colorspaceRef,
+                                                     kCGBitmapByteOrderDefault|kCGImageAlphaNoneSkipLast);
+        
+        // Draw the image into the context and retrieve the new bitmap image without alpha
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+        CGImageRef imageRefWithoutAlpha = CGBitmapContextCreateImage(context);
+        UIImage *imageWithoutAlpha = [UIImage imageWithCGImage:imageRefWithoutAlpha
+                                                         scale:image.scale
+                                                   orientation:image.imageOrientation];
+</code></pre>
 
 
 		</div>
-	
 
+		
+
+	</article>
  
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15349190375007.html">HTTP/HTTPS协议</a></h1>
+			<p class="meta"><time datetime="2018-08-22T14:23:57+08:00" 
+			pubdate data-updated="true">2018/8/22</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<h2 id="toc_0">URL编码</h2>
+
+<p>为什么需要进行url编码？<br/>
+Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符。Url中只允许使用可打印字符。<br/>
+还有一些保留字符，比如url划分成若干组件的分隔符。<br/>
+url编码被称为百分号编码。%字符的十六进制表示。</p>
+
+<h2 id="toc_1">HTTP的实体类型</h2>
+
+<p>在HTTP协议的GET请求的参数内容直接拼接在url后面(这些个工作可以自己做，也可以通过第三方比如iOS的AFNetworking就为我们做了这个工作，哈哈，我们用AFNet只需给个字，详情可以参见AFURLRequestSerialization)。</p>
+
+<p>在HTTP协议的POST请求的参数放在请求体里。那么请求体力到底是些什么内容？<br/>
+常见的post提交数据类型有四种：</p>
+
+<p>1.第一种：application/json：这是最常见的json格式如下<br/>
+{&quot;input1&quot;:&quot;xxx&quot;,&quot;input2&quot;:&quot;ooo&quot;,&quot;remember&quot;:false}</p>
+
+<p>2.第二种：application/x-www-form-urlencoded：浏览器的原生 form 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数<br/>
+input1=xxx&amp;input2=ooo&amp;remember=false</p>
+
+<p>3.第三种：multipart/form-data:这一种是表单格式的，数据类型如下</p>
+
+<p>------WebKitFormBoundaryrGKCBY7qhFd3TrwAContent-Disposition: form-data; name=&quot;text&quot;<br/>
+title------WebKitFormBoundaryrGKCBY7qhFd3TrwAContent-Disposition:form-data;name=&quot;file&quot;;filename=&quot;chrome.png&quot;Content-Type: image/pngPNG ... content of chrome.png ...<br/>
+------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</p>
+
+<p>4.第四种：text/xml:这种直接传的xml格式</p>
+
+<p>AFNetworking这部分搞的很复杂</p>
+
+<h2 id="toc_2">HTTP在断点下载，断点续传的应用</h2>
+
+<h2 id="toc_3">HTTP里的Cookie与Session</h2>
+
+<ul>
+<li><p>Cookie<br/>
+用于在客户端记录用户的的数据。因为http是一种无状态协议。且工作都是在一次性中完成。有时为了方便记录数据。会将一些数据存在cookie里。比如用户的登陆状态信息，。（若果）</p></li>
+<li><p>Session<br/>
+session就是一种保存上下文信息的机制，它是针对每一个用户的，变量的值保存在服务器端，通过SessionID来区分不同的客户。默认传给客户端用cookie存储，在在每次请求是传给服务端，服务端根据这个Session找出当前用户的状态信息</p></li>
+</ul>
+
+<h2 id="toc_4">HTTP,TCP,IP协议层关系</h2>
+
+<h2 id="toc_5">HTTPS如何做到安全传输的</h2>
+
+<ol>
+<li>服务器把自己的公钥传给证书机构</li>
+<li>证书机构用自己的私有秘钥把服务器的公钥进行数字签名（标识这是数字机构的签名）</li>
+<li>证书机构的公开秘钥已经事先植入在浏览器里了</li>
+<li>客户端在向服务器请求时，会拿到经过证书机构签名的证书（这个证书里包含服务器的公钥）</li>
+<li>客户端收到这个证书会取出浏览器里的机构公钥对其进行验证（整个的信任机构就是对机构的信任了）</li>
+<li>如果是该证书机构颁发的，就取出公钥。这个公钥就时服务端公钥</li>
+<li>使用公钥对数据加密协商对称加密方法。。。</li>
+</ol>
+
+<p>采用证书机构的原因是防止第三方任攻击。防止伪装。</p>
+
+<h2 id="toc_6">HTTP的性能优化（可不搞）</h2>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346751968513.html">深入理解Object-C的Category</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:39:56+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p><a href="https://tech.meituan.com/DiveIntoCategory.html">深入理解Objective-C：Category</a><br/>
+是我看过的最完整的一个对Category的描述。本篇文章只是一个实践后结论性的总结，并对其中的一些发生关联的概念做说明。</p>
+
+<h2 id="toc_0">1. 前言</h2>
+
+<blockquote>
+<p>Category实际上就是将这些方法添加到主类的方法列表里的头部。</p>
+</blockquote>
+
+<p>apple推荐的使用场景</p>
+
+<ul>
+<li>可以减少单个文件的体积 </li>
+<li>可以把不同的功能组织到不同的category里 </li>
+<li>可以由多个开发者共同完成一个类 </li>
+<li>可以按需加载想要的category </li>
+<li>将私有方法提前声明</li>
+</ul>
+
+<p>不过除了apple推荐的使用场景，category的其他几个使用场景：</p>
+
+<ul>
+<li>模拟多继承</li>
+<li>把framework的私有方法公开</li>
+</ul>
+
+<p>补充说明</p>
+
+<ol>
+<li><p>什么是私有方法提前声明?<br/>
+Cocoa没有任何真正的私有方法。只要知道对象支持的某个方法的名称，即使该对象所在的类的接口中没有该方法的声明，你也可以调用该方法。不过这么做编译器会报错，但是只要新建一个该类的类别，在类别.h文件中写上原始类该方法的声明，类别.m文件中什么也不写，就可以正常调用私有方法了。这就是传说中的私有方法前向引用。 所以说cocoa没有真正的私有方法。<br/>
+我们还知道，即使没有引入 Category 的头文件，Category 的方法也会被添加进主类的方法列表里，可以通过 performSelector 的方式使用，导入头文件只是为了通过编译器的静态检查（将私有方法提前声明）。</p></li>
+<li><p>category如何模拟多继承？<br/>
+模拟多继承主要是利用可以添加方法，添加属性。既然可以添加属性，也可以添加方法，那么我要的方法与东西，都可以在里面实现。</p></li>
+</ol>
+
+<h2 id="toc_1">2. Category与extension对比</h2>
+
+<ul>
+<li><p>extension<br/>
+在<strong>编译器决议</strong>，它是类的一部分。在编译期和头文件的@interface以及实现文件里的@implement一起形成一个完整的类。它伴随类的产生而产生。extension一般用于隐藏类的私有信息。</p></li>
+<li><p>category<br/>
+在<strong>运行期决议</strong>，就category和extension的区别来看，可以推导出，extension可以添加实例变量，而category是无法添加实例变量的。因为在运行期，对象的内存布局已经确定，如果添加实例变量就会破坏类的内部结构，这对编译型语言来说是灾难性的。</p></li>
+</ul>
+
+<h2 id="toc_2">3. Category的结构与编译</h2>
+
+<p>我们知道所有的OC类和对象，在runtime层都是用struct表示的，category也不例外。category结构体如下</p>
+
+<pre><code>typedef struct category_t *Category;
+typedef struct category_t {
+    const char *name;
+    classref_t cls;
+    struct method_list_t *instanceMethods;
+    struct method_list_t *classMethods;
+    struct protocol_list_t *protocols;
+    struct property_list_t *instanceProperties;
+} category_t;
+
+</code></pre>
+
+<p>类的名字，类，实例方法列表，类方法列表，协议列表，属性<br/>
+从category的定义可以看出category可以添加实例方法，类方法，甚至可以实现协议，添加属性。但无法添加实例变量。<br/>
+从category的结构体表示可以看出<br/>
+<strong>在编译时，编译器在DATA段下（静态区）的objc_catlist_section里保存了category的数组。实际上这是个全局数组，所有的编译的category都会放在里面,这个数组供在运行时的加载</strong><br/>
+如下是这个全局数组</p>
+
+<pre><code>static struct _category_t *L_OBJC_LABEL_CATEGORY_$ [1] __attribute__((used, section (&quot;__DATA, __objc_catlist,regular,no_dead_strip&quot;)))= {
+&amp;_OBJC_$_CATEGORY_MyClass_$_MyAddition,
+};
+</code></pre>
+
+<h2 id="toc_3">4. Category的加载</h2>
+
+<p>我们知道，Objective-C的运行是依赖OC的runtime的，而OC的runtime和其他系统库一样，是OS X和iOS通过dyld动态加载的。<br/>
+当动态加载了OC的runtime时，就会将上面编译的那个全局数组做整理，添加到类的方法列表里。具体结论是</p>
+
+<ol>
+<li>把category的实例方法，协议以及属性添加到类上</li>
+<li>把category的类方法和协议添加到类的metaclass上</li>
+</ol>
+
+<p>具体怎么添加的，有兴趣的可以自行查看源码</p>
+
+<p>需要特别注意的是(特别重要)</p>
+
+<ol>
+<li><p>category的方法没有”完全替换掉“原来已经有的方法，也就是说category和原来类都有的methoda,那么category附加完成后，类的方法列表里会有两个methodA;</p></li>
+<li><p>category的方法被放到了新方法列表的前面，而原来类的方法被放到了新方法列表的后面，这也就是我们平常所说的category的方法会“覆盖”掉原来类的同名方法，这是因为运行时在查找方法的时候是顺着方法列表的顺序查找的，它只要一找到对应名字的方法，就会罢休<sup>_<sup>，殊不知后面可能还有一样名字的方法。还有多个category时，越后的会越在数组的前面。</sup></sup></p></li>
+</ol>
+
+<h2 id="toc_4">5. Category的+load方法</h2>
+
+<p>思考如下两个问题</p>
+
+<ol>
+<li><p>在类的+load方法调用的时候，我们可以调用category中声明的方法吗?(其实是在思考，category将方法加到主类与load执行的顺序问题)</p></li>
+<li><p>这些+load方法执行的顺序？（其实是在思考主类与category的执行load的顺序）</p></li>
+</ol>
+
+<pre><code>//Dog+DogCategory.h
+@interface Dog (DogCategory)
++ (void)dogJiao;
+
+@end
+</code></pre>
+
+<pre><code>//Dog+DogCategory.m
+#import &quot;Dog+DogCategory.h&quot;
+@implementation Dog (DogCategory)
++ (void)load {
+    NSLog(@&quot;%s&quot;,__FUNCTION__);
+}
+
++ (void)dogJiao {
+      NSLog(@&quot;%s&quot;,__FUNCTION__);
+}
+@end
+</code></pre>
+
+<pre><code>//Dog+DogCategory2.h
+#import &quot;Dog+DogCategory.h&quot;
+@interface Dog (DogCategory2)
+
+@end
+</code></pre>
+
+<pre><code>//Dog+DogCategory2
+#import &quot;Dog+DogCategory2.h&quot;
+@implementation Dog (DogCategory2)
++ (void)load {
+    
+    NSLog(@&quot;%s&quot;,__FUNCTION__);
+    
+    [self dogJiao];
+}
+@end
+</code></pre>
+
+<p>我们在DogCategory2中调用了DogCategory中的方法，由此可见，category的方法是在+load执行之前。<br/>
++load的执行顺序是先是 类，然后是category，而category的+load方法是按编译顺序。编译顺序在后的+load后执行。因为编译在后，在形成全局的数组时，会被加在数组最前面，这也是为什么，在category有相同的方法时，在执行时会选择后面文件在后面编译的文件。哈哈。</p>
+
+<h2 id="toc_5">6. 怎么调用原来类中被category覆盖掉的方法？</h2>
+
+<p>我们已经知道category其实并不是完全替换掉原理的类的同名方法。只是category在方法列表的前面而已。所以我嫩只要顺着方法列表找到最后一个对应名字的方法，就可以调用原来类的方方法。</p>
+
+<h2 id="toc_6">7. category与关联对象</h2>
+
+<p>其实category与关联对象没有关系。只是category只能给原有类添加方法，不能添加实例变量，可以用关联对象去解决这个问题罢了。</p>
+
+<p>那么关联对象又是存在什么地方？如何存储？对象销毁的时候如何处理关联对象？<br/>
+有兴趣的可以去看源码</p>
+
+<p>所有的关联对象都由AssociationsManager管理，而AssociationsManager里面由一个静态AsscociationsHashMap来存储所有的关联对象的。这相当于把所有对象的关联对象存在一个全局的map里面。而map的key就是这个对象的指针地址（任意两个不同对象的指针地址一定是不同的），而这个map的value又是另外一个AssociationsHashMap,里面保存了关联对象的kv值。在对象销毁时，会查看这个对象有没有关联对象。如果有就会完成关联对象的移除工作。</p>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346749892115.html">iOS APP启动如何优化</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:36:29+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>参考文章<br/>
+<a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653579242&amp;idx=1&amp;sn=8f2313711f96a62e7a80d63851653639&amp;chksm=84b3b5edb3c43cfb08e30f2affb1895e8bac8c5c433a50e74e18cda794dcc5bd53287ba69025&amp;mpshare=1&amp;scene=1&amp;srcid=081075Vt9sYPaGgAWwb7xd1x&amp;key=4b95006583a3cb388791057645bf19a825b73affa9d3c1303dbc0040c75548ef548be21acce6a577731a08112119a29dfa75505399bba67497ad729187c6a98469674924c7b447788c7370f6c2003fb4&amp;ascene=0&amp;uin=NDA2NTgwNjc1&amp;devicetype=iMac16%2C2+OSX+OSX+10.12.6+build(16G29)&amp;version=12020110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=IDZVtt6EyfPD9ZLcACRVJZYH8WaaMPtT%2BF3nfv7yZUQBCMKM4H1rDCbevGd7bXoG">iOS App 启动性能优化</a></p>
+
+<h1 id="toc_0">iOS APP启动如何优化</h1>
+
+<p>App总的启动时间 = main()之前加载装载时间 + didFinishLaunchingWithOptions()之后时间</p>
+
+<ul>
+<li><p>didFinishLaunchingWithOptions之后<br/>
+在didFinishLaunching时间后，我们有SDK的初始化，视图控制器的创建。网络请求，配置等信息。可以将这个进行类，并分别时间进行配置</p>
+
+<ul>
+<li>日志，统计可以继续放在最先配置</li>
+<li>推送，即是通讯，项目配置</li>
+<li>其他sdk的初始化</li>
+</ul>
+
+<p>一点：日志，统计配置先启动，其次是推送，环境配置，项目配置，可以放在加载广告时进行处理，最后是一般SDK的配置，可以在第一个页面渲染完成后进行配置。</p>
+
+<p>二点：可以将网络请求放在didAppear里进行，并将数据解析渲染等操作，放在didAppear里进行。首页面给一个缓存的数据先显示出来。<br/>
+总的思路：1.didFinishLaunchingWithOptions里的配置操作 2.减少第一个页面的渲染时间。</p></li>
+<li><p>main之前的加载时间</p></li>
+</ul>
+
+<p>动态库加载越多，启动越慢(因为在启动时，需要将编译时依赖的动态库的函数真正绑定)<br/>
+Objc类越多，启动越慢(因为要解析更多的二进制数据)<br/>
+静态数据越多，启动越慢<br/>
++load越多，启动越慢</p>
+
+<pre><code>Total pre-main time: 1.7 seconds (100.0%)
+         dylib loading time: 252.96 milliseconds (14.7%)
+        rebase/binding time: 939.94 milliseconds (54.7%)
+            ObjC setup time: 113.02 milliseconds (6.5%)
+           initializer time: 410.92 milliseconds (23.9%)
+</code></pre>
+
+<p>优化手段<br/>
+移出不需要的动态库<br/>
+移出不需要用到的类<br/>
+合并功能类似的类和扩展（一般不做优化，对程序员成本太高）<br/>
+减少+load方法里执行耗时的操作，可以用dispatch_once来替代的只执行一次的方案<br/>
+减少图片大小</p>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346749374335.html">RunLoop思考与总结</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:35:37+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>本篇是对这篇文章<a href="https://blog.ibireme.com/2015/05/18/runloop/">深入理解Runloop</a>的学习与实践的理解，文字绝大部分是出自这篇文章，可以说是我自己学习总结吧。</p>
+
+<ul>
+<li>
+<a href="#toc_0">一：程序是如何保持不退出的？</a>
+</li>
+<li>
+<a href="#toc_1">二：Runloop的基础概念与相关API</a>
+</li>
+<li>
+<a href="#toc_2">三：RunLoop的内部逻辑</a>
+</li>
+<li>
+<a href="#toc_3">四：RunLoop如何在睡眠中等待?</a>
+</li>
+<li>
+<a href="#toc_4">六：RunLoop与AutoreleasePool的关系</a>
+</li>
+<li>
+<a href="#toc_5">七：事件响应</a>
+</li>
+<li>
+<a href="#toc_6">八：手势识别</a>
+</li>
+<li>
+<a href="#toc_7">九：界面更新</a>
+</li>
+<li>
+<a href="#toc_8">十：动画</a>
+</li>
+<li>
+<a href="#toc_9">十一：定时器</a>
+</li>
+<li>
+<a href="#toc_10">十二：PerformSelecter</a>
+</li>
+<li>
+<a href="#toc_11">十三：GCD（还没具体的研究证实）</a>
+</li>
+<li>
+<a href="#toc_12">十四：观察RunLoop的实际调用（很重要）</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一：程序是如何保持不退出的？</h2>
+
+<p><strong>一个应用就是一段可执行的指令。一段段的指令按照一定的顺序执行，而这样一条执行流顺序就是一个抽象的概念叫“线程”。而提供给执行所需要的内存，计数器，栈，寄存器等独立空间就是进程空间，整个执行流（包括多个子执行流（线程））就是一个抽象概念”进程“。</strong>。<br/>
+在下面的main函数指令执行完后并没有退出程序。那么是如何保证应用程序处于不退出呢？</p>
+
+<pre><code>int main(int argc, char * argv[])
+{
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+</code></pre>
+
+<p>上面的代码是一个iOS应用的main.m应用入口。明显在main执行完后就按理应当退出。但并没有退出。我们可以推测，UIApplicationMain()有一个死循环，而这个死循环要能时刻监听事件并执行事件发生后的程序指令，这个过程就是&quot;EventLoop&quot;，这个循环的关键点：如何管理消息的到来，如何让线程在没有处理消息时休眠以避免资源的浪费，在有消息来时如何立刻被唤醒。所以线程执行完，就一直处于这个函数的内部“接受消息--》处理消息--&gt;等待--&gt;c处理”，直到收到退出的标识。</p>
+
+<p>苹果不循序直接创建Runloop，它只提荣CFRunloopGetMain()与CFRunloopGetCurrent()函数，用懒加载的方式。线程与Runloop是一一对应的。</p>
+
+<h2 id="toc_1">二：Runloop的基础概念与相关API</h2>
+
+<p>iOS里有关于Runloop的类既有OC的API也有CoreFoundation的API.我在查看NSRunloop时API内容简单到已经忽略了很多概念。CoreFoundation里的CFRunLoop对Runloop概念的诠释更加全面。</p>
+
+<p>如下几个核心概念<br/>
+CFRunLoop,<br/>
+CFRunLoopMode,<br/>
+CFRunLoopSourceRef,<br/>
+CFRunLoopObserverRef,<br/>
+CFRunLoopTimerRef</p>
+
+<ol>
+<li><p>CFRunLoopMode<br/>
+一个Runloop包含若干个Mode,每个Mode包含若干个Source/Timer/Observer。每次调用RunLoop时，只能指定在一个Mode下运行。切换Mode可以切换在不同Mode下的Source/Timer/Observer（NSTimer 这就是为什么要加入指定的Mode才能运行，并且只能在指定的Mode下）。Source/Timer/Observer将其统一称为item ，一个item可以加入到多个Mode,如果一个Mode里一个 item都没有，就不进入循环。</p>
+
+<pre><code>typedef CFStringRef CFRunLoopMode CF_EXTENSIBLE_STRING_ENUM;
+
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFRunLoop * CFRunLoopRef;
+
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFRunLoopSource * CFRunLoopSourceRef;
+
+typedef struct CF_BRIDGED_MUTABLE_TYPE(id) __CFRunLoopObserver * CFRunLoopObserverRef;
+
+typedef struct CF_BRIDGED_MUTABLE_TYPE(NSTimer) __CFRunLoopTimer * CFRunLoopTimerRef;    
+</code></pre>
+
+<p>CFRunLoopMode 和 CFRunLoop 的结构大致如下(此部分在开源的Runloop的源码里有，在苹果的库里并没有开放)：</p>
+
+<pre><code>struct __CFRunLoopMode {
+    CFStringRef _name;            // Mode Name, 例如 @&quot;kCFRunLoopDefaultMode&quot;
+    CFMutableSetRef _sources0;    // Set
+    CFMutableSetRef _sources1;    // Set
+    CFMutableArrayRef _observers; // Array
+    CFMutableArrayRef _timers;    // Array
+...
+};
+
+struct __CFRunLoop {
+    CFMutableSetRef _commonModes;     // Set
+    CFMutableSetRef _commonModeItems; // Set&lt;Source/Observer/Timer&gt;
+    CFRunLoopModeRef _currentMode;    // Current Runloop Mode
+    CFMutableSetRef _modes;           // Set
+};
+
+</code></pre>
+
+<p><strong>特别强调(我以前没有理解将NSTimer添加到kCFRunLoopCommonModes模式的真正含义,哈哈，现在终于弄清楚了)</strong><br/>
+CFRunLoop里有commonModes,一个Mode可以将自己标记为&quot;Common”属性。<code>CF_EXPORT void CFRunLoopAddCommonMode(CFRunLoopRef rl, CFRunLoopMode mode);<br/>
+</code>。每当RunLoop的模式发生变化时，都会将_commonModeItems里的Source/Observer/Timer同步到具有“Common”标记的Mode里。<br/>
+例如<br/>
+主线程的Runloop里有两个预置的<strong>Mode:kCFRunLoopDefaultMode，UITrackingRunLoopMode，这两个Mode都已经被标记为&quot;Common&quot;属性。有时你需要一个Timer，在两个Mode中都能回调，一种办法是将这个Timer分别添加到这两个Mode里。还有一种方式，就是将其添加到RunLoop的”commonModelItems&quot;中，“commonModeItems”被RunLoop自动更新到所有具有“Common”属性的Mode里去</strong>。</p>
+
+<p>还可以自己创建Model,通过    </p>
+
+<pre><code>CFRunLoopAddCommonMode(runloop,     yourFriendlyCFString);
+</code></pre>
+
+<p>添加commonMode会把commonModeItems数组中的所有source同步到新添加的mode中</p>
+
+<pre><code>//CFRunLoop对外暴露的管理Mode接口只有如下
+
+CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);//将一个mode添加common标记
+CFRunLoopRunInMode(CFStringRef modeName, ...);
+
+//Mode 暴露的管理 mode item的接口有下面几个：
+//在RunLoop里添加Source,Observer,Timer。并指定Mode。
+ Boolean CFRunLoopContainsSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFRunLoopMode mode);
+void CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFRunLoopMode mode);
+void CFRunLoopRemoveSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFRunLoopMode mode);
+
+ Boolean CFRunLoopContainsObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFRunLoopMode mode);
+ void CFRunLoopAddObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFRunLoopMode mode);
+ void CFRunLoopRemoveObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFRunLoopMode mode);
+
+ Boolean CFRunLoopContainsTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFRunLoopMode mode);
+ void CFRunLoopAddTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFRunLoopMode mode);
+ void CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFRunLoopMode mode);
+</code></pre></li>
+<li><p>CFRunLoopSourceRef 事件源。分为Source0,Source1</p>
+
+<ul>
+<li><p>Source0 只包含了一个回调（函数指针），它并不能主动触发事件。使用时，你需要先调用 CFRunLoopSourceSignal(source)，将这个 Source 标记为待处理，然后手动调用 CFRunLoopWakeUp(runloop) 来唤醒 RunLoop，让其处理这个事件。</p></li>
+<li><p>Source1 包含了一个 mach_port 和一个回调（函数指针），<strong>被用于通过内核和其他线程相互发送消息</strong>。这种 Source 能主动唤醒 RunLoop 的线程，其原理在下面会讲到。</p></li>
+</ul></li>
+<li><p>CFRunLoopTimerRef是基于时间的触发器，它和NSTimer是toll-frebridged的。当加入到Runloop时，Runloop会注册对应的时间点，当时间点到时，RunLoop会被唤醒以执行那个回到。</p></li>
+<li><p>CFRunLoopObserverRef是观察者，每个Observer都包含一个回调。当RunLoop的状态发生改变时，观察者就能通过回调接受这个变化。如下是RunLoop的状态</p>
+
+<pre><code>/* Run Loop Observer Activities */
+typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+kCFRunLoopEntry = (1UL &lt;&lt; 0),//进入Runllp
+kCFRunLoopBeforeTimers = (1UL &lt;&lt; 1),//即将处理Timer
+kCFRunLoopBeforeSources = (1UL &lt;&lt; 2),//即将处理Sources
+kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5),//即将进入睡眠
+kCFRunLoopAfterWaiting = (1UL &lt;&lt; 6),//刚从睡眠职工唤醒
+kCFRunLoopExit = (1UL &lt;&lt; 7),//退出runloop
+kCFRunLoopAllActivities = 0x0FFFFFFFU
+};
+</code></pre></li>
+</ol>
+
+<h2 id="toc_2">三：RunLoop的内部逻辑</h2>
+
+<p>此段代码出自最前面提到的文章，我将它贴到此处，便于我自己的理解。</p>
+
+<pre><code>/// 用DefaultMode启动
+void CFRunLoopRun(void) {
+    CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);
+}
+ 
+/// 用指定的Mode启动，允许设置RunLoop超时时间
+int CFRunLoopRunInMode(CFStringRef modeName, CFTimeInterval seconds, Boolean stopAfterHandle) {
+    return CFRunLoopRunSpecific(CFRunLoopGetCurrent(), modeName, seconds, returnAfterSourceHandled);
+}
+ 
+/// RunLoop的实现
+int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
+    
+    /// 首先根据modeName找到对应mode
+    CFRunLoopModeRef currentMode = __CFRunLoopFindMode(runloop, modeName, false);
+    /// 如果mode里没有source/timer/observer, 直接返回。
+    if (__CFRunLoopModeIsEmpty(currentMode)) return;
+    
+    /// 1. 通知 Observers: RunLoop 即将进入 loop。
+    __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopEntry);
+    
+    /// 内部函数，进入loop
+    __CFRunLoopRun(runloop, currentMode, seconds, returnAfterSourceHandled) {
+        
+        Boolean sourceHandledThisLoop = NO;
+        int retVal = 0;
+        do {
+ 
+            /// 2. 通知 Observers: RunLoop 即将触发 Timer 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeTimers);
+            /// 3. 通知 Observers: RunLoop 即将触发 Source0 (非port) 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeSources);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+            
+            /// 4. RunLoop 触发 Source0 (非port) 回调。
+            sourceHandledThisLoop = __CFRunLoopDoSources0(runloop, currentMode, stopAfterHandle);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+ 
+            /// 5. 如果有 Source1 (基于port) 处于 ready 状态，直接处理这个 Source1 然后跳转去处理消息。
+            if (__Source0DidDispatchPortLastTime) {
+                Boolean hasMsg = __CFRunLoopServiceMachPort(dispatchPort, &amp;msg)
+                if (hasMsg) goto handle_msg;
+            }
+            
+            /// 通知 Observers: RunLoop 的线程即将进入休眠(sleep)。
+            if (!sourceHandledThisLoop) {
+                __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeWaiting);
+            }
+            
+            /// 7. 调用 mach_msg 等待接受 mach_port 的消息。线程将进入休眠, 直到被下面某一个事件唤醒。
+            /// • 一个基于 port 的Source 的事件。
+            /// • 一个 Timer 到时间了
+            /// • RunLoop 自身的超时时间到了
+            /// • 被其他什么调用者手动唤醒
+            __CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) {
+                mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg
+            }
+ 
+            /// 8. 通知 Observers: RunLoop 的线程刚刚被唤醒了。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopAfterWaiting);
+            
+            /// 收到消息，处理消息。
+            handle_msg:
+ 
+            /// 9.1 如果一个 Timer 到时间了，触发这个Timer的回调。
+            if (msg_is_timer) {
+                __CFRunLoopDoTimers(runloop, currentMode, mach_absolute_time())
+            } 
+ 
+            /// 9.2 如果有dispatch到main_queue的block，执行block。
+            else if (msg_is_dispatch) {
+                __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(msg);
+            } 
+ 
+            /// 9.3 如果一个 Source1 (基于port) 发出事件了，处理这个事件
+            else {
+                CFRunLoopSourceRef source1 = __CFRunLoopModeFindSourceForMachPort(runloop, currentMode, livePort);
+                sourceHandledThisLoop = __CFRunLoopDoSource1(runloop, currentMode, source1, msg);
+                if (sourceHandledThisLoop) {
+                    mach_msg(reply, MACH_SEND_MSG, reply);
+                }
+            }
+            
+            /// 执行加入到Loop的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+            
+ 
+            if (sourceHandledThisLoop &amp;&amp; stopAfterHandle) {
+                /// 进入loop时参数说处理完事件就返回。
+                retVal = kCFRunLoopRunHandledSource;
+            } else if (timeout) {
+                /// 超出传入参数标记的超时时间了
+                retVal = kCFRunLoopRunTimedOut;
+            } else if (__CFRunLoopIsStopped(runloop)) {
+                /// 被外部调用者强制停止了
+                retVal = kCFRunLoopRunStopped;
+            } else if (__CFRunLoopModeIsEmpty(runloop, currentMode)) {
+                /// source/timer/observer一个都没有了
+                retVal = kCFRunLoopRunFinished;
+            }
+            
+            /// 如果没超时，mode里没空，loop也没被停止，那继续loop。
+        } while (retVal == 0);
+    }
+    
+    /// 10. 通知 Observers: RunLoop 即将退出。
+    __CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);
+}
+</code></pre>
+
+<p>可以看到，实际上 RunLoop 就是这样一个函数，其内部是一个 do-while 循环。当你调用 CFRunLoopRun() 时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。</p>
+
+<p>从以上可以看出RunLoop就是一个一个有do while的函数。大致思路<br/>
+用一张图能很好的说明<br/>
+<img src="media/15346749374335/162a5b8323373d82.png" alt="162a5b8323373d82"/></p>
+
+<ul>
+<li>在这里区别一些source0与source1
+source0是非基于Port的。只包含了一个回调（函数指针），它并不能主动触发事件。使用时，你需要先调用 CFRunLoopSourceSignal(source)，将这个 Source 标记为待处理，然后手动调用 CFRunLoopWakeUp(runloop) 来唤醒 RunLoop，让其处理这个事件。
+source1由RunLoop和内核管理，source1带有mach_port_t，可以接收内核消息并触发回调</li>
+</ul>
+
+<p>source1除了包含回调指针外包含一个mach port，Source1可以监听系统端口和通过内核和其他线程通信，接收、分发系统事件，它能够主动唤醒RunLoop(由操作系统内核进行管理，例如CFMessagePort消息)。官方也指出可以自定义Source，因此对于CFRunLoopSourceRef来说它更像一种协议，框架已经默认定义了两种实现，如果有必要开发人员也可以自定义，详细情况可以查看官方文档。</p>
+
+<ul>
+<li>关键还有将现行睡眠，等待消息。那么是如何睡眠的呢？</li>
+</ul>
+
+<pre><code> __CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) {
+                mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg
+            }
+</code></pre>
+
+<h2 id="toc_3">四：RunLoop如何在睡眠中等待?</h2>
+
+<p>其实要搞清楚Runloop如何停下循环进入睡眠（在我们程序的概念里，大家从Runloop内部实现可以看出，是一个do while循环，循环的过程其实也是消耗资源的,所以才去睡眠来防止消耗资源）<br/>
+休眠的函数调用的函数时mach_msg()。<br/>
+在微内核Mach中，所有的东西都是通过自己的对象实现的，进程，线程，虚拟内存都被称作&quot;对象“。和其他架构不同,Mach的对象间不能直接调用，只能通过消息传递的方式，这就是Mach的IPC(进程通信)的核心。<br/>
+为了实现消息的发送和接收，mach_msg()函数实际上是调用了一个Mach陷阱(trap)，即函数mach_msg_trap(),陷阱这个概念在Mach中等同与系统调用。当你在用户态调用mach_msg_trap()时会触发陷阱机制，切换到内核态，内核态中内核实现的mach_msg()函数完成实际的工作。若果么有别人发送port消息过来，内核会将线程置于等待状态。例如，当APP静止时点击暂停，会看到主线程调用栈停留在mach_msg_trap()这里。</p>
+
+<h2 id="toc_4">六：RunLoop与AutoreleasePool的关系</h2>
+
+<p>App启动后，苹果在主线程 RunLoop 里注册了两个 Observer，其回调都是 _wrapRunLoopWithAutoreleasePoolHandler()。</p>
+
+<p>第一个 Observer 监视的事件是 <strong>Entry(即将进入Loop)，其回调内会调用 <u>objc</u>autoreleasePoolPush() 创建自动释放池</strong>。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。</p>
+
+<p>第二个 Observer 监视了两个事件：<strong>BeforeWaiting(准备进入休眠) 时调用_objc_autoreleasePoolPop() 和 <u>objc</u>autoreleasePoolPush() 释放旧的池并创建新池</strong> ；Exit(即将退出Loop) 时调用 <u>objc</u>autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。</p>
+
+<p>在主线程执行的代码，通常是写在诸如事件回调、Timer回调内的。这些回调会被 RunLoop 创建好的 AutoreleasePool 环绕着，所以不会出现内存泄漏，开发者也不必显示创建 Pool 了。</p>
+
+<p>kCFRunLoopEntry; // 进入runloop之前，创建一个自动释放池<br/>
+kCFRunLoopBeforeWaiting; // 休眠之前，销毁自动释放池，创建一个新的自动释放池<br/>
+kCFRunLoopExit; // 退出runloop之前，销毁自动释放池</p>
+
+<h2 id="toc_5">七：事件响应</h2>
+
+<p>苹果注册了一个 Source1 (基于 mach port 的) 用来接收系统事件，其回调函数为 __IOHIDEventSystemClientQueueCallback()。</p>
+
+<p>当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。这个过程的详细情况可以参考这里。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。</p>
+
+<p>_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</p>
+
+<p>总结下：<strong>屏幕硬件接收事件---&gt;给SprindBoard(桌面)应用程序--&gt;通过mach_port进程间通信给本应用（进程）---&gt;进入主线程的runloop---》处理事件进入事件队列处理执行</strong></p>
+
+<h2 id="toc_6">八：手势识别</h2>
+
+<p>(这里可以深入的思考，手势识别与touch事件向冲突时如何处理的)</p>
+
+<h2 id="toc_7">九：界面更新</h2>
+
+<p>当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。</p>
+
+<p>苹果注册了一个 Observer 监听 BeforeWaiting(即将进入休眠) 和 Exit (即将退出Loop) 事件，会去调用执行一个很长的函数：<br/>
+_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()。这个函数里会遍历所有待处理的 UIView/CAlayer 以执行实际的绘制和调整，并更新 UI 界面。</p>
+
+<p>说明:总结就是在进入睡眠前，会计算好，绘制好界面。等待垂直时钟从缓冲区取帧数据。</p>
+
+<p>这个函数内部的调用栈大概是这样的：</p>
+
+<pre><code>_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()
+    QuartzCore:CA::Transaction::observer_callback:
+        CA::Transaction::commit();
+            CA::Context::commit_transaction();
+                CA::Layer::layout_and_display_if_needed();
+                    CA::Layer::layout_if_needed();
+                        [CALayer layoutSublayers];
+                            [UIView layoutSubviews];
+                    CA::Layer::display_if_needed();
+                        [CALayer display];
+                            [UIView drawRe_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()
+    QuartzCore:CA::Transaction::observer_callback:
+        CA::Transaction::commit();
+            CA::Context::commit_transaction();
+                CA::Layer::layout_and_display_if_needed();
+                    CA::Layer::layout_if_needed();
+                        [CALayer layoutSublayers];
+                            [UIView layoutSubviews];
+                    CA::Layer::display_if_needed();
+                        [CALayer display];
+                            [UIView drawRect];
+</code></pre>
+
+<h2 id="toc_8">十：动画</h2>
+
+<p>Runloop与动画其实与绘制差不多。当要提交动画时，UIKit或者是CoreAnimation会向Runloop注册通知，并将其提交到渲染系统，包括动画结束的通知。也就是当动画结束后，runloop会被这些observer唤醒。（runloop的唤醒其实都是timer,source0,source1,observer都可以唤醒,特别需要说明的是performSeletor是通过timer唤醒）</p>
+
+<h2 id="toc_9">十一：定时器</h2>
+
+<ul>
+<li>NSTimer </li>
+</ul>
+
+<p>其实就是 CFRunLoopTimerRef，他们之间是 toll-free bridged 的。一个 NSTimer 注册到 RunLoop 后，RunLoop 会为其重复的时间点注册好事件。例如 10:00, 10:10, 10:20 这几个时间点。<strong>RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer。Timer 有个属性叫做 Tolerance (宽容度)，标示了当时间点到后，容许有多少最大误差。</strong></p>
+
+<p>如果某个时间点被错过了，例如执行了一个很长的任务，则那个时间点的回调也会跳过去，不会延后执行。就比如等公交，如果 10:10 时我忙着玩手机错过了那个点的公交，那我只能等 10:20 这一趟了。</p>
+
+<ul>
+<li><p>GCD Timer<br/>
+GCD Timer 是通过 dispatch port 给 RunLoop 发送消息，来使 RunLoop 执行相应的 block，如果所在线程没有 RunLoop，那么 GCD 会临时创建一个线程去执行 block，执行完之后再销毁掉，因此 GCD 的 Timer 是不依赖 RunLoop 的。</p></li>
+<li><p>CADisplayLink<br/>
+<strong>CADisplayLink 是一个和屏幕刷新率一致的定时器（但实际实现原理更复杂，和 NSTimer 并不一样，其内部实际是操作了一个 Source）</strong>。如果在两次屏幕刷新之间执行了一个长任务，那其中就会有一帧被跳过去（和 NSTimer 相似），造成界面卡顿的感觉。在快速滑动TableView时，即使一帧的卡顿也会让用户有所察觉。Facebook 开源的 AsyncDisplayLink 就是为了解决界面卡顿的问题，其内部也用到了 RunLoop，这个稍后我会再单独写一页博客来分析。</p></li>
+</ul>
+
+<h2 id="toc_10">十二：PerformSelecter</h2>
+
+<p>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</p>
+
+<p>当调用 performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去，同样的，如果对应线程没有 RunLoop 该方法也会失效。</p>
+
+<h2 id="toc_11">十三：GCD（还没具体的研究证实）</h2>
+
+<h2 id="toc_12">十四：观察RunLoop的实际调用（很重要）</h2>
+
+<p>这个等有机会在实践吧<br/>
+实践思路，操作一个事件，看runloop的反应<br/>
+如。Time事件，手动添加一个事件源source0,触摸事件的事件源(基于端口的事件源)</p>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346747750773.html">KVO-KVC</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:32:55+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<h2 id="toc_0">KVC</h2>
+
+<p>Objective-C中有个显式的NSKeyValueCoding类别名，所以对于所有继承了NSObject的类型，都能使用KVC.</p>
+
+<p>KVC的找寻方式<br/>
+setter,getter方法，_name,name</p>
+
+<ul>
+<li><p>KVC来访问和修改私有变量<br/>
+对类里的私有属性，Objective-C是无法直接访问的，但KVC是可以的。(嗯。这个功能很强大)。</p></li>
+<li><p>Model和字典的转换<br/>
+KVC和Object的runtime组合可以很容易实现Model和字典的转换</p></li>
+<li><p>修改一些控件的内部属性<br/>
+比如在很多UI控件都有很多内部UI控件组合而成的。但是Apple没有提供这些控件的API。这样我们就无法正常的访问和修改控件的样式。</p></li>
+</ul>
+
+<h2 id="toc_1">KVO</h2>
+
+<p>Objective-C中有个显式的NSKeyValueObserving类别名，所以对于所有继承了NSObject的类型.</p>
+
+<ul>
+<li>关闭KVO 
+<code>
++ (BOOL) automaticallyNotifiesObserversForKey:(NSString *)key {
+return NO;
+}
+</code></li>
+<li><p>KVO的行为是同步的<br/>
+发生与所有观察的值发生变化的同样的线程上。<br/>
+KVO的同步运行这个特性是非常强大的，只要我们在单一线程上面运行,KVO就能保证setter方法在执行完之前被通知到。</p></li>
+<li><p>KVO的实现<br/>
+实现思路<br/>
+<strong>编译器自动为被观察的对象创造一个派生类，并将被观察对象的isa指向这个派生类。若果用户注册了对某个目标对象的某一个属性的观察，那么此派生类会重写这个方法，并在其中添加通知的代码。Object-c在发送消息的时候，会通过isa指针找到当前对象所属的类对象。而类对象中保存着当前对象的实例方法。因此在向此对象发送消息时候，实际上是发送到了派生类对象的方法。又由于编译器对派生类的方法进行了重写，并添加了通知代码，因此会向注册的对象发送通知。</strong></p></li>
+</ul>
+
+<pre><code>#import &quot;NSObject+RAOKVO.h&quot;
+#import &lt;objc/message.h&gt;
+const char *key;
+@implementation NSObject (RAOKVO)
+
+- (void)rao_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context {
+    /*
+     动态创建一个新类
+     */
+    NSString *oldName = NSStringFromClass([self class]);
+    NSString *newName = [@&quot;RAO&quot; stringByAppendingString:oldName];
+    
+    Class myClass = objc_allocateClassPair([self class], [newName UTF8String], 0);
+    objc_registerClassPair(myClass);//注册类(相当于加载吧)
+    object_setClass(self, myClass);//更改本类类型（修改isa指向）
+    
+    //重写setName，实际是给子类添加方法(因为如果本类没方法，实际是找到父类方法)
+    class_addMethod(myClass, @selector(setName:), (IMP)setName,&quot;v@:@&quot;);
+    
+    //将观察者绑定到子类对象
+    objc_setAssociatedObject(self, @&quot;key&quot;, observer, OBJC_ASSOCIATION_ASSIGN);//(用ASSIGN防止循环引用)
+}
+
+void setName(id self,SEL sel,NSString * name) {
+    struct objc_super person = {self,class_getSuperclass([self class])};
+    objc_msgSendSuper(&amp;person,sel,name);
+    
+    //拿出观察者
+    id observer = objc_getAssociatedObject(self,@&quot;key&quot;);
+    objc_msgSend(observer, @selector(observeValueForKeyPath:ofObject:change:context:),&quot;name&quot;,self,@{@&quot;name&quot;:name});
+}
+
+@end
+</code></pre>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346744072286.html">iOS内存管理</a></h1>
+			<p class="meta"><time datetime="2018-08-19T18:26:47+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<ul>
+<li>
+<a href="#toc_0">一：内存管理研究的对象（基本问题）</a>
+</li>
+<li>
+<a href="#toc_1">二：ARC里的Autorelease</a>
+</li>
+<li>
+<a href="#toc_2">三：自动释放池</a>
+</li>
+<li>
+<a href="#toc_3">四：为什么系统的某些blockAPI不会循环引用?</a>
+</li>
+<li>
+<a href="#toc_4">四：内存泄露检测的实践</a>
+</li>
+<li>
+<a href="#toc_5">五：常见的内存泄露场景</a>
+</li>
+</ul>
+
+
+<p>本文不是对内存管理的应用介绍，而是对内存里一些比较难以理解的概念做重新梳理。<br/>
+本文将会解决的如下疑问<br/>
+1. 内存管理研究的对象(这是几个基本的问题)<br/>
+2. 自动释放在ARC里理解(自动释放在ARC里似乎被大家遗忘或是被误解)<br/>
+3. 自动释放池的原理实现<br/>
+4. ARC里有些系统的API为什么不需要做__weak避免循环引用？<br/>
+5. 为什么NSTimer容易造成内存泄漏，怎么解决？<br/>
+6. 如何检查内存泄漏的实践</p>
+
+<h2 id="toc_0">一：内存管理研究的对象（基本问题）</h2>
+
+<p>简单回忆下内存管理内容<br/>
+对内存的管理采用引用计数。释放计数release,autorelese.在知道明确的释放位置时，使用release,在是自己创建当要传递给别人时，不知道明确的释放位置时加入autoreleasePool里。让系统帮着在合适的时机释放（其实这个合适的时机时在一个运行循环的结束）。当一个对象的引用计数0时，对象释放。而MARC与ARC的区别，是ARC编译器为我们做了在合适的时机加入+1与-1，当然这个工作是用了更底层的api。</p>
+
+<p>比较重要的几个概念</p>
+
+<ul>
+<li><p>野指针<br/>
+指指针变量没有进行初始化或者指向的空间已经释放。（没进行初始化，有可能指向的内存地址就是非法的，指向的空间已经释放，这个指针也可能被其他占用）。<strong>这种情况在MRC时代很常见。在ARC很少见。因为ARC里weak会自动给释放的对象的引用设置为nil。OC里对nil发消息是没有任何反应的。</strong>比如 利用unsafe_unretained修饰的对象被释放了（这个不会主动置null）。</p></li>
+<li><p>内存泄露</p>
+
+<ol>
+<li><strong>在栈区对象引用置为nil。在MRC里是会内存泄露的,因为堆区的对象没有收到release。当在ARC里是不会有内存泄露的,ARC做了优化。ARC里只要没有强引用了就会释放（这块因为在看一些文章时，有的没有说明具体环境，给人造成一些误解。经过实践）</strong></li>
+<li>循环引用</li>
+<li>使用C的API</li>
+</ol></li>
+</ul>
+
+<pre><code>    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGColorRef colorRef = CGColorCreate(colorSpace, (CGFloat[]){0,0,0,0.8});
+    //这里就有内存泄露。计即使在arc下，也需要释放
+    //CGColorRelease(colorRef);
+</code></pre>
+
+<ul>
+<li><p>僵尸对象<br/>
+堆中已经释放的对象retainCount = 0;</p></li>
+<li><p>空指针<br/>
+指针为nil.不指向任何一个堆区对象。</p></li>
+</ul>
+
+<h2 id="toc_1">二：ARC里的Autorelease</h2>
+
+<p>ARC修饰符回忆<br/>
+1. ARC,__weak在对象被释放时，指向它的弱引用会自动被置为nil;<br/>
+2. ARC里的修饰符,__strong，__weak，__autoreleasing<br/>
+如果是从MRC转过来，这样思考，__stong就是retain,__autoreleasign就是autorelease。只是编译器给我们添加了。而__weak，只是引用，不做任何操作。</p>
+
+<p><strong>当在实际的开发中，autoreleasing好像不存在似的_autoreleasing其实在ARC里也是存在的。与MRC里的autorelease作用相同如下做出解释</strong></p>
+
+<p>在ARC下，编译器会检查方法名是否以alloc/new/copy/mutableCopy开头，如果不是，则自动将返回的对象注册到autorelease pool中。</p>
+
+<pre><code>@interface RJBObject : NSObject
+
++ (NSString *)newHelloWorldString;
++ (NSString *)helloWorldString;
+
+@end
+
+@implementation RJBObject
+
++ (NSString *)newHelloWorldString {
+    return [[NSString alloc] initWithCString:&quot;HelloWorld&quot; encoding:NSUTF8StringEncoding];
+}
+
++ (NSString *)helloWorldString {
+    return [[NSString alloc] initWithCString:&quot;HelloWorld&quot; encoding:NSUTF8StringEncoding];
+}
+
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        
+        __weak NSString *helloWorldString = [RJBObject helloWorldString];
+        __weak NSString *newHelloWorldString = [RJBObject newHelloWorldString];
+        
+        //assigning retained object to weak variable; 
+        //object will be released after assignment 
+
+        NSLog(@&quot;%@&quot;, helloWorldString);//输出HelloWorld
+        NSLog(@&quot;%@&quot;, newHelloWorldString);//输出null
+        
+    }
+    return 0;
+}
+
+</code></pre>
+
+<p>从上面可以看出。ARC给非创建的函数的返回值添加了自动释放池。</p>
+
+<p>在一些特殊的情况下，程序员也可以手动给某些方法加上其他标记，来覆盖被编译器隐式加上的标记。<br/>
+比如</p>
+
+<blockquote>
+<p>函数之间如果想要传递一个对象，不仅可以通过返回值，也可以通过将一个对象</p>
+</blockquote>
+
+<h2 id="toc_2">三：自动释放池</h2>
+
+<p>自动释放池就是一个数据结构，里面存有要被自动释放的对象的引用（实际就是搞一个存储地方即池子，标记需要在池子释放时同时释放的对象而已，那么释放时机就是池子的释放时机了），在自动释放池要释放的时候，会向这些对象发送release。</p>
+
+<p>那么自动释放池释放时机？</p>
+
+<ol>
+<li><p>自动释放池“自动释放”时，是在一个运行循环结束时。在与runloop联系时，是在runloop收到afterWaiting时（线程苏醒），将需要放入释放池的对象，在这个运行循环里放到这池子里面。在runloop收到beforeWaiting时(线程即将进入睡眠)，将池子倒掉。</p></li>
+<li><p>当然可以“手动释放”池子。自己创建的释放池，可以在出去(运行到{}后)池子时就释放掉。手动创建的自动释放池灵活应用可以避免内存泄露，避免不断循环并创建对象导致的内存峰值，避免可能将栈区搞溢出。</p></li>
+</ol>
+
+<p>特别说明<br/>
+主线程，GCD创建的线程都是会主动创建一个自动释放池的。而采用NSThread是不会主动创建一个自动释放池的。所以要特别注意，采取这种方式创建的线程要注意内存泄露。具体的实现源码<code>AutoreleasePoolPage</code>实现的一个双向链表实现的栈。具体的源码分析。我们将在专门的一章进行说明。</p>
+
+<h2 id="toc_3">四：为什么系统的某些blockAPI不会循环引用?</h2>
+
+<p>如下：一<br/>
+以前以为不会循环引用可能是系统做了哪些工作。哎，当初真是笨啊，糊里糊涂的死记，并没有理解其本质。还是回到循环引用的本质就能理解。不说了。</p>
+
+<pre><code>[UIViewanimateWithDuration:durationanimations:^{ 
+    [self.superviewlayoutIfNeeded]; 
+}];
+</code></pre>
+
+<p>如下：二</p>
+
+<pre><code> dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController pushViewController:self.blockvc animated:YES];
+    });
+</code></pre>
+
+<p>上面两例都不会造成循环引用，根本原因就时block捕获self,当self幷不强引用block;</p>
+
+<p>如下：三<br/>
+NStimer的两种版本</p>
+
+<pre><code> [NSTimer bk_scheduledTimerWithTimeInterval:10 block:^(NSTimer *timer) {
+              [Weak(self) fetchChatRoomInfo];
+        } repeats:YES];
+</code></pre>
+
+<pre><code>- (void)viewDidLoad {
+self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timeTick) userInfo:nil repeats:YES];
+}
+
+- (void)timeTick {
+    
+}
+</code></pre>
+
+<p>block版本的通过设置弱引用可以防止循环引用<br/>
+target版本因为设置target时将self强引用了（即<strong>计时器会保留它的target对象</strong>）。在timer处于有效期间，会一直对self持有强引用。而self又对timer有强引用。这就导致了，大家常说的NSTimer导致的内存泄漏的原因。</p>
+
+<p>那么如何去解决这个问题？<br/>
+首先想到的是打破环<br/>
+手动调用timer的invalidate,但在程序中，我们很难保证一定就会调用到这个使定时期无效的代码。有人会想，我将无效的代码放在dealloc里不就可以保证了吗。哈哈，当什么时候调用dealloc呢，是在释放的时候。因为循环引用了，dealloc永远不会调用。</p>
+
+<p>最优的思路<br/>
+将NSTimer进行block化。然后用blcock的API,通过设置weak避免循环引用。就能解决了。<br/>
+以下是block化的代码(实际是将NSTimer对target的强引用变成对类对象的强引用，而类对象本来就不会释放。就无所谓了。<strong>这里就给我们提供了一个绝妙的思路，在设计API时采取这种方式是不是更好呢！</strong>)</p>
+
+<pre><code>@interface NSTimer (Block)
+
++ (NSTimer *)rjb_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
+                                          block:(void(^)(void))block
+                                        repeats:(BOOL)repeats;
+
+
+@end
+
+@implementation NSTimer (Block)
++ (NSTimer *)rjb_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
+                                          block:(void(^)())block
+                                        repeats:(BOOL)repeats {
+    return [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(rjb_blockinvoke:) userInfo:[block copy] repeats:YES];
+}
+
++ (void)rjb_blockinvoke:(NSTimer *)timer {
+    void (^block)() = timer.userInfo;
+    if(block){
+        block();
+    }
+}
+
+@end
+
+</code></pre>
+
+<h2 id="toc_4">四：内存泄露检测的实践</h2>
+
+<p>下面我以我在我自己的项目中的真实记录</p>
+
+<ol>
+<li><p>静态分析analyze</p></li>
+<li><p>Leak checks<br/>
+在时间线里有红色x的就是有内存泄露。下面代码是哪个泄露的函数实现</p></li>
+</ol>
+
+<p><img src="media/15346744072286/Xnip2018-08-23_15-21-18.png" alt="Xnip2018-08-23_15-21-18"/></p>
+
+<p>哈哈，以我们自己的项目里，可以看出，用c的API导致的内存泄露很多，项目里的人员对于c里的内存管理不是很理解。</p>
+
+<pre><code>calloc申请的内存明显没有释放，添加free(map_chars)即可
+
++ (NSString *)_encryptWithString:(NSString *)source {
+    NSString *materialString = [source stringByAppendingString:(NSString *)k_material];
+    NSString *encryptString = [self md5WithString:materialString];
+    NSUInteger len = encryptString.length;
+    char *map_chars = (char *)calloc((len+1), sizeof(char));
+    md5Map([encryptString UTF8String], map_chars, (int)len);
+    NSString *mapString = [NSString stringWithCString:map_chars encoding:NSUTF8StringEncoding];
+
+    return mapString;
+}
+</code></pre>
+
+<pre><code>vars因为是copyIvarList产生的.是非object-c对象，所以要手动释放。添加free(vars)
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super init]) {
+        unsigned int outCount = 0;
+        Ivar *vars = class_copyIvarList([self class], &amp;outCount);
+        for (int i = 0; i &lt; outCount; i ++) {
+            Ivar var = vars[i];
+            const char *name = ivar_getName(var);
+            NSString *key = [NSString stringWithUTF8String:name];
+            id value = [aDecoder decodeObjectForKey:key];
+            [self setValue:value forKey:key];
+        }
+    }
+    return self;
+}
+</code></pre>
+
+<h2 id="toc_5">五：常见的内存泄露场景</h2>
+
+<ol>
+<li>NSTimer初始化时指定self为target。即self引用timer,timer引用self。</li>
+<li>block的循环引用</li>
+<li>调用c的API忘记调用release</li>
+<li>在通知中心里，在对象销毁前不将该对象从通知中心移除，当发送通知时，就会造成奔溃(野指针)。</li>
+</ol>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346723413820.html">开始自己的博客啦</a></h1>
+			<p class="meta"><time datetime="2018-08-19T17:52:21+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<p>之前一直在gitbook上写些总结，都不是原创的东西，觉得没有必要拿到自己的博客上。随着对技术，生活的体验与思考，有了些心得与体会。我觉得有必要开始表达我自己的想法了。于是这个博客就诞生了。</p>
+
+
+		</div>
+
+		
+
+	</article>
+ 
+	<article>
+		 <header>
+		  	<h1 class="entry-title"><a href="15346720571289.html">Block</a></h1>
+			<p class="meta"><time datetime="2018-08-19T17:47:37+08:00" 
+			pubdate data-updated="true">2018/8/19</time></p>
+		 </header>
+	  	<div class="entry-content">
+		  	
+		  	<ul>
+<li>
+<a href="#toc_0">本文要思考的问题</a>
+</li>
+<li>
+<a href="#toc_1">Block概念</a>
+</li>
+<li>
+<a href="#toc_2">Block内存管理</a>
+</li>
+<li>
+<a href="#toc_3">Block循环引用</a>
+</li>
+<li>
+<a href="#toc_4">Block的实现原理</a>
+</li>
+<li>
+<a href="#toc_5">block实践感悟</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">本文要思考的问题</h2>
+
+<p>本文将会解决的如下疑问<br/>
+1. block内存如何管理<br/>
+2. 为什么会造成循环引用<br/>
+3. 延时释放的原理<br/>
+4. block的实现原理的本质推演</p>
+
+<h2 id="toc_1">Block概念</h2>
+
+<p>一句话：”一个能捕获局部变量，且保存了可执行代码的一个对象“，对象类型有isa指向，__NSGlobalBlock__,__NSMallocBlock__，__NSStckBlock__。</p>
+
+<p>使用clang 将OC代码转换成C++文件。在命令行输入clang -rewrite-objc需要编译的OC文件.m</p>
+
+<pre><code>int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        NSLog(@&quot;Hello, World!&quot;);
+        int a = 1;
+        int (^RJBblock)(void) = ^(void){
+            NSLog(@&quot;这是值%d&quot;,a);
+            return 1;
+        };
+        RJBblock();
+    }
+    return 0;
+}
+</code></pre>
+
+<pre><code>struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  int a;
+  //在c++中，结构体是可以用构造函数初始化的
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int _a, int flags=0) : a(_a) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+static int __main_block_func_0(struct __main_block_impl_0 *__cself) {
+  int a = __cself-&gt;a; // bound by copy
+
+            NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_20bcfd_mi_1,a);
+            return 1;
+        }
+
+static struct __main_block_desc_0 {
+  size_t reserved;
+  size_t Block_size;
+} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0)};
+
+int main(int argc, const char * argv[]) {
+    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
+
+        NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_20bcfd_mi_0);
+        int a = 1;
+        //c++里的一个对象的初始化,用void *fp 指向函数的指针进行初始化。__main_block_func_0 就是一函数。也就是block括号里的东西。
+        //普通的传值，是会将这个变量传进去的
+        int (*RJBblock)(void) = ((int (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, a));
+
+        //
+        ((int (*)(__block_impl *))((__block_impl *)RJBblock)-&gt;FuncPtr)((__block_impl *)RJBblock);
+    }
+    return 0;
+}
+</code></pre>
+
+<p>上面的表示，就是一个Block的实现。</p>
+
+<h2 id="toc_2">Block内存管理</h2>
+
+<p>block存储区域</p>
+
+<ul>
+<li><p>block没有访问外部变量<br/>
+block始终在Global区,无论当前环境是ARC还是MRC</p></li>
+<li><p>MRC </p>
+
+<ul>
+<li>block 如若果访问外部变量，block在栈里</li>
+<li>只要使用copy,才能放到堆里</li>
+</ul></li>
+<li><p>ARC </p>
+
+<ul>
+<li>block如果访问外部变量，block在堆里(因为arc默认将其拷贝了)</li>
+<li>block可以使用strong,copy,并且block是同一个对象</li>
+</ul></li>
+</ul>
+
+<p>__block变量<br/><br/>
+我们通过<code>clang -rewrite-objc</code> 查看如何实现的。由下面的可以看出。<code>__block</code>也有自己的结构体实现，传进去的是传值。再通过 <code>__block</code>结构体力的<code>_forwarding</code>，保证了访问时，block拷贝还是没拷贝的_block变量访问的正确性。拷贝后_forwarding指向堆里，没拷贝_forwarding指向栈里。</p>
+
+<pre><code>_struct __Block_byref_a_0 {
+  void *__isa;
+__Block_byref_a_0 *__forwarding;
+ int __flags;
+ int __size;
+ int a;
+};
+
+struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  __Block_byref_a_0 *a; // by ref
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, __Block_byref_a_0 *_a, int flags=0) : a(_a-&gt;__forwarding) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+static int __main_block_func_0(struct __main_block_impl_0 *__cself) {
+  __Block_byref_a_0 *a = __cself-&gt;a; // bound by ref
+
+            (a-&gt;__forwarding-&gt;a) = 2;
+            return 1;
+        }
+static void __main_block_copy_0(struct __main_block_impl_0*dst, struct __main_block_impl_0*src) {_Block_object_assign((void*)&amp;dst-&gt;a, (void*)src-&gt;a, 8/*BLOCK_FIELD_IS_BYREF*/);}
+
+static void __main_block_dispose_0(struct __main_block_impl_0*src) {_Block_object_dispose((void*)src-&gt;a, 8/*BLOCK_FIELD_IS_BYREF*/);}
+
+static struct __main_block_desc_0 {
+  size_t reserved;
+  size_t Block_size;
+  void (*copy)(struct __main_block_impl_0*, struct __main_block_impl_0*);
+  void (*dispose)(struct __main_block_impl_0*);
+} __main_block_desc_0_DATA = { 0, sizeof(struct __main_block_impl_0), __main_block_copy_0, __main_block_dispose_0};
+int main(int argc, const char * argv[]) {
+    /* @autoreleasepool */ { __AtAutoreleasePool __autoreleasepool; 
+
+        NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders_jv_wzmk5z514_17z63gkvg7fk0h0000gn_T_main_e97dd6_mi_0);
+        __attribute__((__blocks__(byref))) __Block_byref_a_0 a = {(void*)0,(__Block_byref_a_0 *)&amp;a, 0, sizeof(__Block_byref_a_0), 1};
+        int (*RJBblock)(void) = ((int (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, (__Block_byref_a_0 *)&amp;a, 570425344));
+        ((int (*)(__block_impl *))((__block_impl *)RJBblock)-&gt;FuncPtr)((__block_impl *)RJBblock);
+    }
+    return 0;
+}
+</code></pre>
+
+<h2 id="toc_3">Block循环引用</h2>
+
+<ul>
+<li><p>费曼输出：<strong>self引用block,block引用self</strong>。<br/>
+如果对此理解的不是很清楚，而只是一味按照其他人说的避免循环引用的方式。就没有抓住本质，也就不能创造性的解决问题。<br/>
+self引用block,就是self持有这个block,block引用self，是因为block代码里使用到了self，或者self.property,_ivr,block默认会对这个self,实现强引用。<br/>
+解决的办法是不让block对self进行强引用。也就是block不对self进行一次release的权限。(这里的self指的是直接强引用block的对象)</p></li>
+<li><p>延时释放(<strong>重点，这个问题我想了好久，是如何办到的？</strong>)<br/>
+但有时会遇到，需要在block执行时，self一定要存在。即需求是延时self的释放。尽管有时，self释放后，执行block时，不会对逻辑造成影响（对nil发起的操作不做任何反应）。这时。我们需要在在block里对self的一次强引用。那有人会问，在block外面进行强引用，与在block里面进行强引用，不都是强引用吗？_为啥，在外面强引用会造成循环引用，在block里面做强引用不会造成循环引用呢？__<br/>
+因为Block的实现原理导致。请看Block的实现原理（高潮来了）</p></li>
+</ul>
+
+<h2 id="toc_4">Block的实现原理</h2>
+
+<ul>
+<li>费曼输出：Block在内存里实际是一个对象，而在Object-C里，对象实际是一个结构体。
+<strong>Block结构体里保存了“实现”，“描述”，“捕获的变量”。“实现”里保存了isa,funcPtr,而isa是这个对象类型，funcPtr就是函数指针，指向那个可执行的一个函数。函数的数据来源就是这个Block里捕获的变量</strong></li>
+</ul>
+
+<p>代码如下<br/>
+oc代码</p>
+
+<pre><code>test1() {
+    int a = 10;
+    void (^block)()= ^{
+        NSLogt(&quot;%d&quot;,a);
+    }
+    a = 20;
+    block();
+}
+
+int main(int argc,const char *argv[]){    
+    test1();
+    return 0;
+}
+
+</code></pre>
+
+<p>编译成c++代码</p>
+
+<pre><code>struct __test1_block_impl_0 {
+        struct __block_imple impl;
+        struct__test1_block_desc_0 *Desc_0;
+        _int a;
+        __test1_block_impl_0(void *fp,struct_test1_block_desc_0*Desc,int _a,int flag =0):a(_a) {
+            impl.isa = &amp;_NSConcreteStackBlock;
+            impl.Flags = flags;
+            impl.FuncPtr = fp;
+            Desc = desc;
+        }
+    };
+    
+static void __test1_block_func_0(struct __test1_block_imp_0 *__cself) {
+    int a = __cself-&gt;a;
+    NSLog(a);
+}
+
+void test1 () {
+    int a  = 10;
+    //block的定义转换成c++的定义，这是block的初始化（c++结构体的初始化）,生成block。
+    void(*block)() = (void (*)())&amp;__test1_block_imp_0((void *))__test1_block_func_0,&amp;__test1_block__desc_0_DATA,a);
+    a = 20;
+     //执行block   
+    ((void (*)(__block_impl *))((__block_imp *)block)-&gt;FuncPtr)((_block_impl *)block);
+}
+int main(itn argc,const char *argv[]){
+    test1();
+    return 0;
+}
+</code></pre>
+
+<p>简单推演<br/>
+1.  _int a; 是捕获的变量<br/>
+2. __test1_block_func_0 ;是可执行的代码<br/>
+3.执行block时，实际是执行声明的block里的FuncPtr,并将自己当做参数传了进去。</p>
+
+<p>我们回到延时释放的解释：从这里就能解释为什么从外面强引用会造成循环引用，因为block的结构体里实现了对self的捕获。并强引用了。从里面实现强引用，为什么不造成循环引用，是因为，从里面是在__test1_block_func_0函数里了。是一个局部变量了。block执行完时，自然会对这个局部变量实行释放。哈哈。终于揭开了疑惑。！！！</p>
+
+<p>对于__block变量的捕获原理，其实本质是一样的。只不过，是在捕获int a是传值进去。而__block变量是传地址进去。（特别说明：__block,static的变量，全局变量都是传指针）</p>
+
+<p>这里是block的实现。（这里有个遗憾，没有模拟出??）<br/>
+当外面的对象捕获是强引用时。在block的实现里也是强引用。这就导致当引用的是“对block有强引用的对象”时出现循环引用情况。若果对外面是弱引用。在block里就是弱引用。当想延迟时释放时。可以在block里加强引用。这会将其当做是局部变量，也就是在栈上。</p>
+
+<pre><code>//RJBObject.h
+typedef void(^RJBBlock)(void);
+
+@interface RJBObject : NSObject
+@property (nonatomic, strong) RJBBlock block;
+@property (nonatomic, assign) int a;
+@end
+
+</code></pre>
+
+<pre><code>//main.m
+#import &quot;RJBObject.h&quot;
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        RJBObject *objct = [[RJBObject alloc]init];
+        objct.block = ^{
+            NSLog(@&quot;这是a的值%d&quot;,weakObj.a);
+        };
+    }
+    return 0;
+}
+</code></pre>
+
+<pre><code>struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  RJBObject *objct;//此处是捕获的变量。因为捕获时时强引用，则这里就是强引用导致了+1;若果外面是弱引用，则这里就不会+1.就不会造成强引用。
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, RJBObject *_objct, int flags=0) : objct(_objct) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+</code></pre>
+
+<h2 id="toc_5">block实践感悟</h2>
+
+<p>block是强大的。可以做保存代码，可以当返回值，可以当参数，总之，将其当一般对象使用，外加他能保存代码并执行，那就简直强大无比了。Masory里将block做返回值实现链式编程，就是一个很好的实践。</p>
+
+
+		</div>
+
+		
+
+	</article>
+  
+	<div class="pagination">
 	
-
-  
-  
-</div></div>
-
-
-<div class="page-bottom">
-  <div class="row">
-  <hr />
-  <div class="small-9 columns">
-  <p class="copyright">Copyright &copy; 2015
-Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
-Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
-  </div>
-  <div class="small-3 columns">
-  <p class="copyright text-right"><a href="#header">TOP</a></p>
-  </div>
-   
-  </div>
+<a href="archives.html">Blog Archives</a>
+	 <a class="next" href="all_5.html">Newer &rarr;</a>  
+	    
+	</div>
 </div>
+ <aside class="sidebar"> 
 
-        </section>
-      </div>
-    </div>
+	<section>
+	  <h1>Categories</h1>
+	  <ul id="recent_posts">
+	  
+	      <li class="post">
+	        <a href="%E5%89%8D%E8%A8%80.html"><strong>前言&nbsp;(1)</strong></a>
+	        
+	        
+	        
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E4%B8%AA%E4%BA%BA%E7%B3%BB%E7%BB%9F.html"><strong>个人系统&nbsp;(10)</strong></a>
+	         <p class="cat-children-p"> 
+	        
+	        	<a href="%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0.html">投资笔记&nbsp;(9)</a>&nbsp;&nbsp;
+	        
+	         </p> 
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.html"><strong>软件工程&nbsp;(49)</strong></a>
+	         <p class="cat-children-p"> 
+	        
+	        	<a href="%E7%AE%97%E6%B3%95.html">算法&nbsp;(8)</a>&nbsp;&nbsp;
+	        
+	        	<a href="%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE.html">网络协议&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">iOS基础概念&nbsp;(11)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%BC%80%E6%BA%90%E5%88%86%E6%9E%90.html">iOS开源分析&nbsp;(2)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">iOS性能优化&nbsp;(6)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html">iOS工具深入&nbsp;(2)</a>&nbsp;&nbsp;
+	        
+	        	<a href="shell%E8%84%9A%E6%9C%AC.html">shell脚本&nbsp;(9)</a>&nbsp;&nbsp;
+	        
+	        	<a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html">C语言捡漏&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="Git%E5%B7%A5%E5%85%B7.html">Git工具&nbsp;(3)</a>&nbsp;&nbsp;
+	        
+	        	<a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">iOS架构设计&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="Swift.html">Swift&nbsp;(1)</a>&nbsp;&nbsp;
+	        
+	        	<a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">设计模式&nbsp;(4)</a>&nbsp;&nbsp;
+	        
+	         </p> 
+	      </li>
+	  
+	      <li class="post">
+	        <a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html"><strong>音视频技术&nbsp;(9)</strong></a>
+	        
+	        
+	        
+	      </li>
+	   
+	  </ul>
+	</section>
+	<section>
+	  <h1>Recent Posts</h1>
+	  <ul id="recent_posts">
+	  
+	      
+		      <li class="post">
+		        <a href="15512048926912.html">设计模式系列（四）-- 行为型</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048797799.html">设计模式系列（三）-- 结构型</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048653711.html">设计模式系列（二）--创建型设计模式</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512048416439.html">设计模式系列（一）设计模式概要</a>
+		      </li>
+	     
+	  
+	      
+		      <li class="post">
+		        <a href="15512046578708.html">Swift梳理</a>
+		      </li>
+	     
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	  
+	      
+	   
+	  </ul>
+	</section>
+	
+</aside> </div></div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 -  -
+  <span class="credit">Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; Theme by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+
+  
     
-    
-    <script src="asset/js/foundation.min.js"></script>
-    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
-    <script>
-      $(document).foundation();
-
-     
-    </script>
-    
 
 
-  </body>
+
+
+</body>
 </html>
