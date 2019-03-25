@@ -4,7 +4,7 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-03-25T10:24:10+08:00</updated>
+  <updated>2019-03-25T10:24:18+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -457,275 +457,6 @@ kTemplateRenderModeEditUserAnswer, //编辑模式下填充用户答案
 <a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005533">Core Text Programming Guide</a><br/>
 <a href="http://blog.leichunfeng.com/blog/2017/02/20/talking-about-the-decompression-of-the-image-in-ios/">谈谈 iOS 中图片的解压缩</a><br/>
 <a href="https://segmentfault.com/a/1190000004164291">iOS 视图、动画渲染机制探究</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[墨迹启动性能优化方案]]></title>
-    <link href="https://raojunbo.github.io/15522762874599.html"/>
-    <updated>2019-03-11T11:51:27+08:00</updated>
-    <id>https://raojunbo.github.io/15522762874599.html</id>
-    <content type="html"><![CDATA[
-<p>参考文档<a href="https://mp.weixin.qq.com/s/Kf3EbDIUuf0aWVT-UCEmbA">腾讯Bugly启动优化方案总结</a></p>
-
-<h1 id="toc_0">一：目标定制</h1>
-
-<ol>
-<li>main()之前 </li>
-<li>main()函数至applicationWillFinishLaunching完成---》主优化。SDK的初始化，本地数据的初始化。</li>
-<li>App完成所有本地数据的加载，到app首页数据显示----》资源加载和渲染性能</li>
-<li>App完成所有联网数据的加载，到首页网络数据显示---》网络，资源加载，和渲染性能</li>
-</ol>
-
-<h2 id="toc_1">1：main()之前</h2>
-
-<ul>
-<li>思考方向
-
-<ol>
-<li>移除不需要的动态库</li>
-<li>移除不需要用到的类</li>
-<li>合并功能类似的类和扩展</li>
-<li>压缩图片资源</li>
-</ol></li>
-</ul>
-
-<h2 id="toc_2">2：main()函数至applicationWillFinishLaunching完成</h2>
-
-<ul>
-<li>思考方向
-
-<ol>
-<li>各种业务请求配置更新</li>
-<li>第三方SDK</li>
-<li>闪屏，广告逻辑</li>
-<li>持续集成的一些配置 </li>
-</ol></li>
-</ul>
-
-<h2 id="toc_3">3：App完成所有本地数据的加载</h2>
-
-<ol>
-<li>缓存</li>
-<li>骨骼动画的加载</li>
-<li>tabBar里的处理
-tabBar的viewDidLoad会先执行
-然后是第一个vc的viewDidLoad执行
-然后是点击vc的viewDidLoad执行
-思路
-主视图第一时间加载，当里面的数据和界面都会延后加载。用户就会阶段性的，获得视觉上的变化。
-主要解决的问题</li>
-</ol>
-
-<h2 id="toc_4">4：App完成所有联网数据的加载，到首页网络数据显示</h2>
-
-<ol>
-<li>强化网络链接速度</li>
-</ol>
-
-<h1 id="toc_5">二：墨迹天气实践</h1>
-
-<ol>
-<li></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[墨迹天气启动优化技术汇总]]></title>
-    <link href="https://raojunbo.github.io/15519481732502.html"/>
-    <updated>2019-03-07T16:42:53+08:00</updated>
-    <id>https://raojunbo.github.io/15519481732502.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">一：图片的异步加载</h2>
-
-<p>背景：在进行时间分析时，本地图片的加载是比较耗时的。<br/><br/>
-在实践过程中大致遇到如下几种具体情况及相应的解决方法</p>
-
-<ol>
-<li><p>在设置背景颜色时最好直接用颜色而不是用图片<br/>
-原因分析：图片在加载与解码都会耗时</p></li>
-<li><p>UIImageView直接用图片的地方</p>
-
-<p>示例：</p>
-
-<pre><code>- (void)layoutmarkIconWitCity:(FollowedCity *)city {
-self.markIcon.hidden = ![self markIconIsShowWithCity:city];
-if (!self.markIcon.hidden) {
-    if (city.isFootMark) {
-        self.markIcon.image = [UIImage imageNamed:@&quot;left_drawer_footmark&quot;];
-    } else {
-        self.markIcon.image = [UIImage imageNamed:@&quot;b_auto_location_icon&quot;];
-    }
-}
-self.markIcon.size = CGSizeMake(20, 20);
-self.markIcon.left = self.cityNameLabel.right;
-self.markIcon.centerY = self.cityNameLabel.centerY;
-}
-</code></pre>
-
-<p>timeProfile时间检测如下</p>
-
-<p><img src="media/15519481732502/Xnip2019-03-08_15-18-42.png" alt="Xnip2019-03-08_15-18-42"/></p>
-
-<p>解决办法：我们尽量避免引入负责的异步绘制代码。优先选择了SD加载本地图片。SD加载本地图片后会对图片进行异步的解码并缓存；</p></li>
-<li><p>已经存绘制合成图片的代码或者直接在主线程执行图片转换</p>
-
-<p>示例1</p>
-
-<pre><code>//LeftDrawerMenuViewController.m
-UIImage *img = [UIImage imageNamed:@&quot;left_drawer_add_city_normal&quot;];
-[addCityBtn asyload_imageName:@&quot;left_drawer_add_city_normal&quot; forState:UIControlStateNormal];
-[addCityBtn setImage:[img mjl_imageByApplyingAlpha:0.7] forState:UIControlStateHighlighted];
-</code></pre>
-
-<p>示例2</p>
-
-<pre><code>//DisasterWarning
-/**
-获取图片，根据id，已经选择的背景圆形，或者方形的。
-@param dwicon icon id
-@param backgroundShapePrefix kCircleShapePrefix,kSquareShapePrefix 只有这2个有效值
-@return 可能nil
-*/
-- (UIImage *)disasterWarningImgbyDwIcon:(NSString *)dwicon prefix:(NSString *)backgroundShapePrefix {
-UIImage *resultingImage = nil;
-if (!IS_EMPTY_STRING(dwicon)) {
-    NSInteger length = dwicon.length;
-    NSString* colorChar;
-    NSString* typeStr;
-    if (length &gt; 1) {
-        typeStr = [dwicon substringToIndex:length - 1];
-        colorChar = [dwicon substringFromIndex:length - 1];
-        if ([typeStr intValue] &gt; 0) {
-            if (19 == [typeStr intValue]) {
-                typeStr = @&quot;4&quot;;
-            }
-            UIImage *bgimg = [UIImage imageNamed:[NSString stringWithFormat:@&quot;%@%@&quot;, backgroundShapePrefix,colorChar]];
-            UIImage *iconImg = [UIImage imageNamed:[NSString stringWithFormat:@&quot;dw%@&quot;, typeStr]];
-            CGSize size = bgimg.size;
-            UIGraphicsBeginImageContext(size);
-            [bgimg drawInRect:CGRectMake(0, 0, bgimg.size.width, bgimg.size.height)];
-            [iconImg drawInRect:CGRectMake(5, 5, bgimg.size.width-10, bgimg.size.height-10)];
-            resultingImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            return resultingImage;
-
-        }else{
-            UIImage *bgimg = [UIImage imageNamed:[NSString stringWithFormat:@&quot;%@1.png&quot;, backgroundShapePrefix]];
-            UIImage *iconImg = [UIImage imageNamed:@&quot;dw00.png&quot;];
-            CGSize size = bgimg.size;
-            UIGraphicsBeginImageContext(size);
-            [bgimg drawInRect:CGRectMake(0, 0, bgimg.size.width, bgimg.size.height)];
-            [iconImg drawInRect:CGRectMake(5, 5, bgimg.size.width-10, bgimg.size.height-10)];
-            resultingImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            return resultingImage;
-        }
-    }
-}
-return resultingImage;
-}
-</code></pre>
-
-<p>解决办法：添加手写异步绘制的代码；</p></li>
-</ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[墨迹天气App启动时间分析]]></title>
-    <link href="https://raojunbo.github.io/15518431320651.html"/>
-    <updated>2019-03-06T11:32:12+08:00</updated>
-    <id>https://raojunbo.github.io/15518431320651.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0">一：监测App在pre-main之前的启动时间</h2>
-
-<p>监测方法：在iOS10之后，通过在工程的scheme中添加环境变量DYLD_PRINT_STATISTICS,设置Value为1,App启动加载时就会有启动过程的日志输出. </p>
-
-<p>如下为墨迹天气App的pre_main时间</p>
-
-<pre><code>total pre-main time: 619.12 milliseconds (100.0%)
-         dylib loading time: 113.54 milliseconds (18.3%)
-        rebase/binding time:  91.24 milliseconds (14.7%)
-            ObjC setup time:  48.20 milliseconds (7.7%)
-           initializer time: 365.84 milliseconds (59.0%)
-           slowest intializers :
-             libSystem.B.dylib :   7.23 milliseconds (1.1%)
-    libMainThreadChecker.dylib :  21.51 milliseconds (3.4%)
-          libglInterpose.dylib :  87.65 milliseconds (14.1%)
-         libMTLInterpose.dylib :  41.99 milliseconds (6.7%)
-  libViewDebuggerSupport.dylib :  12.65 milliseconds (2.0%)
-                        Mapbox :  37.23 milliseconds (6.0%)
-                   MojiWeather : 307.60 milliseconds (49.6%)
-
-</code></pre>
-
-<p>total pre_main time 619.12ms</p>
-
-<h2 id="toc_1">二：监测APP在main()方法到首页显示的启动时间</h2>
-
-<p>以下监测是以iPhone8 iOS12.1真机测试数据，main()方法后直到首页显示的时间</p>
-
-<p>监测方法:main方法里UIApplicationMain()之前与首页EGWCityWeatherViewController viewDidAppear方法之间的时间差</p>
-
-<ul>
-<li><p>全初始化启动耗时<br/><br/>
-<code>1140.987992286682ms</code>,<code>1076.292037963867ms</code>,<code>1129.900932312012ms</code><br/>
-<code>1140.275001525879ms</code>,<code>1121.049046516418ms</code>, <code>1111.2140417099ms</code><br/>
-平均耗时 <code>1119.5ms</code></p></li>
-<li><p>去除广告初始化启动耗时<br/><br/>
-<code>1077.777981758118ms</code>,<code>1098.919034004211ms</code>,<code>1078.455924987793ms</code><br/>
-<code>1044.085025787354ms</code>,<code>1110.05699634552ms</code>,<code>1080.057978630066ms</code><br/><br/>
-平均耗时 <code>1081.1ms</code></p></li>
-</ul>
-
-<p>app启动总时长：pre_main+main()后 = 1700ms;</p>
-
-<h2 id="toc_2">二：timeProfile监测耗时图</h2>
-
-<p><img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%887.02.49.png" alt="屏幕快照 2019-03-06 下午7.02.49"/><br/>
-以上是耗时最多的概览图，会根据以上耗时最长找出原因，并分析。</p>
-
-<h2 id="toc_3">三：对上面的耗时的方法进行分类分析</h2>
-
-<p>不好解决的有CCDirector的drawScene,骨骼动画的加载。即第1，2条。</p>
-
-<ol>
-<li><p><code>-[CCDirectorDisplayLink mainLoop:](481ms)</code><br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.35.18.png" alt="屏幕快照 2019-03-06 下午6.35.18"/><br/>
-主要是在[CCDirector drawScene]</p></li>
-<li><p><code>+[SkeletonAnimation skeletonWithFile:atlasFile:scale:]</code>(131ms)<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.45.12.png" alt="屏幕快照 2019-03-06 下午6.45.12"/><br/>
-耗时主要在加载骨骼动画文件<br/>
-<code>+[SkeletonAnimation skeletonWithFile:atlasFile:scale:]</code><br/>
-<code>-[SkeletonRenderer initWithFile:atlasFile:scale:]</code></p></li>
-<li><p><code>-[LeftDrawerMenuViewController tableView:cellForRowAtIndexPath:]</code> (165ms)<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.41.50.png" alt="屏幕快照 2019-03-06 下午6.41.50"/></p>
-
-<p>耗时在<code>[NewSwipeTableViewCell createUI]</code> 和 <code>updateWeatherInfo</code></p></li>
-<li><p><code>-[NITableViewModel tableView:cellForRowAtIndexPath:]</code> (231ms)<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.37.59.png" alt="屏幕快照 2019-03-06 下午6.37.59"/><br/>
-耗时主要在<code>EGWSummaryWeatherCell初始化</code> ，<code>-[EGWHourCell shouldUpdateCellWithObject:]</code></p></li>
-<li><p><code>-[EGWCityWeatherViewController(NavigationBar) egwcwNavBar_installNavigationBar]</code> (99ms)<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.48.02.png" alt="屏幕快照 2019-03-06 下午6.48.02"/><br/>
-耗时操作在<code>-[UserCenterNavigatorView initWithFrame:]</code></p></li>
-<li><p><code>+[TYModule TY_application:willFinishLaunchingWithOptions:]</code>（总耗时125ms）<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%887.06.45.png" alt="屏幕快照 2019-03-06 下午7.06.45"/></p>
-
-<p>主要耗时在<code>DataStore</code>的初始化，<code>ipcNavigateonController</code>的初始化</p></li>
-<li><p>[EGWCityWeatherViewController(NavigationBar)egwcwNavBar_installNavigationBar]<br/>
-<img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.55.57.png" alt="屏幕快照 2019-03-06 下午6.55.57"/></p>
-
-<p>主要耗时在给 EGWCityWeatherViewController(NavigationBar)的设置导航</p></li>
-</ol>
-
-<p>8.<code>+[TYModule TY_application:didFinishLaunchingWithOptions:]</code> (43ms)<br/>
-    <img src="media/15518431320651/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-06%20%E4%B8%8B%E5%8D%886.58.29.png" alt="屏幕快照 2019-03-06 下午6.58.29"/><br/>
-    耗时主要在<code>TY_application:didFinishLaunchingWithOptions</code>第三方SDK的初始化，一些自己定义的管理器的初始化如<code>AvatarResourceManager</code>等</p>
 
 ]]></content>
   </entry>
@@ -2471,6 +2202,241 @@ M,V,C<br/>
 <p>组合与继承都可以实现代码的复用<br/>
 1. 除非两个类之间是<strong>&quot;is-a&quot;</strong>的关系，否则不要轻易使用继承<br/>
 2. 两个类之间是<strong>has a</strong>的关系时，最好用组合</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode里的Instruments的应用]]></title>
+    <link href="https://raojunbo.github.io/15454940280965.html"/>
+    <updated>2018-12-22T23:53:48+08:00</updated>
+    <id>https://raojunbo.github.io/15454940280965.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">TimerPofile</h2>
+
+<p>可以查看应用程序的那个方法耗时比较长，然后针对性优化</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数据结构与算法之美(专栏)]]></title>
+    <link href="https://raojunbo.github.io/15453886088422.html"/>
+    <updated>2018-12-21T18:36:48+08:00</updated>
+    <id>https://raojunbo.github.io/15453886088422.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">复杂度分析</h2>
+
+<p>时间复杂度</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git 拾遗]]></title>
+    <link href="https://raojunbo.github.io/15453592839286.html"/>
+    <updated>2018-12-21T10:28:03+08:00</updated>
+    <id>https://raojunbo.github.io/15453592839286.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0"><code>.git</code>文件目录</a>
+</li>
+<li>
+<a href="#toc_1">commit,tree,block关系</a>
+</li>
+<li>
+<a href="#toc_2">分离头指针情况的注意事项（没有与branch进行关联）</a>
+</li>
+<li>
+<a href="#toc_3">修改commit的message</a>
+</li>
+<li>
+<a href="#toc_4">rebase操作</a>
+<ul>
+<li>
+<a href="#toc_5">修改以往的任何一个commit的message(rebase)</a>
+</li>
+<li>
+<a href="#toc_6">合并以往的连续的几个commit（rebase）</a>
+</li>
+<li>
+<a href="#toc_7">合并以往的不连续的commit(rebase)</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_8">diff操作</a>
+</li>
+<li>
+<a href="#toc_9">恢复工作区，恢复索引区</a>
+</li>
+<li>
+<a href="#toc_10">删除，重命名文件</a>
+</li>
+<li>
+<a href="#toc_11">ignore文件</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0"><code>.git</code>文件目录</h2>
+
+<pre><code>➜  .git git:(V.12.0) ls -l
+total 1440
+-rw-r--r--    1 raojunbo  staff      26 12 15 15:40 COMMIT_EDITMSG
+-rw-r--r--    1 raojunbo  staff    1573 12 18 19:12 FETCH_HEAD
+-rw-r--r--    1 raojunbo  staff      23 12 18 19:12 HEAD
+-rw-r--r--    1 raojunbo  staff      41 12 18 19:12 ORIG_HEAD
+-rw-r--r--    1 raojunbo  staff     551 12 12 12:56 config
+-rw-r--r--    1 raojunbo  staff      73 11 30 11:39 description
+-rw-r--r--    1 raojunbo  staff  311844 12 20 22:54 gitk.cache
+drwxr-xr-x   13 raojunbo  staff     416 11 30 11:39 hooks
+-rw-r--r--    1 raojunbo  staff  391258 12 20 22:48 index
+drwxr-xr-x    3 raojunbo  staff      96 11 30 11:39 info
+drwxr-xr-x    4 raojunbo  staff     128 11 30 11:42 logs
+drwxr-xr-x  256 raojunbo  staff    8192 12 14 14:58 objects
+-rw-r--r--    1 raojunbo  staff    1536 11 30 11:42 packed-refs
+drwxr-xr-x    5 raojunbo  staff     160 11 30 11:42 refs
+</code></pre>
+
+<ul>
+<li><p>HEAD 文件<br/>
+存有当前分支的头指针。在切换分支的时候，会跟随分支的变化而变化。当然也可以不与分支挂钩，直接指向一个处理分支状态（任意指向的）也可以。</p></li>
+<li><p>config 文件</p>
+
+<p><code>git config -l</code>命令的内容</p></li>
+</ul>
+
+<ul>
+<li><p>ORIG_HEAD 文件</p></li>
+<li><p>FETCH_HEAD 文件</p></li>
+<li><p>object目录<br/>
+对象集，block ,commit,tree,tags;</p></li>
+<li><p>refs</p></li>
+</ul>
+
+<blockquote>
+<p>git内部的命令<br/>
+查看hash所代表的对象类型 `<code>git cat-file -t 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
+
+<p>查看hash所代表的对象实际内容<code>git cat-file -p 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
+</blockquote>
+
+<h2 id="toc_1">commit,tree,block关系</h2>
+
+<p><img src="media/15453592839286/gitbloctree.png" alt="gitbloctree"/></p>
+
+<p>blob实际就是真实的文件<br/>
+tree实际就是目录<br/>
+commit是git里的东西是一个包含“根tree”的东西。commit里有parent(父commit),author(作者),committer(提交者)</p>
+
+<h2 id="toc_2">分离头指针情况的注意事项（没有与branch进行关联）</h2>
+
+<pre><code>➜  GitTestDir git:(master) git checkout 552aa3eba30936d5c4ecf148b38d0cbc89221fbc 
+Note: checking out &#39;552aa3eba30936d5c4ecf148b38d0cbc89221fbc&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at 552aa3e add sty
+➜  GitTestDir git:(552aa3e) 
+</code></pre>
+
+<p>直接切换到一个指定的commit号，直接进入工作后，进行提交，如果在checkout 到其它分支，就会出现分离头指针，也就是没有基于某个分支。在后期，分支的指针会自动被清理掉。</p>
+
+<p>git diff HEAD HEAD^     //head与父亲进行对比<br/>
+git diff HEAD HEAD<sup>^</sup>   //head 与父亲的父亲进行对比<br/>
+git diff HEAD HEAD~1    //head 与父亲进行对比</p>
+
+<h2 id="toc_3">修改commit的message</h2>
+
+<p>对最近一次的message做修改<br/>
+<code>git commit --amend</code></p>
+
+<h2 id="toc_4">rebase操作</h2>
+
+<h3 id="toc_5">修改以往的任何一个commit的message(rebase)</h3>
+
+<p>示例<br/>
+<code><br/>
+commit3<br/>
+commit2<br/>
+commit1<br/>
+</code><br/>
+我现在要，修改commit2,那么我就是git rebase -i commit1;以commit1作为基准,去修改其后面的commit信息。<br/>
+rebase 命令的交互命令里有拿出commit,重新设置messge等操作。<br/>
+修改后commit的commit号会发生变化。</p>
+
+<h3 id="toc_6">合并以往的连续的几个commit（rebase）</h3>
+
+<p>示例<br/>
+<code><br/>
+commit4<br/>
+commit3<br/>
+commit2<br/>
+commit1<br/>
+</code><br/>
+合并commit2,与commit3为commit5;这样就会形成一个新的commit;</p>
+
+<h3 id="toc_7">合并以往的不连续的commit(rebase)</h3>
+
+<p>其实与前面一样，只是，列出commit ，然后描述命令</p>
+
+<h2 id="toc_8">diff操作</h2>
+
+<ul>
+<li><p>比较工作区，索引区,HEAD的差异<br/>
+<code>git diff --cached</code>  比较索引区域HEAD的差别比较<br/>
+<code>git diff</code> 工作区与索引区的差别</p></li>
+<li><p>比较不同分支的同一个文件的差异</p></li>
+</ul>
+
+<p><code>git diff temp master -- filename</code><br/>
+temp是一个分支或者commitid，master是一个分支或者commitid；</p>
+
+<h2 id="toc_9">恢复工作区，恢复索引区</h2>
+
+<ul>
+<li>清空工作区</li>
+</ul>
+
+<p><code>git checkout file</code><br/>
+<code>git checkout .</code></p>
+
+<ul>
+<li>将加入索引的放入工作区</li>
+</ul>
+
+<p><code>git reset HEAD</code></p>
+
+<ul>
+<li>清除最近的几个commit</li>
+</ul>
+
+<p><code>git reset --hard  commitid</code></p>
+
+<h2 id="toc_10">删除，重命名文件</h2>
+
+<ul>
+<li>重命名文件
+<code>git mv filename1 filename2</code></li>
+</ul>
+
+<ul>
+<li>删除文件
+<code>git rm filename</code></li>
+</ul>
+
+<h2 id="toc_11">ignore文件</h2>
+
+<p><code>.gitignore</code>告诉哪些不需要加入git的管理里</p>
 
 ]]></content>
   </entry>
