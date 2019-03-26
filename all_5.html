@@ -8,17 +8,23 @@
   北哥传奇
   
   </title>
- <meta name="description" content="">
- <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+  
+  
+  <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
-
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-    <script src="asset/highlightjs/highlight.pack.js"></script>
-    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <script>hljs.initHighlightingOnLoad();</script>
-    
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:raojunbo.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
   </head>
   <body class="antialiased hide-extras">
     
@@ -28,11 +34,32 @@
 
 <nav class="top-bar docs-bar hide-for-small" data-topbar>
 
-<div id="header">
-    <h1><a href="index.html">北哥传奇</a></h1>
-</div>
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
 
 </nav>
+
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
     <span> &nbsp; 北哥传奇</span>
@@ -41,465 +68,72 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-      <li><a href="index.html">Home</a></li>
-      
-        <li class="divider"></li>
-        <li><label>前言</label></li>
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
 
-          
-            <li><a title="我为什么写作？" href="15515336874984.html">我为什么写作？</a></li>
-          
-            <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-          
+    <li><label>Categories</label></li>
 
-      
-        <li class="divider"></li>
-        <li><label>算法</label></li>
+        
+            <li><a href="%E5%89%8D%E8%A8%80.html">前言</a></li>
+        
+            <li><a href="%E7%AE%97%E6%B3%95.html">算法</a></li>
+        
+            <li><a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">iOS基础概念</a></li>
+        
+            <li><a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">iOS性能优化</a></li>
+        
+            <li><a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html">iOS工具深入</a></li>
+        
+            <li><a href="shell%E8%84%9A%E6%9C%AC.html">shell脚本</a></li>
+        
+            <li><a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html">C语言捡漏</a></li>
+        
+            <li><a href="Git%E5%B7%A5%E5%85%B7.html">Git工具</a></li>
+        
+            <li><a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">iOS架构设计</a></li>
+        
+            <li><a href="Swift.html">Swift</a></li>
+        
+            <li><a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">设计模式</a></li>
+        
+            <li><a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html">音视频技术</a></li>
+        
+            <li><a href="%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E6%8A%95%E8%B5%84%E9%80%BB%E8%BE%91.html">证券市场投资逻辑</a></li>
+        
+            <li><a href="%E8%8B%B1%E8%AF%AD%E8%83%BD%E5%8A%9B.html">英语能力</a></li>
+         
 
-          
-            <li><a title="数据结构与算法之美(专栏)" href="15453886088422.html">数据结构与算法之美(专栏)</a></li>
-          
-            <li><a title="OFFER 第2章 基础知识" href="15383938776397.html">OFFER 第2章 基础知识</a></li>
-          
-            <li><a title="OFFER 第6章" href="15381309314963.html">OFFER 第6章</a></li>
-          
-            <li><a title="OFFER 第4章 解决问题的思路与方法" href="15381303838316.html">OFFER 第4章 解决问题的思路与方法</a></li>
-          
-            <li><a title="OFFER 第5章 优化时间效率与空间效率" href="15380441185875.html">OFFER 第5章 优化时间效率与空间效率</a></li>
-          
-            <li><a title="OFFER 第3章 高质量的代码" href="15379486241928.html">OFFER 第3章 高质量的代码</a></li>
-          
-            <li><a title="OFFER" href="15372661258374.html">OFFER</a></li>
-          
-            <li><a title="《算法图解》" href="15371495937899.html">《算法图解》</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS基础概念</label></li>
-
-          
-            <li><a title="GCD源码核心概念" href="15462987177847.html">GCD源码核心概念</a></li>
-          
-            <li><a title="iOS UI视图相关深入" href="15459973166637.html">iOS UI视图相关深入</a></li>
-          
-            <li><a title="GCD" href="15364733386397.html">GCD</a></li>
-          
-            <li><a title="Runtime系列二 消息机制" href="15358111534341.html">Runtime系列二 消息机制</a></li>
-          
-            <li><a title="Runtime系列一 Objective-C对象模型" href="15351908674819.html">Runtime系列一 Objective-C对象模型</a></li>
-          
-            <li><a title="HTTP/HTTPS协议" href="15349190375007.html">HTTP/HTTPS协议</a></li>
-          
-            <li><a title="深入理解Object-C的Category" href="15346751968513.html">深入理解Object-C的Category</a></li>
-          
-            <li><a title="RunLoop思考与总结" href="15346749374335.html">RunLoop思考与总结</a></li>
-          
-            <li><a title="KVO-KVC" href="15346747750773.html">KVO-KVC</a></li>
-          
-            <li><a title="iOS内存管理" href="15346744072286.html">iOS内存管理</a></li>
-          
-            <li><a title="Block" href="15346720571289.html">Block</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS性能优化</label></li>
-
-          
-            <li><a title="iOS 基于CoreText题型渲染引擎主题讨论" href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a></li>
-          
-            <li><a title="Xcode里的Instruments的应用" href="15454940280965.html">Xcode里的Instruments的应用</a></li>
-          
-            <li><a title="xcode项目编译过程" href="15378464323310.html">xcode项目编译过程</a></li>
-          
-            <li><a title="iOS如何将像素显示到屏幕" href="15362957172406.html">iOS如何将像素显示到屏幕</a></li>
-          
-            <li><a title="iOS保持界面流畅的技巧（性能优化）" href="15351910189854.html">iOS保持界面流畅的技巧（性能优化）</a></li>
-          
-            <li><a title="组件化系列（一） 组件化原理及方案" href="15351909215000.html">组件化系列（一） 组件化原理及方案</a></li>
-          
-            <li><a title="iOS APP启动如何优化" href="15346749892115.html">iOS APP启动如何优化</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS工具深入</label></li>
-
-          
-            <li><a title="敏捷开发流程实践" href="15514275216080.html">敏捷开发流程实践</a></li>
-          
-            <li><a title="利用Cocoapods构建自己的私有与公有库" href="15361293454277.html">利用Cocoapods构建自己的私有与公有库</a></li>
-          
-            <li><a title="Cocoapods入门" href="15360720067630.html">Cocoapods入门</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>shell脚本</label></li>
-
-          
-            <li><a title="shell脚本知识梳理（八）文本处理" href="15443591203562.html">shell脚本知识梳理（八）文本处理</a></li>
-          
-            <li><a title="shell脚本知识梳理 （六）函数" href="15443590303184.html">shell脚本知识梳理 （六）函数</a></li>
-          
-            <li><a title="shell脚本知识梳理（零）linux 基础命令" href="15443316930228.html">shell脚本知识梳理（零）linux 基础命令</a></li>
-          
-            <li><a title="shell脚本知识梳理（七）SQL应用处理" href="15442673526076.html">shell脚本知识梳理（七）SQL应用处理</a></li>
-          
-            <li><a title="shell脚本知识梳理（五）输出" href="15441102869614.html">shell脚本知识梳理（五）输出</a></li>
-          
-            <li><a title="shell脚本知识梳理（三） 流程控制" href="15440981221870.html">shell脚本知识梳理（三） 流程控制</a></li>
-          
-            <li><a title="shell脚本知识梳理（二）test命令的条件" href="15440910992060.html">shell脚本知识梳理（二）test命令的条件</a></li>
-          
-            <li><a title="shell脚本知识梳理（四）输入" href="15440719029358.html">shell脚本知识梳理（四）输入</a></li>
-          
-            <li><a title="shell脚本知识梳理（一）之变量" href="15426405220672.html">shell脚本知识梳理（一）之变量</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>C语言捡漏</label></li>
-
-          
-            <li><a title="C语言拾遗" href="15444947240000.html">C语言拾遗</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>Git工具</label></li>
-
-          
-            <li><a title="Git 拾遗" href="15453592839286.html">Git 拾遗</a></li>
-          
-            <li><a title="rebase" href="15353730636847.html">rebase</a></li>
-          
-            <li><a title="详解Git里的Rebase操作" href="15352828379687.html">详解Git里的Rebase操作</a></li>
-          
-            <li><a title="深入理解Git" href="15352517950877.html">深入理解Git</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS架构设计</label></li>
-
-          
-            <li><a title="讨论架构时是在说什么" href="15458865236455.html">讨论架构时是在说什么</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>Swift</label></li>
-
-          
-            <li><a title="Swift梳理" href="15512046578708.html">Swift梳理</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>设计模式</label></li>
-
-          
-            <li><a title="设计模式系列（四）-- 行为型" href="15512048926912.html">设计模式系列（四）-- 行为型</a></li>
-          
-            <li><a title="设计模式系列（三）-- 结构型" href="15512048797799.html">设计模式系列（三）-- 结构型</a></li>
-          
-            <li><a title="设计模式系列（二）--创建型设计模式" href="15512048653711.html">设计模式系列（二）--创建型设计模式</a></li>
-          
-            <li><a title="设计模式系列（一）设计模式概要" href="15512048416439.html">设计模式系列（一）设计模式概要</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>音视频技术</label></li>
-
-          
-            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-          
-            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-          
-            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-          
-            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-          
-            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-          
-            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-          
-            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-          
-            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>证券市场投资逻辑</label></li>
-
-          
-            <li><a title="威科夫中阶课程（六,七，八）" href="15515878249617.html">威科夫中阶课程（六,七，八）</a></li>
-          
-            <li><a title="威科夫中阶课程（五）" href="15509867976030.html">威科夫中阶课程（五）</a></li>
-          
-            <li><a title="威科夫中阶课程（四）" href="15507609402868.html">威科夫中阶课程（四）</a></li>
-          
-            <li><a title="威科夫中阶课程（三）" href="15503292008544.html">威科夫中阶课程（三）</a></li>
-          
-            <li><a title="威科夫中阶课程（二）" href="15486866737545.html">威科夫中阶课程（二）</a></li>
-          
-            <li><a title="威科夫中阶课程(一)" href="15486697437875.html">威科夫中阶课程(一)</a></li>
-          
-            <li><a title="读《韭菜的自我修养》" href="15370049486631.html">读《韭菜的自我修养》</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>英语能力</label></li>
-
-          
-            <li><a title="英语语法梳理【总结】" href="15423493216966.html">英语语法梳理【总结】</a></li>
-          
-
-      
       </ul>
     </aside>
 
 <a class="exit-off-canvas" href="#"></a>
 
+
         <section id="main-content" role="main" class="scroll-container">
+        
+       
 
-          <div class="row">
-            <div class="large-3 medium-3 columns">
-              <div class="hide-for-small">
-                <div class="sidebar">
-
-                <nav>
-                  <ul id="side-nav" class="side-nav">
-
-                    
-                      <li class="side-title"><span>前言</span></li>
-                        
-                          <li><a title="我为什么写作？" href="15515336874984.html">我为什么写作？</a></li>
-                        
-                          <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>算法</span></li>
-                        
-                          <li><a title="数据结构与算法之美(专栏)" href="15453886088422.html">数据结构与算法之美(专栏)</a></li>
-                        
-                          <li><a title="OFFER 第2章 基础知识" href="15383938776397.html">OFFER 第2章 基础知识</a></li>
-                        
-                          <li><a title="OFFER 第6章" href="15381309314963.html">OFFER 第6章</a></li>
-                        
-                          <li><a title="OFFER 第4章 解决问题的思路与方法" href="15381303838316.html">OFFER 第4章 解决问题的思路与方法</a></li>
-                        
-                          <li><a title="OFFER 第5章 优化时间效率与空间效率" href="15380441185875.html">OFFER 第5章 优化时间效率与空间效率</a></li>
-                        
-                          <li><a title="OFFER 第3章 高质量的代码" href="15379486241928.html">OFFER 第3章 高质量的代码</a></li>
-                        
-                          <li><a title="OFFER" href="15372661258374.html">OFFER</a></li>
-                        
-                          <li><a title="《算法图解》" href="15371495937899.html">《算法图解》</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS基础概念</span></li>
-                        
-                          <li><a title="GCD源码核心概念" href="15462987177847.html">GCD源码核心概念</a></li>
-                        
-                          <li><a title="iOS UI视图相关深入" href="15459973166637.html">iOS UI视图相关深入</a></li>
-                        
-                          <li><a title="GCD" href="15364733386397.html">GCD</a></li>
-                        
-                          <li><a title="Runtime系列二 消息机制" href="15358111534341.html">Runtime系列二 消息机制</a></li>
-                        
-                          <li><a title="Runtime系列一 Objective-C对象模型" href="15351908674819.html">Runtime系列一 Objective-C对象模型</a></li>
-                        
-                          <li><a title="HTTP/HTTPS协议" href="15349190375007.html">HTTP/HTTPS协议</a></li>
-                        
-                          <li><a title="深入理解Object-C的Category" href="15346751968513.html">深入理解Object-C的Category</a></li>
-                        
-                          <li><a title="RunLoop思考与总结" href="15346749374335.html">RunLoop思考与总结</a></li>
-                        
-                          <li><a title="KVO-KVC" href="15346747750773.html">KVO-KVC</a></li>
-                        
-                          <li><a title="iOS内存管理" href="15346744072286.html">iOS内存管理</a></li>
-                        
-                          <li><a title="Block" href="15346720571289.html">Block</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS性能优化</span></li>
-                        
-                          <li><a title="iOS 基于CoreText题型渲染引擎主题讨论" href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a></li>
-                        
-                          <li><a title="Xcode里的Instruments的应用" href="15454940280965.html">Xcode里的Instruments的应用</a></li>
-                        
-                          <li><a title="xcode项目编译过程" href="15378464323310.html">xcode项目编译过程</a></li>
-                        
-                          <li><a title="iOS如何将像素显示到屏幕" href="15362957172406.html">iOS如何将像素显示到屏幕</a></li>
-                        
-                          <li><a title="iOS保持界面流畅的技巧（性能优化）" href="15351910189854.html">iOS保持界面流畅的技巧（性能优化）</a></li>
-                        
-                          <li><a title="组件化系列（一） 组件化原理及方案" href="15351909215000.html">组件化系列（一） 组件化原理及方案</a></li>
-                        
-                          <li><a title="iOS APP启动如何优化" href="15346749892115.html">iOS APP启动如何优化</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS工具深入</span></li>
-                        
-                          <li><a title="敏捷开发流程实践" href="15514275216080.html">敏捷开发流程实践</a></li>
-                        
-                          <li><a title="利用Cocoapods构建自己的私有与公有库" href="15361293454277.html">利用Cocoapods构建自己的私有与公有库</a></li>
-                        
-                          <li><a title="Cocoapods入门" href="15360720067630.html">Cocoapods入门</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>shell脚本</span></li>
-                        
-                          <li><a title="shell脚本知识梳理（八）文本处理" href="15443591203562.html">shell脚本知识梳理（八）文本处理</a></li>
-                        
-                          <li><a title="shell脚本知识梳理 （六）函数" href="15443590303184.html">shell脚本知识梳理 （六）函数</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（零）linux 基础命令" href="15443316930228.html">shell脚本知识梳理（零）linux 基础命令</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（七）SQL应用处理" href="15442673526076.html">shell脚本知识梳理（七）SQL应用处理</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（五）输出" href="15441102869614.html">shell脚本知识梳理（五）输出</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（三） 流程控制" href="15440981221870.html">shell脚本知识梳理（三） 流程控制</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（二）test命令的条件" href="15440910992060.html">shell脚本知识梳理（二）test命令的条件</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（四）输入" href="15440719029358.html">shell脚本知识梳理（四）输入</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（一）之变量" href="15426405220672.html">shell脚本知识梳理（一）之变量</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>C语言捡漏</span></li>
-                        
-                          <li><a title="C语言拾遗" href="15444947240000.html">C语言拾遗</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>Git工具</span></li>
-                        
-                          <li><a title="Git 拾遗" href="15453592839286.html">Git 拾遗</a></li>
-                        
-                          <li><a title="rebase" href="15353730636847.html">rebase</a></li>
-                        
-                          <li><a title="详解Git里的Rebase操作" href="15352828379687.html">详解Git里的Rebase操作</a></li>
-                        
-                          <li><a title="深入理解Git" href="15352517950877.html">深入理解Git</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS架构设计</span></li>
-                        
-                          <li><a title="讨论架构时是在说什么" href="15458865236455.html">讨论架构时是在说什么</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>Swift</span></li>
-                        
-                          <li><a title="Swift梳理" href="15512046578708.html">Swift梳理</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>设计模式</span></li>
-                        
-                          <li><a title="设计模式系列（四）-- 行为型" href="15512048926912.html">设计模式系列（四）-- 行为型</a></li>
-                        
-                          <li><a title="设计模式系列（三）-- 结构型" href="15512048797799.html">设计模式系列（三）-- 结构型</a></li>
-                        
-                          <li><a title="设计模式系列（二）--创建型设计模式" href="15512048653711.html">设计模式系列（二）--创建型设计模式</a></li>
-                        
-                          <li><a title="设计模式系列（一）设计模式概要" href="15512048416439.html">设计模式系列（一）设计模式概要</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>音视频技术</span></li>
-                        
-                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-                        
-                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-                        
-                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-                        
-                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-                        
-                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-                        
-                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-                        
-                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-                        
-                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>证券市场投资逻辑</span></li>
-                        
-                          <li><a title="威科夫中阶课程（六,七，八）" href="15515878249617.html">威科夫中阶课程（六,七，八）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（五）" href="15509867976030.html">威科夫中阶课程（五）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（四）" href="15507609402868.html">威科夫中阶课程（四）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（三）" href="15503292008544.html">威科夫中阶课程（三）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（二）" href="15486866737545.html">威科夫中阶课程（二）</a></li>
-                        
-                          <li><a title="威科夫中阶课程(一)" href="15486697437875.html">威科夫中阶课程(一)</a></li>
-                        
-                          <li><a title="读《韭菜的自我修养》" href="15370049486631.html">读《韭菜的自我修养》</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>英语能力</span></li>
-                        
-                          <li><a title="英语语法梳理【总结】" href="15423493216966.html">英语语法梳理【总结】</a></li>
-                        
-
-
-                    
-                  </ul>
-                </nav>
-                </div>
-              </div>
-            </div>
-            <div class="large-9 medium-9 columns">
-
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>iOS如何将像素显示到屏幕</h1>
-
-		<hr/>
+ <script type="text/javascript">
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
+</script>
+<div class="row">
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="15362957172406.html">
+                
+                  <h1>iOS如何将像素显示到屏幕</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<hr/>
 
 <h1 id="toc_0">绘制像素到屏幕</h1>
 
@@ -686,71 +320,2209 @@ UILabel将text画入backing image。也就是将文字搞成相对应的图片�
 图片解码可以异步进行，不要在设置图片的时候解码</p></li>
 </ul>
 
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/7</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html'>iOS性能优化</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15361293454277.html">
+                
+                  <h1>利用Cocoapods构建自己的私有与公有库</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一：Spec文件</h2>
+
+<p>在我们第一次安装pods时，都会主动的去拉取公有的repo,其实无论是共有的还是私有的下载后都在用户的/Users/用户名/.cocoapods/repos 目录下。每一个第三库都有一个spec文件，或者你自己的私有库也应该有这个spec文件。这些spec文件就在相应的repo里。<br/>
+我将我自己创建一个私有库的spec文件贴出来</p>
+
+<pre><code>#
+# Be sure to run `pod lib lint KBRCategory.podspec&#39; to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+#
+
+Pod::Spec.new do |s|
+  s.name             = &#39;KBRCategory&#39;
+  s.version          = &#39;0.1.2&#39;
+  s.summary          = &#39;KBRCategory.&#39;
+
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don&#39;t worry about the indent, CocoaPods strips it!
+
+  s.description      = &quot;a description KBRCategory&quot;
+
+  s.homepage         = &#39;https://gitee.com/BlueLegend&#39;
+  # s.screenshots     = &#39;www.example.com/screenshots_1&#39;, &#39;www.example.com/screenshots_2&#39;
+  s.license          = { :type =&gt; &#39;MIT&#39;, :file =&gt; &#39;LICENSE&#39; }
+  s.author           = { &#39;raojb@knowbox.cn&#39; =&gt; &#39;raojb@knowbox.cn&#39; }
+  s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;, :tag =&gt; s.version.to_s }
+  #这里改成了不以tag版本来拉取，以最新的commit
+    # s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;}
+  # s.social_media_url = &#39;https://twitter.com/&lt;TWITTER_USERNAME&gt;&#39;
+
+  s.ios.deployment_target = &#39;8.0&#39;
+
+  s.source_files = &#39;KBRCategory/Classes/**/*&#39;
+  
+  # s.resource_bundles = {
+  #   &#39;KBRCategory&#39; =&gt; [&#39;KBRCategory/Assets/*.png&#39;]
+  # }
+
+  # s.public_header_files = &#39;Pod/Classes/**/*.h&#39;
+  # s.frameworks = &#39;UIKit&#39;, &#39;MapKit&#39;
+  s.dependency &#39;AFNetworking&#39;
+end
+
+</code></pre>
+
+<p>里面无非就是你要提交到Cocoapods上的名字、版本号，简介、主页、License、作者信息、最低平台信息、从哪个Git上下载、需要引入的framework、那些文件需要被引入，那些文件是资源文件以及是否需要ARC的模式。</p>
+
+<ul>
+<li><p>license<br/>
+用MIT就可以了，一定要正确填写不然在验证的时候验证通过</p></li>
+<li><p>source<br/>
+是库的地址</p></li>
+<li><p>s.source_files <br/>
+是要将哪些文件放入进去</p></li>
+<li><p>s.subspec 添加子模块<br/>
+其实可以添加子模块，所谓的子模块，就是在pods出来后有子文件夹</p></li>
+</ul>
+
+<pre><code>s.subspec &#39;Security&#39; do |ss|  
+  ss.source_files = &#39;AFNetworking/AFSecurityPolicy.{h,m}&#39;
+  ss.public_header_files = &#39;AFNetworking/AFSecurityPolicy.h&#39;
+  ss.frameworks = &#39;Security&#39;
+end  
+</code></pre>
+
+<h2 id="toc_1">二：创建公有库</h2>
+
+<ul>
+<li>向Cocoapods方面注册一个账号
+这个命令会收到一份邮件，让你进行会话授权。具体机制没有研究过，当你切换电脑时，需要重新进行会话授权
+<code>pod trunk register raojb@knowbox.cn &#39;rjb&#39; --description=&#39;My own computer&#39;</code></li>
+</ul>
+
+<ul>
+<li><p>创建spec文件<br/>
+<code>pod spec create &#39;KBCategory&#39;</code><br/>
+在写好代码后，在你项目的根目录下运行，会在该项目目录下生成一个spec文件。修改这个spec文件的里的相关信息。<br/>
+如果是项目已经建立好了，需要创建时，可以在根目录下执行<br/>
+<code>pod spec create &#39;KBCategory&#39;</code>也会生成一个spec文件</p></li>
+<li><p>验证Podspec文件<br/>
+<code>pod lib lint Name.podspec</code><br/>
+这一步是最坑人的地方。会有各种让你通不过的理由。比如，找不到文件，找不到Lience等。<br/>
+我遇到了，spec文件与s.source_files文件路径设置的不一致问题。<br/>
+开源协议文件也要生成。路径也要设置正确。</p>
+
+<pre><code>    - ERROR | [iOS] xcodebuild: Returned an unsuccessful exit code.
+</code></pre>
+
+<p>遇到这样的错误，是编译没有通过的情况。如果自己在工程里编译通过，看是不是依赖库没有设置正确。别忘了依赖系统库也要填写。总之基本没有一次性验证通过的，具体问题具体查吧。</p>
+
+<p>例如 <br/>
+<code>s.framework  = &quot;UIKit&quot;</code> <br/>
+最终你出现<code>passed validation</code>就表示验证通过。验证通过表示，你给定的环境，单独编译这部分你提供的目录下的代码能自行编译通过。</p></li>
+<li><p>上传<br/>
+可上传项目到Cocoapods官方的仓库里。<br/>
+pod trunk push 项目名.podspec<br/><br/>
+上传成功后，可以在命令行里pod search &quot;库名字&quot;,若果没有应该是有缓存，删除这个文件<br/>
+<code>~/Library/Caches/CocoaPods/search_index.json</code><br/>
+重新pod search就可以了。</p></li>
+</ul>
+
+<h2 id="toc_2">三：创建私有库</h2>
+
+<p>其实创建私有库的核心过程还是跟公有库是差不多的。不管是私有库还是公有库，关注点都在于Podspec文件的书写。<strong>其实我们讲到pod trunk push 项目名.podspec这条命令，其实是默认我们的Podspec文件提交到Cocoapod的仓库(Specs),然后我们之后的pod install或者pod update都是从这个仓库中提取Podspec文件，然后根据文件里面的信息去取对应的源代码。大家可以上去找找自己的开源的Podespec文件转换成json的文件</strong>。</p>
+
+<ul>
+<li><p>建立自己的私有仓库<br/>
+<code>pod repo add &#39;仓库名&#39; &#39;仓库地址&#39;</code>建立好后，可以在你的cd <code>~/.cocoapods/repos</code>目录下查看，是否有你的私有仓库。</p></li>
+<li><p>写代码-&gt;写Podspec文件了-&gt;检查项目和Podspec文件-&gt;打tag<br/>
+这些工作与创建公有库一样</p></li>
+<li><p>提交podspec文件到仓库<br/>
+公有库是pod trunk push 项目名.podspec<br/>
+私有库是pod repo push &#39;私有仓库名&#39; 项目名.podspec<br/>
+其实就都是讲podspec文件提交到相应的仓库里</p></li>
+</ul>
+
+<p>特别说明</p>
+
+<h2 id="toc_3">四：使用私有库</h2>
+
+<p>使用公有库与使用私有库的方式一样。都是在podfile文件里有一个source。这个source就是标识所要使用的源(spec文件仓库)。</p>
+
+<pre><code>#公用的私有远程索引库源
+source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;
+#github远程索引库源
+source &#39;https://github.com/CocoaPods/Specs.git&#39;
+platform :ios, &#39;8.0&#39;
+
+target ‘testdown’ do
+    #pod &#39;lottie-ios&#39;
+    pod &#39;Masonry&#39;
+    pod &#39;SDWebImage&#39;, &#39;~&gt; 4.3.0&#39;
+    pod &#39;YYModel&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;MJRefresh&#39;, &#39;~&gt; 3.1.15.3&#39;
+    pod &#39;KBRCategory&#39;
+end
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/5</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html'>iOS工具深入</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15360720067630.html">
+                
+                  <h1>Cocoapods入门</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一：安装</h2>
+
+<ol>
+<li><p>安装cocoapods</p>
+
+<p><code>sudo gem install cocoapods</code></p></li>
+</ol>
+
+<ol>
+<li><p>安装指定版本的cocoapods<br/>
+在协同开发时，podfile文件会加入Git版本库，为了防止pod版本不一样，导致其他开发人员Pod时执行错误，所以协同开发时最好安装一样的版本号。</p>
+
+<p><code>sudo gem install cocoapods -v 1.4</code></p></li>
+</ol>
+
+<h2 id="toc_1">二：初次使用</h2>
+
+<ol>
+<li><p>更新cocoapods的repo<br/>
+如果是新电脑或者没有下载过repo执行<code>pod repo update</code>。这个耗时会很长，这个文件现在达到2G了。改repo下载完后在/Users/用户目录/.cocoapods（这个文件夹的作用将在后面说明）</p></li>
+<li><p>生成podfile文件<br/>
+在指定的xcode工程目录下执行<code>pod init</code>就会有一个Podfile文件生成，或者干脆从其他工程里拷贝一份过来也行。<br/>
+编辑如</p>
+
+<pre><code>platform:ios,&#39;7.1&#39;
+pod &#39;SDWebImage&#39;, &#39;~&gt;3.7&#39;
+pod &#39;AFNetworking&#39; 
+</code></pre></li>
+<li><p>查找相关库<br/>
+有时为了查看要使用一个第三方库的指定版本号，<code>pod search AFNetworking</code>进行类似的查询，将会列出历史版本。</p></li>
+<li><p>pod install 与pod update</p>
+
+<ul>
+<li><p><code>pod install</code><br/>
+在podfile.lock不存在时，会根据podfile文件生成这个文件，并安装相应的库。存在时会根据podfile.lock文件下载与安装相应的库。</p></li>
+<li><p><code>pod update</code><br/>
+会根据podfile文件更新库，并更新podfile.lock文件。也就是pod update时，会检测podfile文件里有的库配置是没有指定版本号的就会取最新的版本号，重新下载与安装。</p></li>
+<li><p><code>--no-repo-update</code><br/>
+其主要的作用是用于在执行pod install和pod update两条命令是而执行的pod repo update的操作。pod repo update操作时间比较长，这也就是为什么平时我们加--no-repo-update的原因</p></li>
+</ul></li>
+</ol>
+
+<h2 id="toc_2">三：podfile文件深入</h2>
+
+<ol>
+<li><p><code>pod &#39;框架名&#39; 参数</code><br/>
+参数需要特别说明下</p>
+
+<ul>
+<li><p>指定版本号(这个版本号是spec文件)<br/>
+’&gt;3.7&#39;  大于3.7版本<br/>
+&#39;&gt;=3.7&#39; 大于等于3.7版本<br/>
+&#39;<3.7' 小于3.7版本<br/>
+'~>3.7&#39; 大于等于3.7并且小于3.8版本（这个参数有意思，经常使用的也是这个参数）</p></li>
+<li><p>指定path,branch,tag,commit<br/>
+:branch =&gt; &#39;branch名&#39;<br/>
+:tag =&gt; &#39;tag名&#39;<br/>
+:commit =&gt; &#39;提交号&#39;<br/>
+:path =&gt; &#39;~/Documents/AFNetworking&#39;</p></li>
+</ul></li>
+<li><p>platform<br/>
+platform :ios, &#39;7.0&#39;。说希望采用iOS7.0的进行编译<br/>
+最好进行指定，不指定的化，会采用默认的，因为有些库指定了最低的ios版本所以，不指定的化可能编译不过</p></li>
+<li><p>target<br/>
+如果不指定的化，就默认是全部的target。有些时候我向在一个target里有，在其他target没有，这是就可以采用下面指定target指定需要的库</p>
+
+<pre><code>target &#39;TRapidCalculation&#39; do
+//写你要的库
+end
+target &#39;TRapidCalculation_auto&#39; do
+//写你要的库
+end
+</code></pre></li>
+<li><p>use_frameworks!<br/>
+这个指明编译成动态库，而不是静态库，特别是在使用Swift库的过程中，特别需要使用这句，swift里。不过他会把所有项目的编译动态库，这一点有点不好。不过在使用Swift库的过程中就没办法了。</p></li>
+<li><p>source<br/>
+Cocoapods从哪些仓库(装有Spec文件的repo)中获得框架的源代码。（至于什么是Spec我将在后面建立私有库里做说明）我们使用公开的第三库时都是使用的<code>source &#39;https://github.com/CocoaPods/Specs.git&#39;</code>这个源。在做私有库时，可以引用自己源如我的<code>source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;</code></p></li>
+<li><p>podfile文件示例</p></li>
+</ol>
+
+<pre><code>#公用的私有远程索引库源
+source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;
+#github远程索引库源
+source &#39;https://github.com/CocoaPods/Specs.git&#39;
+platform :ios, &#39;8.0&#39;
+
+target ‘CoreConcept’ do
+    pod &#39;lottie-ios&#39;
+    pod &#39;Masonry&#39;
+    pod &#39;SDWebImage&#39;, &#39;~&gt; 4.3.0&#39;
+    pod &#39;YYModel&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;YYCache&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;YYText&#39;, &#39;~&gt; 1.0.7&#39;
+    pod &#39;BlocksKit&#39;, &#39;~&gt; 2.2.5&#39;
+    pod &#39;MJRefresh&#39;, &#39;~&gt; 3.1.15.3&#39;
+    pod &#39;KBRCategory&#39;
+    pod &#39;HyphenateLite&#39;
+end
+</code></pre>
+
+<h2 id="toc_3">四：podfile.lock文件深入</h2>
+
+<p>Podfile.lock 文件主要包含三个块：<br/>
+PODS 用来记录每个pod的版本号<br/>
+DEPENDENCIES 依赖的其他库<br/>
+SPEC CHECKSUMS 每个库对应的podspec.json文件的checksum(SHA-1算法)。<br/>
+通过这些信息可以确保多人协作的时候，大家使用的是相同版本的第三方库。</p>
+
+<p>当团队中的某个人执行完pod install命令后，生成的Podfile.lock文件就记录下了当时最新Pods依赖库的版本，这时团队中的其它人check下来这份包含Podfile.lock文件的工程以后，再去执行pod install命令时，获取下来的Pods依赖库的版本就和最开始用户获取到的版本一致。如果没有Podfile.lock文件，后续所有用户执行pod install命令都会获取最新版本的SBJson，这就有可能造成同一个团队使用的依赖库版本不一致，这对团队协作来说绝对是个灾难!</p>
+
+<h2 id="toc_4">五：Manifest.lock文件</h2>
+
+<p>Manifest.lock文件格式与podfile.lock文件是一样的。主要用来对比远程与本地安装文件是否一样。<br/>
+Manifest.lock是你的本地的清单，在你没做任何操作时时与podfile.lock文件内容一样的。但当你git pull 从其他开发人员那里拿到了podfile.lock文件，其他开发人员可能修改了podfile.lock文件，就造成安装清单不一致。需要你pod install重新安装，Manifest.lock这个文件，重新保持了两个文件的一致性。所以我们在工程文件里编译脚本里有这两个文件的比较。</p>
+
+<pre><code>diff &quot;${PODS_PODFILE_DIR_PATH}/Podfile.lock&quot; &quot;${PODS_ROOT}/Manifest.lock&quot; &gt; /dev/null
+if [ $? != 0 ] ; then
+    # print error to STDERR
+    echo &quot;error: The sandbox is not in sync with the Podfile.lock. Run &#39;pod install&#39; or update your CocoaPods installation.&quot; &gt;&amp;2
+    exit 1
+fi
+# This output is used by Xcode &#39;outputs&#39; to avoid re-running this script phase.
+echo &quot;SUCCESS&quot; &gt; &quot;${SCRIPT_OUTPUT_FILE_0}&quot;
+
+</code></pre>
+
+<p>还是给个截图解释下<br/>
+/bin/sh  是指定脚本解释器（这里是shell脚本解释器）<br/>
+inputFile 就是Podfile.lock文件与Mainifest.lock</p>
+
+<p><img src="media/15360720067630/Xnip2018-09-05_14-26-04.png" alt="Xnip2018-09-05_14-26-04"/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/4</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html'>iOS工具深入</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15358111534341.html">
+                
+                  <h1>Runtime系列二 消息机制</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>
+<a href="#toc_0">一：方法调用的流程</a>
+</li>
+<li>
+<a href="#toc_1">二 ：消息的转发</a>
+<ul>
+<li>
+<a href="#toc_2">1. 动态方法解析</a>
+</li>
+<li>
+<a href="#toc_3">2. 备用接收者</a>
+</li>
+<li>
+<a href="#toc_4">3. 完整转发</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>前面讨论了Runtime中对类和对象的处理以及对成员变量与属性的处理。本文将讨论Runtime里的消息机制。</p>
+
+<h2 id="toc_0">一：方法调用的流程</h2>
+
+<p>在Objective-C中，消息直到运行时才绑定到指定的方法实现上。编译器会将消息表达式转换成一个消息函数的调用</p>
+
+<pre><code> RuntimePerson *p = objc_msgSend([RuntimePerson class], @selector(alloc));
+    p = objc_msgSend(p, @selector(init));
+    [p eat];
+    objc_msgSend(p, sel_registerName(&quot;eatFoot:&quot;),@&quot;汉堡&quot;);
+</code></pre>
+
+<pre><code>//相应的底层实现(这是上面代码经过编译后)
+Class pClass = objc_getClass(&quot;RuntimePerson&quot;);
+RuntimePerson *pp  = objc_msgSend(pClass,sel_registerName(&quot;alloc&quot;));
+pp = objc_msgSend(pp, sel_registerName(&quot;init&quot;));  
+[pp eat];
+</code></pre>
+
+<p>objc_msgSend(receiver, selector)<br/>
+objc_msgSend(receiver, selector, arg1, arg2, ...)</p>
+
+<h2 id="toc_1">二 ：消息的转发</h2>
+
+<p>当一个对象能接收一个消息时，就会走正常的方法调用流程。但如果一个对象无法接收指定消息时，就会启动所谓”消息转发(message forwarding)“机制<br/>
+消息转发机制基本上分为三个步骤：<br/>
+动态方法解析<br/>
+备用接收者<br/>
+完整转发</p>
+
+<h3 id="toc_2">1. 动态方法解析</h3>
+
+<p>对象在接收到未知的消息时，首先会调用所属类的类方法+resolveInstanceMethod:(实例方法)或者+resolveClassMethod:(类方法)。在这个方法中，我们有机会为该未知消息新增一个”处理方法””。不过使用该方法的前提是我们已经实现了该”处理方法”，只需要在运行时通过class_addMethod函数动态添加到类里面就可以了。如下代码所示：</p>
+
+<pre><code>```
++ (BOOL)resolveInstanceMethod:(SEL)sel{
+class_addMethod(self, sel, (IMP)hh, &quot;v@:@&quot;);
+</code></pre>
+
+<p>return [super resolveInstanceMethod:sel];<br/>
+    }</p>
+
+<pre><code>void hh(id obj,SEL sel,NSString *objc){
+NSLog(@&quot;我来了%@,%@,%@&quot;,obj,sel,objc);
+}
+```
+</code></pre>
+
+<h3 id="toc_3">2. 备用接收者</h3>
+
+<p>如果在上一步无法处理消息，则Runtime会继续调以下方法：</p>
+
+<pre><code>- (id)forwardingTargetForSelector:(SEL)aSelector
+</code></pre>
+
+<p>如果一个对象实现了这个方法，并返回一个非nil的结果，则这个对象会作为消息的新接收者，且消息会被分发到这个对象</p>
+
+<h3 id="toc_4">3. 完整转发</h3>
+
+<p>如果在上一步还不能处理未知消息，则唯一能做的就是启用完整的消息转发机制了。此时会调用以下方法：</p>
+
+<pre><code>- (void)forwardInvocation:(NSInvocation *)anInvocation
+
+</code></pre>
+
+<p>还有一个很重要的问题，我们必须重写以下方法：</p>
+
+<pre><code>- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+</code></pre>
+
+<pre><code>- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    NSMethodSignature *signature = [super methodSignatureForSelector:aSelector];
+    if (!signature) {
+        if ([SUTRuntimeMethodHelper instancesRespondToSelector:aSelector]) {
+            signature = [SUTRuntimeMethodHelper instanceMethodSignatureForSelector:aSelector];
+        }
+    }
+    return signature;
+}
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([SUTRuntimeMethodHelper instancesRespondToSelector:anInvocation.selector]) {
+        [anInvocation invokeWithTarget:_helper];
+    }
+}
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/1</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html'>iOS基础概念</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15353730636847.html">
+                
+                  <h1>rebase</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>在命令行里git rebase --help 可以查看英文版本的解释<br/>
+下面将对这个英文的文档做输出<br/>
+假定下面历史记录<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-08.png" alt="Xnip2018-08-27_19-14-08"/></p>
+
+<p>当前在topic分支上<br/>
+执行 <br/>
+<code>git rebase master</code> 或者 <code>git rebase master topic</code><br/>
+将得到如下结果<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-18.png" alt="Xnip2018-08-27_19-14-18"/></p>
+
+<p>NOTE:<code>git rebase master topic</code> 形式是<code>git checkout topic ,git rebase master</code>两条命令的相继执行。</p>
+
+<p>如果upstream分支(在这里举例的就是master分支,因为topic从master分支开分支而来)已经包含一个改变的提交，这个提交将会跳过。（A,A`是相同的改变，不同的提交信息）<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-28.png" alt="Xnip2018-08-27_19-14-28"/></p>
+
+<p>执行 <code>git rebase master</code><br/>
+将会得到<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-36.png" alt="Xnip2018-08-27_19-14-36"/></p>
+
+<p>下面将介绍如何使用rebase --onto将一个分支的base迁移到另一个分支。<br/>
+假设现在是如下历史记录<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-48.png" alt="Xnip2018-08-27_19-14-48"/></p>
+
+<p>我们要得到如下结果<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-58.png" alt="Xnip2018-08-27_19-14-58"/></p>
+
+<p>执行 git rebase --onto master next topic </p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/27</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Git%E5%B7%A5%E5%85%B7.html'>Git工具</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15352828379687.html">
+                
+                  <h1>详解Git里的Rebase操作</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>前言:<br/>
+用了一段时间的git，基础命令已经使用的比较熟练，在回顾时，发现平时使用git rebase比价少。找了些文章，都是支离破碎的。最终自己从命令行的文档里找到了平易见人的解释。</p>
+
+<p>下面跟着文章的实践思路一步步走完，会有异想不到的收获</p>
+
+<p>在命令行里git rebase --help 可以查看英文版本的解释<br/>
+下面将对这个英文的文档做理解输出</p>
+
+<p>假定下面历史记录<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-08.png" alt="Xnip2018-08-27_19-14-08"/></p>
+
+<p>当前在topic分支上<br/>
+执行 <br/>
+<code>git rebase master</code> <br/>
+或者<br/>
+ <code>git rebase master topic</code></p>
+
+<p>将得到如下结果<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-18.png" alt="Xnip2018-08-27_19-14-18"/></p>
+
+<p>NOTE:<code>git rebase master topic</code> 形式是<code>git checkout topic ,git rebase master</code>两条命令的相继执行。</p>
+
+<p>如果upstream分支(在这里举例的就是master分支,因为topic从master分支开分支而来)已经包含一个改变的提交，这个提交将会跳过。（A,A`是相同的改变，不同的提交信息）<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-28.png" alt="Xnip2018-08-27_19-14-28"/></p>
+
+<p>执行 <code>git rebase master</code></p>
+
+<p>将会得到<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-36.png" alt="Xnip2018-08-27_19-14-36"/></p>
+
+<p>下面将介绍如何使用rebase --onto将一个分支的base迁移到另一个分支。<br/>
+假设现在是如下历史记录<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-48.png" alt="Xnip2018-08-27_19-14-48"/></p>
+
+<p>我们要得到如下结果<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-14-58.png" alt="Xnip2018-08-27_19-14-58"/></p>
+
+<p>执行 git rebase --onto master next topic </p>
+
+<p>另一种使用<br/>
+<img src="media/15352828379687/Xnip2018-08-28_09-55-15.png" alt="Xnip2018-08-28_09-55-15"/><br/>
+执行 git rebase --onto master topicA topicB</p>
+
+<p>（我对这条的理解，checkout到topicB,取topicA到topcB多出来的变更，以master为新的基础）<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-15-17.png" alt="Xnip2018-08-27_19-15-17"/></p>
+
+<p>另一种使用<br/>
+假设当前历史记录<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-15-25.png" alt="Xnip2018-08-27_19-15-25"/><br/>
+执行 git rebase --onto topicA~5 topicA~3 topicA <br/>
+得到如下结果<br/>
+<img src="media/15352828379687/Xnip2018-08-27_19-15-33.png" alt="Xnip2018-08-27_19-15-33"/></p>
+
+<p>在rebase操作时，如果有冲突，git rebase将停止让你解决冲突，解决后git add ,在执行git rebase --continue,直到没有冲突为止。想取消rebase可以执行git rebase --abort;</p>
+
+<p>从上面的总结，可以看出，rebase,其内在含义就是变基础（起点）。有两个参数，一个是”找到变基的提交“。另一个是指“定变基的到哪”。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/26</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Git%E5%B7%A5%E5%85%B7.html'>Git工具</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15352517950877.html">
+                
+                  <h1>深入理解Git</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>本篇文章是对使用Git的使用的概述。然后对几个忽略的概念做了一下重新理解。</p>
+
+<ul>
+<li>
+<a href="#toc_0">一：Git 文件管理</a>
+</li>
+<li>
+<a href="#toc_1">二：Git分支操作</a>
+</li>
+<li>
+<a href="#toc_2">三：Git提交操作</a>
+</li>
+<li>
+<a href="#toc_3">四：Git的Diff操作</a>
+</li>
+<li>
+<a href="#toc_4">五：远程版本库</a>
+<ul>
+<li>
+<a href="#toc_5">重点解释了“本地分支”，“本地追踪分支”，“远程追踪分支”区别</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">六：多个仓库可以共用一个对象库吗？（很重要，初学时的疑惑点）</a>
+</li>
+<li>
+<a href="#toc_7">七：解释fast-forward，non-fast-forward</a>
+</li>
+<li>
+<a href="#toc_8">八：解释git rebase ，git cherry-pick</a>
+<ul>
+<li>
+<a href="#toc_9">者两命令，不常用，但有时能解决关键问题</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">九：提交范围(很重要)</a>
+</li>
+<li>
+<a href="#toc_11">十：多人协作开发时，造成起点分叉的原因(还待研究)</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一：Git 文件管理</h2>
+
+<ul>
+<li><p>工作目录<br/>
+纯净的工作文件</p></li>
+<li><p>索引<br/>
+git add命令，将对象添加到对象库中，维持一个新的目录树，这个目录树在工作区没有再次改变时是与工作区相同的目录树。新添加的修改与对象库里的目录树是不同的。而这些新添加的就是待提交到对象库里的修改。</p></li>
+<li><p>对象库<br/>
+包括，提交对象(commit)，目录树对象（tree），实际的数据(blob)，标签(tag)；<br/>
+blob对应正真的数据,文件的每个一版本。<br/>
+tree对应目录。树对象下可以有其他数，最终都会有blob的指向<br/>
+commit对应提交。对应当前目录树的一个完整快照</p>
+
+<p><strong>从总体上来理解，就是工作目录，索引，对象库，都有一个目录树。从编辑，git add ,git commit，的三个过程，就是目录树的同步工作。当然对象库里的commit是某个目录树的引用即快照。这就快照就是目录树，而这个目录树维持着blob的数据。而commit就记录着作者日志等信息。而commit实际上是链表，将一个个commit串联起来，构成一个分支开发线。</strong></p></li>
+</ul>
+
+<h2 id="toc_1">二：Git分支操作</h2>
+
+<p>远程追踪分支(追踪远程分支)，本地追踪分支(追踪&quot;远程追踪分支&quot;)，本地分支（谁也不追踪,自己玩,不具有pull功能）</p>
+
+<ul>
+<li><p>分支管理<br/>
+git show-branch<br/>
+git branch -d &quot;branchname&quot;<br/>
+git branch<br/>
+git branch -r<br/>
+git branch -a<br/>
+git branch -d<br/>
+git branch -D<br/>
+git branch testbranch //从当前commit创建分支<br/>
+git branch testbranch2 commitID //从指定的commit创建分支</p></li>
+<li><p>分支合并<br/>
+<strong>HEAD 当前引用<br/>
+FETCH_HEAD 远程跟踪分支的最新<br/>
+ORIGIN_HEAD 本分支合并前的commit号或者是reset前的commit号<br/>
+MERGE_HEAD 合并时别人的分支的commit号(在有冲突时,哈哈)</strong></p></li>
+</ul>
+
+<p>所有对对分支的操作都应该在本地操作。</p>
+
+<h2 id="toc_2">三：Git提交操作</h2>
+
+<ul>
+<li><p>git reset  git reset 精髓是--soft ,--mixed,--hard，三者对于head指向，索引树，工作目录的影响。</p>
+
+<p><code>git reset --soft 提交</code> 会将HEAD引用指向给定提交,相当于是将后面对commit的提交的修改重新放入了索引里；(<strong>commit树与索引树不同</strong>)</p>
+
+<p><code>git reset --mixed 提交</code> 会将HEAD指向给定提交，索引内容改变以符合给定提交的树。相当于是将后这个提交的后面的带面放到工作区；(<strong>commit树与索引树相同，工作树不同</strong>)</p>
+
+<p><code>git reset --hard 提交</code> 会将HEAD指向给定提交。并且三个树同步。即此种情况，会导致新修改丢失。（<strong>工作区树，索引区，commit树</strong>）</p>
+
+<p>特别说明：<br/>
+<code>git reset --mixed</code> ,让你有机会重新编辑文件(系统默认)<br/>
+<code>git reset --soft</code>,让你有机会重新修改提交日志<br/>
+<code>giet reset --hard</code>,全部删除了.没机会了</p></li>
+<li><p>git revert<br/>
+指定反转一个提交，并形成新的这个提交记录</p></li>
+<li><p>git cherry-pick(重点，难点)<br/>
+将其他分支的commit指定合并到当前分支并形成一个新的提交</p></li>
+<li><p>git commit --amend<br/>
+修改最新提交,主要是对此提交新添加内容，并在修改了最新的提交</p></li>
+<li><p>git checkout<br/>
+检出分支内容，即沿着当前分支树路径取出内容</p></li>
+<li><p>git rebase(这个概念理解的不够透彻)</p></li>
+<li><p>git rebase master topic<br/>
+将topic可达到master的提交添加到master的最新的后面。（有时也有说成，将你的补丁变基到master分支的头）</p></li>
+<li><p>git rebase --onto master maint^ feature<br/>
+将从maint<sup>到feature的路径的提交，迁移到master后面(<strong>onto表示把一条分支上的开发线整个移植到完全不同的分支上</strong>)。在此期间需要使用git</sup> rebase --continue 继续下一个提交，也可git rebase --abort进行编辑中止</p></li>
+<li><p>git rebase -i （ -- interactive）<br/>
+<strong>合并提交，或者改变提交顺序，或者删除，编辑，即将两个提交合并成一个提交（注意不是合并分支）,</strong></p></li>
+</ul>
+
+<p><strong>特别注意：这些操作可以专门针对某个文件进行操作。直接在commit后面添加 文件名就可以了</strong></p>
+
+<h2 id="toc_3">四：Git的Diff操作</h2>
+
+<p>diff的操作在实际的工作中是很有用的。</p>
+
+<ul>
+<li><p>git diff<br/>
+显示工作目录和索引差异</p></li>
+<li><p>git diff commit<br/>
+显示工作目录与commit差异</p></li>
+<li><p>git diff --cached commit<br/>
+显示索引中的变更和给定提交中的变更差异</p></li>
+<li><p>git diff commit1 commit2<br/>
+显示两个commit差异</p></li>
+</ul>
+
+<p><strong>差异都是用各个树来进行比较，然后通过比较程序，进行差异</strong></p>
+
+<h2 id="toc_4">五：远程版本库</h2>
+
+<h3 id="toc_5">重点解释了“本地分支”，“本地追踪分支”，“远程追踪分支”区别</h3>
+
+<ol>
+<li><p>远程分支几个易混淆的概念<br/>
+远程版本库：为版本库提供友好的名字，里面的分支就时远程分支。<br/>
+本地版本库：本地库 <br/>
+本地分支：本地分支(没有设置track)<br/>
+本地追踪分支：设置了track远程分支的分支(一般也就我们本地开发的分支)<br/>
+远程追踪分支：当fectch拉取远程分支时，实际下载的文件都在远程追踪个分支里。当执行pull时，这个分支与本地的分支（这个本地分支的upstream要是这个远程追踪分支）执行merge,用来追踪远程版本库中分支的变化。</p>
+
+<p>config文件里如下是记录本地各个分支HEAD的commit号与远程的各个分支Head的commit号。 建立这个refspec预示你要通过从原始版本库中抓取变更来持续更新本地版本库。下面就是这个映射关系</p>
+
+<pre><code>配置信息里的定义:
+remote.origin.fetch定义的是远程的别名，
+以及与**本地追踪分支的关联**（refs/heads/\*），
+**远程追踪分支的关联**关系（refs/remotes/origin/*）;
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+</code></pre></li>
+<li><p>git remote 命令创建，删除，操作和查看远程版本库。<br/>
+引入的所有远程版本库都记录在.git/config文件中。可以通过一个本地库添加多个远程仓库。</p>
+
+<pre><code>git remote add origin https://github.com/xxx(仓库地址)
+git remote update origin
+git remote show origin
+git remote rm origin
+git remote prune 删除”远程版本库已经删除的分支“的远程追踪分支
+</code></pre></li>
+<li><p>建立本地分支与远程追踪分支的关联(即设立本地追踪分支)</p>
+
+<pre><code>[remote &quot;origin&quot;]
+url = git@gitee.com:rjb_555/BookerReading.git
+fetch = +refs/heads/*:refs/remotes/origin/*
+[branch &quot;master&quot;]
+remote = origin
+merge = refs/heads/master
+[branch &quot;develop&quot;]
+remote = origin
+merge = refs/heads/develop
+</code></pre>
+
+<p>[remote &quot;origin&quot;] 定义是远程仓库地址，远程仓库别名，本地追踪分支（refs/heads/<em>），远程追踪分支（refs/remotes/origin/</em>）的关联关系;</p>
+
+<p><code>git branch --track test origin/dev</code><br/>
+或者<br/>
+<code>git checkout -b mypu --track origin/testbranch</code></p></li>
+<li><p>Git fetch,pull,push 的实质</p>
+
+<p>git fetch (拉取远程版本库到远程追踪分支)<br/>
+git pull (git fectch，git merge origin/master)<br/>
+git push (变更发送到远程版本库，在同步到origin/master)</p>
+
+<p>指定远程版本库的指定分支进行推送<br/>
+git push origin master<br/>
+这里要理解git push本质&quot;将变更打包“传输”在解包“放到指定的库中。所以git push 只是变更。所以可以将其推到指定的远程仓库。</p>
+
+<p>在非快进的push时，会遭到（non-fast forward）拒绝。 在此时因为远程的已经有人提交了。你的分支在当前远程分支之后，但有共同的提交记录。push -f 强制覆盖(覆盖掉别人的记录)。但此种情况一般都是先Pull,合并别人的提交。<br/>
+删除与创建远程分支<br/>
+git branch testbranch<br/>
+git push origin testbranch(直接在远程创建了一根分支)<br/>
+git push origin :foo</p>
+
+<p>原理(git push origin 源：目标)<br/>
+git push origin testbranch (简写)(如果远程没偶testbranch ,会将本地的分支推送到远程的版本,即相当于在远程新建分支)<br/>
+git push origin testbranch:testbranch<br/>
+git push origin raotest:testbranch(将内容推到指定的分支)<br/>
+Git push origin :testbranch (将空分支推发哦指定分支，即删除远程分支)</p></li>
+</ol>
+
+<h2 id="toc_6">六：多个仓库可以共用一个对象库吗？（很重要，初学时的疑惑点）</h2>
+
+<p>经过实践是可以的。比如，当前库是A，在分支master上，我现在在当前目录添加一个远程的仓库B，幷Pull下来。这时pull下来的对象与库A共用一个对象库。所谓的共用一个对象仓库，就时存储真实数据的地方。当时一般情况我们不这么弄，因为如果都放入一个对象库里，会导致上库变大，上传时变慢。</p>
+
+<p><img src="media/15352517950877/Xnip2018-08-26_14-47-26.png" alt="Xnip2018-08-26_14-47-26"/></p>
+
+<p>当如果是这样一个使用场景（fork公司的参考到你自己的远程库，然后通过发pull request的工作方式）：<br/>
+公司的库A，你fork公式的库B,你在你本地添加了这两个的远程库，都pull下来，因为你们使用的是很多相同的文件，所以，不会造成很多重复的存储，因为文件都是按内容hash的。如果当远程同步不能工作时（将A的内容同步到B），可以先pull下A,然后本地合并到B，在通过将B库push 到你自己的远程，然后通过发push request方式请求公司的库的合并。当然你有权限合公司库，可以直接push到公司的库。</p>
+
+<h2 id="toc_7">七：解释fast-forward，non-fast-forward</h2>
+
+<p>我们举例说明：<br/>
+开发一直在master分支进行，但忽然有一个新的想法，于是新建了一个develop的分支，并在其上进行一系列提交，完成时，回到 master分支，此时，master分支在创建develop分支之后并未产生任何新的commit。此时的合并就叫fast forward。<br/>
+反之，是non-fast-forwad<br/>
+哈哈，在知道了，命令行，长长有fast-forward的日志信息！</p>
+
+<h2 id="toc_8">八：解释git rebase ，git cherry-pick</h2>
+
+<h3 id="toc_9">者两命令，不常用，但有时能解决关键问题</h3>
+
+<ul>
+<li><p>git cherry-pick<br/>
+git cherry-pick 通常用于将一个分支的特定提交引入一个不同的分支中。<br/>
+举例说明<br/>
+master分支已经有很多提交。master其中一个提交时修复一个bug时，这个bug在另一个分支也存在，需要将这个提交也放到dev分支。在dev会形成一个新的提交。<br/>
+<code><br/>
+git checkout dev<br/>
+git cherry-pick  master~2<br/>
+</code></p>
+
+<p>一句话总结，就时将<strong>一个分支的提交拷贝到另一个分支</strong>的最后面，幷形成<strong>一个新的提交</strong>(这句话很重要)</p></li>
+<li><p>git rebase</p></li>
+</ul>
+
+<p>rebase是个很重要的概念，需要比较综合的能力才能理解的比较好。我将在这篇文章里做详细的解释<a href="https://raojunbo.github.io/2018/08/%E8%AF%A6%E8%A7%A3Git%E9%87%8C%E7%9A%84Rebase%E6%93%8D%E4%BD%9C/">详解Git里的Rebase操作</a></p>
+
+<h2 id="toc_10">九：提交范围(很重要)</h2>
+
+<p>很多命令都可以对提交范围执行某些操作。那么怎么表达这些提交范围呢？<br/>
+<strong>&quot;...&quot;表示一个范围，“开始...结束&quot;<br/>
+&quot;maser~2&quot;表示master分支往后数第二个提交。（表示的是一个提交点）</strong><br/>
+示例<br/>
+1. master~5 ... master~2,表示master的倒数第5个提交到倒数第2个提交之间的提交<br/>
+2. topic...master，表示在master分支而不在topic分支生的提交</p>
+
+<p>终于写完了这篇总结，以前看书《Git版本控制管理》JonLoeLiger 著 因为没有实践的前提，所以理解的不深。用了将近一年后，重新回过来看时，很做概念就很清晰了。</p>
+
+<h2 id="toc_11">十：多人协作开发时，造成起点分叉的原因(还待研究)</h2>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/26</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Git%E5%B7%A5%E5%85%B7.html'>Git工具</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15351910189854.html">
+                
+                  <h1>iOS保持界面流畅的技巧（性能优化）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>
+<a href="#toc_0">卡顿原理</a>
+</li>
+<li>
+<a href="#toc_1">卡顿监控思路</a>
+</li>
+<li>
+<a href="#toc_2">线程卡顿监控方案一的实现</a>
+</li>
+</ul>
+
+
+<p>参考<a href="https://juejin.im/post/5ace078cf265da23994ee493">iOS 性能优化总结</a><br/>
+参考<a href="http://wereadteam.github.io/2016/05/03/WeRead-Performance/">微信读书 iOS 性能优化总结</a><br/>
+参考<a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿监控</a><br/>
+参考<a href="http://www.52im.net/thread-136-1-1.html">移动端IM实践：iOS版微信界面卡顿监测方案</a><br/>
+参考<a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/">iOS保持界面流畅的技巧</a></p>
+
+<p>本文是对上面几篇文章的总结。并与我自己的知识体系相融合，以达到一个自相融洽的整体。</p>
+
+<h2 id="toc_0">卡顿原理</h2>
+
+<p>VSync信号到来时，系统图形服务会通过CADisplayLink等机制通知App，APP主线程开始在CPU中计算显示内容，比如视图的创建，布局计算，图片解码，文本绘制等。随后CPU会将计算好的内容提交到GPU，由GPU进行变换，合成，渲染。随后GPU会把渲染结果提交到帧缓冲区区，等待下一次VSync信号到来时显示到屏幕上。<br/>
+由于垂直同步机制，若果在一个VSync时间内，CPU或者GPU没有完成内容的提交，则这个没有完成的提交不会显示到屏幕，在其提交后会到缓冲区，等待下一次机会在显示。那么这个下一次有可能是正常时间提交修改，则会将缓存区的内容覆盖。导致被覆盖的永远没机会显示了。就是掉帧了。<br/>
+那么与runloop有什么关系呢？<br/>
+Runloop的时间概念比1/60更小，也就是Runloop处理事物的时间远远比1/60要小。绝大部分时间是睡眠的。所以它们两个本身是没有关系的。绝大部分时候是主线程早就处理完毕所有显示数据，并提交到了渲染系统，渲染系统也完成了合成，也就是提交到了缓存区。只需要等待时钟的到来，将这个缓冲区的内容显示到屏幕上。</p>
+
+<p>FPS的真正含义是，1s的时间真正有多少帧显示到了屏幕上。</p>
+
+<h2 id="toc_1">卡顿监控思路</h2>
+
+<ol>
+<li><p>主线程卡顿监控<br/>
+通过子线程监测主线程的runloop，判断两个状态区域之间的耗时是否达到一定阈值。这两个状态就是kCFRunLoopBeforeSources与kCFRunLoopAfterWaiting</p></li>
+<li><p>借助FPS监控<br/>
+CADisplayLink 可以将其看做一个定时器。定时器都与机器的硬件有关系。而这个定时器是有屏幕“垂直时钟”驱动。也就是与垂直时钟同步，1/60时间跳动一次。因为CADisplayLink的回调也要在线程里执行，将其加入到主线程的Runloop里。runloop的TimerSource就会触发runloop的“叫醒”，执行该执行的内容。若果不将CADisplayLink加入，当然就不会定固定时间“叫醒”。</p></li>
+</ol>
+
+<p>CADislayLink的timestampe的两次差为1s之内的tick次数，即使FPS。</p>
+
+<h2 id="toc_2">线程卡顿监控方案一的实现</h2>
+
+<p><a href="http://www.tanhao.me/code/151113.html/">iOS实时卡顿检测</a><br/>
+这一方案的思路，就是从引起卡顿的本质来优化。引起卡顿，在kCFRunLoopBeforeSources通知后执行主队列里的代码，执行block的代码等。或则在kCFRunLoopAfterWaiting被唤起后，也会执行队列里的代码，block代码。</p>
+
+<pre><code>#import &lt;CrashReporter/CrashReporter.h&gt;
+
+@interface PerformanceMonitor ()
+{
+    int timeoutCount;
+    CFRunLoopObserverRef observer;
+    
+    @public
+    dispatch_semaphore_t semaphore;
+    CFRunLoopActivity activity;
+}
+@end
+
+@implementation PerformanceMonitor
+
++ (instancetype)sharedInstance
+{
+    static id instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
+static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info)
+{
+    PerformanceMonitor *moniotr = (__bridge PerformanceMonitor*)info;
+    
+    moniotr-&gt;activity = activity;
+    
+    dispatch_semaphore_t semaphore = moniotr-&gt;semaphore;
+    dispatch_semaphore_signal(semaphore);//没当状态发生变化的时候+1；这是在主线程执行
+}
+
+- (void)stop
+{
+    if (!observer)
+        return;
+    
+    CFRunLoopRemoveObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
+    CFRelease(observer);
+    observer = NULL;
+}
+
+- (void)start
+{
+    if (observer)
+        return;
+    
+    // 信号
+    semaphore = dispatch_semaphore_create(0);
+    
+    // 注册RunLoop状态观察
+    CFRunLoopObserverContext context = {0,(__bridge void*)self,NULL,NULL};
+    observer = CFRunLoopObserverCreate(kCFAllocatorDefault,
+                                       kCFRunLoopAllActivities,
+                                       YES,
+                                       0,
+                                       &amp;runLoopObserverCallBack,
+                                       &amp;context);
+    CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
+    
+    //在子线程监控时长
+    //在子线程不断的监控信号量，如果在50 ms里还没有超时，也就是在50ms状态没有发生该边的话。就说明在两个状态的时间间隔里有执行时长超过50ms的
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        while (YES)
+        {
+            long st = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 50*NSEC_PER_MSEC));
+            if (st != 0)
+            {
+                if (!observer)
+                {
+                    timeoutCount = 0;
+                    semaphore = 0;
+                    activity = 0;
+                    return;
+                }
+                
+                //若果超时的是kCFRunLoopBeforeSources 或者kCFRunLoopAfterWaiting 就更能说明问题
+                //如果5此都是这样，说明有问题。几下主线程的调用堆栈。
+                if (activity==kCFRunLoopBeforeSources || activity==kCFRunLoopAfterWaiting)
+                {
+                    if (++timeoutCount &lt; 5)
+                        continue;
+                    
+                    PLCrashReporterConfig *config = [[PLCrashReporterConfig alloc] initWithSignalHandlerType:PLCrashReporterSignalHandlerTypeBSD
+                                                                                       symbolicationStrategy:PLCrashReporterSymbolicationStrategyAll];
+                    PLCrashReporter *crashReporter = [[PLCrashReporter alloc] initWithConfiguration:config];
+                    
+                    NSData *data = [crashReporter generateLiveReport];
+                    PLCrashReport *reporter = [[PLCrashReport alloc] initWithData:data error:NULL];
+                    NSString *report = [PLCrashReportTextFormatter stringValueForCrashReport:reporter
+                                                                              withTextFormat:PLCrashReportTextFormatiOS];
+                    
+                    NSLog(@&quot;------------\n%@\n------------&quot;, report);
+                }
+            }
+            timeoutCount = 0;
+        }
+    });
+}
+
+@end
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/25</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html'>iOS性能优化</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15351909215000.html">
+                
+                  <h1>组件化系列（一） 组件化原理及方案</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<hr/>
+
+<p>本系列文章是对大神的博客文章的研读与总结。我们公司从18年初开始组件化的开发的构建。为了理解组件开发的原理，找了相关资料做了对比分析。以下是我参考的文章<br/>
+<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a><br/>
+<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。<br/>
+<a href="https://github.com/meili/MGJRouter.git">蘑菇街的开源</a><br/>
+<a href="https://github.com/raojunbo/CTMediator.git">Casa的组件化方案开源</a></p>
+
+<h2 id="toc_0">一：模块化与解耦</h2>
+
+<p><a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a></p>
+
+<h3 id="toc_1">1.为什么模块化</h3>
+
+<p>因为在实际的开发中，项目业务较多，一个APP会有多个小组进行开发，比如我们公司的有数学组，语文组，英语组，商业组，等，出现的问题大多数情况下一个开发人员只关心我这个组的代码。这样在编译时实际上是编译整个项目，<strong>编译效率低</strong>。每个小组在同一个工程里增，删，改文件，<strong>xcode的工程文件会经常发生冲突</strong>（我们用git进行版本控制），合并代码时很痛苦。在整个项目查找自己忘记类名了的功能时，犹如<strong>大海捞针</strong>。有些基础模块核心模块需要专人维护，对基础的开发人员不开发，需要<strong>隔离基础库</strong>，也需要进行解耦。</p>
+
+<p>这些理由已经足以说明进行模块化组件化的迫切了。</p>
+
+<h3 id="toc_2">2. 模块设计原则</h3>
+
+<blockquote>
+<ol>
+<li>越底层的模块，应该越稳定，越抽象，越具有高度复用度。</li>
+<li>不要让稳定的模块依赖不稳定的模块，减少依赖</li>
+<li>提升模块的复用度，<strong>自完备性有时候要优于代码复用</strong></li>
+<li>每个模块只做好一件事情，不要让Common出现</li>
+<li>按照你架构的层数从上到下依赖，<strong>不要出现下层模块依赖上层模块的现象</strong>，业务模块之间也尽量不要耦合</li>
+</ol>
+</blockquote>
+
+<h3 id="toc_3">3. 模块解耦手段</h3>
+
+<p>要实现模块之间真正的解耦才算真正的模块化。<br/>
+解耦目标：</p>
+
+<blockquote>
+<p><strong>在基于模块设计原则上让模块之间没有循环依赖，让业务模块之间解除依赖</strong>。</p>
+</blockquote>
+
+<p>公共模块可以通过架构设计来避免耦合业务。但业务模块之间还是会有耦合的。<br/>
+业务模块之间的比如页面跳转，数据传递，怎么实现解耦不同业务模块之间的代码调用呢？</p>
+
+<h4 id="toc_4">1. 面向接口调用（很妙）</h4>
+
+<p>直接引用有依赖的情况</p>
+
+<pre><code>//A 模块
+- (void)getSomeDataFromB {
+    B.getSomeData();
+}
+//B 模块
+- (void)getSomeData {
+    return self.data;
+}
+</code></pre>
+
+<pre><code>//接口
+@protocol BService&lt;NSObject&gt;
+- (void)getSomeData;
+@end
+
+//A 模块，只依赖接口(针对协议编程)
+- (void)getSomeDataFromB {
+    id b = findService(@protocol(BService));
+    b.getSomeData;
+}
+//B模块，实现BService接口
+@interface B:NSObject&lt;BService&gt;
+- (void)getSomeData {
+    return self.data;
+}
+
+</code></pre>
+
+<p>这样就可以实现了既满足了模块之间的调用，也实现了解耦<br/>
+优点</p>
+
+<p><code>接口类似代码，可以非常灵活的定义函数和回调</code></p>
+
+<p>缺点</p>
+
+<pre><code>1. 接口定义文件需要放在一个模块里以供依赖，但是这个模块不贡献代码。还好。
+2. 使用麻烦，每个调用都需要定义一个service的接口，幷实现。
+</code></pre>
+
+<h4 id="toc_5">2. 面向自定义协议的调用</h4>
+
+<p>面向接口的调用的缺点导致幷不能满足所有的需求，也解耦的不彻底（对接口的依赖）。<br/>
+终极手段就是通过定义一套自定义协议来实现模块间的通信，可以采用现成的协议如URL协议，简单，易于上手，这也是很多人采用url作为协议原因。可统一实现本地于远程的页面跳转，并且实现业务间的解耦。<br/>
+要实现真正的解耦，采用注册机制。</p>
+
+<h4 id="toc_6">3.利用运行时的反射机制</h4>
+
+<p>Object-C的反射机制是通过一个字符串找到一个类的类对象，即NSClassFromString();<br/>
+要实现真正的解耦，可以采用通过反射机制获取类，在创建对象，实现跳转或者通信。这样就不用依赖”要跳转的类“了。</p>
+
+<blockquote>
+<p>总结<br/>
+以上的解耦方式是从<a href="https://blog.cnbluebox.com/blog/2015/11/28/module-and-decoupling/">模块化与解耦</a>得到的启发。这些解耦方式无论是在平时开发中，还是要搭建组件化的框架都可以使用。具体的组件化框架我们将在下面对前人的组件化探索做下分析</p>
+</blockquote>
+
+<h2 id="toc_7">二：模块拆分</h2>
+
+<ol>
+<li><p>基础库组件<br/>
+第三方库如AFNetWorking,SDWebImage等，还有一些工具也要从主库重剥离出来，形成自己的私有基础仓库。</p></li>
+<li><p>服务组件</p></li>
+<li><p>业务组件</p></li>
+</ol>
+
+<p><a href="https://blog.csdn.net/xinzhou201/article/details/51000807">https://blog.csdn.net/xinzhou201/article/details/51000807</a></p>
+
+<ol>
+<li>拆分中遇到的问题
+主工程与壳工程的pods版本的管理问题</li>
+</ol>
+
+<h2 id="toc_8">三：蘑菇街组件化</h2>
+
+<h3 id="toc_9">蘑菇街的方案一</h3>
+
+<p>原理采用的是面向自定义协议的方式实现解耦。自定义协议采用的是现成的url协议，url协议成熟，方便，利用URL可以在这里做key值，方便的参数解析，与应用之间的调用相吻合。<br/>
+嫌在这里看代码代码麻烦的话，可以下载我自己写的原理 <a href="https://github.com/raojunbo/iOSCoreConcept.git">Demo组件化原理分析</a></p>
+
+<pre><code>//Mediator3.h文件
+typedef void(^componetBlock)(id param);
+typedef id(^objectComponetBlock)(id param);
+
+/*
+ 原理就是将url与Block进行映射
+ url起到两个作用：一是作为key值与block进行映射，二是可以直接接参数就想普通url后面跟参数一样。
+ 
+ 特别说明:
+ url传递参数受到一定的限制。比如对本地来说，需要传非常规的参数时，就办不到。
+ 这里我自己的Demo直接将参数放在了函数后面省去对url进行解析的操作。实际的开发中将这个参数从url里解析出来。如果要传递非常规的参数。也可以直接在后面添加有一个param。
+ */
+
+@interface Mediator3 : NSObject
+
++ (instancetype)shareInstance;
+
+//指定相应的url的执行操作
+//例如，只是简单的打开一个页面
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block;
+//打开某个页面
+- (void)openURL:(NSString *)url withParam:(id)param;
+
+
+//指定相应rul的执行操作，并给一个返回值
+//例如打开一个页面，或者在一个组件里面取值后返回来
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block;
+//取得某个组件操作后的值
+- (id)objectForURL:(NSString *)url withParam:(id)param;
+</code></pre>
+
+<pre><code>//Mediator3.m文件
+@interface Mediator3()
+@property (nonatomic, strong)NSMutableDictionary *cache;
+@end
+
+@implementation Mediator3
+
+- (instancetype)init {
+    if(self = [super init]){
+        _cache = [[NSMutableDictionary alloc]init];
+    }
+    return self;
+}
+
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    static Mediator3 *mediator = nil;
+    dispatch_once(&amp;onceToken, ^{
+        
+        mediator = [[self alloc]init];
+    });
+    return mediator;
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toHandler:(componetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (void)openURL:(NSString *)url withParam:(id)param {
+    componetBlock block = [self.cache objectForKey:url];
+    if(block){
+        block(param);
+    }
+}
+
+- (void)registerURLPattern:(NSString *)urlPattern toObjectHandler:(objectComponetBlock)block {
+    [self.cache setObject:block forKey:urlPattern];
+}
+
+- (id)objectForURL:(NSString *)url withParam:(id)param{
+    objectComponetBlock block = [self.cache objectForKey:url];
+    if(block){
+        return block(param);
+    }
+    return nil;
+}
+
+@end
+</code></pre>
+
+<pre><code>//BookDetailViewController.m
+@implementation BookDetailViewController
+
++ (void)load {
+    //实现跳转功能
+    [[Mediator3 shareInstance] registerURLPattern:@&quot;weread://bookDetail&quot; toHandler:^(id param) {
+        NSDictionary *paramDict = (NSDictionary *)param;
+        BookDetailViewController *bookDetailVC = [[BookDetailViewController alloc]initWithBookId:paramDict[@&quot;bookId&quot;]];
+        UINavigationController *nav = (UINavigationController *) [UIApplication sharedApplication].keyWindow.rootViewController;
+        [nav pushViewController:bookDetailVC animated:YES];
+    }];
+    
+    
+    //只是取值的操作
+    [[Mediator3 shareInstance]registerURLPattern:@&quot;weread://bookCount&quot; toObjectHandler:^id(id param) {
+        //执行一定的操作后
+        return @&quot;5&quot;;
+    }];
+    
+</code></pre>
+
+<pre><code>//ReadingViewController.m
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ //注册url与block的映射,实现调转的操作
+    [[Mediator3 shareInstance] openURL:@&quot;weread://bookDetail&quot; withParam:@{@&quot;bookId&quot;:@&quot;2&quot;}];
+    
+    //注册url与block映射，实现只是取值的操作
+    NSString *bookCount =  [[Mediator3 shareInstance] objectForURL:@&quot;weread://bookCount&quot; withParam:@&quot;&quot;];
+    NSLog(@&quot;这是从某个组件取回来的值%@&quot;,bookCount);
+    }
+</code></pre>
+
+<h3 id="toc_10">蘑菇街的方案二</h3>
+
+<blockquote>
+<p>实现原理：<br/>
+面向接口调用，即新开了一个对象叫做ModuleManager，提供了一个registerClass:forProtocol:的方法，注册后，@protocol和Class进行配对。因此ModuleManager中就有了一个字典来记录这个配对。<br/>
+当有涉及非常规参数的调用时，业务方就不会去使用[MGJRouter openURL:@&quot;mgj://detail?id=404&quot;]的方案了，转而采用ModuleManager的classForProtocol:方法。业务传入一个@protocol给ModuleManager，然后ModuleManager通过之前注册过的字典查找到对应的Class返回给业务方，然后业务方再自己执行alloc和init方法得到一个符合刚才传入@protocol的对象，然后再执行相应的逻辑。</p>
+</blockquote>
+
+<p>这里的protocol统样起到两个作用，一是key值，另一个是起到定义调用接口的作用，可以定义任意类型的参数。</p>
+
+<p>缺点<br/>
+1. 被调用方与调用方，虽然不相互依赖，但都得依赖这个协议。这实际上是一种不彻底的解耦。</p>
+
+<ol>
+<li>同url注册形式一样，都得维持注册表。</li>
+</ol>
+
+<h2 id="toc_11">四：casa组件化</h2>
+
+<p>基于Mediator模式和Target-Action模式，中间采用了runtime来完成调用。这套组件化方案将远程应用调用和本地应用调用做了拆分，而且是由本地应用调用为远程应用调用提供服务</p>
+
+<blockquote>
+<p>实现原理<br/>
+[[CTMediator sharedInstance] performTarget:targetName action:actionName params:@{...}]向CTMediator发起跨组件调用，CTMediator根据获得的target和action信息，通过objective-C的runtime转化生成target实例以及对应的action选择子，然后最终调用到目标业务提供的逻辑，完成需求。</p>
+</blockquote>
+
+<p><img src="media/15351909215000/Xnip2018-09-04_16-42-52.png" alt="Xnip2018-09-04_16-42-52"/></p>
+
+<p>下面是工程实践<br/>
+下面是casa开源的实现的头文件。.m文件请自行下载</p>
+
+<pre><code>//casa开源的CTMeditor.h
+@interface CTMediator : NSObject
+
++ (instancetype)sharedInstance;
+
+// 远程App调用入口
+- (id)performActionWithUrl:(NSURL *)url completion:(void(^)(NSDictionary *info))completion;
+// 本地组件调用入口
+- (id)performTarget:(NSString *)targetName action:(NSString *)actionName params:(NSDictionary *)params shouldCacheTarget:(BOOL)shouldCacheTarget;
+- (void)releaseCachedTargetWithTargetName:(NSString *)targetName;
+
+@end
+
+//CTMeditor.m
+略
+采用运行时构建可执行的NSInvocation。在内部都给其添加了前缀
+ NSString * targetClassString = [NSString stringWithFormat:@&quot;Target_%@&quot;, targetName];
+ NSString *actionString = [NSString stringWithFormat:@&quot;Action_%@:&quot;, actionName];
+</code></pre>
+
+<pre><code>//Target_B.h
+@interface Target_B : NSObject
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)dict;
+
+@end
+
+//Target_B.m
+#import &quot;Target_B.h&quot;
+#import &quot;DemoModuleBDetailViewController.h&quot;
+@implementation Target_B
+
+- (UIViewController *)Action_DemoModuleBDetailViewController:(NSDictionary *)param {
+    DemoModuleBDetailViewController *bDetailVC = [[DemoModuleBDetailViewController alloc]init];
+    return bDetailVC;
+}
+@end
+</code></pre>
+
+<pre><code>//ViewController.m
+//这是调用方
+#import &quot;CTMediator+CTMediatorModuleAActions.h&quot;
+#import &quot;CTMediator+CTMediatorModuleBActions.h&quot;
+- (void）viewDidLoad {
+//直接调用
+  if (indexPath.row == 6) {
+        [[CTMediator sharedInstance] performTarget:@&quot;InvalidTarget&quot; action:@&quot;InvalidAction&quot; params:nil shouldCacheTarget:NO];
+    }
+    //通过分类调用
+    if(indexPath.row == 7){
+        UIViewController *vc =  [[CTMediator sharedInstance]CTMediator_viewControllerForModuleBDetail:@{}];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+</code></pre>
+
+<ol>
+<li><p>从.h文件里可以看到，外部的调用将远程与本地分开，内部实现时远程利用了本地（通过解析url,将url转换成了本地的调用）。</p></li>
+<li><p>Mediator分别对每一个模块有个一个分类，提供对外部的调用的列表。这些分类被需要调用的模块所依赖。也就是只需要依赖Mediator就可以了，是单向依赖。</p></li>
+<li><p>为了更好的实现组件对外接口的管理。此种方案专门针对每个模块有一个Target_A类似的对外服务接口的实现。</p></li>
+<li><p>用户调用都是通过对Mediator的分类，对固定的模块的类的名字的反射，来对Target_A的调用，当然就调用到了A的服务。</p></li>
+<li><p>此种方式为了使代码方便管理，会为每个模块提供Target和一个对Mediator的分类。</p></li>
+<li><p>Mediator与其分类可以是单独一个repo，方便其他组件依赖。也就是其他组件只依赖于这个中间件。解耦与组件化就完成了。</p></li>
+</ol>
+
+<h2 id="toc_12">五：总结</h2>
+
+<p>组件化就是在与解耦，解耦的方式大致就是上面提到的三种方法（也可能有其他办法，但至少现在我看到的最好实践就这三）。然后是基于各个原理的工程化实践。从工程实践来看casa的Mediator+target-action更胜一筹。思路清晰，调用统一，没有注册机制的维护，模块的服务的实现（Target）在同一个地方，不用耦合到真正的模块里。<br/>
+多说一句，滴滴组件化，页面间的跳转采用openURL,页面在+(void)load方法里进行注册，ONERoute内部保存一份URL与Class的对应表。当调用openURL时，会查找到相应的类，然后生成相应的实例对象。<br/>
+最后强烈建议大家认真读<a href="https://casatwy.com/iOS-Modulization.html">Casa的iOS应用架构谈 组件化方案</a>。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/25</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html'>iOS性能优化</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15351908674819.html">
+                
+                  <h1>Runtime系列一 Objective-C对象模型</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>
+<a href="#toc_0">一：前言</a>
+</li>
+<li>
+<a href="#toc_1">二：NSObject类的实现</a>
+</li>
+<li>
+<a href="#toc_2">三：NSObject对象的表示objc_object</a>
+<ul>
+<li>
+<a href="#toc_3">NSObject是如何根据类创建对象的？这里有很多疑问。？？？？</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">四：元类（实例对象，类对象，元类之间的关系）</a>
+</li>
+<li>
+<a href="#toc_5">六：Runtime几个术语的结构分析</a>
+<ul>
+<li>
+<a href="#toc_6">SEL</a>
+</li>
+<li>
+<a href="#toc_7">id</a>
+</li>
+<li>
+<a href="#toc_8">Method</a>
+</li>
+<li>
+<a href="#toc_9">Ivar</a>
+</li>
+<li>
+<a href="#toc_10">IMP</a>
+</li>
+<li>
+<a href="#toc_11">Cache</a>
+</li>
+<li>
+<a href="#toc_12">Property</a>
+</li>
+<li>
+<a href="#toc_13">类型编码</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_14">七：相关的API</a>
+<ul>
+<li>
+<a href="#toc_15">类相关API</a>
+</li>
+<li>
+<a href="#toc_16">成员变量相关API</a>
+</li>
+<li>
+<a href="#toc_17">属性相关API</a>
+</li>
+<li>
+<a href="#toc_18">Method相关API</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_19">八：API示例Demo</a>
+<ul>
+<li>
+<a href="#toc_20">下面是类的一些基本API使用示例</a>
+</li>
+<li>
+<a href="#toc_21">下面是动态添加类的实践</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一：前言</h2>
+
+<p>Objective-c的编译器将OC代码编译成可执行二进制文件。操作系统在装载后，会在运行时运行时系统下运行该程序（此时运行时系统就是Runtime实现Objective-C机制的一个运行库，可以理解成专门运行Object-C的一个小系统）。</p>
+
+<p>Runtime库主要做下面几件事：</p>
+
+<ol>
+<li><p>封装<br/>
+在这个库中，对象可以用C语言中的结构体表示，而方法可以用C函数来实现，另外再加上了一些额外的特性。这些结构体和函数被runtime函数封装后，我们就可以在程序运行时创建，检查，修改类、对象和它们的方法了。</p></li>
+<li><p>找出方法的最终执行代码<br/>
+当程序执行[object doSomething]时，会向消息接收者(object)发送一条消息(doSomething)，runtime会根据消息接收者是否能响应该消息而做出不同的反应。这将在后面详细介绍。</p></li>
+</ol>
+
+<h2 id="toc_1">二：NSObject类的实现</h2>
+
+<pre><code>//定义NSObject
+@interface NSObject &lt;NSObject&gt; {
+    Class isa;
+}
+</code></pre>
+
+<pre><code>//定义Class类型
+typedef struct objc_class *Class;
+</code></pre>
+
+<pre><code>//定义objc_class
+struct objc_class {
+    Class isa;
+
+#if !__OBJC2__
+    Class _Nullable super_class                              OBJC2_UNAVAILABLE;
+    const char * _Nonnull name                               OBJC2_UNAVAILABLE;
+    long version                                             OBJC2_UNAVAILABLE;
+    long info                                                OBJC2_UNAVAILABLE;
+    long instance_size                                       OBJC2_UNAVAILABLE;
+    struct objc_ivar_list * _Nullable ivars                  OBJC2_UNAVAILABLE;
+    struct objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE;
+    struct objc_cache * _Nonnull cache                       OBJC2_UNAVAILABLE;
+    struct objc_protocol_list * _Nullable protocols          OBJC2_UNAVAILABLE;
+#endif
+};
+</code></pre>
+
+<p>由此可见NSObject类是由Class类型来表示的，它实际上是一个指向objc_class结构体的指针。<br/>
+objc_class字段说明</p>
+
+<p>isa：所有类的自身也是一个对象，这个对象的Class里面也有各个ias指针，它指向metaClass<br/>
+super_class：指向该类的父类<br/>
+cache：在我们每次调用过一个方法后，这个方法就会被缓存到cached列表中，<br/>
+下次调用的时候就会在缓存中找，如果cache中没有，就会在methodlist中找。<br/>
+举例说明<br/>
+NSArray *array  = [NSArray alloc]init];<br/>
+alloc先执行，发现NSArray没有相应的方法，然后去父类查找。父类发现有，就会根据所需要的内存空间大小开始分配内存空间。alloc同意会加入cache里面。<br/>
+接着执行init方法，如果NSArray响应该方法，则直接将其加入cache中。不响应就去父类查找。</p>
+
+<h2 id="toc_2">三：NSObject对象的表示objc_object</h2>
+
+<p>表一个类的实例的结构体<br/>
+这个实例只有指向其所属类的一个指针。当我们向一个Object-C对象发送消息时，运行库会根据实例对象的isa指针找到这个实例对象所属的类。Runtime会根据isa指向所属的类的方法列表及父类方法列表中寻找与消息对应指向的方法。</p>
+
+<h3 id="toc_3">NSObject是如何根据类创建对象的？这里有很多疑问。？？？？</h3>
+
+<p><strong>当创建一个特定类的实例对象时，分配的内存包含一个objc_object数据结构<br/>
+然后是类的实例变量数据。NSObject类的alloc和allocWithZone:方法使用函数class_createInstance来创建objc_object数据结构。</strong></p>
+
+<pre><code>struct objc_object {
+    Class isa;
+}
+type struct objc_object *id;
+</code></pre>
+
+<h2 id="toc_4">四：元类（实例对象，类对象，元类之间的关系）</h2>
+
+<p>从NSObject的定义了可以看出，每个类都是一个对象（类对象）。<br/>
+我们在<code>NSArray *array =  [NSArray array]</code>使用类方法时幷没有创建对象。<br/>
+那么类对象的isa指向哪里？（我能达成的共识是对象由isa指向”对象“定义），那么在object里类对象的isa指向叫meta-class.它是类对象的类。</p>
+
+<p>发送实例方法时，会在类对象方法列表里找，幷缓存<br/>
+发送类方法时，会在元类对象的方法列表里找，幷缓存</p>
+
+<p>那么元类的的isa指针又指向哪里呢？<br/>
+Object-c的设计者为了不让其无限循环下去，将元类的isa指向了其最基类。而最基类的meta-class的isa指向自己。这样就形成一个闭环。<br/>
+类图结构如下(这个图画的真完美)</p>
+
+<p><img src="media/15351908674819/objctree.png" alt="objctree"/></p>
+
+<h2 id="toc_5">六：Runtime几个术语的结构分析</h2>
+
+<h3 id="toc_6">SEL</h3>
+
+<p>这个术语在头Runtime的头文件里没有看到相关的定义(<objc/runtime.h>)。有兴趣的同学可以下载runtime源码查看SEL的定义。<br/>
+这里我们给出推测<br/>
+type struct objc_selector *SEL<br/>
+struct objc_selector{<br/>
+void *sel_id;<br/>
+const char *sel_types;<br/>
+}<br/>
+所以从这里可以将SEL理解成一个char *类型的字符串。这个字符串在method_list里映射了真正的函数实现。</p>
+
+<h3 id="toc_7">id</h3>
+
+<pre><code>typedef struct objc_object *id;
+struct objc_object { Class isa; };
+</code></pre>
+
+<p>id 重新定义为objc_object * 类型（指向对象的指针）。objc_object结构体包含一个isa指针，根据isa指针可以找到所属的类。</p>
+
+<blockquote>
+<p>注意 isa指针在代码运行时并不总是指向实例对象所属于的类。所以不能依靠它来确定类型，要想确定类型还是需要用对象的class方法。kvo实现原理就是被观察对象的isa指针指向一个中间类而不是真实的类型。</p>
+</blockquote>
+
+<h3 id="toc_8">Method</h3>
+
+<pre><code>typedef struct objc_method *Method;
+
+struct objc_method {
+    SEL method_name                                          OBJC2_UNAVAILABLE;
+    char *method_types                                       OBJC2_UNAVAILABLE;
+    IMP method_imp                                           OBJC2_UNAVAILABLE;
+}
+</code></pre>
+
+<p>构建Method时需要SEL(方法名),method_types存储参数与返回值的类型编码，IMP函数指针（真正的函数实现）</p>
+
+<h3 id="toc_9">Ivar</h3>
+
+<pre><code>typedef struct objc_ivar *Ivar;
+
+struct objc_ivar {
+    char *ivar_name                                          OBJC2_UNAVAILABLE;
+    char *ivar_type                                          OBJC2_UNAVAILABLE;
+    int ivar_offset                                          OBJC2_UNAVAILABLE;
+#ifdef __LP64__
+    int space                                                OBJC2_UNAVAILABLE;
+#endif
+}
+</code></pre>
+
+<p>ivar_name 变量名，ivvar_type变量类型编码</p>
+
+<h3 id="toc_10">IMP</h3>
+
+<pre><code>typedef id (*IMP)(id, SEL, ...);
+</code></pre>
+
+<p>你会发现 IMP 指向的方法与 objc_msgSend 函数类型相同，参数都包含 id 和 SEL 类型</p>
+
+<h3 id="toc_11">Cache</h3>
+
+<p>在objc_class的结构体中的cache字段，它用于缓存调用过的方法。cahce是指向objc_cache结构体的指针。</p>
+
+<pre><code>struct objc_cache {
+    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;
+    unsigned int occupied                                    OBJC2_UNAVAILABLE;
+    Method _Nullable buckets[1]                              OBJC2_UNAVAILABLE;
+};
+</code></pre>
+
+<p>occupied 缓存的方法数目<br/>
+buckets 指向Method数据结构的指针的数组。也就是缓存函数的地方。</p>
+
+<h3 id="toc_12">Property</h3>
+
+<p>typedef struct objc_property *objc_property_t;//这个更常用<br/>
+可以通过class_copyPropertyList 和 protocol_copyPropertyList 方法获取类和协议中的属性：</p>
+
+<p>objc_property_t *class_copyPropertyList(Class cls, unsigned int *outCount)<br/>
+objc_property_t *protocol_copyPropertyList(Protocol *proto, unsigned int *outCount)</p>
+
+<h3 id="toc_13">类型编码</h3>
+
+<p>编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与方法的selector关联在一起。这种编码方案在其它情况下也是非常有用的，因此我们可以使用@encode编译器指令来获取它。当给定一个类型时，@encode返回这个类型的字符串编码。这些类型可以是诸如int、指针这样的基本类型，也可以是结构体、类等类型。事实上，任何可以作为sizeof()操作参数的类型都可以用于@encode()。</p>
+
+<p>在Objective-C Runtime Programming Guide中的Type Encoding一节中，列出了Objective-C中所有的类型编码。需要注意的是这些类型很多是与我们用于存档和分发的编码类型是相同的。但有一些不能在存档时使用。</p>
+
+<pre><code> //类型编码
+    float a[] = {1,2,3};
+    NSLog(@&quot;array encoding type:%s&quot;,@encode(typeof(a)));
+    
+    NSString *str = @&quot;你好&quot;;
+    NSLog(@&quot;string encoding type:%s&quot;,@encode(typeof(str)));
+
+    CGFloat ff = 2.0;
+    NSLog(@&quot;float encoding type:%s&quot;,@encode(typeof(ff)));
+    
+    //结果
+    array encoding type:[3f]
+    string encoding type:@
+    float encoding type:d
+</code></pre>
+
+<h2 id="toc_14">七：相关的API</h2>
+
+<p>将上述的实例对象，类对象，元类对象概念理解清楚后，理解实例变量，方法列表等信息。使用下列的相关API将易如反掌。</p>
+
+<h3 id="toc_15">类相关API</h3>
+
+<pre><code>const char * class_getName(Class cls);//取类名
+Class class_getSuperclass(Class cls);//取父类
+BOOL class_isMetaClass(Class cls);//是否是元类
+size_t class_getInstanceSize(Class cls);//获取实例变量的大小
+</code></pre>
+
+<h3 id="toc_16">成员变量相关API</h3>
+
+<pre><code>// 获取类中指定名称实例成员变量的信息
+Ivar class_getInstanceVariable ( Class cls, const char *name );
+// 获取类成员变量的信息
+Ivar class_getClassVariable ( Class cls, const char *name );
+// 添加成员变量
+BOOL class_addIvar ( Class cls, const char *name, size_t size, uint8_t alignment, const char *types );
+// 获取整个成员变量列表
+Ivar * class_copyIvarList ( Class cls, unsigned int *outCount );
+</code></pre>
+
+<ol>
+<li><p><strong>Objectice-c不支持往已经存在的类中添加实例变量。不管是系统提供的库，还是自己定义的类，都无法动态添加成员变量。（这里联想到了category的实现）</strong>但如果我们是通过运行时来创建一个类的话，在该类没注册前是可以添加实例变量的。且只能在objc_allocateClassPair函数与objc_registerClassPair之间调用。（This function may only be called after objc_allocateClassPair and before objc_registerClassPair.  Adding an instance variable to an existing class is not supported.）</p></li>
+<li><p>class_copyIvarList函数，它返回一个指向成员变量信息的数组，数组中每个元素是指向该成员变量信息的objc_ivar结构体的指针。这个数组不包含在父类中声明的变量（注意咯）。使用时，还要注意内存的释放。</p></li>
+</ol>
+
+<h3 id="toc_17">属性相关API</h3>
+
+<pre><code>// 获取指定的属性
+objc_property_t class_getProperty ( Class cls, const char *name );
+// 获取属性列表
+objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount );
+// 为类添加属性
+BOOL class_addProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );
+// 替换类的属性
+void class_replaceProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount )
+</code></pre>
+
+<h3 id="toc_18">Method相关API</h3>
+
+<pre><code>// 添加方法
+BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );
+// 获取实例方法
+Method class_getInstanceMethod ( Class cls, SEL name );
+// 获取类方法
+Method class_getClassMethod ( Class cls, SEL name );
+// 获取所有方法的数组
+Method * class_copyMethodList ( Class cls, unsigned int *outCount );
+// 替代方法的实现
+IMP class_replaceMethod ( Class cls, SEL name, IMP imp, const char *types );
+// 返回方法的具体实现
+IMP class_getMethodImplementation ( Class cls, SEL name );
+IMP class_getMethodImplementation_stret ( Class cls, SEL name );
+// 类实例是否响应指定的selector
+BOOL class_respondsToSelector ( Class cls, SEL sel );
+</code></pre>
+
+<p>class_addMethod的实现会覆盖父类方法的实现。如果已经存在一个同名的实现，则函数会返回NO。如果要修改已经存在的实现，可以使用method_setImplementation。一个Object-c方法是一个简单的C函数，它至少包含两个参数self,_cmd,所以我们在实现函数替换是或者交换时，要添加这两个参数</p>
+
+<pre><code>void myMethodIMP(id self, SEL _cmd)
+{
+    // implementation ....
+}
+</code></pre>
+
+<p>与成员变量不同的是，我们可以为类动态添加方法，不管这个类是否已存在。</p>
+
+<p>添加方法时，class_addMethod函数后面有一个类型编码。这个类型编码在基本概念里已经做了解释。</p>
+
+<h2 id="toc_19">八：API示例Demo</h2>
+
+<p>Demo源码<a href="https://github.com/raojunbo/iOSCoreConcept.git">RunTime相关实践</a></p>
+
+<h3 id="toc_20">下面是类的一些基本API使用示例</h3>
+
+<pre><code>  - (void)viewDidLoad {
+    [super viewDidLoad];
+    //与类相关的API
+    //获得类名
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    const char * resutl0 = class_getName([self class]);//获取类名
+    NSString *resutlStr = [NSString stringWithUTF8String:resutl0];
+    NSLog(@&quot;这是resultStr:%@&quot;,resutlStr);
+    
+    //获取父类
+    Class superClass = class_getSuperclass([self class]);
+    NSLog(@&quot;这是父类:%@&quot;,superClass);
+    
+    //获取变量大小
+    size_t classSize = class_getInstanceSize([self class]);
+    NSLog(@&quot;这是classSize:%zu&quot;,classSize);
+    
+    //是否是元类
+    if(class_isMetaClass([self class])){
+        NSLog(@&quot;self class 是元类&quot;);
+    }
+    
+    if( class_isMetaClass(superClass)){
+        NSLog(@&quot;superClass是元类&quot;);
+    };
+    
+    const char * className = object_getClassName([self class]);
+    Class metaClass = objc_getMetaClass(className);
+    if(class_isMetaClass(metaClass)){
+        NSLog(@&quot;是元类&quot;);
+    }
+   
+    //获取实例变量
+    const char * dataArrayIvarCstring = [@&quot;_dataArray&quot; UTF8String];
+    Ivar dataArrayIvar = class_getInstanceVariable([self class], dataArrayIvarCstring);
+    NSLog(@&quot;这是Ivar:%@&quot;, [NSString stringWithUTF8String:ivar_getName(dataArrayIvar)]);
+    
+    //获取属性(属性会自动生成实例变量)
+    const char * dataArrayPropertyCstring = [@&quot;dataArray&quot; UTF8String];
+    objc_property_t dataArrayPropertyr = class_getProperty([self class], dataArrayPropertyCstring);
+    NSLog(@&quot;这是property:%@&quot;, [NSString stringWithUTF8String:property_getName(dataArrayPropertyr)]);
+    
+    //通过SEL找到Method,并找到相应的实现
+    IMP doFuncMethodImp = class_getMethodImplementation([self class], @selector(doFunc));
+    doFuncMethodImp(self,@selector(doFunc));
+
+    //获取类方法
+    Method dofun2Method = class_getClassMethod([self class], @selector(dofunc2));
+    IMP dofun2MethodImp = method_getImplementation(dofun2Method);
+    dofun2MethodImp(self,@selector(dofun2Method));
+}
+</code></pre>
+
+<h3 id="toc_21">下面是动态添加类的实践</h3>
+
+<pre><code>#import &quot;Runtime3ViewController.h&quot;
+#import &lt;objc/runtime.h&gt;
+
+/*
+ 添加实例变量
+ 添加属性
+ 添加方法
+ 添加协议
+ */
+@interface Runtime3ViewController ()
+
+@property (nonatomic, strong) UIColor *property2;
+
+@end
+
+@implementation Runtime3ViewController {
+    NSArray *_property0;
+    NSArray *property1;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor  = [UIColor whiteColor];
+    
+    //动态创建类,从参数里可以看出,可以指定父列
+    Class CreatClass0 = objc_allocateClassPair([NSObject class], &quot;CreatedClass0&quot;, 0);
+    
+    //动态添加实例变量
+    class_addIvar(CreatClass0, &quot;_attribute0&quot;, sizeof(NSString *), log(sizeof(NSString *)), &quot;i&quot;);
+    Ivar ivar = class_getInstanceVariable(CreatClass0, &quot;_attribute0&quot;);
+    objc_registerClassPair(CreatClass0);
+    
+    //(添加实例变量后再动态添加属性
+    objc_property_attribute_t type2 = {&quot;T&quot;,&quot;@\&quot;NSString\&quot;&quot;};//T，属性类型
+    objc_property_attribute_t ownership2 = {&quot;C&quot;,&quot;&quot;};//C，属性的修饰符 copy
+    objc_property_attribute_t backingivar2 ={&quot;V&quot;,&quot;_attribute0&quot;};//V，属性对应的实例变量值
+    objc_property_attribute_t attrs2[] = { type2, ownership2, backingivar2 };//属性数组
+    class_addProperty(CreatClass0, &quot;_attribute0&quot;, attrs2, 3);//为一个类添加上面设置的属性
+    
+    SEL getter = NSSelectorFromString(@&quot;attribute0&quot;);
+    SEL setter= NSSelectorFromString(@&quot;setAttribute0:&quot;);
+    
+    //(添加属性后，再为属性添加get,set的方法，将SEL,与实现绑定,并添加到类里
+    BOOL suc0 = class_addMethod(CreatClass0, getter, (IMP)attribute0Getter, &quot;@@:&quot;);
+    BOOL suc1 = class_addMethod(CreatClass0, setter, (IMP)attribute0Setter, &quot;v@:@&quot;);
+    NSLog(@&quot;这是suc0:%@,suc1:%@&quot;,@(suc0),@(suc1));
+
+    //根据动态创建的类，创建对象
+    id idClass = [[CreatClass0 alloc]init];
+    
+    //执行动态创建的类的方法
+    [idClass performSelector:setter withObject:@&quot;你好&quot;];
+    NSLog(@&quot;这是被设置的:%@&quot;,[idClass performSelector:getter withObject:nil]);
+    
+    
+    //获取整理实例犯法
+    unsigned int copycopyMethodListCount = 0;
+    Method *methods = class_copyMethodList(CreatClass0, &amp;copycopyMethodListCount);
+    for (int i = 0; i&lt; copycopyMethodListCount; i++) {
+        Method tmpMethod = methods[i];
+        SEL tmpName = method_getName(tmpMethod);
+        NSLog(@&quot;这是所有函数的名字:%@&quot;, NSStringFromSelector(tmpName));
+    }
+    
+    //添加协议
+    class_addProtocol(CreatClass0,  NSProtocolFromString(@&quot;UITableViewDelegate&quot;));
+    
+}
+
+//get方法
+NSString *attribute0Getter(id classInstance, SEL _cmd) {
+    Ivar ivar = class_getInstanceVariable([classInstance class], &quot;_attribute0&quot;);//获取变量,如果没获取到说明不存在
+    return object_getIvar(classInstance, ivar);
+}
+
+//set方法
+void attribute0Setter(id classInstance, SEL _cmd, NSString *newName) {
+    Ivar ivar = class_getInstanceVariable([classInstance class], &quot;_attribute0&quot;);//获取变量,如果没获取到说明不存在
+    id oldName = object_getIvar(classInstance, ivar);
+    if (oldName != newName) object_setIvar(classInstance, ivar, [newName copy]);
+}
+
+</code></pre>
+
+<p>总结，其实理解了对象模型，在理解消息的发送机制，就理解了Rumtime。将在系列二里进行消息的发送机制的梳理。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/25</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html'>iOS基础概念</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="all_4.html">&laquo; Prev Page</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			 <a href="all_6.html">&raquo; Next Page</a> 
+			</p>
+			  </div>
+			</div>
 		</div>
-	
+	</div><!-- large 8 -->
 
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
- 
-	
-
-  
-
-  
-</div></div>
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>北哥传奇</h1>
+                <div class="site-des"></div>
+                <div class="social">
 
 
-<div class="page-bottom">
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="%E5%89%8D%E8%A8%80.html"><strong>前言</strong></a>
+        
+            <a href="%E7%AE%97%E6%B3%95.html"><strong>算法</strong></a>
+        
+            <a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html"><strong>iOS基础概念</strong></a>
+        
+            <a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html"><strong>iOS性能优化</strong></a>
+        
+            <a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html"><strong>iOS工具深入</strong></a>
+        
+            <a href="shell%E8%84%9A%E6%9C%AC.html"><strong>shell脚本</strong></a>
+        
+            <a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html"><strong>C语言捡漏</strong></a>
+        
+            <a href="Git%E5%B7%A5%E5%85%B7.html"><strong>Git工具</strong></a>
+        
+            <a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><strong>iOS架构设计</strong></a>
+        
+            <a href="Swift.html"><strong>Swift</strong></a>
+        
+            <a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html"><strong>设计模式</strong></a>
+        
+            <a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html"><strong>音视频技术</strong></a>
+        
+            <a href="%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E6%8A%95%E8%B5%84%E9%80%BB%E8%BE%91.html"><strong>证券市场投资逻辑</strong></a>
+        
+            <a href="%E8%8B%B1%E8%AF%AD%E8%83%BD%E5%8A%9B.html"><strong>英语能力</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15515878249617.html">威科夫中阶课程（六,七，八）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15515336874984.html">我为什么写作？</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15514275216080.html">敏捷开发流程实践</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15512048926912.html">设计模式系列（四）-- 行为型</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
   <div class="row">
-  <hr />
-  <div class="small-9 columns">
-  <p class="copyright">Copyright &copy; 2015
+   <p class="copyright">Copyright &copy; 2015
 Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
 Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
-  </div>
-  <div class="small-3 columns">
-  <p class="copyright text-right"><a href="#header">TOP</a></p>
-  </div>
-   
   </div>
 </div>
 
         </section>
       </div>
     </div>
+
+  
     
-    
+
     <script src="asset/js/foundation.min.js"></script>
-    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
     <script>
       $(document).foundation();
-
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
      
     </script>
+
     
+
 
 
   </body>

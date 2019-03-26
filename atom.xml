@@ -4,14 +4,13 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-03-25T10:24:18+08:00</updated>
+  <updated>2019-03-27T01:38:40+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im">MWeb</generator>
-
+  <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
     <title type="html"><![CDATA[iOS 基于CoreText题型渲染引擎主题讨论]]></title>
@@ -52,7 +51,7 @@
 <a href="#toc_8">1. CoreText的API</a>
 </li>
 <li>
-<a href="#toc_9">2. 需要解决的问题</a>
+<a href="#toc_9">2. 需要解决的主要问题</a>
 </li>
 </ul>
 </li>
@@ -71,7 +70,7 @@
 </ul>
 </li>
 <li>
-<a href="#toc_14">四：补充：YYText源码解析</a>
+<a href="#toc_14">四：YYText排版思路对比</a>
 <ul>
 <li>
 <a href="#toc_15">1. YYText基于CoreText排版部分的思路</a>
@@ -80,25 +79,27 @@
 <a href="#toc_16">2. 我们可以借鉴的地方？</a>
 </li>
 <li>
-<a href="#toc_17">3. 疑问，为什么不用YYText直接实现，能不能满足需求呢?</a>
+<a href="#toc_17">3. 疑问，为什么不用YYText直接实现题型渲染，能不能满足需求呢?</a>
 </li>
 </ul>
 </li>
 <li>
-<a href="#toc_18">五: 参考文档</a>
+<a href="#toc_18">五: 总结与参考文档</a>
 </li>
 </ul>
 
 
 <h2 id="toc_1">前言</h2>
 
-<p>本次分享的主题是关于CoreText的相关应用实践，并非是纯分享CoreTextAPI的使用。CoreText如何使用，网上很多相关文章，官方也有相应的开发文档，在这里我只是做简单的铺垫。本次分享的主要目的是将“文本排版”，“文本绘制”，“图片绘制”，“图文混排”等相关的知识点串联起来，形成体系。然后通过“题型渲染引擎”和“YYText”的相关实践，来系统化的思考未来开发中可能的解决方案。</p>
+<p>本次分享的主题是关于CoreText的相关应用实践，并非是纯分享CoreTextAPI的使用。CoreText如何使用，网上很多相关文章，官方也有相应的开发文档，在这里我只是做简单的铺垫。</p>
+
+<p>本次分享的主要目的是将“文本排版”，“文本绘制”，“图片绘制”，“图文混排”等相关的知识点串联起来，形成体系。然后通过“题型渲染引擎”和“YYText”的相关实践，来系统化的思考未来开发中关于排版可能的解决方案。</p>
 
 <h2 id="toc_2">一：排版的基础</h2>
 
 <h3 id="toc_3">1. UILabel，UITextField,UITextView,UIWebView的文本是如何排版并显示到屏幕上的？</h3>
 
-<p>我们平常使用最多的是UIKit里的<code>UILabel,UITextField,UITextView,UIWebView</code>,他们的文字处理是都基于CoreText对文字的处理。CoreText是对字符（带有字体，字形）的位置做排版，是将排版后的数据，即字形和位置，交给CoreGraphics进行绘制，绘制的结果是bitmap图,然后交由GPU渲染。</p>
+<p>我们平常使用最多的是UIKit里的<code>UILabel,UITextField,UITextView,UIWebView</code>,他们的文字排版是都基于CoreText这个核心库。CoreText是对富文本做排版，将排版后的数据，即字形和其位置，交给CoreGraphics进行绘制，绘制的结果是bitmap图,然后交由GPU渲染。</p>
 
 <p>下面是iOS7之后的UIKit文本处理的架构图如下</p>
 
@@ -121,36 +122,28 @@
 </ul>
 
 <p>我们平时设置<code>[UIFont fontWithSystem:]</code>方法时，就是在字体里找所应的字符的形状。</p></li>
-<li><p>字形描述集(Glyphs Metris)</p></li>
-</ol>
+<li><p>字形描述集(Glyphs Metris)</p>
 
 <p>那么字形本身用哪些属性来描述呢？如下面两幅图</p>
 
 <p><img src="media/15526311929031/glyphterms_2x.png" alt="glyphterms_2x" style="width:499px;"/><br/>
-【图片来自官方文档】<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/TypoFeatures/TextSystemFeatures.html#//apple_ref/doc/uid/TP40009542-CH6-64585">Text Programming Guide for iOS</a></p>
+【图片来自官方文档】<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/TypoFeatures/TextSystemFeatures.html#//apple_ref/doc/uid/TP40009542-CH6-64585">Text Programming Guide for iOS</a><br/>
+<img src="media/15526311929031/textpg_intro_2x.png" alt="textpg_intro_2x" style="width:657px;"/></p>
 
-<p><img src="media/15526311929031/textpg_intro_2x.png" alt="textpg_intro_2x" style="width:657px;"/></p>
-
-<p>【图片来自官方文档】<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Introduction/Introduction.html">Text Programming Guide for iOS</a></p>
-
-<p>字形描述<br/>
+<p>【图片来自官方文档】<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Introduction/Introduction.html">Text Programming Guide for iOS</a></p></li>
+<li><p>字形描述解释<br/>
 BaseLine：一条假想的参照线，以此为基础进行字形的布局<br/>
 Origin：基线上最左侧的点。<br/>
 Ascent：上行高度，字形的最高到baseline的高度<br/>
 Descent：下行高度，字形的最低到baseline的高度<br/>
 leading：行间距<br/>
-Bounding Box：一个假想的边框，尽可能地容纳整个字形</p>
-
-<p>通过下面的一张图可以检验是否理解了字形描述的属性<br/>
+Bounding Box：一个假想的边框，尽可能地容纳整个字形<br/>
+通过下面的一张图可以检验是否理解了字形描述的属性<br/>
 <img src="media/15526311929031/Xnip2019-03-23_15-34-29.png" alt="Xnip2019-03-23_15-34-29" style="width:395px;"/><br/>
-红色高度即为当前行高，绿线为baseline，绿色到红框上部分为当前行的最大Ascent，绿线到黄线为当前行的最大Desent，而黄框的高即为行间距。</p>
-
-<ol>
-<li>排版过程
-布局引擎要用字体把字符转换成字形，然后通过字体规格信息微调大小，用段落样式把字形放到它所该在的位置。</li>
+红色高度即为当前行高，绿线为baseline，绿色到红框上部分为当前行的最大Ascent，绿线到黄线为当前行的最大Desent，而黄框的高即为行间距。</p></li>
+<li><p>CoreTex对字形的处理过程<br/>
+布局引擎要用字体把字符转换成字形，然后通过字体规格信息微调大小，用段落样式把字形放到它所该在的位置。(暂时假设，字形是图片，那么，图片怎么显示到屏幕上的呢？)</p></li>
 </ol>
-
-<p>暂时假设，字形是图片，那么，图片怎么显示到屏幕上的呢？</p>
 
 <h3 id="toc_5">3. 图片是怎样从加载到显示的？</h3>
 
@@ -175,12 +168,12 @@ Bounding Box：一个假想的边框，尽可能地容纳整个字形</p>
 
 <ul>
 <li><p>UIWebView<br/>
-UIWebView的可以实现图片，文本的混合排版。整个的实现思路我猜测，是解析HTML文件，转换成富文本，然后用CoreText进行排版，然后将排版的结果绘制成位图图片，最后将图片放到视图CALayer的content上，由CoreAnimation交个RenderServer进行渲染。当然我说的这个流程是他的渲染一个简化的流程，苹果的实现还会对JS，网络等做处理，这就是一个比较大的话题了，不过也是一个非常有趣的主题。</p></li>
+UIWebView的可以实现图片，文本的混合排版。整个的实现思路我猜测，是解析HTML文件，转换成富文本，然后用CoreText进行排版，然后将排版的结果绘制成位图图片，最后将图片放到视图CALayer的content上，由CoreAnimation交个RenderServer进行渲染。当然我说的这个流程是他的渲染一个简化的流程，苹果的实现还会对JS，网络等做处理，这就是一个比较大的话题了，不过也是一个非常有趣的主题。虽然UIWebView就能满足我们的需求，当考虑到H5加载速度慢，占内存，交换缓慢，绘制在主线程这些缺陷，影响用户体验。</p></li>
 <li><p>UITextView<br/>
 UITextView的实现，也是基于TextKit实现，TextKit是对CoreText的一个封装。其实我们自己也可以通过CoreText来实现我们自己的TextView。YYText就是一个典范，我们在最后会谈谈YYText的源码。</p></li>
 </ul>
 
-<p>现在我们知道了文字如何排版，图片如何显示，也知道了UIWebView,UITextView等的文本，图文混排都是是基于CoreText的。那么我们怎么去实现<strong>文，图，输入框，其他自定义元素</strong>的混合排版呢？（虽然UIWebView就能满足我们的需求，当考虑到H5加载速度慢，占内存，交换缓慢，绘制在主线程这些缺陷。）</p>
+<p>现在我们知道了文字如何排版，图片如何显示，也知道了UIWebView,UITextView等的文本，图文混排都是基于CoreText的。那么我们怎么去实现<strong>文，图，输入框，其他自定义元素</strong>的混合排版呢？</p>
 
 <p>下面我们看看CoreText的细节，看能不能从中找到实现的关键手段。</p>
 
@@ -191,11 +184,11 @@ UITextView的实现，也是基于TextKit实现，TextKit是对CoreText的一个
 <p>参见<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005533">Core Text Programming Guide</a></p>
 
 <p>主要类介绍<br/>
-CTFramesetter,排版器<br/>
-CTFrame,排版结果，我们操作绝大部分都是对里卖弄line,run，delegate做操作<br/>
-CTLine,CTFrame里的代表一行<br/>
-CTRun,CTFrame里带表相同属性的片段<br/>
-CTRunDelegate,字符代理，供设置字形的一些属性。（哈哈，这里是不是跟我们前面一开始聊排版的字形相联系起来了，对的，这个代理就是供设置哪些字形的属性，当然前提是要那个属性可以被设置，查看好像只有Ascent,Descent,width提供代理callBack）</p>
+CTFramesetter：排版器<br/>
+CTFrame：排版结果，我们操作绝大部分都是对里面的line,run，delegate做操作<br/>
+CTLine：CTFrame里的代表一行<br/>
+CTRun：CTFrame里带表相同属性的片段<br/>
+CTRunDelegate：字符代理，供设置字形的一些属性。（哈哈，这里是不是跟我们前面一开始聊排版的字形相联系起来了，对的，这个代理就是供设置哪些字形的属性，当然前提是要那个属性可以被设置，查看好像只有Ascent,Descent,width提供代理callBack）</p>
 
 <p>CoreText关键元素结构图如下</p>
 
@@ -206,6 +199,10 @@ CTRunDelegate,字符代理，供设置字形的一些属性。（哈哈，这里
 <p>排版流程图如下</p>
 
 <p><img src="media/15526311929031/%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B.jpg" alt="绘制流程"/></p>
+
+<blockquote>
+<p>总结下：CoreText整个的输入是富文本，输出是CTFrame。所以在将文本进行排版的前提是将排版的元素转换成富文本，特殊元素用特殊字符代替，计算好位置后在特殊元素放在特殊字符的位置就可以了,CTFrame绘制到指定的图片尚上下文（可以是在主线程，也可以是在子线程绘制）。</p>
+</blockquote>
 
 <ul>
 <li><p>生成对<strong>指定富文本</strong>的排版器CTFramesetter</p>
@@ -228,10 +225,6 @@ CGContextScaleCTM(context, 1, -1);
 CTFrameDraw(self.richTextData.frameRef, context);
 </code></pre></li>
 </ul>
-
-<blockquote>
-<p>总结下：CoreText整个的输入是富文本，输出是CTFrame。所以在将文本进行排版的前提是将排版的元素转换成富文本，特殊元素用特殊字符代替，计算好位置后在特殊元素放在特殊字符的位置就可以了,CTFrame绘制到指定的图片尚上下文（可以是在主线程，也可以是在子线程绘制）。</p>
-</blockquote>
 
 <p>以下是部分核心代码</p>
 
@@ -330,14 +323,11 @@ CTFrameDraw(self.richTextData.frameRef, context);
 }
 </code></pre>
 
-<h3 id="toc_9">2. 需要解决的问题</h3>
+<h3 id="toc_9">2. 需要解决的主要问题</h3>
 
-<p>网络上对CoreText的API的具体说明已经很多了，在此不在用代码快占用大量篇幅。<br/>
-下面我只是将要面临的问题的思路简单说明下，想一探究竟的可以参考我的一个在GitHub上的CoreText开源示例的<a href="https://github.com/raojunbo/iOSCoreConcept.git">CoreTextDemo</a>，或者参考唐巧老师的<a href="http://blog.devtang.com/2015/06/27/using-coretext-1/">基于CoreText的排版引擎</a>代码里有对这些问题的实现。</p>
+<p>下面我只是将要面临的问题的思路简单说明下，想一探究竟的可以参考我的一个在GitHub上的CoreText开源示例的<a href="https://github.com/raojunbo/iOSCoreConcept.git">CoreTextDemo</a>，或者参考唐巧老师的<a href="http://blog.devtang.com/2015/06/27/using-coretext-1/">基于CoreText的排版引擎</a>代码里有对这些问题的实现。</p>
 
 <ul>
-<li><p>换行<br/>
-CoreText的排版器，会自动换行</p></li>
 <li><p>坐标转换<br/>
 UIKit的原点与CoreText的坐标原点不一样。需要做坐标转换。</p></li>
 <li><p>特殊元素（图片，自定义的view等）<br/>
@@ -433,11 +423,11 @@ kTemplateRenderModeEditUserAnswer, //编辑模式下填充用户答案
 
 <ol>
 <li>异步绘制优化性能？</li>
-<li>TemplateEngin里的数据解析应该与排版相分离 </li>
+<li>TemplateEngin里的数据解析应该与排版相分离。也就是引擎里实现分层并不是很清晰</li>
 </ol></li>
 </ul>
 
-<h2 id="toc_14">四：补充：YYText源码解析</h2>
+<h2 id="toc_14">四：YYText排版思路对比</h2>
 
 <h3 id="toc_15">1. YYText基于CoreText排版部分的思路</h3>
 
@@ -445,16 +435,182 @@ kTemplateRenderModeEditUserAnswer, //编辑模式下填充用户答案
 
 <h3 id="toc_16">2. 我们可以借鉴的地方？</h3>
 
-<p>YYLabel提供异步布局与绘制功能</p>
+<ol>
+<li>异步绘制</li>
+</ol>
 
-<h3 id="toc_17">3. 疑问，为什么不用YYText直接实现，能不能满足需求呢?</h3>
+<p>YYLabel提供异步绘制功能通过一个异步绘制层YYTextAsyncLayer，将绘制的任务在子线程操作。绘制完成后后回调给YYLabel，在将特色元素放在指定的位置。</p>
+
+<p>以下是YYLabel里的异步绘制任务调用</p>
+
+<pre><code>- (YYTextAsyncLayerDisplayTask *)newAsyncDisplayTask {
+    
+    // capture current context
+    BOOL contentsNeedFade = _state.contentsNeedFade;
+    NSAttributedString *text = _innerText;
+    YYTextContainer *container = _innerContainer;
+    YYTextVerticalAlignment verticalAlignment = _textVerticalAlignment;
+    YYTextDebugOption *debug = _debugOption;
+    NSMutableArray *attachmentViews = _attachmentViews;
+    NSMutableArray *attachmentLayers = _attachmentLayers;
+    BOOL layoutNeedUpdate = _state.layoutNeedUpdate;
+    BOOL fadeForAsync = _displaysAsynchronously &amp;&amp; _fadeOnAsynchronouslyDisplay;
+    __block YYTextLayout *layout = (_state.showingHighlight &amp;&amp; _highlightLayout) ? self._highlightLayout : self._innerLayout;
+    __block YYTextLayout *shrinkLayout = nil;
+    __block BOOL layoutUpdated = NO;
+    if (layoutNeedUpdate) {
+        text = text.copy;
+        container = container.copy;
+    }
+    
+    // create display task
+    YYTextAsyncLayerDisplayTask *task = [YYTextAsyncLayerDisplayTask new];
+    
+    task.willDisplay = ^(CALayer *layer) {
+        [layer removeAnimationForKey:@&quot;contents&quot;];
+        
+        // If the attachment is not in new layout, or we don&#39;t know the new layout currently,
+        // the attachment should be removed.
+        for (UIView *view in attachmentViews) {
+            if (layoutNeedUpdate || ![layout.attachmentContentsSet containsObject:view]) {
+                if (view.superview == self) {
+                    [view removeFromSuperview];
+                }
+            }
+        }
+        for (CALayer *layer in attachmentLayers) {
+            if (layoutNeedUpdate || ![layout.attachmentContentsSet containsObject:layer]) {
+                if (layer.superlayer == self.layer) {
+                    [layer removeFromSuperlayer];
+                }
+            }
+        }
+        [attachmentViews removeAllObjects];
+        [attachmentLayers removeAllObjects];
+    };
+
+    task.display = ^(CGContextRef context, CGSize size, BOOL (^isCancelled)(void)) {
+        if (isCancelled()) return;
+        if (text.length == 0) return;
+        
+        YYTextLayout *drawLayout = layout;
+        if (layoutNeedUpdate) {
+            layout = [YYTextLayout layoutWithContainer:container text:text];
+            shrinkLayout = [YYLabel _shrinkLayoutWithLayout:layout];
+            if (isCancelled()) return;
+            layoutUpdated = YES;
+            drawLayout = shrinkLayout ? shrinkLayout : layout;
+        }
+        
+        CGSize boundingSize = drawLayout.textBoundingSize;
+        CGPoint point = CGPointZero;
+        if (verticalAlignment == YYTextVerticalAlignmentCenter) {
+            if (drawLayout.container.isVerticalForm) {
+                point.x = -(size.width - boundingSize.width) * 0.5;
+            } else {
+                point.y = (size.height - boundingSize.height) * 0.5;
+            }
+        } else if (verticalAlignment == YYTextVerticalAlignmentBottom) {
+            if (drawLayout.container.isVerticalForm) {
+                point.x = -(size.width - boundingSize.width);
+            } else {
+                point.y = (size.height - boundingSize.height);
+            }
+        }
+        point = YYTextCGPointPixelRound(point);
+        [drawLayout drawInContext:context size:size point:point view:nil layer:nil debug:debug cancel:isCancelled];
+    };
+
+    task.didDisplay = ^(CALayer *layer, BOOL finished) {
+        YYTextLayout *drawLayout = layout;
+        if (layoutUpdated &amp;&amp; shrinkLayout) {
+            drawLayout = shrinkLayout;
+        }
+        if (!finished) {
+            // If the display task is cancelled, we should clear the attachments.
+            for (YYTextAttachment *a in drawLayout.attachments) {
+                if ([a.content isKindOfClass:[UIView class]]) {
+                    if (((UIView *)a.content).superview == layer.delegate) {
+                        [((UIView *)a.content) removeFromSuperview];
+                    }
+                } else if ([a.content isKindOfClass:[CALayer class]]) {
+                    if (((CALayer *)a.content).superlayer == layer) {
+                        [((CALayer *)a.content) removeFromSuperlayer];
+                    }
+                }
+            }
+            return;
+        }
+        [layer removeAnimationForKey:@&quot;contents&quot;];
+        
+        __strong YYLabel *view = (YYLabel *)layer.delegate;
+        if (!view) return;
+        if (view-&gt;_state.layoutNeedUpdate &amp;&amp; layoutUpdated) {
+            view-&gt;_innerLayout = layout;
+            view-&gt;_shrinkInnerLayout = shrinkLayout;
+            view-&gt;_state.layoutNeedUpdate = NO;
+        }
+        
+        CGSize size = layer.bounds.size;
+        CGSize boundingSize = drawLayout.textBoundingSize;
+        CGPoint point = CGPointZero;
+        if (verticalAlignment == YYTextVerticalAlignmentCenter) {
+            if (drawLayout.container.isVerticalForm) {
+                point.x = -(size.width - boundingSize.width) * 0.5;
+            } else {
+                point.y = (size.height - boundingSize.height) * 0.5;
+            }
+        } else if (verticalAlignment == YYTextVerticalAlignmentBottom) {
+            if (drawLayout.container.isVerticalForm) {
+                point.x = -(size.width - boundingSize.width);
+            } else {
+                point.y = (size.height - boundingSize.height);
+            }
+        }
+        point = YYTextCGPointPixelRound(point);
+        [drawLayout drawInContext:nil size:size point:point view:view layer:layer debug:nil cancel:NULL];
+        for (YYTextAttachment *a in drawLayout.attachments) {
+            if ([a.content isKindOfClass:[UIView class]]) [attachmentViews addObject:a.content];
+            else if ([a.content isKindOfClass:[CALayer class]]) [attachmentLayers addObject:a.content];
+        }
+        
+        if (contentsNeedFade) {
+            CATransition *transition = [CATransition animation];
+            transition.duration = kHighlightFadeDuration;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            transition.type = kCATransitionFade;
+            [layer addAnimation:transition forKey:@&quot;contents&quot;];
+        } else if (fadeForAsync) {
+            CATransition *transition = [CATransition animation];
+            transition.duration = kAsyncFadeDuration;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            transition.type = kCATransitionFade;
+            [layer addAnimation:transition forKey:@&quot;contents&quot;];
+        }
+    };
+    
+    return task;
+}
+</code></pre>
+
+<ol>
+<li>将排版后数据抽象成YYTextLayout
+将排版结构信息包装，方便处理。</li>
+</ol>
+
+<h3 id="toc_17">3. 疑问，为什么不用YYText直接实现题型渲染，能不能满足需求呢?</h3>
 
 <p>题型渲染引擎包括的内容有题型的解析，排版，绘制。YYText包括了排版，绘制，所以题型解析的工作是逃不开的。而YYText是并不是专门做排版的，而是掺杂了TextView,label的特性的库。在一些支持一些特殊的排版问题时，是否能很好的支持，对于项目方的我们是存在很大的不确定性的。排版的机制并不是很难，我们自己做排版，虽然麻烦了点，但能掌握主动权，适应未来的需求。</p>
 
-<h2 id="toc_18">五: 参考文档</h2>
+<h2 id="toc_18">五: 总结与参考文档</h2>
 
-<p><a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/TypoFeatures/TextSystemFeatures.html#//apple_ref/doc/uid/TP40009542-CH6-64585">Text Programming Guide for iOS</a><br/>
+<p>本篇文章主要探讨的是，基于CoreText排版库的应用实践。总体的流程是将富文本在指定的路径或者范围进行排版。对于自定的view或者其他元素，可以预先设置占符号，给定大小，排版完成后将view放在制定的位置即可。对于优化方面，有图片渲染后的内存缓存，异步绘制等。深入了解了文字如何排版，文字如何显示，图片如何显示，相信你对于UI布局，渲染性能方面的理解会提高一个很高的层次。</p>
+
+<p>参考文档<br/>
+<a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/TypoFeatures/TextSystemFeatures.html#//apple_ref/doc/uid/TP40009542-CH6-64585">Text Programming Guide for iOS</a><br/>
 <a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005533">Core Text Programming Guide</a><br/>
+<a href="https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/Introduction/Introduction.html#//apple_ref/doc/uid/TP30001066">Quartz 2D Programming Guide</a><br/>
+<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514">Core Animation Programming Guide</a><br/>
 <a href="http://blog.leichunfeng.com/blog/2017/02/20/talking-about-the-decompression-of-the-image-in-ios/">谈谈 iOS 中图片的解压缩</a><br/>
 <a href="https://segmentfault.com/a/1190000004164291">iOS 视图、动画渲染机制探究</a></p>
 
