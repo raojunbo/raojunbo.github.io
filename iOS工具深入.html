@@ -8,17 +8,23 @@
   iOS工具深入 - 北哥传奇
   
   </title>
- <meta name="description" content="">
- <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
+  
+  
+  <link href="atom.xml" rel="alternate" title="北哥传奇" type="application/atom+xml">
     <link rel="stylesheet" href="asset/css/foundation.min.css" />
     <link rel="stylesheet" href="asset/css/docs.css" />
-
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-    <script src="asset/highlightjs/highlight.pack.js"></script>
-    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <script>hljs.initHighlightingOnLoad();</script>
-    
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:raojunbo.github.io ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
   </head>
   <body class="antialiased hide-extras">
     
@@ -28,11 +34,32 @@
 
 <nav class="top-bar docs-bar hide-for-small" data-topbar>
 
-<div id="header">
-    <h1><a href="index.html">北哥传奇</a></h1>
-</div>
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
 
 </nav>
+
         <nav class="tab-bar show-for-small">
   <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
     <span> &nbsp; 北哥传奇</span>
@@ -41,465 +68,72 @@
 
 <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-      <li><a href="index.html">Home</a></li>
-      
-        <li class="divider"></li>
-        <li><label>前言</label></li>
+        
+        <li><a target="self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
 
-          
-            <li><a title="我为什么写作？" href="15515336874984.html">我为什么写作？</a></li>
-          
-            <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-          
+    <li><label>Categories</label></li>
 
-      
-        <li class="divider"></li>
-        <li><label>算法</label></li>
+        
+            <li><a href="%E5%89%8D%E8%A8%80.html">前言</a></li>
+        
+            <li><a href="%E7%AE%97%E6%B3%95.html">算法</a></li>
+        
+            <li><a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">iOS基础概念</a></li>
+        
+            <li><a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html">iOS性能优化</a></li>
+        
+            <li><a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html">iOS工具深入</a></li>
+        
+            <li><a href="shell%E8%84%9A%E6%9C%AC.html">shell脚本</a></li>
+        
+            <li><a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html">C语言捡漏</a></li>
+        
+            <li><a href="Git%E5%B7%A5%E5%85%B7.html">Git工具</a></li>
+        
+            <li><a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">iOS架构设计</a></li>
+        
+            <li><a href="Swift.html">Swift</a></li>
+        
+            <li><a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">设计模式</a></li>
+        
+            <li><a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html">音视频技术</a></li>
+        
+            <li><a href="%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E6%8A%95%E8%B5%84%E9%80%BB%E8%BE%91.html">证券市场投资逻辑</a></li>
+        
+            <li><a href="%E8%8B%B1%E8%AF%AD%E8%83%BD%E5%8A%9B.html">英语能力</a></li>
+         
 
-          
-            <li><a title="数据结构与算法之美(专栏)" href="15453886088422.html">数据结构与算法之美(专栏)</a></li>
-          
-            <li><a title="OFFER 第2章 基础知识" href="15383938776397.html">OFFER 第2章 基础知识</a></li>
-          
-            <li><a title="OFFER 第6章" href="15381309314963.html">OFFER 第6章</a></li>
-          
-            <li><a title="OFFER 第4章 解决问题的思路与方法" href="15381303838316.html">OFFER 第4章 解决问题的思路与方法</a></li>
-          
-            <li><a title="OFFER 第5章 优化时间效率与空间效率" href="15380441185875.html">OFFER 第5章 优化时间效率与空间效率</a></li>
-          
-            <li><a title="OFFER 第3章 高质量的代码" href="15379486241928.html">OFFER 第3章 高质量的代码</a></li>
-          
-            <li><a title="OFFER" href="15372661258374.html">OFFER</a></li>
-          
-            <li><a title="《算法图解》" href="15371495937899.html">《算法图解》</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS基础概念</label></li>
-
-          
-            <li><a title="GCD源码核心概念" href="15462987177847.html">GCD源码核心概念</a></li>
-          
-            <li><a title="iOS UI视图相关深入" href="15459973166637.html">iOS UI视图相关深入</a></li>
-          
-            <li><a title="GCD" href="15364733386397.html">GCD</a></li>
-          
-            <li><a title="Runtime系列二 消息机制" href="15358111534341.html">Runtime系列二 消息机制</a></li>
-          
-            <li><a title="Runtime系列一 Objective-C对象模型" href="15351908674819.html">Runtime系列一 Objective-C对象模型</a></li>
-          
-            <li><a title="HTTP/HTTPS协议" href="15349190375007.html">HTTP/HTTPS协议</a></li>
-          
-            <li><a title="深入理解Object-C的Category" href="15346751968513.html">深入理解Object-C的Category</a></li>
-          
-            <li><a title="RunLoop思考与总结" href="15346749374335.html">RunLoop思考与总结</a></li>
-          
-            <li><a title="KVO-KVC" href="15346747750773.html">KVO-KVC</a></li>
-          
-            <li><a title="iOS内存管理" href="15346744072286.html">iOS内存管理</a></li>
-          
-            <li><a title="Block" href="15346720571289.html">Block</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS性能优化</label></li>
-
-          
-            <li><a title="iOS 基于CoreText题型渲染引擎主题讨论" href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a></li>
-          
-            <li><a title="Xcode里的Instruments的应用" href="15454940280965.html">Xcode里的Instruments的应用</a></li>
-          
-            <li><a title="xcode项目编译过程" href="15378464323310.html">xcode项目编译过程</a></li>
-          
-            <li><a title="iOS如何将像素显示到屏幕" href="15362957172406.html">iOS如何将像素显示到屏幕</a></li>
-          
-            <li><a title="iOS保持界面流畅的技巧（性能优化）" href="15351910189854.html">iOS保持界面流畅的技巧（性能优化）</a></li>
-          
-            <li><a title="组件化系列（一） 组件化原理及方案" href="15351909215000.html">组件化系列（一） 组件化原理及方案</a></li>
-          
-            <li><a title="iOS APP启动如何优化" href="15346749892115.html">iOS APP启动如何优化</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS工具深入</label></li>
-
-          
-            <li><a title="敏捷开发流程实践" href="15514275216080.html">敏捷开发流程实践</a></li>
-          
-            <li><a title="利用Cocoapods构建自己的私有与公有库" href="15361293454277.html">利用Cocoapods构建自己的私有与公有库</a></li>
-          
-            <li><a title="Cocoapods入门" href="15360720067630.html">Cocoapods入门</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>shell脚本</label></li>
-
-          
-            <li><a title="shell脚本知识梳理（八）文本处理" href="15443591203562.html">shell脚本知识梳理（八）文本处理</a></li>
-          
-            <li><a title="shell脚本知识梳理 （六）函数" href="15443590303184.html">shell脚本知识梳理 （六）函数</a></li>
-          
-            <li><a title="shell脚本知识梳理（零）linux 基础命令" href="15443316930228.html">shell脚本知识梳理（零）linux 基础命令</a></li>
-          
-            <li><a title="shell脚本知识梳理（七）SQL应用处理" href="15442673526076.html">shell脚本知识梳理（七）SQL应用处理</a></li>
-          
-            <li><a title="shell脚本知识梳理（五）输出" href="15441102869614.html">shell脚本知识梳理（五）输出</a></li>
-          
-            <li><a title="shell脚本知识梳理（三） 流程控制" href="15440981221870.html">shell脚本知识梳理（三） 流程控制</a></li>
-          
-            <li><a title="shell脚本知识梳理（二）test命令的条件" href="15440910992060.html">shell脚本知识梳理（二）test命令的条件</a></li>
-          
-            <li><a title="shell脚本知识梳理（四）输入" href="15440719029358.html">shell脚本知识梳理（四）输入</a></li>
-          
-            <li><a title="shell脚本知识梳理（一）之变量" href="15426405220672.html">shell脚本知识梳理（一）之变量</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>C语言捡漏</label></li>
-
-          
-            <li><a title="C语言拾遗" href="15444947240000.html">C语言拾遗</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>Git工具</label></li>
-
-          
-            <li><a title="Git 拾遗" href="15453592839286.html">Git 拾遗</a></li>
-          
-            <li><a title="rebase" href="15353730636847.html">rebase</a></li>
-          
-            <li><a title="详解Git里的Rebase操作" href="15352828379687.html">详解Git里的Rebase操作</a></li>
-          
-            <li><a title="深入理解Git" href="15352517950877.html">深入理解Git</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>iOS架构设计</label></li>
-
-          
-            <li><a title="讨论架构时是在说什么" href="15458865236455.html">讨论架构时是在说什么</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>Swift</label></li>
-
-          
-            <li><a title="Swift梳理" href="15512046578708.html">Swift梳理</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>设计模式</label></li>
-
-          
-            <li><a title="设计模式系列（四）-- 行为型" href="15512048926912.html">设计模式系列（四）-- 行为型</a></li>
-          
-            <li><a title="设计模式系列（三）-- 结构型" href="15512048797799.html">设计模式系列（三）-- 结构型</a></li>
-          
-            <li><a title="设计模式系列（二）--创建型设计模式" href="15512048653711.html">设计模式系列（二）--创建型设计模式</a></li>
-          
-            <li><a title="设计模式系列（一）设计模式概要" href="15512048416439.html">设计模式系列（一）设计模式概要</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>音视频技术</label></li>
-
-          
-            <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-          
-            <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-          
-            <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-          
-            <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-          
-            <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-          
-            <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-          
-            <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-          
-            <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-          
-            <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>证券市场投资逻辑</label></li>
-
-          
-            <li><a title="威科夫中阶课程（六,七，八）" href="15515878249617.html">威科夫中阶课程（六,七，八）</a></li>
-          
-            <li><a title="威科夫中阶课程（五）" href="15509867976030.html">威科夫中阶课程（五）</a></li>
-          
-            <li><a title="威科夫中阶课程（四）" href="15507609402868.html">威科夫中阶课程（四）</a></li>
-          
-            <li><a title="威科夫中阶课程（三）" href="15503292008544.html">威科夫中阶课程（三）</a></li>
-          
-            <li><a title="威科夫中阶课程（二）" href="15486866737545.html">威科夫中阶课程（二）</a></li>
-          
-            <li><a title="威科夫中阶课程(一)" href="15486697437875.html">威科夫中阶课程(一)</a></li>
-          
-            <li><a title="读《韭菜的自我修养》" href="15370049486631.html">读《韭菜的自我修养》</a></li>
-          
-
-      
-        <li class="divider"></li>
-        <li><label>英语能力</label></li>
-
-          
-            <li><a title="英语语法梳理【总结】" href="15423493216966.html">英语语法梳理【总结】</a></li>
-          
-
-      
       </ul>
     </aside>
 
 <a class="exit-off-canvas" href="#"></a>
 
+
         <section id="main-content" role="main" class="scroll-container">
+        
+       
 
-          <div class="row">
-            <div class="large-3 medium-3 columns">
-              <div class="hide-for-small">
-                <div class="sidebar">
-
-                <nav>
-                  <ul id="side-nav" class="side-nav">
-
-                    
-                      <li class="side-title"><span>前言</span></li>
-                        
-                          <li><a title="我为什么写作？" href="15515336874984.html">我为什么写作？</a></li>
-                        
-                          <li><a title="开始自己的博客啦" href="15346723413820.html">开始自己的博客啦</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>算法</span></li>
-                        
-                          <li><a title="数据结构与算法之美(专栏)" href="15453886088422.html">数据结构与算法之美(专栏)</a></li>
-                        
-                          <li><a title="OFFER 第2章 基础知识" href="15383938776397.html">OFFER 第2章 基础知识</a></li>
-                        
-                          <li><a title="OFFER 第6章" href="15381309314963.html">OFFER 第6章</a></li>
-                        
-                          <li><a title="OFFER 第4章 解决问题的思路与方法" href="15381303838316.html">OFFER 第4章 解决问题的思路与方法</a></li>
-                        
-                          <li><a title="OFFER 第5章 优化时间效率与空间效率" href="15380441185875.html">OFFER 第5章 优化时间效率与空间效率</a></li>
-                        
-                          <li><a title="OFFER 第3章 高质量的代码" href="15379486241928.html">OFFER 第3章 高质量的代码</a></li>
-                        
-                          <li><a title="OFFER" href="15372661258374.html">OFFER</a></li>
-                        
-                          <li><a title="《算法图解》" href="15371495937899.html">《算法图解》</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS基础概念</span></li>
-                        
-                          <li><a title="GCD源码核心概念" href="15462987177847.html">GCD源码核心概念</a></li>
-                        
-                          <li><a title="iOS UI视图相关深入" href="15459973166637.html">iOS UI视图相关深入</a></li>
-                        
-                          <li><a title="GCD" href="15364733386397.html">GCD</a></li>
-                        
-                          <li><a title="Runtime系列二 消息机制" href="15358111534341.html">Runtime系列二 消息机制</a></li>
-                        
-                          <li><a title="Runtime系列一 Objective-C对象模型" href="15351908674819.html">Runtime系列一 Objective-C对象模型</a></li>
-                        
-                          <li><a title="HTTP/HTTPS协议" href="15349190375007.html">HTTP/HTTPS协议</a></li>
-                        
-                          <li><a title="深入理解Object-C的Category" href="15346751968513.html">深入理解Object-C的Category</a></li>
-                        
-                          <li><a title="RunLoop思考与总结" href="15346749374335.html">RunLoop思考与总结</a></li>
-                        
-                          <li><a title="KVO-KVC" href="15346747750773.html">KVO-KVC</a></li>
-                        
-                          <li><a title="iOS内存管理" href="15346744072286.html">iOS内存管理</a></li>
-                        
-                          <li><a title="Block" href="15346720571289.html">Block</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS性能优化</span></li>
-                        
-                          <li><a title="iOS 基于CoreText题型渲染引擎主题讨论" href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a></li>
-                        
-                          <li><a title="Xcode里的Instruments的应用" href="15454940280965.html">Xcode里的Instruments的应用</a></li>
-                        
-                          <li><a title="xcode项目编译过程" href="15378464323310.html">xcode项目编译过程</a></li>
-                        
-                          <li><a title="iOS如何将像素显示到屏幕" href="15362957172406.html">iOS如何将像素显示到屏幕</a></li>
-                        
-                          <li><a title="iOS保持界面流畅的技巧（性能优化）" href="15351910189854.html">iOS保持界面流畅的技巧（性能优化）</a></li>
-                        
-                          <li><a title="组件化系列（一） 组件化原理及方案" href="15351909215000.html">组件化系列（一） 组件化原理及方案</a></li>
-                        
-                          <li><a title="iOS APP启动如何优化" href="15346749892115.html">iOS APP启动如何优化</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS工具深入</span></li>
-                        
-                          <li><a title="敏捷开发流程实践" href="15514275216080.html">敏捷开发流程实践</a></li>
-                        
-                          <li><a title="利用Cocoapods构建自己的私有与公有库" href="15361293454277.html">利用Cocoapods构建自己的私有与公有库</a></li>
-                        
-                          <li><a title="Cocoapods入门" href="15360720067630.html">Cocoapods入门</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>shell脚本</span></li>
-                        
-                          <li><a title="shell脚本知识梳理（八）文本处理" href="15443591203562.html">shell脚本知识梳理（八）文本处理</a></li>
-                        
-                          <li><a title="shell脚本知识梳理 （六）函数" href="15443590303184.html">shell脚本知识梳理 （六）函数</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（零）linux 基础命令" href="15443316930228.html">shell脚本知识梳理（零）linux 基础命令</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（七）SQL应用处理" href="15442673526076.html">shell脚本知识梳理（七）SQL应用处理</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（五）输出" href="15441102869614.html">shell脚本知识梳理（五）输出</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（三） 流程控制" href="15440981221870.html">shell脚本知识梳理（三） 流程控制</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（二）test命令的条件" href="15440910992060.html">shell脚本知识梳理（二）test命令的条件</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（四）输入" href="15440719029358.html">shell脚本知识梳理（四）输入</a></li>
-                        
-                          <li><a title="shell脚本知识梳理（一）之变量" href="15426405220672.html">shell脚本知识梳理（一）之变量</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>C语言捡漏</span></li>
-                        
-                          <li><a title="C语言拾遗" href="15444947240000.html">C语言拾遗</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>Git工具</span></li>
-                        
-                          <li><a title="Git 拾遗" href="15453592839286.html">Git 拾遗</a></li>
-                        
-                          <li><a title="rebase" href="15353730636847.html">rebase</a></li>
-                        
-                          <li><a title="详解Git里的Rebase操作" href="15352828379687.html">详解Git里的Rebase操作</a></li>
-                        
-                          <li><a title="深入理解Git" href="15352517950877.html">深入理解Git</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>iOS架构设计</span></li>
-                        
-                          <li><a title="讨论架构时是在说什么" href="15458865236455.html">讨论架构时是在说什么</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>Swift</span></li>
-                        
-                          <li><a title="Swift梳理" href="15512046578708.html">Swift梳理</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>设计模式</span></li>
-                        
-                          <li><a title="设计模式系列（四）-- 行为型" href="15512048926912.html">设计模式系列（四）-- 行为型</a></li>
-                        
-                          <li><a title="设计模式系列（三）-- 结构型" href="15512048797799.html">设计模式系列（三）-- 结构型</a></li>
-                        
-                          <li><a title="设计模式系列（二）--创建型设计模式" href="15512048653711.html">设计模式系列（二）--创建型设计模式</a></li>
-                        
-                          <li><a title="设计模式系列（一）设计模式概要" href="15512048416439.html">设计模式系列（一）设计模式概要</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>音视频技术</span></li>
-                        
-                          <li><a title="基础实践系列之编译成iOS可用的.a静态库" href="15429406911904.html">基础实践系列之编译成iOS可用的.a静态库</a></li>
-                        
-                          <li><a title="FFMPEG视音频基础探索-命令行(系列一)" href="15427812231625.html">FFMPEG视音频基础探索-命令行(系列一)</a></li>
-                        
-                          <li><a title="UDP-RTP协议解析（基础系列六）" href="15427692957422.html">UDP-RTP协议解析（基础系列六）</a></li>
-                        
-                          <li><a title="FLV封装格式解析（基础系列五）" href="15427076070232.html">FLV封装格式解析（基础系列五）</a></li>
-                        
-                          <li><a title="AAC音频码流解析（基础系列四）" href="15427004394453.html">AAC音频码流解析（基础系列四）</a></li>
-                        
-                          <li><a title="H.264视频码流解析（基础系列三）" href="15426950827326.html">H.264视频码流解析（基础系列三）</a></li>
-                        
-                          <li><a title="音频采样数据处理（基础系列二）" href="15426806992852.html">音频采样数据处理（基础系列二）</a></li>
-                        
-                          <li><a title="视频像素数据处理(基础系列一)" href="15426223369165.html">视频像素数据处理(基础系列一)</a></li>
-                        
-                          <li><a title="[TOC]" href="15420339112607.html">[TOC]</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>证券市场投资逻辑</span></li>
-                        
-                          <li><a title="威科夫中阶课程（六,七，八）" href="15515878249617.html">威科夫中阶课程（六,七，八）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（五）" href="15509867976030.html">威科夫中阶课程（五）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（四）" href="15507609402868.html">威科夫中阶课程（四）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（三）" href="15503292008544.html">威科夫中阶课程（三）</a></li>
-                        
-                          <li><a title="威科夫中阶课程（二）" href="15486866737545.html">威科夫中阶课程（二）</a></li>
-                        
-                          <li><a title="威科夫中阶课程(一)" href="15486697437875.html">威科夫中阶课程(一)</a></li>
-                        
-                          <li><a title="读《韭菜的自我修养》" href="15370049486631.html">读《韭菜的自我修养》</a></li>
-                        
-
-
-                    
-                      <li class="side-title"><span>英语能力</span></li>
-                        
-                          <li><a title="英语语法梳理【总结】" href="15423493216966.html">英语语法梳理【总结】</a></li>
-                        
-
-
-                    
-                  </ul>
-                </nav>
-                </div>
-              </div>
-            </div>
-            <div class="large-9 medium-9 columns">
-
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>敏捷开发流程实践</h1>
-
-		<p>RaoJunBO890605<br/>
+ <script type="text/javascript">
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
+</script>
+<div class="row">
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="15514275216080.html">
+                
+                  <h1>敏捷开发流程实践</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>RaoJunBO890605<br/>
 RaoJunbo</p>
 
 <p>按期交付率</p>
@@ -555,50 +189,562 @@ API,APP,BOSS,知道自己怎么实现<br/>
 建议</p></li>
 </ol>
 
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/3/1</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html'>iOS工具深入</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
 
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15361293454277.html">
+                
+                  <h1>利用Cocoapods构建自己的私有与公有库</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一：Spec文件</h2>
+
+<p>在我们第一次安装pods时，都会主动的去拉取公有的repo,其实无论是共有的还是私有的下载后都在用户的/Users/用户名/.cocoapods/repos 目录下。每一个第三库都有一个spec文件，或者你自己的私有库也应该有这个spec文件。这些spec文件就在相应的repo里。<br/>
+我将我自己创建一个私有库的spec文件贴出来</p>
+
+<pre><code>#
+# Be sure to run `pod lib lint KBRCategory.podspec&#39; to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+#
+
+Pod::Spec.new do |s|
+  s.name             = &#39;KBRCategory&#39;
+  s.version          = &#39;0.1.2&#39;
+  s.summary          = &#39;KBRCategory.&#39;
+
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don&#39;t worry about the indent, CocoaPods strips it!
+
+  s.description      = &quot;a description KBRCategory&quot;
+
+  s.homepage         = &#39;https://gitee.com/BlueLegend&#39;
+  # s.screenshots     = &#39;www.example.com/screenshots_1&#39;, &#39;www.example.com/screenshots_2&#39;
+  s.license          = { :type =&gt; &#39;MIT&#39;, :file =&gt; &#39;LICENSE&#39; }
+  s.author           = { &#39;raojb@knowbox.cn&#39; =&gt; &#39;raojb@knowbox.cn&#39; }
+  s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;, :tag =&gt; s.version.to_s }
+  #这里改成了不以tag版本来拉取，以最新的commit
+    # s.source           = { :git =&gt; &#39;https://gitee.com/BlueLegend/KBRCategory.git&#39;}
+  # s.social_media_url = &#39;https://twitter.com/&lt;TWITTER_USERNAME&gt;&#39;
+
+  s.ios.deployment_target = &#39;8.0&#39;
+
+  s.source_files = &#39;KBRCategory/Classes/**/*&#39;
+  
+  # s.resource_bundles = {
+  #   &#39;KBRCategory&#39; =&gt; [&#39;KBRCategory/Assets/*.png&#39;]
+  # }
+
+  # s.public_header_files = &#39;Pod/Classes/**/*.h&#39;
+  # s.frameworks = &#39;UIKit&#39;, &#39;MapKit&#39;
+  s.dependency &#39;AFNetworking&#39;
+end
+
+</code></pre>
+
+<p>里面无非就是你要提交到Cocoapods上的名字、版本号，简介、主页、License、作者信息、最低平台信息、从哪个Git上下载、需要引入的framework、那些文件需要被引入，那些文件是资源文件以及是否需要ARC的模式。</p>
+
+<ul>
+<li><p>license<br/>
+用MIT就可以了，一定要正确填写不然在验证的时候验证通过</p></li>
+<li><p>source<br/>
+是库的地址</p></li>
+<li><p>s.source_files <br/>
+是要将哪些文件放入进去</p></li>
+<li><p>s.subspec 添加子模块<br/>
+其实可以添加子模块，所谓的子模块，就是在pods出来后有子文件夹</p></li>
+</ul>
+
+<pre><code>s.subspec &#39;Security&#39; do |ss|  
+  ss.source_files = &#39;AFNetworking/AFSecurityPolicy.{h,m}&#39;
+  ss.public_header_files = &#39;AFNetworking/AFSecurityPolicy.h&#39;
+  ss.frameworks = &#39;Security&#39;
+end  
+</code></pre>
+
+<h2 id="toc_1">二：创建公有库</h2>
+
+<ul>
+<li>向Cocoapods方面注册一个账号
+这个命令会收到一份邮件，让你进行会话授权。具体机制没有研究过，当你切换电脑时，需要重新进行会话授权
+<code>pod trunk register raojb@knowbox.cn &#39;rjb&#39; --description=&#39;My own computer&#39;</code></li>
+</ul>
+
+<ul>
+<li><p>创建spec文件<br/>
+<code>pod spec create &#39;KBCategory&#39;</code><br/>
+在写好代码后，在你项目的根目录下运行，会在该项目目录下生成一个spec文件。修改这个spec文件的里的相关信息。<br/>
+如果是项目已经建立好了，需要创建时，可以在根目录下执行<br/>
+<code>pod spec create &#39;KBCategory&#39;</code>也会生成一个spec文件</p></li>
+<li><p>验证Podspec文件<br/>
+<code>pod lib lint Name.podspec</code><br/>
+这一步是最坑人的地方。会有各种让你通不过的理由。比如，找不到文件，找不到Lience等。<br/>
+我遇到了，spec文件与s.source_files文件路径设置的不一致问题。<br/>
+开源协议文件也要生成。路径也要设置正确。</p>
+
+<pre><code>    - ERROR | [iOS] xcodebuild: Returned an unsuccessful exit code.
+</code></pre>
+
+<p>遇到这样的错误，是编译没有通过的情况。如果自己在工程里编译通过，看是不是依赖库没有设置正确。别忘了依赖系统库也要填写。总之基本没有一次性验证通过的，具体问题具体查吧。</p>
+
+<p>例如 <br/>
+<code>s.framework  = &quot;UIKit&quot;</code> <br/>
+最终你出现<code>passed validation</code>就表示验证通过。验证通过表示，你给定的环境，单独编译这部分你提供的目录下的代码能自行编译通过。</p></li>
+<li><p>上传<br/>
+可上传项目到Cocoapods官方的仓库里。<br/>
+pod trunk push 项目名.podspec<br/><br/>
+上传成功后，可以在命令行里pod search &quot;库名字&quot;,若果没有应该是有缓存，删除这个文件<br/>
+<code>~/Library/Caches/CocoaPods/search_index.json</code><br/>
+重新pod search就可以了。</p></li>
+</ul>
+
+<h2 id="toc_2">三：创建私有库</h2>
+
+<p>其实创建私有库的核心过程还是跟公有库是差不多的。不管是私有库还是公有库，关注点都在于Podspec文件的书写。<strong>其实我们讲到pod trunk push 项目名.podspec这条命令，其实是默认我们的Podspec文件提交到Cocoapod的仓库(Specs),然后我们之后的pod install或者pod update都是从这个仓库中提取Podspec文件，然后根据文件里面的信息去取对应的源代码。大家可以上去找找自己的开源的Podespec文件转换成json的文件</strong>。</p>
+
+<ul>
+<li><p>建立自己的私有仓库<br/>
+<code>pod repo add &#39;仓库名&#39; &#39;仓库地址&#39;</code>建立好后，可以在你的cd <code>~/.cocoapods/repos</code>目录下查看，是否有你的私有仓库。</p></li>
+<li><p>写代码-&gt;写Podspec文件了-&gt;检查项目和Podspec文件-&gt;打tag<br/>
+这些工作与创建公有库一样</p></li>
+<li><p>提交podspec文件到仓库<br/>
+公有库是pod trunk push 项目名.podspec<br/>
+私有库是pod repo push &#39;私有仓库名&#39; 项目名.podspec<br/>
+其实就都是讲podspec文件提交到相应的仓库里</p></li>
+</ul>
+
+<p>特别说明</p>
+
+<h2 id="toc_3">四：使用私有库</h2>
+
+<p>使用公有库与使用私有库的方式一样。都是在podfile文件里有一个source。这个source就是标识所要使用的源(spec文件仓库)。</p>
+
+<pre><code>#公用的私有远程索引库源
+source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;
+#github远程索引库源
+source &#39;https://github.com/CocoaPods/Specs.git&#39;
+platform :ios, &#39;8.0&#39;
+
+target ‘testdown’ do
+    #pod &#39;lottie-ios&#39;
+    pod &#39;Masonry&#39;
+    pod &#39;SDWebImage&#39;, &#39;~&gt; 4.3.0&#39;
+    pod &#39;YYModel&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;MJRefresh&#39;, &#39;~&gt; 3.1.15.3&#39;
+    pod &#39;KBRCategory&#39;
+end
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/5</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html'>iOS工具深入</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15360720067630.html">
+                
+                  <h1>Cocoapods入门</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一：安装</h2>
+
+<ol>
+<li><p>安装cocoapods</p>
+
+<p><code>sudo gem install cocoapods</code></p></li>
+</ol>
+
+<ol>
+<li><p>安装指定版本的cocoapods<br/>
+在协同开发时，podfile文件会加入Git版本库，为了防止pod版本不一样，导致其他开发人员Pod时执行错误，所以协同开发时最好安装一样的版本号。</p>
+
+<p><code>sudo gem install cocoapods -v 1.4</code></p></li>
+</ol>
+
+<h2 id="toc_1">二：初次使用</h2>
+
+<ol>
+<li><p>更新cocoapods的repo<br/>
+如果是新电脑或者没有下载过repo执行<code>pod repo update</code>。这个耗时会很长，这个文件现在达到2G了。改repo下载完后在/Users/用户目录/.cocoapods（这个文件夹的作用将在后面说明）</p></li>
+<li><p>生成podfile文件<br/>
+在指定的xcode工程目录下执行<code>pod init</code>就会有一个Podfile文件生成，或者干脆从其他工程里拷贝一份过来也行。<br/>
+编辑如</p>
+
+<pre><code>platform:ios,&#39;7.1&#39;
+pod &#39;SDWebImage&#39;, &#39;~&gt;3.7&#39;
+pod &#39;AFNetworking&#39; 
+</code></pre></li>
+<li><p>查找相关库<br/>
+有时为了查看要使用一个第三方库的指定版本号，<code>pod search AFNetworking</code>进行类似的查询，将会列出历史版本。</p></li>
+<li><p>pod install 与pod update</p>
+
+<ul>
+<li><p><code>pod install</code><br/>
+在podfile.lock不存在时，会根据podfile文件生成这个文件，并安装相应的库。存在时会根据podfile.lock文件下载与安装相应的库。</p></li>
+<li><p><code>pod update</code><br/>
+会根据podfile文件更新库，并更新podfile.lock文件。也就是pod update时，会检测podfile文件里有的库配置是没有指定版本号的就会取最新的版本号，重新下载与安装。</p></li>
+<li><p><code>--no-repo-update</code><br/>
+其主要的作用是用于在执行pod install和pod update两条命令是而执行的pod repo update的操作。pod repo update操作时间比较长，这也就是为什么平时我们加--no-repo-update的原因</p></li>
+</ul></li>
+</ol>
+
+<h2 id="toc_2">三：podfile文件深入</h2>
+
+<ol>
+<li><p><code>pod &#39;框架名&#39; 参数</code><br/>
+参数需要特别说明下</p>
+
+<ul>
+<li><p>指定版本号(这个版本号是spec文件)<br/>
+’&gt;3.7&#39;  大于3.7版本<br/>
+&#39;&gt;=3.7&#39; 大于等于3.7版本<br/>
+&#39;<3.7' 小于3.7版本<br/>
+'~>3.7&#39; 大于等于3.7并且小于3.8版本（这个参数有意思，经常使用的也是这个参数）</p></li>
+<li><p>指定path,branch,tag,commit<br/>
+:branch =&gt; &#39;branch名&#39;<br/>
+:tag =&gt; &#39;tag名&#39;<br/>
+:commit =&gt; &#39;提交号&#39;<br/>
+:path =&gt; &#39;~/Documents/AFNetworking&#39;</p></li>
+</ul></li>
+<li><p>platform<br/>
+platform :ios, &#39;7.0&#39;。说希望采用iOS7.0的进行编译<br/>
+最好进行指定，不指定的化，会采用默认的，因为有些库指定了最低的ios版本所以，不指定的化可能编译不过</p></li>
+<li><p>target<br/>
+如果不指定的化，就默认是全部的target。有些时候我向在一个target里有，在其他target没有，这是就可以采用下面指定target指定需要的库</p>
+
+<pre><code>target &#39;TRapidCalculation&#39; do
+//写你要的库
+end
+target &#39;TRapidCalculation_auto&#39; do
+//写你要的库
+end
+</code></pre></li>
+<li><p>use_frameworks!<br/>
+这个指明编译成动态库，而不是静态库，特别是在使用Swift库的过程中，特别需要使用这句，swift里。不过他会把所有项目的编译动态库，这一点有点不好。不过在使用Swift库的过程中就没办法了。</p></li>
+<li><p>source<br/>
+Cocoapods从哪些仓库(装有Spec文件的repo)中获得框架的源代码。（至于什么是Spec我将在后面建立私有库里做说明）我们使用公开的第三库时都是使用的<code>source &#39;https://github.com/CocoaPods/Specs.git&#39;</code>这个源。在做私有库时，可以引用自己源如我的<code>source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;</code></p></li>
+<li><p>podfile文件示例</p></li>
+</ol>
+
+<pre><code>#公用的私有远程索引库源
+source  &#39;git@gitee.com:BlueLegend/BlueLegendPrivateSpec.git&#39;
+#github远程索引库源
+source &#39;https://github.com/CocoaPods/Specs.git&#39;
+platform :ios, &#39;8.0&#39;
+
+target ‘CoreConcept’ do
+    pod &#39;lottie-ios&#39;
+    pod &#39;Masonry&#39;
+    pod &#39;SDWebImage&#39;, &#39;~&gt; 4.3.0&#39;
+    pod &#39;YYModel&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;YYCache&#39;, &#39;~&gt; 1.0.4&#39;
+    pod &#39;YYText&#39;, &#39;~&gt; 1.0.7&#39;
+    pod &#39;BlocksKit&#39;, &#39;~&gt; 2.2.5&#39;
+    pod &#39;MJRefresh&#39;, &#39;~&gt; 3.1.15.3&#39;
+    pod &#39;KBRCategory&#39;
+    pod &#39;HyphenateLite&#39;
+end
+</code></pre>
+
+<h2 id="toc_3">四：podfile.lock文件深入</h2>
+
+<p>Podfile.lock 文件主要包含三个块：<br/>
+PODS 用来记录每个pod的版本号<br/>
+DEPENDENCIES 依赖的其他库<br/>
+SPEC CHECKSUMS 每个库对应的podspec.json文件的checksum(SHA-1算法)。<br/>
+通过这些信息可以确保多人协作的时候，大家使用的是相同版本的第三方库。</p>
+
+<p>当团队中的某个人执行完pod install命令后，生成的Podfile.lock文件就记录下了当时最新Pods依赖库的版本，这时团队中的其它人check下来这份包含Podfile.lock文件的工程以后，再去执行pod install命令时，获取下来的Pods依赖库的版本就和最开始用户获取到的版本一致。如果没有Podfile.lock文件，后续所有用户执行pod install命令都会获取最新版本的SBJson，这就有可能造成同一个团队使用的依赖库版本不一致，这对团队协作来说绝对是个灾难!</p>
+
+<h2 id="toc_4">五：Manifest.lock文件</h2>
+
+<p>Manifest.lock文件格式与podfile.lock文件是一样的。主要用来对比远程与本地安装文件是否一样。<br/>
+Manifest.lock是你的本地的清单，在你没做任何操作时时与podfile.lock文件内容一样的。但当你git pull 从其他开发人员那里拿到了podfile.lock文件，其他开发人员可能修改了podfile.lock文件，就造成安装清单不一致。需要你pod install重新安装，Manifest.lock这个文件，重新保持了两个文件的一致性。所以我们在工程文件里编译脚本里有这两个文件的比较。</p>
+
+<pre><code>diff &quot;${PODS_PODFILE_DIR_PATH}/Podfile.lock&quot; &quot;${PODS_ROOT}/Manifest.lock&quot; &gt; /dev/null
+if [ $? != 0 ] ; then
+    # print error to STDERR
+    echo &quot;error: The sandbox is not in sync with the Podfile.lock. Run &#39;pod install&#39; or update your CocoaPods installation.&quot; &gt;&amp;2
+    exit 1
+fi
+# This output is used by Xcode &#39;outputs&#39; to avoid re-running this script phase.
+echo &quot;SUCCESS&quot; &gt; &quot;${SCRIPT_OUTPUT_FILE_0}&quot;
+
+</code></pre>
+
+<p>还是给个截图解释下<br/>
+/bin/sh  是指定脚本解释器（这里是shell脚本解释器）<br/>
+inputFile 就是Podfile.lock文件与Mainifest.lock</p>
+
+<p><img src="media/15360720067630/Xnip2018-09-05_14-26-04.png" alt="Xnip2018-09-05_14-26-04"/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/4</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html'>iOS工具深入</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
 		</div>
-	
+	</div><!-- large 8 -->
 
- 
-	
-
- 
-	
-
-  
-
-  
-</div></div>
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>北哥传奇</h1>
+                <div class="site-des"></div>
+                <div class="social">
 
 
-<div class="page-bottom">
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="%E5%89%8D%E8%A8%80.html"><strong>前言</strong></a>
+        
+            <a href="%E7%AE%97%E6%B3%95.html"><strong>算法</strong></a>
+        
+            <a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html"><strong>iOS基础概念</strong></a>
+        
+            <a href="iOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html"><strong>iOS性能优化</strong></a>
+        
+            <a href="iOS%E5%B7%A5%E5%85%B7%E6%B7%B1%E5%85%A5.html"><strong>iOS工具深入</strong></a>
+        
+            <a href="shell%E8%84%9A%E6%9C%AC.html"><strong>shell脚本</strong></a>
+        
+            <a href="C%E8%AF%AD%E8%A8%80%E6%8D%A1%E6%BC%8F.html"><strong>C语言捡漏</strong></a>
+        
+            <a href="Git%E5%B7%A5%E5%85%B7.html"><strong>Git工具</strong></a>
+        
+            <a href="iOS%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><strong>iOS架构设计</strong></a>
+        
+            <a href="Swift.html"><strong>Swift</strong></a>
+        
+            <a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html"><strong>设计模式</strong></a>
+        
+            <a href="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8A%80%E6%9C%AF.html"><strong>音视频技术</strong></a>
+        
+            <a href="%E8%AF%81%E5%88%B8%E5%B8%82%E5%9C%BA%E6%8A%95%E8%B5%84%E9%80%BB%E8%BE%91.html"><strong>证券市场投资逻辑</strong></a>
+        
+            <a href="%E8%8B%B1%E8%AF%AD%E8%83%BD%E5%8A%9B.html"><strong>英语能力</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15515878249617.html">威科夫中阶课程（六,七，八）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15515336874984.html">我为什么写作？</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15514275216080.html">敏捷开发流程实践</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15512048926912.html">设计模式系列（四）-- 行为型</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
   <div class="row">
-  <hr />
-  <div class="small-9 columns">
-  <p class="copyright">Copyright &copy; 2015
+   <p class="copyright">Copyright &copy; 2015
 Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
 Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
-  </div>
-  <div class="small-3 columns">
-  <p class="copyright text-right"><a href="#header">TOP</a></p>
-  </div>
-   
   </div>
 </div>
 
         </section>
       </div>
     </div>
+
+  
     
-    
+
     <script src="asset/js/foundation.min.js"></script>
-    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
     <script>
       $(document).foundation();
-
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
      
     </script>
+
     
+
 
 
   </body>
