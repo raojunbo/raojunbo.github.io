@@ -79,6 +79,8 @@
         
             <li><a href="%E5%89%8D%E8%A8%80.html">前言</a></li>
         
+            <li><a href="%E6%9D%82%E8%AE%B0.html">杂记</a></li>
+        
             <li><a href="%E7%AE%97%E6%B3%95.html">算法</a></li>
         
             <li><a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html">iOS基础概念</a></li>
@@ -125,6 +127,371 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15364733386397.html">
+                
+                  <h1>GCD</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>本篇内容<br/>
+1. 死锁<br/>
+2. 异步与同步概念<br/>
+3. 串行与并发概念（重点）<br/>
+4. dispatch_group<br/>
+5. dispatch_barrier_async<br/>
+6. 信号量<br/>
+6. dispatch_source(重点)  </p>
+
+<h2 id="toc_0">简介</h2>
+
+<p>在单核的CPU里，采用分时的执行，来回在不同线程之间进行切换。在多核的CPU里可以同时多个线程，也可以切换线程。这样就实现多线程。</p>
+
+<p>多线程带来的问题<br/>
+数据竞争：多个线程更新相同的资源<br/>
+死锁：线程之间相互等待<br/>
+消耗大量内存：太多线程会消耗大量内存</p>
+
+<h2 id="toc_1">死锁</h2>
+
+<p>在GCD中，以同步分发的方式非常容易出现死锁。死锁的本质资源的相互等待。异步调用不会产生死锁。</p>
+
+<pre><code>  dispatch_queue_t queueA;
+    dispatch_sync(queueA, ^{
+        dispatch_sync(queueA, ^{
+            [self foo];
+        });
+    });
+    /*
+    一旦进入第二个dispatch_sync就会死锁
+     它们两个在同一个线程里执行外面的正在执行，第二个会等待外面的执行完，而第二个永远都不会执行完。
+     */
+</code></pre>
+
+<h2 id="toc_2">队列</h2>
+
+<p>同步队列只是在执行任务时，顺序的从对列里去任务。在一个任务没有完时不会执行下一个任务。</p>
+
+<p>并发队列是执行任务时，在一个任务没有执行完，可以去拿另一个任务去找线程执行。</p>
+
+<h2 id="toc_3">异步</h2>
+
+<p>异步操作有开启线程的权利。<br/>
+同步操作没有开启线程的权利。</p>
+
+<h2 id="toc_4">不同执行方式在不同的队列里执行</h2>
+
+<p>同步异步在并发串行队列里的四种组合<br/>
+同步与异步<strong>决定是否开启线程</strong><br/>
+串行与并发<strong>决定拿任务方式</strong><br/>
+任务时需要线程去执行的。也就时需要考虑，有线程没任务，有任务没线程去执行的情况。</p>
+
+<ul>
+<li>同步执行 串行队列
+因为是同步，不会从线程池里拿线程执行，会在当前线程里执行下一个任务（要在当前任务执行完后）。即若果在主线程里同步执行任务。会出现<strong>死锁</strong>。</li>
+</ul>
+
+<pre><code> /*
+     死锁
+     */
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    dispatch_sync(queue, ^{
+        NSLog(@&quot;%@&quot;,[NSThread currentThread]);
+    });
+</code></pre>
+
+<pre><code>- (void)gcdDemo1 {
+    //1.创建串行队列
+    dispatch_queue_t q = dispatch_queue_create(&quot;demo1_seral&quot;, DISPATCH_QUEUE_SERIAL);
+    
+    //2.同步执行任务
+     for (int i =0; i&lt; 20; i++) {
+         dispatch_sync(q, ^{
+        NSLog(@&quot;demo1 %@&quot;,[NSThread currentThread]);
+         });
+     }
+}
+</code></pre>
+
+<ul>
+<li>同步执行 并发队列
+因为是同步，不会开启线程，因为是并发队列，拿任务可以并发，但没有线程执行，所有还是一个一个执行</li>
+</ul>
+
+<pre><code> //1.创建串行队列
+    dispatch_queue_t q = dispatch_queue_create(&quot;demo4_seral&quot;, DISPATCH_QUEUE_CONCURRENT);
+    //2.同步执行任务
+    for (int i =0; i&lt; 20; i++) {
+        dispatch_sync(q, ^{
+            NSLog(@&quot;demo3+%@, %@&quot;,@(i),[NSThread currentThread]);
+        });
+    }
+    NSLog(@&quot;come here&quot;);
+</code></pre>
+
+<ul>
+<li>异步执行 串行队列
+因为是异步，可以去线程池里拿线程执行。当前是串行队列，要等一个任务执行完后才去拿下一个任务。所以还是一个一个执行</li>
+</ul>
+
+<pre><code>- (void)gcdDemo2 {
+    //1.创建串行队列
+    dispatch_queue_t q = dispatch_queue_create(&quot;demo2_seral&quot;, DISPATCH_QUEUE_SERIAL);
+    
+    //2.同步执行任务
+    for (int i =0; i&lt; 20; i++) {
+        dispatch_async(q, ^{
+            NSLog(@&quot;demo2+%@, %@&quot;,@(i),[NSThread currentThread]);
+        });
+    }
+    NSLog(@&quot;come here&quot;);
+}
+</code></pre>
+
+<ul>
+<li>异步执行 并发队列
+因为是异步，可以去线程池中拿线程执行。当前是并发队列。当前任务没有执行完可以去拿下一个任务执行，因为是并发，可以从线程池里拿新的线程去执行这个任务。这时就真正实现了幷发执行。</li>
+</ul>
+
+<pre><code>- (void)gcdDemo3 {
+    //1.创建串行队列
+    dispatch_queue_t q = dispatch_queue_create(&quot;demo3_seral&quot;, DISPATCH_QUEUE_CONCURRENT);
+    
+    //2.同步执行任务
+    for (int i =0; i&lt; 20; i++) {
+        dispatch_async(q, ^{
+            NSLog(@&quot;demo3+%@, %@&quot;,@(i),[NSThread currentThread]);
+        });
+    }
+    NSLog(@&quot;come here&quot;);
+}
+</code></pre>
+
+<ul>
+<li>应用（如果将这个例子理解了，就真正理解的同步异步执行与串行并发对列）
+指定一个同步任务，让所有异步任务等待同步任务执行完后才执行。
+解决方法：
+在一个并发队列里先执行加入这个同步任务，在加入后面两个异步任务。因为是同步任务在前，不会有开启多余的线程去执行后面的任务。当第一个执行完，执行到第二个时候，是异步的，可以开启线程执行其他的，因为是并发队列，第三个任务有线程可以用来执行。</li>
+</ul>
+
+<pre><code>- (void)gcdDemo6 {
+    
+    dispatch_queue_t loginQueue = dispatch_queue_create(&quot;rao-login-queue&quot;, DISPATCH_QUEUE_CONCURRENT);
+    void (^task)(void) = ^(){
+        dispatch_sync(loginQueue, ^{
+            NSLog(@&quot;用户登录了%@&quot;,[NSThread currentThread]);
+        });
+        
+        dispatch_async(loginQueue, ^{
+            NSLog(@&quot;用户支付了%@&quot;,[NSThread currentThread]);
+        });
+        
+        dispatch_async(loginQueue, ^{
+            NSLog(@&quot;用户下载了%@&quot;,[NSThread currentThread]);
+        });
+    };
+    dispatch_async(loginQueue, task);
+}
+</code></pre>
+
+<h2 id="toc_5">dispatch group</h2>
+
+<p>使用场景：在一个对列里并发执行完后，想执行一个操作，就可以用dispatch_group</p>
+
+<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;rao-queue&quot;, DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_async(group, queue, ^{
+        NSLog(@&quot;down load1%@&quot;,[NSThread currentThread]);
+    });
+    dispatch_group_async(group, queue, ^{
+        NSLog(@&quot;down load2%@&quot;,[NSThread currentThread]);
+    });
+    dispatch_group_async(group, queue, ^{
+         NSLog(@&quot;down load3%@&quot;,[NSThread currentThread]);
+    });
+    
+    //当前面的所有
+    dispatch_group_notify(group, queue, ^{
+        NSLog(@&quot;所有的都执行完%@&quot;,[NSThread currentThread]);
+    });
+    
+    //在主队列里进行更新
+    dispatch_group_notify(group,dispatch_get_main_queue(), ^{
+        NSLog(@&quot;所有的都执行完%@&quot;,[NSThread currentThread]);
+    });
+</code></pre>
+
+<h2 id="toc_6">dispatch_barrier_async</h2>
+
+<p>dispatch_barrier_async等待之前追加的任务执行完后，就会执行这个任务，并且不会执行下一个任务，要等这个任务执行完后，才会并发执行下一个任务。</p>
+
+<pre><code>- (void)viewDidLoad {
+    [super viewDidLoad];    
+    dispatch_queue_t queue = dispatch_queue_create(&quot;label&quot;, DISPATCH_QUEUE_CONCURRENT);
+    static NSInteger readCount = 0;
+    void(^read)(void) = ^() {
+        NSLog(@&quot;这是read%@&quot;,@(readCount));
+      
+    };
+    void(^write)(void) = ^(){
+        readCount++;
+        NSLog(@&quot;这是write%@&quot;,@(readCount));
+        
+    };
+    
+    dispatch_async(queue, read);
+    dispatch_async(queue, read);
+    dispatch_async(queue, read);
+    dispatch_async(queue, read);
+    
+    dispatch_barrier_async(queue, write);
+    
+    dispatch_async(queue, read);
+    dispatch_async(queue, read);
+    
+}
+</code></pre>
+
+<h2 id="toc_7">信号量</h2>
+
+<p>NSMutableArray是线程不安全的，当有多个线程同时对数组进行操作的时候可能导致崩溃或数据错误。这里采用的就时信号量，所谓信号量，可以理解成一个数，占有空间时+1，走开始-1；</p>
+
+<pre><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+    //并发写入数据
+    dispatch_queue_t queue  = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);//创建信号量
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    for (int i = 0 ; i&lt;1000; i++) {
+        dispatch_async(queue, ^{
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);//减少信号量
+            [array addObject:@(i)];
+        });
+        dispatch_semaphore_signal(semaphore);//提高信号量
+    
+}
+</code></pre>
+
+<h2 id="toc_8">锁</h2>
+
+<p>锁的部分参考<a href="https://bestswifter.com/ios-lock/">深入理解iOS开发中的锁</a><br/>
+<img src="media/15364733386397/1513585102364922.png" alt="1513585102364922"/><br/>
+本图来自ibireme<br/>
+- OSSpinLock<br/>
+自旋锁的实现原理比较简单，就是死循环。当a线程获得锁以后，b线程想要获取锁就需要等待a线程释放锁。在没有获得锁的期间，b线程会一直处于忙等的状态。如果a线程在临界区的执行时间过长，则b线程会消耗大量的cpu时间，不太划算。所以，自旋锁用在临界区执行时间比较短的环境性能会很高。</p>
+
+<ul>
+<li><p>dispatch_semaphore<br/>
+dispatch_semaphore实现的原理和自旋锁有点不一样。首先会先将信号量减一，并判断是否大于等于0，如果是，则返回0，并继续执行后续代码，否则，使线程进入睡眠状态，让出cpu时间。直到信号量大于0或者超时，则线程会被重新唤醒执行后续操作。</p></li>
+<li><p>pthread_mutex<br/>
+pthread_mutex表示互斥锁，和信号量的实现原理类似，也是阻塞线程并进入睡眠，需要进行上下文切换。</p></li>
+<li><p>NSLock<br/>
+NSLock在内部封装了一个 pthread_mutex，属性为 PTHREAD_MUTEX_ERRORCHECK。</p></li>
+<li><p>NSCondition<br/>
+NSCondition封装了一个互斥锁和条件变量。互斥锁保证线程安全，条件变量保证执行顺序。</p></li>
+<li><p>NSRecursiveLock<br/>
+递归锁，pthread_mutex(recursive)的封装。</p></li>
+<li><p>@synchronized：<br/>
+一个对象层面的锁，锁住了整个对象，底层使用了互斥递归锁来实现。</p></li>
+</ul>
+
+<h2 id="toc_9">事件源</h2>
+
+<p>Runloop里我们说过source_t的概念，其实与队列的源是相同的。Runloop提供对源的监控。队列也可以实现对源的监控。且都可以创建自定义源。</p>
+
+<p>理解：dispatch都是主动添加任务到队列中，然而当系统事件发生时，我们希望做一定的工作当监听到系统事件后就会触发一个任务，并自动将其加入队列执行，这里与之前手动添加任务的模式不同，一旦将Diaptach Source与Dispatch Queue关联后，只要监听到系统事件，Dispatch Source就会自动将任务（回调函数）添加到关联的队列中。（这个概念在监听系统事件时做一定的操作时是很有用处的！！！哈哈）</p>
+
+<p>监听事件类型<br/>
+     Dispatch Source一共可以监听六类事件，分为11个类型，我们来看看都是什么：</p>
+
+<pre><code> DISPATCH_SOURCE_TYPE_DATA_ADD：属于自定义事件，可以通过dispatch_source_get_data函数获取事件变量数据，在我们自定义的方法中可以调用dispatch_source_merge_data函数向Dispatch Source设置数据，下文中会有详细的演示。     
+ DISPATCH_SOURCE_TYPE_DATA_OR：属于自定义事件，用法同上面的类型一样。
+DISPATCH_SOURCE_TYPE_MACH_SEND：Mach端口发送事件。
+DISPATCH_SOURCE_TYPE_MACH_RECV：Mach端口接收事件。
+DISPATCH_SOURCE_TYPE_PROC：与进程相关的事件。
+DISPATCH_SOURCE_TYPE_READ：读文件事件。
+DISPATCH_SOURCE_TYPE_WRITE：写文件事件。
+DISPATCH_SOURCE_TYPE_VNODE：文件属性更改事件。
+DISPATCH_SOURCE_TYPE_SIGNAL：接收信号事件。
+DISPATCH_SOURCE_TYPE_TIMER：定时器事件。
+DISPATCH_SOURCE_TYPE_MEMORYPRESSURE：内存压力事件。  
+</code></pre>
+
+<ul>
+<li>timer_source 示例</li>
+</ul>
+
+<pre><code> dispatch_queue_t queue = dispatch_queue_create(&quot;queue&quot;, DISPATCH_QUEUE_CONCURRENT);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    if(time){
+        dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), 1, 1);
+        dispatch_source_set_event_handler(timer, ^{
+            
+        });
+        dispatch_resume(timer);
+    }
+    
+</code></pre>
+
+<ul>
+<li>监听度文件读事件</li>
+</ul>
+
+<pre><code>dispatch_source_t processContentsOfFile(const char *fileName) {
+    //prepare the file for reading
+    int fd = open(fileName,O_RDONLY);
+    if(fd == -1){
+        return NULL;
+    }
+    
+    fcntl(fd,F_SETFL,O_NONBLOCK);
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fd, 0, queue);
+    if(!readSource){
+        close(fd);
+        return NULL;
+    }
+    
+    dispatch_source_set_event_handler(readSource, ^{
+        
+        
+    });
+    return nil;
+}
+</code></pre>
+
+<h3 id="toc_10">取消dispatch_source</h3>
+
+<p>当设置了Dispatch source对象将一直保持有效状态，除非手动调用dispatch_source_cancel函数来取消它。但取消了dispatch source对象后，将不能再接收到新的事件</p>
+
+<h3 id="toc_11">暂停与恢复dispatch_source</h3>
+
+<p>可以通过使用dispatch_suspend和 dispatch_resume函数来暂停和恢复事件传递给dispatch source对象</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/9/9</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html'>iOS基础概念</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15362957172406.html">
                 
@@ -1807,526 +2174,6 @@ typedef id(^objectComponetBlock)(id param);
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15351908674819.html">
-                
-                  <h1>Runtime系列一 Objective-C对象模型</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ul>
-<li>
-<a href="#toc_0">一：前言</a>
-</li>
-<li>
-<a href="#toc_1">二：NSObject类的实现</a>
-</li>
-<li>
-<a href="#toc_2">三：NSObject对象的表示objc_object</a>
-<ul>
-<li>
-<a href="#toc_3">NSObject是如何根据类创建对象的？这里有很多疑问。？？？？</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_4">四：元类（实例对象，类对象，元类之间的关系）</a>
-</li>
-<li>
-<a href="#toc_5">六：Runtime几个术语的结构分析</a>
-<ul>
-<li>
-<a href="#toc_6">SEL</a>
-</li>
-<li>
-<a href="#toc_7">id</a>
-</li>
-<li>
-<a href="#toc_8">Method</a>
-</li>
-<li>
-<a href="#toc_9">Ivar</a>
-</li>
-<li>
-<a href="#toc_10">IMP</a>
-</li>
-<li>
-<a href="#toc_11">Cache</a>
-</li>
-<li>
-<a href="#toc_12">Property</a>
-</li>
-<li>
-<a href="#toc_13">类型编码</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_14">七：相关的API</a>
-<ul>
-<li>
-<a href="#toc_15">类相关API</a>
-</li>
-<li>
-<a href="#toc_16">成员变量相关API</a>
-</li>
-<li>
-<a href="#toc_17">属性相关API</a>
-</li>
-<li>
-<a href="#toc_18">Method相关API</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_19">八：API示例Demo</a>
-<ul>
-<li>
-<a href="#toc_20">下面是类的一些基本API使用示例</a>
-</li>
-<li>
-<a href="#toc_21">下面是动态添加类的实践</a>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<h2 id="toc_0">一：前言</h2>
-
-<p>Objective-c的编译器将OC代码编译成可执行二进制文件。操作系统在装载后，会在运行时运行时系统下运行该程序（此时运行时系统就是Runtime实现Objective-C机制的一个运行库，可以理解成专门运行Object-C的一个小系统）。</p>
-
-<p>Runtime库主要做下面几件事：</p>
-
-<ol>
-<li><p>封装<br/>
-在这个库中，对象可以用C语言中的结构体表示，而方法可以用C函数来实现，另外再加上了一些额外的特性。这些结构体和函数被runtime函数封装后，我们就可以在程序运行时创建，检查，修改类、对象和它们的方法了。</p></li>
-<li><p>找出方法的最终执行代码<br/>
-当程序执行[object doSomething]时，会向消息接收者(object)发送一条消息(doSomething)，runtime会根据消息接收者是否能响应该消息而做出不同的反应。这将在后面详细介绍。</p></li>
-</ol>
-
-<h2 id="toc_1">二：NSObject类的实现</h2>
-
-<pre><code>//定义NSObject
-@interface NSObject &lt;NSObject&gt; {
-    Class isa;
-}
-</code></pre>
-
-<pre><code>//定义Class类型
-typedef struct objc_class *Class;
-</code></pre>
-
-<pre><code>//定义objc_class
-struct objc_class {
-    Class isa;
-
-#if !__OBJC2__
-    Class _Nullable super_class                              OBJC2_UNAVAILABLE;
-    const char * _Nonnull name                               OBJC2_UNAVAILABLE;
-    long version                                             OBJC2_UNAVAILABLE;
-    long info                                                OBJC2_UNAVAILABLE;
-    long instance_size                                       OBJC2_UNAVAILABLE;
-    struct objc_ivar_list * _Nullable ivars                  OBJC2_UNAVAILABLE;
-    struct objc_method_list * _Nullable * _Nullable methodLists                    OBJC2_UNAVAILABLE;
-    struct objc_cache * _Nonnull cache                       OBJC2_UNAVAILABLE;
-    struct objc_protocol_list * _Nullable protocols          OBJC2_UNAVAILABLE;
-#endif
-};
-</code></pre>
-
-<p>由此可见NSObject类是由Class类型来表示的，它实际上是一个指向objc_class结构体的指针。<br/>
-objc_class字段说明</p>
-
-<p>isa：所有类的自身也是一个对象，这个对象的Class里面也有各个ias指针，它指向metaClass<br/>
-super_class：指向该类的父类<br/>
-cache：在我们每次调用过一个方法后，这个方法就会被缓存到cached列表中，<br/>
-下次调用的时候就会在缓存中找，如果cache中没有，就会在methodlist中找。<br/>
-举例说明<br/>
-NSArray *array  = [NSArray alloc]init];<br/>
-alloc先执行，发现NSArray没有相应的方法，然后去父类查找。父类发现有，就会根据所需要的内存空间大小开始分配内存空间。alloc同意会加入cache里面。<br/>
-接着执行init方法，如果NSArray响应该方法，则直接将其加入cache中。不响应就去父类查找。</p>
-
-<h2 id="toc_2">三：NSObject对象的表示objc_object</h2>
-
-<p>表一个类的实例的结构体<br/>
-这个实例只有指向其所属类的一个指针。当我们向一个Object-C对象发送消息时，运行库会根据实例对象的isa指针找到这个实例对象所属的类。Runtime会根据isa指向所属的类的方法列表及父类方法列表中寻找与消息对应指向的方法。</p>
-
-<h3 id="toc_3">NSObject是如何根据类创建对象的？这里有很多疑问。？？？？</h3>
-
-<p><strong>当创建一个特定类的实例对象时，分配的内存包含一个objc_object数据结构<br/>
-然后是类的实例变量数据。NSObject类的alloc和allocWithZone:方法使用函数class_createInstance来创建objc_object数据结构。</strong></p>
-
-<pre><code>struct objc_object {
-    Class isa;
-}
-type struct objc_object *id;
-</code></pre>
-
-<h2 id="toc_4">四：元类（实例对象，类对象，元类之间的关系）</h2>
-
-<p>从NSObject的定义了可以看出，每个类都是一个对象（类对象）。<br/>
-我们在<code>NSArray *array =  [NSArray array]</code>使用类方法时幷没有创建对象。<br/>
-那么类对象的isa指向哪里？（我能达成的共识是对象由isa指向”对象“定义），那么在object里类对象的isa指向叫meta-class.它是类对象的类。</p>
-
-<p>发送实例方法时，会在类对象方法列表里找，幷缓存<br/>
-发送类方法时，会在元类对象的方法列表里找，幷缓存</p>
-
-<p>那么元类的的isa指针又指向哪里呢？<br/>
-Object-c的设计者为了不让其无限循环下去，将元类的isa指向了其最基类。而最基类的meta-class的isa指向自己。这样就形成一个闭环。<br/>
-类图结构如下(这个图画的真完美)</p>
-
-<p><img src="media/15351908674819/objctree.png" alt="objctree"/></p>
-
-<h2 id="toc_5">六：Runtime几个术语的结构分析</h2>
-
-<h3 id="toc_6">SEL</h3>
-
-<p>这个术语在头Runtime的头文件里没有看到相关的定义(<objc/runtime.h>)。有兴趣的同学可以下载runtime源码查看SEL的定义。<br/>
-这里我们给出推测<br/>
-type struct objc_selector *SEL<br/>
-struct objc_selector{<br/>
-void *sel_id;<br/>
-const char *sel_types;<br/>
-}<br/>
-所以从这里可以将SEL理解成一个char *类型的字符串。这个字符串在method_list里映射了真正的函数实现。</p>
-
-<h3 id="toc_7">id</h3>
-
-<pre><code>typedef struct objc_object *id;
-struct objc_object { Class isa; };
-</code></pre>
-
-<p>id 重新定义为objc_object * 类型（指向对象的指针）。objc_object结构体包含一个isa指针，根据isa指针可以找到所属的类。</p>
-
-<blockquote>
-<p>注意 isa指针在代码运行时并不总是指向实例对象所属于的类。所以不能依靠它来确定类型，要想确定类型还是需要用对象的class方法。kvo实现原理就是被观察对象的isa指针指向一个中间类而不是真实的类型。</p>
-</blockquote>
-
-<h3 id="toc_8">Method</h3>
-
-<pre><code>typedef struct objc_method *Method;
-
-struct objc_method {
-    SEL method_name                                          OBJC2_UNAVAILABLE;
-    char *method_types                                       OBJC2_UNAVAILABLE;
-    IMP method_imp                                           OBJC2_UNAVAILABLE;
-}
-</code></pre>
-
-<p>构建Method时需要SEL(方法名),method_types存储参数与返回值的类型编码，IMP函数指针（真正的函数实现）</p>
-
-<h3 id="toc_9">Ivar</h3>
-
-<pre><code>typedef struct objc_ivar *Ivar;
-
-struct objc_ivar {
-    char *ivar_name                                          OBJC2_UNAVAILABLE;
-    char *ivar_type                                          OBJC2_UNAVAILABLE;
-    int ivar_offset                                          OBJC2_UNAVAILABLE;
-#ifdef __LP64__
-    int space                                                OBJC2_UNAVAILABLE;
-#endif
-}
-</code></pre>
-
-<p>ivar_name 变量名，ivvar_type变量类型编码</p>
-
-<h3 id="toc_10">IMP</h3>
-
-<pre><code>typedef id (*IMP)(id, SEL, ...);
-</code></pre>
-
-<p>你会发现 IMP 指向的方法与 objc_msgSend 函数类型相同，参数都包含 id 和 SEL 类型</p>
-
-<h3 id="toc_11">Cache</h3>
-
-<p>在objc_class的结构体中的cache字段，它用于缓存调用过的方法。cahce是指向objc_cache结构体的指针。</p>
-
-<pre><code>struct objc_cache {
-    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;
-    unsigned int occupied                                    OBJC2_UNAVAILABLE;
-    Method _Nullable buckets[1]                              OBJC2_UNAVAILABLE;
-};
-</code></pre>
-
-<p>occupied 缓存的方法数目<br/>
-buckets 指向Method数据结构的指针的数组。也就是缓存函数的地方。</p>
-
-<h3 id="toc_12">Property</h3>
-
-<p>typedef struct objc_property *objc_property_t;//这个更常用<br/>
-可以通过class_copyPropertyList 和 protocol_copyPropertyList 方法获取类和协议中的属性：</p>
-
-<p>objc_property_t *class_copyPropertyList(Class cls, unsigned int *outCount)<br/>
-objc_property_t *protocol_copyPropertyList(Protocol *proto, unsigned int *outCount)</p>
-
-<h3 id="toc_13">类型编码</h3>
-
-<p>编译器将每个方法的返回值和参数类型编码为一个字符串，并将其与方法的selector关联在一起。这种编码方案在其它情况下也是非常有用的，因此我们可以使用@encode编译器指令来获取它。当给定一个类型时，@encode返回这个类型的字符串编码。这些类型可以是诸如int、指针这样的基本类型，也可以是结构体、类等类型。事实上，任何可以作为sizeof()操作参数的类型都可以用于@encode()。</p>
-
-<p>在Objective-C Runtime Programming Guide中的Type Encoding一节中，列出了Objective-C中所有的类型编码。需要注意的是这些类型很多是与我们用于存档和分发的编码类型是相同的。但有一些不能在存档时使用。</p>
-
-<pre><code> //类型编码
-    float a[] = {1,2,3};
-    NSLog(@&quot;array encoding type:%s&quot;,@encode(typeof(a)));
-    
-    NSString *str = @&quot;你好&quot;;
-    NSLog(@&quot;string encoding type:%s&quot;,@encode(typeof(str)));
-
-    CGFloat ff = 2.0;
-    NSLog(@&quot;float encoding type:%s&quot;,@encode(typeof(ff)));
-    
-    //结果
-    array encoding type:[3f]
-    string encoding type:@
-    float encoding type:d
-</code></pre>
-
-<h2 id="toc_14">七：相关的API</h2>
-
-<p>将上述的实例对象，类对象，元类对象概念理解清楚后，理解实例变量，方法列表等信息。使用下列的相关API将易如反掌。</p>
-
-<h3 id="toc_15">类相关API</h3>
-
-<pre><code>const char * class_getName(Class cls);//取类名
-Class class_getSuperclass(Class cls);//取父类
-BOOL class_isMetaClass(Class cls);//是否是元类
-size_t class_getInstanceSize(Class cls);//获取实例变量的大小
-</code></pre>
-
-<h3 id="toc_16">成员变量相关API</h3>
-
-<pre><code>// 获取类中指定名称实例成员变量的信息
-Ivar class_getInstanceVariable ( Class cls, const char *name );
-// 获取类成员变量的信息
-Ivar class_getClassVariable ( Class cls, const char *name );
-// 添加成员变量
-BOOL class_addIvar ( Class cls, const char *name, size_t size, uint8_t alignment, const char *types );
-// 获取整个成员变量列表
-Ivar * class_copyIvarList ( Class cls, unsigned int *outCount );
-</code></pre>
-
-<ol>
-<li><p><strong>Objectice-c不支持往已经存在的类中添加实例变量。不管是系统提供的库，还是自己定义的类，都无法动态添加成员变量。（这里联想到了category的实现）</strong>但如果我们是通过运行时来创建一个类的话，在该类没注册前是可以添加实例变量的。且只能在objc_allocateClassPair函数与objc_registerClassPair之间调用。（This function may only be called after objc_allocateClassPair and before objc_registerClassPair.  Adding an instance variable to an existing class is not supported.）</p></li>
-<li><p>class_copyIvarList函数，它返回一个指向成员变量信息的数组，数组中每个元素是指向该成员变量信息的objc_ivar结构体的指针。这个数组不包含在父类中声明的变量（注意咯）。使用时，还要注意内存的释放。</p></li>
-</ol>
-
-<h3 id="toc_17">属性相关API</h3>
-
-<pre><code>// 获取指定的属性
-objc_property_t class_getProperty ( Class cls, const char *name );
-// 获取属性列表
-objc_property_t * class_copyPropertyList ( Class cls, unsigned int *outCount );
-// 为类添加属性
-BOOL class_addProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount );
-// 替换类的属性
-void class_replaceProperty ( Class cls, const char *name, const objc_property_attribute_t *attributes, unsigned int attributeCount )
-</code></pre>
-
-<h3 id="toc_18">Method相关API</h3>
-
-<pre><code>// 添加方法
-BOOL class_addMethod ( Class cls, SEL name, IMP imp, const char *types );
-// 获取实例方法
-Method class_getInstanceMethod ( Class cls, SEL name );
-// 获取类方法
-Method class_getClassMethod ( Class cls, SEL name );
-// 获取所有方法的数组
-Method * class_copyMethodList ( Class cls, unsigned int *outCount );
-// 替代方法的实现
-IMP class_replaceMethod ( Class cls, SEL name, IMP imp, const char *types );
-// 返回方法的具体实现
-IMP class_getMethodImplementation ( Class cls, SEL name );
-IMP class_getMethodImplementation_stret ( Class cls, SEL name );
-// 类实例是否响应指定的selector
-BOOL class_respondsToSelector ( Class cls, SEL sel );
-</code></pre>
-
-<p>class_addMethod的实现会覆盖父类方法的实现。如果已经存在一个同名的实现，则函数会返回NO。如果要修改已经存在的实现，可以使用method_setImplementation。一个Object-c方法是一个简单的C函数，它至少包含两个参数self,_cmd,所以我们在实现函数替换是或者交换时，要添加这两个参数</p>
-
-<pre><code>void myMethodIMP(id self, SEL _cmd)
-{
-    // implementation ....
-}
-</code></pre>
-
-<p>与成员变量不同的是，我们可以为类动态添加方法，不管这个类是否已存在。</p>
-
-<p>添加方法时，class_addMethod函数后面有一个类型编码。这个类型编码在基本概念里已经做了解释。</p>
-
-<h2 id="toc_19">八：API示例Demo</h2>
-
-<p>Demo源码<a href="https://github.com/raojunbo/iOSCoreConcept.git">RunTime相关实践</a></p>
-
-<h3 id="toc_20">下面是类的一些基本API使用示例</h3>
-
-<pre><code>  - (void)viewDidLoad {
-    [super viewDidLoad];
-    //与类相关的API
-    //获得类名
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    const char * resutl0 = class_getName([self class]);//获取类名
-    NSString *resutlStr = [NSString stringWithUTF8String:resutl0];
-    NSLog(@&quot;这是resultStr:%@&quot;,resutlStr);
-    
-    //获取父类
-    Class superClass = class_getSuperclass([self class]);
-    NSLog(@&quot;这是父类:%@&quot;,superClass);
-    
-    //获取变量大小
-    size_t classSize = class_getInstanceSize([self class]);
-    NSLog(@&quot;这是classSize:%zu&quot;,classSize);
-    
-    //是否是元类
-    if(class_isMetaClass([self class])){
-        NSLog(@&quot;self class 是元类&quot;);
-    }
-    
-    if( class_isMetaClass(superClass)){
-        NSLog(@&quot;superClass是元类&quot;);
-    };
-    
-    const char * className = object_getClassName([self class]);
-    Class metaClass = objc_getMetaClass(className);
-    if(class_isMetaClass(metaClass)){
-        NSLog(@&quot;是元类&quot;);
-    }
-   
-    //获取实例变量
-    const char * dataArrayIvarCstring = [@&quot;_dataArray&quot; UTF8String];
-    Ivar dataArrayIvar = class_getInstanceVariable([self class], dataArrayIvarCstring);
-    NSLog(@&quot;这是Ivar:%@&quot;, [NSString stringWithUTF8String:ivar_getName(dataArrayIvar)]);
-    
-    //获取属性(属性会自动生成实例变量)
-    const char * dataArrayPropertyCstring = [@&quot;dataArray&quot; UTF8String];
-    objc_property_t dataArrayPropertyr = class_getProperty([self class], dataArrayPropertyCstring);
-    NSLog(@&quot;这是property:%@&quot;, [NSString stringWithUTF8String:property_getName(dataArrayPropertyr)]);
-    
-    //通过SEL找到Method,并找到相应的实现
-    IMP doFuncMethodImp = class_getMethodImplementation([self class], @selector(doFunc));
-    doFuncMethodImp(self,@selector(doFunc));
-
-    //获取类方法
-    Method dofun2Method = class_getClassMethod([self class], @selector(dofunc2));
-    IMP dofun2MethodImp = method_getImplementation(dofun2Method);
-    dofun2MethodImp(self,@selector(dofun2Method));
-}
-</code></pre>
-
-<h3 id="toc_21">下面是动态添加类的实践</h3>
-
-<pre><code>#import &quot;Runtime3ViewController.h&quot;
-#import &lt;objc/runtime.h&gt;
-
-/*
- 添加实例变量
- 添加属性
- 添加方法
- 添加协议
- */
-@interface Runtime3ViewController ()
-
-@property (nonatomic, strong) UIColor *property2;
-
-@end
-
-@implementation Runtime3ViewController {
-    NSArray *_property0;
-    NSArray *property1;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor  = [UIColor whiteColor];
-    
-    //动态创建类,从参数里可以看出,可以指定父列
-    Class CreatClass0 = objc_allocateClassPair([NSObject class], &quot;CreatedClass0&quot;, 0);
-    
-    //动态添加实例变量
-    class_addIvar(CreatClass0, &quot;_attribute0&quot;, sizeof(NSString *), log(sizeof(NSString *)), &quot;i&quot;);
-    Ivar ivar = class_getInstanceVariable(CreatClass0, &quot;_attribute0&quot;);
-    objc_registerClassPair(CreatClass0);
-    
-    //(添加实例变量后再动态添加属性
-    objc_property_attribute_t type2 = {&quot;T&quot;,&quot;@\&quot;NSString\&quot;&quot;};//T，属性类型
-    objc_property_attribute_t ownership2 = {&quot;C&quot;,&quot;&quot;};//C，属性的修饰符 copy
-    objc_property_attribute_t backingivar2 ={&quot;V&quot;,&quot;_attribute0&quot;};//V，属性对应的实例变量值
-    objc_property_attribute_t attrs2[] = { type2, ownership2, backingivar2 };//属性数组
-    class_addProperty(CreatClass0, &quot;_attribute0&quot;, attrs2, 3);//为一个类添加上面设置的属性
-    
-    SEL getter = NSSelectorFromString(@&quot;attribute0&quot;);
-    SEL setter= NSSelectorFromString(@&quot;setAttribute0:&quot;);
-    
-    //(添加属性后，再为属性添加get,set的方法，将SEL,与实现绑定,并添加到类里
-    BOOL suc0 = class_addMethod(CreatClass0, getter, (IMP)attribute0Getter, &quot;@@:&quot;);
-    BOOL suc1 = class_addMethod(CreatClass0, setter, (IMP)attribute0Setter, &quot;v@:@&quot;);
-    NSLog(@&quot;这是suc0:%@,suc1:%@&quot;,@(suc0),@(suc1));
-
-    //根据动态创建的类，创建对象
-    id idClass = [[CreatClass0 alloc]init];
-    
-    //执行动态创建的类的方法
-    [idClass performSelector:setter withObject:@&quot;你好&quot;];
-    NSLog(@&quot;这是被设置的:%@&quot;,[idClass performSelector:getter withObject:nil]);
-    
-    
-    //获取整理实例犯法
-    unsigned int copycopyMethodListCount = 0;
-    Method *methods = class_copyMethodList(CreatClass0, &amp;copycopyMethodListCount);
-    for (int i = 0; i&lt; copycopyMethodListCount; i++) {
-        Method tmpMethod = methods[i];
-        SEL tmpName = method_getName(tmpMethod);
-        NSLog(@&quot;这是所有函数的名字:%@&quot;, NSStringFromSelector(tmpName));
-    }
-    
-    //添加协议
-    class_addProtocol(CreatClass0,  NSProtocolFromString(@&quot;UITableViewDelegate&quot;));
-    
-}
-
-//get方法
-NSString *attribute0Getter(id classInstance, SEL _cmd) {
-    Ivar ivar = class_getInstanceVariable([classInstance class], &quot;_attribute0&quot;);//获取变量,如果没获取到说明不存在
-    return object_getIvar(classInstance, ivar);
-}
-
-//set方法
-void attribute0Setter(id classInstance, SEL _cmd, NSString *newName) {
-    Ivar ivar = class_getInstanceVariable([classInstance class], &quot;_attribute0&quot;);//获取变量,如果没获取到说明不存在
-    id oldName = object_getIvar(classInstance, ivar);
-    if (oldName != newName) object_setIvar(classInstance, ivar, [newName copy]);
-}
-
-</code></pre>
-
-<p>总结，其实理解了对象模型，在理解消息的发送机制，就理解了Rumtime。将在系列二里进行消息的发送机制的梳理。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/8/25</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html'>iOS基础概念</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -2381,6 +2228,8 @@ void attribute0Setter(id classInstance, SEL _cmd, NSString *newName) {
         
             <a href="%E5%89%8D%E8%A8%80.html"><strong>前言</strong></a>
         
+            <a href="%E6%9D%82%E8%AE%B0.html"><strong>杂记</strong></a>
+        
             <a href="%E7%AE%97%E6%B3%95.html"><strong>算法</strong></a>
         
             <a href="iOS%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5.html"><strong>iOS基础概念</strong></a>
@@ -2422,6 +2271,12 @@ void attribute0Setter(id classInstance, SEL _cmd, NSString *newName) {
 	      
 		      
 			      <li class="post">
+			        <a href="15527009457594.html">我的学习方法论</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15526311929031.html">iOS 基于CoreText题型渲染引擎主题讨论</a>
 			      </li>
 		     
@@ -2441,12 +2296,6 @@ void attribute0Setter(id classInstance, SEL _cmd, NSString *newName) {
 		      
 			      <li class="post">
 			        <a href="15514275216080.html">敏捷开发流程实践</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15512048926912.html">设计模式系列（四）-- 行为型</a>
 			      </li>
 		     
 		  

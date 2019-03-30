@@ -4,13 +4,27 @@
   <title><![CDATA[北哥传奇]]></title>
   <link href="https://raojunbo.github.io/atom.xml" rel="self"/>
   <link href="https://raojunbo.github.io/"/>
-  <updated>2019-03-30T10:21:23+08:00</updated>
+  <updated>2019-03-30T19:53:26+08:00</updated>
   <id>https://raojunbo.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[我的学习方法论]]></title>
+    <link href="https://raojunbo.github.io/15527009457594.html"/>
+    <updated>2019-03-16T09:49:05+08:00</updated>
+    <id>https://raojunbo.github.io/15527009457594.html</id>
+    <content type="html"><![CDATA[
+<p>系统学习（构建知识体系）<br/>
+系统思考（思考体系里的知识点的联系）<br/>
+刻意练习 (提取体系知识点应用)<br/>
+复盘练习 (验证是否对概念理解正确，是否能自主对一个知识点灵活应用)</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS 基于CoreText题型渲染引擎主题讨论]]></title>
@@ -624,11 +638,25 @@ kTemplateRenderModeEditUserAnswer, //编辑模式下填充用户答案
     <updated>2019-03-03T12:37:04+08:00</updated>
     <id>https://raojunbo.github.io/15515878249617.html</id>
     <content type="html"><![CDATA[
-<h2 id="toc_0">第六课</h2>
+<h2 id="toc_0">第六课（结构案例）</h2>
 
-<h2 id="toc_1">第七课</h2>
+<h2 id="toc_1">第七课(供给案例)</h2>
 
-<h2 id="toc_2">第八课</h2>
+<p>供给课程</p>
+
+<h2 id="toc_2">第八课（相对强弱案例）</h2>
+
+<p>相对强弱<br/>
+强弱分为短期强弱，长期强弱；长期强最好。<br/>
+上证指数与一级行业（消费品）的比较<br/>
+一级行业与二级行业（粱酒）的比较<br/>
+二级行业与三级行业（白酒）的比较</p>
+
+<p>障碍</p>
+
+<p>股票涨后出现电脑顶，是否有心理障碍，不想追高<br/>
+选择趋势向上的股票<br/>
+股票出现反转的唯一现象是有派发了</p>
 
 ]]></content>
   </entry>
@@ -2388,215 +2416,6 @@ M,V,C<br/>
 <h2 id="toc_0">复杂度分析</h2>
 
 <p>时间复杂度</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git 拾遗]]></title>
-    <link href="https://raojunbo.github.io/15453592839286.html"/>
-    <updated>2018-12-21T10:28:03+08:00</updated>
-    <id>https://raojunbo.github.io/15453592839286.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>
-<a href="#toc_0"><code>.git</code>文件目录</a>
-</li>
-<li>
-<a href="#toc_1">commit,tree,block关系</a>
-</li>
-<li>
-<a href="#toc_2">分离头指针情况的注意事项（没有与branch进行关联）</a>
-</li>
-<li>
-<a href="#toc_3">修改commit的message</a>
-</li>
-<li>
-<a href="#toc_4">rebase操作</a>
-<ul>
-<li>
-<a href="#toc_5">修改以往的任何一个commit的message(rebase)</a>
-</li>
-<li>
-<a href="#toc_6">合并以往的连续的几个commit（rebase）</a>
-</li>
-<li>
-<a href="#toc_7">合并以往的不连续的commit(rebase)</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="#toc_8">diff操作</a>
-</li>
-<li>
-<a href="#toc_9">恢复工作区，恢复索引区</a>
-</li>
-<li>
-<a href="#toc_10">删除，重命名文件</a>
-</li>
-<li>
-<a href="#toc_11">ignore文件</a>
-</li>
-</ul>
-
-
-<h2 id="toc_0"><code>.git</code>文件目录</h2>
-
-<pre><code>➜  .git git:(V.12.0) ls -l
-total 1440
--rw-r--r--    1 raojunbo  staff      26 12 15 15:40 COMMIT_EDITMSG
--rw-r--r--    1 raojunbo  staff    1573 12 18 19:12 FETCH_HEAD
--rw-r--r--    1 raojunbo  staff      23 12 18 19:12 HEAD
--rw-r--r--    1 raojunbo  staff      41 12 18 19:12 ORIG_HEAD
--rw-r--r--    1 raojunbo  staff     551 12 12 12:56 config
--rw-r--r--    1 raojunbo  staff      73 11 30 11:39 description
--rw-r--r--    1 raojunbo  staff  311844 12 20 22:54 gitk.cache
-drwxr-xr-x   13 raojunbo  staff     416 11 30 11:39 hooks
--rw-r--r--    1 raojunbo  staff  391258 12 20 22:48 index
-drwxr-xr-x    3 raojunbo  staff      96 11 30 11:39 info
-drwxr-xr-x    4 raojunbo  staff     128 11 30 11:42 logs
-drwxr-xr-x  256 raojunbo  staff    8192 12 14 14:58 objects
--rw-r--r--    1 raojunbo  staff    1536 11 30 11:42 packed-refs
-drwxr-xr-x    5 raojunbo  staff     160 11 30 11:42 refs
-</code></pre>
-
-<ul>
-<li><p>HEAD 文件<br/>
-存有当前分支的头指针。在切换分支的时候，会跟随分支的变化而变化。当然也可以不与分支挂钩，直接指向一个处理分支状态（任意指向的）也可以。</p></li>
-<li><p>config 文件</p>
-
-<p><code>git config -l</code>命令的内容</p></li>
-</ul>
-
-<ul>
-<li><p>ORIG_HEAD 文件</p></li>
-<li><p>FETCH_HEAD 文件</p></li>
-<li><p>object目录<br/>
-对象集，block ,commit,tree,tags;</p></li>
-<li><p>refs</p></li>
-</ul>
-
-<blockquote>
-<p>git内部的命令<br/>
-查看hash所代表的对象类型 `<code>git cat-file -t 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
-
-<p>查看hash所代表的对象实际内容<code>git cat-file -p 005642f3c41eecb8c56b8b77c4f100f1575ccf54</code></p>
-</blockquote>
-
-<h2 id="toc_1">commit,tree,block关系</h2>
-
-<p><img src="media/15453592839286/gitbloctree.png" alt="gitbloctree"/></p>
-
-<p>blob实际就是真实的文件<br/>
-tree实际就是目录<br/>
-commit是git里的东西是一个包含“根tree”的东西。commit里有parent(父commit),author(作者),committer(提交者)</p>
-
-<h2 id="toc_2">分离头指针情况的注意事项（没有与branch进行关联）</h2>
-
-<pre><code>➜  GitTestDir git:(master) git checkout 552aa3eba30936d5c4ecf148b38d0cbc89221fbc 
-Note: checking out &#39;552aa3eba30936d5c4ecf148b38d0cbc89221fbc&#39;.
-
-You are in &#39;detached HEAD&#39; state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b &lt;new-branch-name&gt;
-
-HEAD is now at 552aa3e add sty
-➜  GitTestDir git:(552aa3e) 
-</code></pre>
-
-<p>直接切换到一个指定的commit号，直接进入工作后，进行提交，如果在checkout 到其它分支，就会出现分离头指针，也就是没有基于某个分支。在后期，分支的指针会自动被清理掉。</p>
-
-<p>git diff HEAD HEAD^     //head与父亲进行对比<br/>
-git diff HEAD HEAD<sup>^</sup>   //head 与父亲的父亲进行对比<br/>
-git diff HEAD HEAD~1    //head 与父亲进行对比</p>
-
-<h2 id="toc_3">修改commit的message</h2>
-
-<p>对最近一次的message做修改<br/>
-<code>git commit --amend</code></p>
-
-<h2 id="toc_4">rebase操作</h2>
-
-<h3 id="toc_5">修改以往的任何一个commit的message(rebase)</h3>
-
-<p>示例<br/>
-<code><br/>
-commit3<br/>
-commit2<br/>
-commit1<br/>
-</code><br/>
-我现在要，修改commit2,那么我就是git rebase -i commit1;以commit1作为基准,去修改其后面的commit信息。<br/>
-rebase 命令的交互命令里有拿出commit,重新设置messge等操作。<br/>
-修改后commit的commit号会发生变化。</p>
-
-<h3 id="toc_6">合并以往的连续的几个commit（rebase）</h3>
-
-<p>示例<br/>
-<code><br/>
-commit4<br/>
-commit3<br/>
-commit2<br/>
-commit1<br/>
-</code><br/>
-合并commit2,与commit3为commit5;这样就会形成一个新的commit;</p>
-
-<h3 id="toc_7">合并以往的不连续的commit(rebase)</h3>
-
-<p>其实与前面一样，只是，列出commit ，然后描述命令</p>
-
-<h2 id="toc_8">diff操作</h2>
-
-<ul>
-<li><p>比较工作区，索引区,HEAD的差异<br/>
-<code>git diff --cached</code>  比较索引区域HEAD的差别比较<br/>
-<code>git diff</code> 工作区与索引区的差别</p></li>
-<li><p>比较不同分支的同一个文件的差异</p></li>
-</ul>
-
-<p><code>git diff temp master -- filename</code><br/>
-temp是一个分支或者commitid，master是一个分支或者commitid；</p>
-
-<h2 id="toc_9">恢复工作区，恢复索引区</h2>
-
-<ul>
-<li>清空工作区</li>
-</ul>
-
-<p><code>git checkout file</code><br/>
-<code>git checkout .</code></p>
-
-<ul>
-<li>将加入索引的放入工作区</li>
-</ul>
-
-<p><code>git reset HEAD</code></p>
-
-<ul>
-<li>清除最近的几个commit</li>
-</ul>
-
-<p><code>git reset --hard  commitid</code></p>
-
-<h2 id="toc_10">删除，重命名文件</h2>
-
-<ul>
-<li>重命名文件
-<code>git mv filename1 filename2</code></li>
-</ul>
-
-<ul>
-<li>删除文件
-<code>git rm filename</code></li>
-</ul>
-
-<h2 id="toc_11">ignore文件</h2>
-
-<p><code>.gitignore</code>告诉哪些不需要加入git的管理里</p>
 
 ]]></content>
   </entry>
